@@ -4,13 +4,18 @@
     <id>$id$</id>
     <version>$version$</version>
     <title>$title$</title>
-    <authors>LGK</authors>
+    <authors>LGK, Brügmann Software GmbH</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">MIT</license>
-    <!-- <icon>icon.png</icon> -->
+    <license type="expression">LGPL-3.0-or-later</license>
+    <icon>logo.png</icon>
     <projectUrl>https://github.com/bruegmann/</projectUrl>
-    <description>Komponenten-Library für Blazor.</description>
+    <description>Component library for Blazor.</description>
     <copyright>$copyright$</copyright>
     <tags>blue blue-web blazor components bootstrap</tags>
+    <readme>README.md</readme>
   </metadata>
+  <files>
+    <file src="logo.png" target="logo.png" />
+    <file src="../README.md" target="README.md" />
+  </files>
 </package>

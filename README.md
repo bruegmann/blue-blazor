@@ -6,7 +6,11 @@ Blue Blazor is an adaptation of [Blue Web](https://bruegmann.github.io/blue-web)
 
 ### Installation
 
-You can install Blue Blazor via NuGet. You can find it in the NuGet source "GitLab". [Click here to find out how to install it.](https://gitlab.patorg.de/groups/dev/-/packages?orderBy=created_at&sort=desc&search%5B%5D=BlueBlazor)
+```
+dotnet add package BlueBlazor
+```
+
+[![Nuget](https://img.shields.io/nuget/v/BlueBlazor)](https://www.nuget.org/packages/BlueBlazor/)
 
 ### Import
 
@@ -64,14 +68,14 @@ To support dark mode, you should create a separated theme. You can then use medi
 ```html
 <link rel="stylesheet" href="_content/BlueBlazor/css/blue-web.min.css" />
 <link
-    rel="stylesheet"
-    href="css/your-light-theme.css"
-    media="(prefers-color-scheme: light)"
+  rel="stylesheet"
+  href="css/your-light-theme.css"
+  media="(prefers-color-scheme: light)"
 />
 <link
-    rel="stylesheet"
-    href="css/your-dark-theme.css"
-    media="(prefers-color-scheme: dark)"
+  rel="stylesheet"
+  href="css/your-dark-theme.css"
+  media="(prefers-color-scheme: dark)"
 />
 ```
 

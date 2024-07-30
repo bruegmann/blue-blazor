@@ -16,7 +16,7 @@
 
         helper.GenerateStoryPages(storiesPath, pagesPath, componentNamespace, assemblyName, xmlDocumentationPath).Wait();
 
-        string readmePath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "BlueBlazor", "README.md");
+        string readmePath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "README.md");
         string indexRazorPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "BlueBlazor.Docs", "Pages", "Index.razor");
 
         helper.GeneratePage(readmePath, indexRazorPath).Wait();
