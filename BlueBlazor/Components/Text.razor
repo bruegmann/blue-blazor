@@ -1,0 +1,59 @@
+@using Microsoft.Extensions.Localization
+
+<label for="@Id" class="my-0 lh-1 fw-bold @(LabelHidden ? "d-none" : "")"><small>@Label</small></label>
+
+<input type="@Type" class="blue-text-input form-control @InputClass" id="@Id" placeholder="@Placeholder" @bind="@Value"
+    @bind:event="@getBindEvent()" readonly="@ReadOnly" />
+
+
+@code {
+    [Parameter]
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+
+    [Parameter]
+    public string Type { get; set; } = "text";
+
+    [Parameter]
+    public string? Placeholder { get; set; }
+
+    [Parameter, EditorRequired]
+    public required string Label { get; set; }
+
+    [Parameter]
+    public bool LabelHidden { get; set; } = false;
+
+    string? _value;
+    [Parameter]
+    public string? Value
+    {
+        get => _value;
+        set
+        {
+            if (_value != value)
+            {
+                _value = value;
+                ValueChanged.InvokeAsync(value);
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    [Parameter]
+    public bool ReadOnly { get; set; } = false;
+
+    /// <summary>
+    /// If true, the value is updated immediately on input, otherwise on change.
+    /// </summary>
+    [Parameter]
+    public bool Immediate { get; set; } = false;
+
+    [Parameter]
+    public string InputClass { get; set; } = "";
+
+    string getBindEvent()
+    {
+        return Immediate ? "oninput" : "onchange";
+    }
+}

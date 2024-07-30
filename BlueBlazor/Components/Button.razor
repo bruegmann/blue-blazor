@@ -1,0 +1,76 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
+
+<ButtonOrA @attributes="AdditionalAttributes"
+           Disabled="@(Busy || busy || Disabled)"
+           ButtonType="@ButtonType"
+           OnClick="@onClick" Href="@Href" Target="@Target" Class="@Class" aria-label="@(LabelHidden ? Label : null)">
+    @if (Busy || busy)
+    {
+        <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+
+        <span role="status">@L["Loading"]...</span>
+    }
+    else
+    {
+        @if (!string.IsNullOrWhiteSpace(Label) && !LabelHidden)
+        {
+            @L[Label]
+        }
+        @ChildContent
+    }
+</ButtonOrA>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+    [Parameter]
+    public string? Href { get; set; }
+
+    /// <summary>
+    /// `Target="_blank"` will automatically add `rel="noreferrer"` to the anchor tag.
+    /// </summary>
+    [Parameter]
+    public string? Target { get; set; }
+
+    [Parameter]
+    public string Class { get; set; } = "btn blue-btn-soft-primary";
+
+    /// <summary>
+    /// Let the button appear busy.
+    /// Hint: busy state is set automatically when the button is clicked and the `OnClick` event handler is running.
+    /// </summary>
+    [Parameter]
+    public bool Busy { get; set; } = false;
+
+    [Parameter]
+    public string? Label { get; set; }
+
+    /// <summary>
+    /// The label is hidden, but still accessible for screen readers.
+    /// </summary>
+    [Parameter]
+    public bool LabelHidden { get; set; } = false;
+
+    [Parameter]
+    public ButtonType? ButtonType { get; set; } = Shared.ButtonType.Button;
+
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    bool busy = false;
+
+    async Task onClick(MouseEventArgs args)
+    {
+        busy = true;
+        await OnClick.InvokeAsync(args);
+        busy = false;
+    }
+}

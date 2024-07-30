@@ -1,0 +1,51 @@
+@if (isButton)
+{
+    <button @attributes="AdditionalAttributes" @onclick="OnClick" type="@ButtonType?.ToString().ToLower()" class="@Class" disabled="@Disabled">
+        @ChildContent
+    </button>
+}
+else
+{
+    <a @attributes="AdditionalAttributes" @onclick="OnClick" href="@Href" class="@Class" disabled="@Disabled"
+       target="@Target" rel="@(Target == "_blank" ? "noreferrer" : "")">
+        @ChildContent
+    </a>
+
+}
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+    [Parameter]
+    public string? Href { get; set; }
+
+    /// <summary>
+    /// `Target="_blank"` will automatically add `rel="noreferrer"` to the anchor tag.
+    /// </summary>
+    [Parameter]
+    public string? Target { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public ButtonType? ButtonType { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    protected override void OnParametersSet()
+    {
+        isButton = Href == null || AdditionalAttributes?.ContainsKey("href") == true;
+        StateHasChanged();
+    }
+
+    bool isButton = false;
+}

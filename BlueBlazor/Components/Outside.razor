@@ -1,0 +1,59 @@
+@inject IJSRuntime JSRuntime
+
+<div @ref="myRef" class="outside" style="display: contents">
+    @ChildContent
+</div>
+
+<script>
+    function hasClass(el, className) {
+        if (el.classList) return el.classList.contains(className)
+        else return !!el.className.match(new RegExp("(\\s|^)" + className + "(\\s|$)"))
+    }
+
+    window.initOutsite = function (element, dotNetObjectReference, ignoreElements) {
+        document.addEventListener("click", function ({ target }) {
+            const isClickInside = element.contains(target)
+
+            if (ignoreElements) {
+                for (let i = 0; i < ignoreElements.length; i++) {
+                    if (hasClass(target, ignoreElements[i])) {
+                        return
+                    }
+                }
+            }
+
+            if (!isClickInside) {
+                dotNetObjectReference.invokeMethodAsync("OnClickOutsideHandler")
+            }
+        })
+    }
+</script>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<ElementReference> OnClickOutside { get; set; }
+
+    [Parameter]
+    public List<string> IgnoreClasses { get; set; } = new() { "blue-outside-exception" };
+
+    [JSInvokable]
+    public void OnClickOutsideHandler()
+    {
+        OnClickOutside.InvokeAsync(myRef);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var dotNetObjectReference = DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("initOutsite", myRef, dotNetObjectReference, IgnoreClasses);
+        }
+    }
+
+    string id = Guid.NewGuid().ToString();
+    ElementReference myRef;
+}

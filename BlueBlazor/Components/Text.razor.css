@@ -1,0 +1,4 @@
+.form-control:read-only {
+    padding: 0;
+    --bs-border-width: 0;
+}

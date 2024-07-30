@@ -1,0 +1,20 @@
+{
+    "name": "blueblazor",
+    "version": "1.0.0",
+    "description": "Blue Blazor is an adaptation of [Blue Web](https://bruegmann.github.io/blue-web) for Blazor.",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack && node buildScripts/copyToWwwroot.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "LGPL-3.0-or-later",
+    "devDependencies": {
+        "webpack": "^5.93.0",
+        "webpack-cli": "^5.1.4"
+    },
+    "dependencies": {
+        "blue-web": "^1.0.1",
+        "blue-web-components": "^1.0.7"
+    }
+}

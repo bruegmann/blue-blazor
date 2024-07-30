@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>LGK</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <!-- <icon>icon.png</icon> -->
+    <projectUrl>https://github.com/bruegmann/</projectUrl>
+    <description>Komponenten-Library für Blazor.</description>
+    <copyright>$copyright$</copyright>
+    <tags>blue blue-web blazor components bootstrap</tags>
+  </metadata>
+</package>

@@ -1,0 +1,12 @@
+﻿<Page>
+    <Body ContainerClass="docgen container pb-3">
+        @ChildContent
+    </Body>
+</Page>
+
+<script src="lib/prism.js"></script>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

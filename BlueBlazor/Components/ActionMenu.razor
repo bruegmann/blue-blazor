@@ -1,0 +1,60 @@
+@inject IJSRuntime JSRuntime
+
+<Outside OnClickOutside="disableActionsToggledIn">
+    <div
+        class="blue-actions navbar @Class navbar-expand@(Break != null ? "-" + Break.ToString() : "") @Break.ToString() @(actionsToggledIn ? "open" : "")">
+        <div class="blue-actions-menu nav navbar-nav navbar-right">
+            @if (!actionsToggledIn && !HideToggleAction)
+            {
+                <MenuItem class="blue-actions-menu-toggle w-100 blue-outside-exception" OnClick="toggleActions" aria-label="Toggle menu">
+                <Icon>
+                        @if (ToggleIcon != null)
+                        {
+                            @ToggleIcon
+                        }
+                        else
+                        {
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                                 class="bi bi-three-dots-vertical blue-outside-exception" viewBox="0 0 16 16">
+                            <path
+                                d="M9.5 13a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm0-5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z">
+                            </path>
+                        </svg>
+                        }
+                </Icon>
+                </MenuItem>
+            }
+            @ChildContent
+        </div>
+    </div>
+</Outside>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public bool HideToggleAction { get; set; } = false;
+
+    [Parameter]
+    public string Class { get; set; } = "";
+
+    [Parameter]
+    public BreakSize? Break { get; set; } = BreakSize.lg;
+
+    [Parameter]
+    public RenderFragment? ToggleIcon { get; set; }
+
+
+    bool actionsToggledIn = false;
+
+    void toggleActions()
+    {
+        actionsToggledIn = !actionsToggledIn;
+    }
+
+    void disableActionsToggledIn()
+    {
+        actionsToggledIn = false;
+    }
+}

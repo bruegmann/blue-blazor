@@ -1,0 +1,10 @@
+﻿<AlertSection Alerts="alerts" />
+
+@code {
+    List<AlertSection.Alert> alerts = new() {
+        new () { Message = "It is an error.", AlertType = AlertSection.AlertType.Danger },
+        new () { Message = "It is a warning.", AlertType = AlertSection.AlertType.Warning },
+        new () { Message = "It is an info.", AlertType = AlertSection.AlertType.Info },
+        new () { Message = "It is a success.", AlertType = AlertSection.AlertType.Success }
+    };
+}

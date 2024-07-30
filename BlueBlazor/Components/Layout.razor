@@ -1,0 +1,137 @@
+@inject IJSRuntime JSRuntime
+
+<div class="blue-layout @Class @(SidebarIn ? "open" : "") @(HideSidebarMenu ? "hasNoSidebarMenu" : "hasSidebarMenu") @(expandSidebar == true ? "expandSidebar" : "") @(DisableHeaders ? "disableHeaders" : "") @(HideToggleExpandSidebar ? "hideToggleExpandSidebar" : "")">
+    @if (!HideSidebarMenu)
+    {
+        <SidebarToggler OnClick="() => SidebarIn = !SidebarIn">
+            <SidebarToggleIconComponent>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"
+                     style="display: inline-block; vertical-align: -0.125em">
+                    <path fillRule="evenodd"
+                          d="M2.5 12a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z">
+                    </path>
+                </svg>
+            </SidebarToggleIconComponent>
+        </SidebarToggler>
+    }
+
+    @if (!HideSidebarMenu && !HideToggleExpandSidebar)
+    {
+        <SidebarToggler OnClick="toggleExpandSidebar" Class="d-none d-xxl-block">
+            <SidebarToggleIconComponent>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     viewBox="0 0 16 16" style="display: inline-block; vertical-align: -0.125em">
+                    <path fillRule="evenodd"
+                          d="M2.5 12a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z">
+                    </path>
+                </svg>
+            </SidebarToggleIconComponent>
+        </SidebarToggler>
+    }
+
+    <Outside OnClickOutside="() => SidebarIn = false" IgnoreClasses="@(new List<string> { "blue-open-menu", "bi-menu", "blue-search", "blue-search-control",
+"blue-search-btn", "blue-search-btn-icon", "blue-menu-item-dropdown-toggle", "blue-menu-item-dropdown-caret",
+"blue-menu-item-dropdown-icon", "blue-sidebar-exception" })">
+        @SideContent
+    </Outside>
+
+    @if (PageContent != null)
+    {
+        <div class="router-page active">
+            @PageContent
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public RenderFragment? SideContent { get; set; }
+    [Parameter] public RenderFragment? PageContent { get; set; }
+
+    [Parameter] public string? Id { get; set; }
+
+    bool sidebarIn;
+
+    /// <summary>
+    /// By default, the side bar is "in". Is two-way bindable.
+    /// </summary>
+    [Parameter]
+    public bool SidebarIn
+    {
+        get => sidebarIn; set
+        {
+            sidebarIn = value;
+            SidebarInChanged.InvokeAsync(value);
+        }
+    }
+    [Parameter] public EventCallback<bool> SidebarInChanged { get; set; }
+
+    [Parameter] public string? Style { get; set; }
+
+    /// <summary>
+    /// Set `true` to hide button to toggle `expandSidebar` state.
+    /// </summary>
+    [Parameter] public bool HideToggleExpandSidebar { get; set; } = false;
+
+    bool? expandSidebar;
+    /// <summary>
+    /// Sidebar is automatically expanded on wider views. Is two-way bindable.
+    /// </summary>
+    [Parameter]
+    public bool? ExpandSidebar
+    {
+        get => expandSidebar; set
+        {
+            expandSidebar = value == true;
+            ExpandSidebarChanged.InvokeAsync(value);
+        }
+    }
+    [Parameter] public EventCallback<bool?> ExpandSidebarChanged { get; set; }
+
+
+    /// <summary>
+    /// Disables sidebar.
+    /// </summary>
+    [Parameter] public bool HideSidebarMenu { get; set; } = false;
+
+    [Parameter] public string? Class { get; set; }
+
+    [Parameter] public RenderFragment? SidebarToggleIconComponent { get; set; }
+
+    /// <summary>
+    /// Disables the header bars on pages.
+    /// </summary>
+    [Parameter] public bool DisableHeaders { get; set; }
+    [Parameter] public bool UseStorage { get; set; } = true;
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (UseStorage && ExpandSidebar == null)
+            {
+                string fromStorage = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "blueLayoutShrinkSidebar");
+                bool shrinkSidebar = fromStorage != "null" && fromStorage != null ? true : false;
+                expandSidebar = !shrinkSidebar;
+            }
+            StateHasChanged();
+        }
+    }
+
+    void toggleExpandSidebar()
+    {
+        if (UseStorage)
+        {
+            if (ExpandSidebar == true)
+            {
+                JSRuntime.InvokeVoidAsync("localStorage.setItem", "blueLayoutShrinkSidebar", "true");
+            }
+            else
+            {
+                JSRuntime.InvokeVoidAsync("localStorage.removeItem", "blueLayoutShrinkSidebar");
+            }
+        }
+
+        ExpandSidebar = !ExpandSidebar;
+    }
+}

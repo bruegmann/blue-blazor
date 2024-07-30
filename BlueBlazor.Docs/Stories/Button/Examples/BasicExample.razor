@@ -1,0 +1,16 @@
+﻿@{ /*docs { 
+        "title": "Basic example",
+        "description": "A basic example of a button with using the `OnClick` event."
+    } */ }
+<Button Label="Click me" OnClick="onClick" />
+
+<p>You have clicked the button @clickCount times.</p>
+
+@code {
+    int clickCount = 0;
+
+    void onClick()
+    {
+        clickCount++;
+    }
+}

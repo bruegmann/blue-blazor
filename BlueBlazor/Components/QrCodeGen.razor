@@ -1,0 +1,38 @@
+@inject IJSRuntime JSRuntime
+
+<div id="@Id" style="display: contents;"></div>
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+    [Parameter]
+    public string? Value { get; set; }
+    [Parameter]
+    public int Border { get; set; } = 4;
+    [Parameter]
+    public string LightColor { get; set; } = "var(--bs-body-bg, #fff)";
+    [Parameter]
+    public string DarkColor { get; set; } = "var(--bs-body-color, #000)";
+    [Parameter]
+    public string? Class { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("blueBlazor.qrCodeGen.createSvg", Id, Value, Border, LightColor, DarkColor, Class);
+            didInit = true;
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (didInit)
+        {
+            await JSRuntime.InvokeVoidAsync("blueBlazor.qrCodeGen.createSvg", Id, Value, Border, LightColor, DarkColor, Class ?? "");
+        }
+    }
+
+    bool didInit = false;
+}

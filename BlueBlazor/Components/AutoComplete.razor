@@ -1,0 +1,216 @@
+@using Microsoft.AspNetCore.Components.Forms
+@inject IJSRuntime JSRuntime
+
+<EditForm Model="@this" OnValidSubmit="@onSubmit">
+    <label for="@($"{Id}-input")" class="my-0 lh-1 fw-bold @(LabelHidden ? "d-none" : "")"><small>@Label</small></label>
+
+    <div id="@Id" class="blue-auto-complete border rounded d-flex align-items-center gap-1 p-1 @Class">
+
+        @foreach (var tag in Tags)
+        {
+            <span class="badge text-secondary bg-secondary-subtle">
+                @displayItem(tag) <Button Label="Delete" LabelHidden Class="btn-close"
+                                          OnClick="async () => {Tags.Remove(tag); await TagsChanged.InvokeAsync(Tags);}" />
+            </span>
+        }
+
+
+        <div class="blue-auto-complete-dropdown w-100 position-relative">
+            <input type="text"
+                   id="@($"{Id}-input")"
+                   class="blue-auto-complete-input form-control form-control-sm @InputClass"
+                   placeholder="@Placeholder"
+                   @bind="@InputValue"
+                   @bind:event="oninput"
+                   @onfocus="@InputOnFocus"
+                   aria-haspopup="true"
+                   aria-controls="@($"{Id}-menu")"
+                   aria-autocomplete="list"
+                   aria-expanded="false" />
+
+            <div class="blue-auto-complete-menu list-group position-absolute w-100 d-none z-1 overflow-y-auto bg-body rounded shadow @MenuClass"
+                 id="@($"{Id}-menu")" role="listbox"
+                 aria-labelledby="@($"{Id}-input")">
+                @MenuContentBefore
+                @foreach (var suggestion in Suggestions)
+                {
+                    <Button Label="@displayItem(suggestion)"
+                            Class="@($"blue-auto-complete-menu-item list-group-item list-group-item-action {(Tags.Contains(suggestion) ? "active" : "")}")"
+                            OnClick="() => selectSuggestion(suggestion)"
+                            role="option"
+                            aria-selected="@(Tags.Contains(suggestion))" />
+                }
+                @MenuContentAfter
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+<style>
+    .blue-auto-complete-menu {
+        max-height: var(--blue-auto-complete-menu-max-height, 400px);
+    }
+</style>
+
+<script>
+    function blueInitAutoComplete(id) {
+        const blueAutoComplete = document.getElementById(id)
+
+        window.addEventListener("click", (event) => {
+            const input = blueAutoComplete.querySelector(
+                ".blue-auto-complete-input"
+            )
+            const menu = blueAutoComplete.querySelector(
+                ".blue-auto-complete-menu"
+            )
+
+            if (!blueAutoComplete.contains(event.target)) {
+                menu.classList.add("d-none")
+                input.setAttribute("aria-expanded", "false")
+                return
+            }
+
+            if (event.target === input) {
+                menu.classList.remove("d-none")
+                input.setAttribute("aria-expanded", "true")
+            }
+
+            if (
+                event.target.classList.contains("blue-auto-complete-menu-item")
+            ) {
+                // input.value = event.target.innerText
+                menu.classList.add("d-none")
+                input.setAttribute("aria-expanded", "false")
+            }
+        })
+
+        window.addEventListener("keydown", (event) => {
+            const input = blueAutoComplete.querySelector(
+                ".blue-auto-complete-input"
+            )
+            const menu = blueAutoComplete.querySelector(
+                ".blue-auto-complete-menu"
+            )
+
+            if (event.key === "Escape") {
+                menu.classList.add("d-none")
+                input.setAttribute("aria-expanded", "false")
+            }
+
+            if (event.key === "ArrowDown") {
+                const focusedItem = menu.querySelector(
+                    ".blue-auto-complete-menu-item:focus"
+                )
+                if (focusedItem) {
+                    focusedItem.nextElementSibling?.focus()
+                } else {
+                    menu.firstElementChild?.focus()
+                }
+            }
+
+            if (event.key === "ArrowUp") {
+                const focusedItemFirst = menu.querySelector(
+                    ".blue-auto-complete-menu-item:first-child:focus"
+                )
+                const focusedItem = menu.querySelector(
+                    ".blue-auto-complete-menu-item:focus"
+                )
+                if (focusedItemFirst) {
+                    input.focus()
+                } else if (focusedItem) {
+                    focusedItem.previousElementSibling?.focus()
+                } else {
+                    menu.lastElementChild?.focus()
+                }
+            }
+        })
+    }
+</script>
+
+@code {
+    [Parameter]
+    public string? Class { get; set; }
+    [Parameter]
+    public string? InputClass { get; set; }
+    [Parameter]
+    public EventCallback InputOnFocus { get; set; }
+    [Parameter]
+    public string? Placeholder { get; set; }
+
+    [Parameter]
+    public List<AutoCompleteItem> Tags { get; set; } = new();
+    [Parameter]
+    public EventCallback<List<AutoCompleteItem>> TagsChanged { get; set; }
+
+    [Parameter]
+    public bool SingleTag { get; set; } = false;
+
+    [Parameter]
+    public List<AutoCompleteItem> Suggestions { get; set; } = new();
+
+    [Parameter]
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+
+    [Parameter]
+    public string? MenuClass { get; set; }
+
+    [Parameter]
+    public RenderFragment? MenuContentBefore { get; set; }
+
+    [Parameter]
+    public RenderFragment? MenuContentAfter { get; set; }
+
+
+    [Parameter, EditorRequired]
+    public required string Label { get; set; }
+
+    [Parameter]
+    public bool LabelHidden { get; set; } = false;
+
+    string _inputValue = "";
+    [Parameter]
+    public string InputValue
+    {
+        get => _inputValue; set
+        {
+            if (_inputValue != value)
+            {
+                _inputValue = value;
+                InputValueChanged.InvokeAsync(value);
+            }
+        }
+    }
+    [Parameter]
+    public EventCallback<string> InputValueChanged { get; set; }
+
+    public class AutoCompleteItem
+    {
+        public string Id { get; set; } = "";
+        public string Description { get; set; } = "";
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            JSRuntime.InvokeVoidAsync("blueInitAutoComplete", Id);
+        }
+    }
+
+    async Task selectSuggestion(AutoCompleteItem suggestion)
+    {
+        if (SingleTag) Tags.Clear();
+        Tags.Add(suggestion);
+        await TagsChanged.InvokeAsync(Tags);
+    }
+
+    async Task onSubmit()
+    {
+        InputValue = "";
+        if (SingleTag) Tags.Clear();
+        Tags.Add(new AutoCompleteItem { Id = InputValue, Description = InputValue });
+        await TagsChanged.InvokeAsync(Tags);
+    }
+
+    string displayItem(AutoCompleteItem item) => item.Id + (!string.IsNullOrEmpty(item.Description) ? $" - {item.Description}" : "");
+}

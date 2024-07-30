@@ -1,0 +1,68 @@
+﻿<div
+    class="blue-header-title d-inline-flex gap-2 fw-medium align-items-center px-3 py-2 position-absolute z-1 @Class @(Sidebar ? "sidebar" : "")">
+    @if (Logo != null)
+    {
+        <a href="@Href">
+            <img src="@Logo" alt="@LogoAlt" class="blue-header-title-image" />
+        </a>
+    }
+
+    @if (H1)
+    {
+        <h1 class="blue-header-title-labels h6 my-0 @(KeepAppTitle ? "keep" : "")">
+            @if (!string.IsNullOrEmpty(AppTitle))
+            {
+                <a href="@Href">@AppTitle</a> @if (ChildContent != null)
+                {
+                    <span class="blue-header-title-separator"> / </span>
+                }
+            }
+            @ChildContent
+        </h1>
+    }
+    else
+    {
+        <span class="blue-header-title-labels @(KeepAppTitle ? "keep" : "")">
+            @if (!string.IsNullOrEmpty(AppTitle))
+            {
+                <a href="@Href">@AppTitle</a> @if (!string.IsNullOrEmpty(ChildContent?.ToString()))
+                {
+                    <span class="blue-header-title-separator"> / </span>
+                }
+            }
+            @ChildContent
+        </span>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string? Logo { get; set; }
+
+    [Parameter]
+    public string LogoAlt { get; set; } = "Logo";
+
+    [Parameter]
+    public bool KeepAppTitle { get; set; } = false;
+
+    [Parameter]
+    public string? AppTitle { get; set; }
+
+    [Parameter]
+    public string Class { get; set; } = "";
+
+    [Parameter]
+    public bool Sidebar { get; set; } = false;
+
+    [Parameter]
+    public string Href { get; set; } = "";
+
+    /// <summary>
+    /// By default, the title is an h1 element. Set to false to use a span element instead.
+    /// </summary>
+    [Parameter]
+    public bool H1 { get; set; } = true;
+}

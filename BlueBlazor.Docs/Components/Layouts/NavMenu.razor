@@ -1,0 +1,69 @@
+﻿@inject NavigationManager NavigationManager
+
+<SidebarMenu>
+    <ChildContent>
+        <MenuItem Label="Home" Href="" IsActive="@isActive("")">
+            <Icon>
+                <BiHouse />
+            </Icon>
+            <IconForActive>
+                <BiHouseFill />
+            </IconForActive>
+        </MenuItem>
+
+        <MenuItem Label="Button" Href="stories/button" IsActive="@isActive("stories/button")">
+            <Icon>
+                <BiPlayBtn />
+            </Icon>
+            <IconForActive>
+                <BiPlayBtnFill />
+            </IconForActive>
+        </MenuItem>
+
+        <MenuItem Label="Alert section" Href="stories/alert-section" IsActive="@isActive("stories/alert-section")">
+            <Icon>
+                <BiExclamationDiamond />
+            </Icon>
+            <IconForActive>
+                <BiExclamationDiamondFill />
+            </IconForActive>
+        </MenuItem>
+    </ChildContent>
+
+    <BottomContent>
+        <MenuItem Label="Code on GitHub" Href="https://github.com/bruegmann/blue-blazor" Target="_blank">
+            <Icon>
+                <BiCodeSquare />
+            </Icon>
+        </MenuItem>
+    </BottomContent>
+</SidebarMenu>
+
+@code {
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= handleLocationChanged;
+    }
+
+    protected override void OnInitialized()
+    {
+        NavigationManager.LocationChanged += handleLocationChanged;
+    }
+
+    void handleLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        StateHasChanged();
+    }
+
+    bool isActive(string href)
+    {
+        var uri = NavigationManager.ToAbsoluteUri(href);
+
+        if (NavigationManager.Uri == uri.ToString())
+        {
+            return true;
+        }
+
+        return false;
+    }
+}

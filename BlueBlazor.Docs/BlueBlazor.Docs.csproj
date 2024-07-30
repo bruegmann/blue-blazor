@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="wwwroot\css\docs-theme.css" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Blazor.Bootstrap.Icons" Version="1.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.7" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Pages\Stories\" />
+	  <Folder Include="wwwroot\images\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\BlueBlazor\BlueBlazor.csproj" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command="npm i" />
+		<Exec Command="npm run sass" />
+	</Target>
+</Project>
