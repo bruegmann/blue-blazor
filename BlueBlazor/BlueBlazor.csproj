@@ -2,11 +2,36 @@
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
+		<PackageId>BlueBlazor</PackageId>
+		<Version>1.0.3</Version>
+
+		<Summary>Component library for Blazor.</Summary>
+		<PackageTags>blue blue-web blazor components bootstrap</PackageTags>
+		<Title>Blue Blazor</Title>
+		<Description>Component library for Blazor.</Description>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+
+		<SignAssembly>False</SignAssembly>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Version>1.0.2</Version>
+
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<IsPackable>true</IsPackable>
+
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<DebugType>embedded</DebugType>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
 		<NoWarn>1591</NoWarn>
+
+		<Authors>LGK, Brügmann Software GmbH</Authors>
+		<PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
+		<PackageIcon>logo.png</PackageIcon>
+		<ProjectUrl>https://github.com/bruegmann/</ProjectUrl>
+		
+		<Copyright>Copyright © 2024</Copyright>
+		<RepositoryUrl>https://github.com/bruegmann/</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -22,10 +47,6 @@
 		<EmbeddedResource Update="Resources\Phrases.resx">
 			<Generator></Generator>
 		</EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="wwwroot\**\*.*" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -45,6 +66,13 @@
 	<ItemGroup>
 		<None Update="README.md">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<Pack>true</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Update="logo.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Pack>true</Pack>
+			<PackagePath></PackagePath>
 		</None>
 	</ItemGroup>
 
