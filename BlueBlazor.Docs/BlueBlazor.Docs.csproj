@@ -28,4 +28,8 @@
 		<Exec Command="npm i" />
 		<Exec Command="npm run sass" />
 	</Target>
+
+	<Target Name="PostPublishScript" AfterTargets="AfterPublish">
+		<Exec Command="node buildScripts/afterPublish.js" />
+	</Target>
 </Project>
