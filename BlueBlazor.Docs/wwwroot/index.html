@@ -44,7 +44,17 @@
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">
+        <div class="card rounded-5 shadow-lg p-5 d-inline-flex flex-column align-items-center position-absolute"
+             style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
+            <div class="d-flex gap-2 align-items-center mb-3">
+                <img src="images/blue.svg" style="width: 2rem; height: 2rem;" alt="Blue Blazor logo" />
+                <h1>Blue Blazor</h1>
+            </div>
+            <span class="spinner-border text-primary" aria-hidden="true"></span>
+            <span role="status">Loading...</span>
+        </div>
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
