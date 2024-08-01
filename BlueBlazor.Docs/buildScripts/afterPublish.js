@@ -57,5 +57,3 @@ emptyFolder(target)
 
 // Copy contents from folder to target
 copyFolderSync(folder, target)
-
-fs.writeFileSync(path.resolve(target, ".nojekyll"), "")
