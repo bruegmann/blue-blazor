@@ -1,7 +1,9 @@
-﻿@inject NavigationManager NavigationManager
+﻿@using System.Text.Json
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
 
 <SidebarMenu>
-    <ChildContent>
+    <TopContent>
         <MenuItem Label="Home" Href="" IsActive="@isActive("")">
             <Icon>
                 <BiHouse />
@@ -10,30 +12,22 @@
                 <BiHouseFill />
             </IconForActive>
         </MenuItem>
-
-        <MenuItem Label="Button" Href="stories/button" IsActive="@isActive("stories/button")">
-            <Icon>
-                <BiPlayBtn />
-            </Icon>
-            <IconForActive>
-                <BiPlayBtnFill />
-            </IconForActive>
-        </MenuItem>
-
-        <MenuItem Label="Alert section" Href="stories/alert-section" IsActive="@isActive("stories/alert-section")">
-            <Icon>
-                <BiExclamationDiamond />
-            </Icon>
-            <IconForActive>
-                <BiExclamationDiamondFill />
-            </IconForActive>
-        </MenuItem>
-
-        <MenuItem Label="Heading" Href="stories/heading" IsActive="@isActive("stories/heading")">
-            <Icon>
-                <BiTypeH1 />
-            </Icon>
-        </MenuItem>
+    </TopContent>
+    <ChildContent>
+        @if (componentPageUrls != null)
+        {
+            foreach (var item in componentPageUrls)
+            {
+                <MenuItem Label="@item.Key" Href="@item.Value" IsActive="@isActive(item.Value)">
+                    <Icon>
+                        @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
+                    </Icon>
+                    <IconForActive>
+                        @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ?? (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
+                    </IconForActive>
+                </MenuItem>
+            }
+        }
     </ChildContent>
 
     <BottomContent>
@@ -51,9 +45,10 @@
         NavigationManager.LocationChanged -= handleLocationChanged;
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         NavigationManager.LocationChanged += handleLocationChanged;
+        await loadPagesData();
     }
 
     void handleLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -71,5 +66,43 @@
         }
 
         return false;
+    }
+
+    async Task loadPagesData()
+    {
+        var json = await Http.GetStringAsync("data/pages-data.json");
+        componentPageUrls = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+    }
+
+    Dictionary<string, string>? componentPageUrls;
+    Dictionary<string, ComponentIcon> componentIcons = new()
+    {
+        {"ActionMenu", new() {
+            Icon = @<BiMenuButtonWide />,
+            IconForActive = @<BiMenuButtonWideFill />}
+        },
+        {"AlertSection", new() {
+            Icon = @<BiExclamationDiamond />,
+            IconForActive = @<BiExclamationDiamondFill />}
+        },
+        {"AutoComplete", new() {
+            Icon = @<BiInputCursor />}
+        },
+        {"Button", new() {
+            Icon = @<BiPlayBtn />,
+            IconForActive = @<BiPlayBtnFill />}
+        },
+        {"ButtonOrA", new() {
+            Icon = @<BiLink45deg />}
+        },
+        {"Heading", new() {
+            Icon = @<BiTypeH1 />}
+        }};
+    RenderFragment defaultIcon = @<BiFileCode />;
+
+    class ComponentIcon
+    {
+        public RenderFragment Icon { get; set; } = @<BiFileCode />;
+        public RenderFragment? IconForActive { get; set; }
     }
 }
