@@ -36,7 +36,7 @@ public class Helper
                 parametersHtml = componentParameterInfoToHtml(parameters);
             }
 
-            string pageUrl = $"/components/{pascalToKebabCase(component!)}";
+            string pageUrl = $"components/{pascalToKebabCase(component!)}";
             componentPageUrls.Add(component!, pageUrl);
 
             string storyPath = Path.Combine(storiesPath, component!);
@@ -48,7 +48,7 @@ public class Helper
                 storyHtml = await getStoryContent(storyPath);
             }
 
-            string content = $"@page \"{pageUrl}\"\n" +
+            string content = $"@page \"/{pageUrl}\"\n" +
                 storyImport +
                 $"\n{readMeHtml}\n" +
                 $"\n{parametersHtml}\n" +
