@@ -1,0 +1,14 @@
+﻿<AutoComplete Label="Select tags"
+              Placeholder="Enter something..."
+              Tags="@tags"
+              Suggestions="@suggestions" />
+
+@code {
+    List<AutoComplete.AutoCompleteItem> tags = new() { new() { Description = "Bla" } };
+    List<AutoComplete.AutoCompleteItem> suggestions { get; set; } = new() {
+        new () { Id = "csharp", Description = "C#" },
+        new () { Id = "jsx", Description = "JSX" },
+        new () { Id = "react", Description = "React" },
+        new () { Id = "blazor", Description = "Blazor" }
+    };
+}

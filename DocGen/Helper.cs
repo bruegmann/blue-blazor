@@ -70,11 +70,12 @@ public class Helper
         foreach (var example in examples)
         {
             string exampleName = Path.GetFileNameWithoutExtension(example);
+            string exampleNameReadable = pascalToReadable(exampleName);
             var code = await File.ReadAllTextAsync(example);
 
             DocsMeta docsMeta = new DocsMeta
             {
-                Title = exampleName,
+                Title = exampleNameReadable,
                 Description = ""
             };
 
@@ -90,6 +91,10 @@ public class Helper
                     if (s != null)
                     {
                         docsMeta = s;
+                        if (string.IsNullOrEmpty(docsMeta.Title))
+                        {
+                            docsMeta.Title = exampleNameReadable;
+                        }
                     }
                     code = code.Replace(match.Value, "");
                 }
@@ -102,7 +107,9 @@ public class Helper
                 (docsMeta.Description != "" ? markdownToHtml(docsMeta.Description ?? "") : "");
 
             examplesHtml += "<div class=\"example\">\n" +
-                $"    <div class=\"example-demo\"><{exampleName} /></div>\n\n" +
+                $"    <div class=\"example-demo\">{(docsMeta.IframeUrl != null ?
+                $"<iframe class=\"example-iframe\" src=\"{docsMeta.IframeUrl}\"></iframe>" :
+                $"<{exampleName} />")}</div>\n\n" +
                 $"    <details class=\"example-code\">\n" +
                 $"        <summary>Code</summary>\n" +
                 $"        <pre><code class=\"language-razor\">{code}</code></pre>\n" +
@@ -201,6 +208,18 @@ public class Helper
             .Trim()
             .ToLower();
     }
+
+    string pascalToReadable(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return value;
+
+        // Fügen Sie Leerzeichen vor Großbuchstaben ein
+        string result = Regex.Replace(value, "(?<!^)([A-Z])", " $1", RegexOptions.Compiled);
+
+        // Konvertieren Sie den ersten Buchstaben in Großbuchstaben und den Rest in Kleinbuchstaben
+        return char.ToUpper(result[0]) + result.Substring(1).ToLower();
+    }
 }
 
 public class ComponentParameterInfo
@@ -215,4 +234,5 @@ public class DocsMeta
 {
     public string? Title { get; set; }
     public string? Description { get; set; }
+    public string? IframeUrl { get; set; }
 }

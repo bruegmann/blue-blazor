@@ -46,6 +46,12 @@ $sidebar-color: $gray-900;
     @extend .p-3;
 }
 
+.example-iframe {
+    width: 100%;
+    overflow: auto;
+    resize: both;
+}
+
 .example-code {
     @extend .border, .rounded, .bg-light;
 }
