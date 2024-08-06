@@ -1,0 +1,33 @@
+﻿<div @attributes="AdditionalAttributes" role="heading" aria-level="@Level"
+     class="@($"h{Level} mt-4 mb-3 {(PageHeader ? "blue-page-header" : "")} {Class}")">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Allowed are values from `1` to `6`.
+    /// </summary>
+    [Parameter]
+    public required int Level { get; set; } = 1;
+
+    /// <summary>
+    /// Will add the class "blue-page-header" to the heading, which underlines the heading.
+    /// </summary>
+    [Parameter]
+    public bool PageHeader { get; set; } = false;
+
+    /// <summary>
+    /// Pass additional classes to the heading.
+    /// </summary>
+    [Parameter]
+    public string? Class { get; set; }
+
+    /// <summary>
+    /// Pass additional attributes to the heading.
+    /// </summary>
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object>? AdditionalAttributes { get; set; }
+}

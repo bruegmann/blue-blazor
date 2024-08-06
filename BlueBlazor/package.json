@@ -14,7 +14,7 @@
         "webpack-cli": "^5.1.4"
     },
     "dependencies": {
-        "blue-web": "^1.0.1",
+        "blue-web": "^1.1.0",
         "blue-web-components": "^1.0.7"
     }
 }

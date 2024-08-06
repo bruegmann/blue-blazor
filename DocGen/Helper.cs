@@ -30,6 +30,10 @@ public class Helper
                 var markdown = File.ReadAllText(readMePath);
                 readMeHtml = markdownToHtml(markdown);
             }
+            else
+            {
+                readMeHtml = markdownToHtml($"# {story!}");
+            }
 
             Type? componentType = Type.GetType($"{componentNamespace}.{story}");
             if (componentType == null)
@@ -38,6 +42,9 @@ public class Helper
             }
             if (componentType != null && xmlDocumentationPath != null)
             {
+                string componentComment = getXmlDocumentationCommentForClass(xmlDocumentationPath, componentType);
+                readMeHtml += markdownToHtml(componentComment);
+
                 var parameters = getComponentParameters(componentType, xmlDocumentationPath);
                 parametersHtml = componentParameterInfoToHtml(parameters);
             }
@@ -123,7 +130,7 @@ public class Helper
                                 Name = prop.Name,
                                 ParameterType = prop.PropertyType,
                                 DefaultValue = prop.GetValue(Activator.CreateInstance(componentType)) ?? "",
-                                Comment = getXmlDocumentationComment(memberNodes, prop)
+                                Comment = getXmlDocumentationCommentForProp(memberNodes, prop)
                             });
     }
 
@@ -137,7 +144,7 @@ public class Helper
         {
             table += "\n        <tr>";
             table += $"<td><code>{param.Name}</code></td>";
-            table += $"<td>{param.Comment}</td>";
+            table += $"<td>{markdownToHtml(param.Comment ?? "")}</td>";
             table += $"<td>{param.ParameterType?.Name}</td>";
             table += $"<td>{param.DefaultValue}</td>";
             table += "</tr>";
@@ -149,7 +156,17 @@ public class Helper
         return table;
     }
 
-    string getXmlDocumentationComment(IEnumerable<XElement> memberNodes, PropertyInfo prop)
+    string getXmlDocumentationCommentForClass(string xmlDocumentationPath, Type classType)
+    {
+        var xmlDoc = XDocument.Load(xmlDocumentationPath);
+        var memberNodes = xmlDoc.Descendants("member");
+
+        var memberName = $"T:{classType.FullName}";
+        var memberNode = memberNodes.FirstOrDefault(node => node.Attribute("name")?.Value == memberName);
+        return memberNode?.Element("summary")?.Value.Trim() ?? string.Empty;
+    }
+
+    string getXmlDocumentationCommentForProp(IEnumerable<XElement> memberNodes, PropertyInfo prop)
     {
         var memberName = $"P:{prop.DeclaringType?.FullName}.{prop.Name}";
         var memberNode = memberNodes.FirstOrDefault(node => node.Attribute("name")?.Value == memberName);
