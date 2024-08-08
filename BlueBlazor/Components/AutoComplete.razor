@@ -4,11 +4,11 @@
 <EditForm Model="@this" OnValidSubmit="@onSubmit">
     <label for="@($"{Id}-input")" class="my-0 lh-1 fw-bold @(LabelHidden ? "d-none" : "")"><small>@Label</small></label>
 
-    <div id="@Id" class="blue-auto-complete border rounded d-flex align-items-center gap-1 p-1 @Class">
+    <div id="@Id" class="blue-auto-complete @(SingleTag ? "blue-auto-complete-single-tag" : "") border rounded d-flex align-items-center gap-1 p-1 @Class">
 
         @foreach (var tag in Tags)
         {
-            <span class="badge text-secondary bg-secondary-subtle">
+            <span class="blue-auto-complete-tag badge text-secondary bg-secondary-subtle">
                 @displayItem(tag) <Button Label="Delete" LabelHidden Class="btn-close"
                                           OnClick="async () => {Tags.Remove(tag); await TagsChanged.InvokeAsync(Tags);}" />
             </span>
@@ -50,82 +50,15 @@
     .blue-auto-complete-menu {
         max-height: var(--blue-auto-complete-menu-max-height, 400px);
     }
-</style>
 
-<script>
-    function blueInitAutoComplete(id) {
-        const blueAutoComplete = document.getElementById(id)
-
-        window.addEventListener("click", (event) => {
-            const input = blueAutoComplete.querySelector(
-                ".blue-auto-complete-input"
-            )
-            const menu = blueAutoComplete.querySelector(
-                ".blue-auto-complete-menu"
-            )
-
-            if (!blueAutoComplete.contains(event.target)) {
-                menu.classList.add("d-none")
-                input.setAttribute("aria-expanded", "false")
-                return
-            }
-
-            if (event.target === input) {
-                menu.classList.remove("d-none")
-                input.setAttribute("aria-expanded", "true")
-            }
-
-            if (
-                event.target.classList.contains("blue-auto-complete-menu-item")
-            ) {
-                // input.value = event.target.innerText
-                menu.classList.add("d-none")
-                input.setAttribute("aria-expanded", "false")
-            }
-        })
-
-        window.addEventListener("keydown", (event) => {
-            const input = blueAutoComplete.querySelector(
-                ".blue-auto-complete-input"
-            )
-            const menu = blueAutoComplete.querySelector(
-                ".blue-auto-complete-menu"
-            )
-
-            if (event.key === "Escape") {
-                menu.classList.add("d-none")
-                input.setAttribute("aria-expanded", "false")
-            }
-
-            if (event.key === "ArrowDown") {
-                const focusedItem = menu.querySelector(
-                    ".blue-auto-complete-menu-item:focus"
-                )
-                if (focusedItem) {
-                    focusedItem.nextElementSibling?.focus()
-                } else {
-                    menu.firstElementChild?.focus()
-                }
-            }
-
-            if (event.key === "ArrowUp") {
-                const focusedItemFirst = menu.querySelector(
-                    ".blue-auto-complete-menu-item:first-child:focus"
-                )
-                const focusedItem = menu.querySelector(
-                    ".blue-auto-complete-menu-item:focus"
-                )
-                if (focusedItemFirst) {
-                    input.focus()
-                } else if (focusedItem) {
-                    focusedItem.previousElementSibling?.focus()
-                } else {
-                    menu.lastElementChild?.focus()
-                }
-            }
-        })
+    .blue-auto-complete-single-tag .blue-auto-complete-tag {
+        width: 100%;
     }
-</script>
+
+    .blue-auto-complete-single-tag .blue-auto-complete-tag + .blue-auto-complete-dropdown {
+        display: none;
+    }
+</style>
 
 @code {
     [Parameter]
@@ -193,7 +126,7 @@
     {
         if (firstRender)
         {
-            JSRuntime.InvokeVoidAsync("blueInitAutoComplete", Id);
+            JSRuntime.InvokeVoidAsync("blueBlazor.autoComplete.init", Id);
         }
     }
 

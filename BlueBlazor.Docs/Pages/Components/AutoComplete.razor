@@ -4,9 +4,12 @@
 @using BlueBlazor.Docs.Stories.AutoComplete
 
 <div class="md-block"><h1>AutoComplete</h1>
-</div><div class="md-block"></div>
+</div><div class="md-block"><p>Text box with auto complete feature.
+Make sure to embed the required JavaScript file &quot;_content/BlueBlazor/js/autoComplete.bundle.js&quot; or
+&quot;_content/BlueBlazor/js/all.bundle.js&quot;.</p>
+</div>
 
-<table class="table table-bordered">
+<div class="table-responsive"><table class="table table-bordered">
     <thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead>
     <tbody>
         <tr><td><code>Class</code></td><td><div class="md-block"></div></td><td>String</td><td></td></tr>
@@ -17,7 +20,7 @@
         <tr><td><code>TagsChanged</code></td><td><div class="md-block"></div></td><td>EventCallback`1</td><td>Microsoft.AspNetCore.Components.EventCallback`1[System.Collections.Generic.List`1[BlueBlazor.Components.AutoComplete+AutoCompleteItem]]</td></tr>
         <tr><td><code>SingleTag</code></td><td><div class="md-block"></div></td><td>Boolean</td><td>False</td></tr>
         <tr><td><code>Suggestions</code></td><td><div class="md-block"></div></td><td>List`1</td><td>System.Collections.Generic.List`1[BlueBlazor.Components.AutoComplete+AutoCompleteItem]</td></tr>
-        <tr><td><code>Id</code></td><td><div class="md-block"></div></td><td>String</td><td>20770e19-ba57-49e1-ac72-83ab8be99086</td></tr>
+        <tr><td><code>Id</code></td><td><div class="md-block"></div></td><td>String</td><td>85b08ea1-407e-4b62-b960-14039d48504b</td></tr>
         <tr><td><code>MenuClass</code></td><td><div class="md-block"></div></td><td>String</td><td></td></tr>
         <tr><td><code>MenuContentBefore</code></td><td><div class="md-block"></div></td><td>RenderFragment</td><td></td></tr>
         <tr><td><code>MenuContentAfter</code></td><td><div class="md-block"></div></td><td>RenderFragment</td><td></td></tr>
@@ -26,7 +29,7 @@
         <tr><td><code>InputValue</code></td><td><div class="md-block"></div></td><td>String</td><td></td></tr>
         <tr><td><code>InputValueChanged</code></td><td><div class="md-block"></div></td><td>EventCallback`1</td><td>Microsoft.AspNetCore.Components.EventCallback`1[System.String]</td></tr>
     </tbody>
-</table>
+</table></div>
 
 <h2>Basic usage</h2>
 <div class="example">
@@ -38,6 +41,33 @@
               Placeholder="Enter something..."
               Tags="@@tags"
               Suggestions="@@suggestions" /&gt;
+
+@@code {
+    List&lt;AutoComplete.AutoCompleteItem&gt; tags = new() { new() { Description = "Bla" } };
+    List&lt;AutoComplete.AutoCompleteItem&gt; suggestions { get; set; } = new() {
+        new () { Id = "csharp", Description = "C#" },
+        new () { Id = "jsx", Description = "JSX" },
+        new () { Id = "react", Description = "React" },
+        new () { Id = "blazor", Description = "Blazor" }
+    };
+}</code></pre>
+    </details>
+</div><h2>Single tag</h2>
+<div class="md-block"><p>When <code>SingleTag</code> is set, you can only have one tag and make change its value. This example also demonstrates how to bind <code>Tags</code>.</p>
+</div><div class="example">
+    <div class="example-demo"><SingleTag /></div>
+
+    <details class="example-code">
+        <summary>Code</summary>
+        <pre><code class="language-razor">&lt;AutoComplete Label="Select tag"
+              Placeholder="Enter something..."
+              @@bind-Tags="@@tags"
+              Suggestions="@@suggestions"
+              SingleTag="true" /&gt;
+
+Value ID is: @@tags.FirstOrDefault()?.Id
+&lt;br /&gt;
+Value description is: @@tags.FirstOrDefault()?.Description
 
 @@code {
     List&lt;AutoComplete.AutoCompleteItem&gt; tags = new() { new() { Description = "Bla" } };

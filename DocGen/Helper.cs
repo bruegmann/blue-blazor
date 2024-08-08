@@ -153,7 +153,7 @@ public class Helper
 
     string componentParameterInfoToHtml(IEnumerable<ComponentParameterInfo> parameter)
     {
-        string table = "<table class=\"table table-bordered\">";
+        string table = "<div class=\"table-responsive\"><table class=\"table table-bordered\">";
         table += "\n    <thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead>";
         table += "\n    <tbody>";
 
@@ -168,7 +168,7 @@ public class Helper
         }
 
         table += "\n    </tbody>\n";
-        table += "</table>";
+        table += "</table></div>";
 
         return table;
     }

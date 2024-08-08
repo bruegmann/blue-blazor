@@ -1,6 +1,5 @@
 {
     "name": "blueblazor",
-    "version": "1.0.0",
     "description": "Blue Blazor is an adaptation of [Blue Web](https://bruegmann.github.io/blue-web) for Blazor.",
     "main": "index.js",
     "scripts": {
@@ -14,7 +13,7 @@
         "webpack-cli": "^5.1.4"
     },
     "dependencies": {
-        "blue-web": "^1.1.0",
+        "blue-web": "^1.1.1",
         "blue-web-components": "^1.0.7"
     }
 }

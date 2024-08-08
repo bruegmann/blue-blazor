@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<PackageId>BlueBlazor</PackageId>
-		<Version>1.0.4</Version>
+		<Version>1.0.5</Version>
 
 		<Summary>Component library for Blazor.</Summary>
 		<PackageTags>blue blue-web blazor components bootstrap</PackageTags>
