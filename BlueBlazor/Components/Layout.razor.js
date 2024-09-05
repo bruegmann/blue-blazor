@@ -1,4 +1,40 @@
-﻿window.blueBlazor = window.blueBlazor || {}
+﻿export function onLoad() {
+    for (let layout of document.getElementsByClassName("blue-layout")) {
+        initLayout(layout)
+
+        if (layout) {
+            for (let toggler of layout.getElementsByClassName("blue-sidebar-toggler-sidebarIn")) {
+                toggler.addEventListener("click", toggleSidebarIn)
+            }
+
+            for (let toggler of layout.getElementsByClassName("blue-sidebar-toggler-expandSidebar")) {
+                toggler.addEventListener("click", toggleExpandSidebar)
+            }
+        }
+    }
+}
+
+export function onUpdate() {
+    for (let layout of document.getElementsByClassName("blue-layout")) {
+        initExpandSidebar(layout)
+    }
+}
+
+export function onDispose() {
+    for (let layout of document.getElementsByClassName("blue-layout")) {
+        document.removeEventListener("click", outsideClickHandler)
+
+        if (layout) {
+            for (let toggler of layout.getElementsByClassName("blue-sidebar-toggler-sidebarIn")) {
+                toggler.removeEventListener("click", toggleSidebarIn)
+            }
+
+            for (let toggler of layout.getElementsByClassName("blue-sidebar-toggler-expandSidebar")) {
+                toggler.removeEventListener("click", toggleExpandSidebar)
+            }
+        }
+    }
+}
 
 function findParentWithClass(element, className) {
     while (element && !element.classList.contains(className)) {
@@ -13,6 +49,24 @@ function hasClass(el, className) {
         return !!el.className.match(
             new RegExp("(\\s|^)" + className + "(\\s|$)")
         )
+}
+
+function initLayout(layout) {
+    initExpandSidebar(layout)
+
+    if (layout) {
+        const fromStorage = localStorage.getItem("blueLayoutShrinkSidebar")
+        const shrinkSidebar =
+            fromStorage !== "null" && fromStorage !== null ? true : false
+        const expandSidebar = !shrinkSidebar
+        if (expandSidebar) {
+            layout.classList.add("expandSidebar")
+        } else {
+            layout.classList.remove("expandSidebar")
+        }
+
+        document.addEventListener("click", (ev) => outsideClickHandler(ev, layout))
+    }
 }
 
 function initExpandSidebar(layout) {
@@ -61,87 +115,25 @@ function outsideClickHandler({ target }, layout) {
     }
 }
 
-window.blueBlazor.layout = {
-    init: (layout) => {
-        initExpandSidebar(layout)
+function toggleSidebarIn(event) {
+    const layout = findParentWithClass(event.target, "blue-layout")
+    if (layout) {
+        layout.classList.toggle("open")
+    }
+}
 
-        if (layout) {
-            const fromStorage = localStorage.getItem("blueLayoutShrinkSidebar")
-            const shrinkSidebar =
-                fromStorage !== "null" && fromStorage !== null ? true : false
-            const expandSidebar = !shrinkSidebar
+function toggleExpandSidebar(event, useStorage = true) {
+    const layout = findParentWithClass(event.target, "blue-layout")
+    if (layout) {
+        if (useStorage) {
+            const expandSidebar = layout.classList.contains("expandSidebar")
             if (expandSidebar) {
-                layout.classList.add("expandSidebar")
+                localStorage.setItem("blueLayoutShrinkSidebar", "true")
             } else {
-                layout.classList.remove("expandSidebar")
-            }
-
-            document.addEventListener("click", (ev) => outsideClickHandler(ev, layout))
-        }
-    },
-    toggleSidebarIn: (event) => {
-        const layout = findParentWithClass(event.target, "blue-layout")
-        if (layout) {
-            layout.classList.toggle("open")
-        }
-    },
-    toggleExpandSidebar: (event, useStorage = true) => {
-        const layout = findParentWithClass(event.target, "blue-layout")
-        if (layout) {
-            if (useStorage) {
-                const expandSidebar = layout.classList.contains("expandSidebar")
-                if (expandSidebar) {
-                    localStorage.setItem("blueLayoutShrinkSidebar", "true")
-                } else {
-                    localStorage.removeItem("blueLayoutShrinkSidebar")
-                }
-            }
-
-            layout.classList.toggle("expandSidebar")
-        }
-    },
-    unsetSidebarIn: (event) => {
-        const layout = findParentWithClass(event.target, "blue-layout")
-        if (layout) {
-            layout.classList.remove("open")
-        }
-    }
-}
-
-export function onLoad() {
-    for (let layout of document.getElementsByClassName("blue-layout")) {
-        blueBlazor.layout.init(layout)
-
-        if (layout) {
-            for (let toggler of layout.getElementsByClassName("blue-sidebar-toggler-sidebarIn")) {
-                toggler.addEventListener("click", blueBlazor.layout.toggleSidebarIn)
-            }
-
-            for (let toggler of layout.getElementsByClassName("blue-sidebar-toggler-expandSidebar")) {
-                toggler.addEventListener("click", blueBlazor.layout.toggleExpandSidebar)
+                localStorage.removeItem("blueLayoutShrinkSidebar")
             }
         }
-    }
-}
 
-export function onUpdate() {
-    for (let layout of document.getElementsByClassName("blue-layout")) {
-        initExpandSidebar(layout)
-    }
-}
-
-export function onDispose() {
-    for (let layout of document.getElementsByClassName("blue-layout")) {
-        document.removeEventListener("click", outsideClickHandler)
-
-        if (layout) {
-            for (let toggler of layout.getElementsByClassName("blue-sidebar-toggler-sidebarIn")) {
-                toggler.removeEventListener("click", blueBlazor.layout.toggleSidebarIn)
-            }
-
-            for (let toggler of layout.getElementsByClassName("blue-sidebar-toggler-expandSidebar")) {
-                toggler.removeEventListener("click", blueBlazor.layout.toggleExpandSidebar)
-            }
-        }
+        layout.classList.toggle("expandSidebar")
     }
 }

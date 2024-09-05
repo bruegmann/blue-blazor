@@ -50,7 +50,7 @@
     [Parameter] public RenderFragment? SideContent { get; set; }
     [Parameter] public RenderFragment? PageContent { get; set; }
 
-    [Parameter] public string Id { get; set; } = "blue-layout-" + Guid.NewGuid().ToString();
+    [Parameter] public string? Id { get; set; }
 
     bool sidebarIn;
     /// <summary>
