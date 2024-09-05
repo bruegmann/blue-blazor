@@ -12,6 +12,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocGen", "DocGen\DocGen.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueBlazor", "BlueBlazor\BlueBlazor.csproj", "{890CE62A-CF5C-4D95-ACC4-D910AA275E00}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1", "..\..\projects-temp\BlazorApp1\BlazorApp1\BlazorApp1.csproj", "{D7BF97EF-27AE-4ECA-9F5E-E05125B1FAB7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1.Client", "..\..\projects-temp\BlazorApp1\BlazorApp1.Client\BlazorApp1.Client.csproj", "{01E9CB21-AE8C-44E3-B69B-420597C654DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +34,14 @@ Global
 		{890CE62A-CF5C-4D95-ACC4-D910AA275E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{890CE62A-CF5C-4D95-ACC4-D910AA275E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{890CE62A-CF5C-4D95-ACC4-D910AA275E00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7BF97EF-27AE-4ECA-9F5E-E05125B1FAB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7BF97EF-27AE-4ECA-9F5E-E05125B1FAB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7BF97EF-27AE-4ECA-9F5E-E05125B1FAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7BF97EF-27AE-4ECA-9F5E-E05125B1FAB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01E9CB21-AE8C-44E3-B69B-420597C654DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01E9CB21-AE8C-44E3-B69B-420597C654DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01E9CB21-AE8C-44E3-B69B-420597C654DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01E9CB21-AE8C-44E3-B69B-420597C654DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

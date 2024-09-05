@@ -1,6 +1,6 @@
 @inject IJSRuntime JSRuntime
 
-<div @ref="myRef" class="blue-outside" style="display: contents">
+<div @ref="myRef" class="blue-outside" style="display: contents" @onclick="OnClick">
     @ChildContent
 </div>
 
@@ -38,6 +38,9 @@
 
     [Parameter]
     public string? JsOnClickOutside { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     [Parameter]
     public List<string> IgnoreClasses { get; set; } = new() { "blue-outside-exception" };
