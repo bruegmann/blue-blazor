@@ -4,6 +4,10 @@ Blue Blazor is an adaptation of [Blue Web](https://bruegmann.github.io/blue-web)
 
 ## Getting started
 
+### Create project
+
+Use one of the official Blazor project templates like **Blazor Web App** or **Blazor Server App (Empty)** to create a new project using Visual Studio or CLI. Make sure, no sample content will be added.
+
 ### Installation
 
 ```
@@ -36,15 +40,41 @@ You can use the stylesheet of Blue Web by adding the following line to the head 
 <link rel="stylesheet" href="_content/BlueBlazor/css/blue-web.min.css" />
 ```
 
-### JavaScript
+### Add layout
 
-Some components require JavaScript. You can embed all together:
+Put this to your `MainLayout.razor` file:
 
-```html
-<script src="_content/BlueBlazor/js/all.bundle.js"></script>
+```razor
+<Layout>
+    <SideContent>
+        <SidebarMenu>
+            <MenuItem Label="Home" Href="">
+                <Icon>🏠</Icon>
+            </MenuItem>
+        </SidebarMenu>
+    </SideContent>
+    <PageContent>@Body</PageContent>
+</Layout>
 ```
 
-If you don't them all, you can also embed them individually:
+### Add page
+
+Your project probably already has at least one page component. Change its content to this:
+
+```razor
+@page "/"
+
+<Page>
+    <Body>
+        <h1>Hello, world!</h1>
+    </Body>
+</Page>
+
+```
+
+### JavaScript (optional)
+
+Some components require JavaScript. Take a look at the individual component page. You can embed them like this:
 
 ```html
 <script src="_content/BlueBlazor/js/dialog.bundle.js"></script>
@@ -52,6 +82,14 @@ If you don't them all, you can also embed them individually:
 <script src="_content/BlueBlazor/js/qrCodeGen.bundle.js"></script>
 <script src="_content/BlueBlazor/js/totpInput.bundle.js"></script>
 ```
+
+When you know, you will use all components, you can also embed them all together:
+
+```html
+<script src="_content/BlueBlazor/js/all.bundle.js"></script>
+```
+
+You now have a very basic app with Blue Blazor. To learn more, check out [the examples](examples) and the [component docs](https://bruegmann.github.io/blue-blazor/).
 
 ## Theming
 
@@ -81,17 +119,21 @@ To support dark mode, you should create a separated theme. You can then use medi
 
 ## JavaScript helpers
 
-Blue Blazor provides some JavaScript helpers that aren't bound to any component. You can use them by injecting the `IJSRuntime` service and calling the methods:
+Blue Blazor provides some JavaScript helpers that aren't bound to any component. You can use them by injecting the `IJSRuntime` service and calling the methods.
+
+### Dialog
+
+You can use the [dialog function from Blue Web](https://bruegmann.github.io/blue-web/v1/utilities#dialog) like this:
 
 ```csharp
 @inject IJSRuntime JSRuntime
 
 @code {
-	async Task ask()
+	async Task verify()
 	{
 		if (firstRender)
 		{
-			await JSRuntime.InvokeVoidAsync("BlueBlazor.Helpers.scrollToTop");
+			bool confirmed = await JSRuntime.InvokeAsync<bool>("blueBlazor.dialog.verify", "Are you sure?");
 		}
 	}
 }
