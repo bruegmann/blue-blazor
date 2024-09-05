@@ -1,13 +1,18 @@
 <div class="blue-sidebar-toggler position-fixed @Class" data-tooltip="@Label">
-    <button type="button" class="blue-open-menu blue-menu-item btn rounded-0" onclick="@JsOnClick" aria-label="@Label">
+    <button type="button" class="blue-open-menu blue-menu-item btn rounded-0" @onclick="onClick" aria-label="@Label">
         <div class="blue-sidebar-exception position-absolute w-100 h-100" />
         @SidebarToggleIconComponent
     </button>
 </div>
 
 @code {
-    [Parameter] public string? JsOnClick { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
     [Parameter] public string Class { get; set; } = "";
     [Parameter] public RenderFragment? SidebarToggleIconComponent { get; set; }
     [Parameter] public string Label { get; set; } = "Toggle menu";
+
+    async Task onClick()
+    {
+        await OnClick.InvokeAsync();
+    }
 }

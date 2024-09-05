@@ -1,9 +1,11 @@
 @inject IJSRuntime JSRuntime
 
+<PageScript Src="./_content/BlueBlazor/Components/Layout.razor.js"></PageScript>
+
 <div id="@Id" class="blue-layout @Class @(SidebarIn ? "open" : "") @(HideSidebarMenu ? "hasNoSidebarMenu" : "hasSidebarMenu") @(ExpandSidebar == true ? "expandSidebar" : "") @(DisableHeaders ? "disableHeaders" : "") @(HideToggleExpandSidebar ? "hideToggleExpandSidebar" : "")">
     @if (!HideSidebarMenu)
     {
-        <SidebarToggler JsOnClick="blueBlazor.layout.toggleSidebarIn(event)">
+        <SidebarToggler OnClick="() => SidebarIn = !SidebarIn" Class="blue-sidebar-toggler-sidebarIn">
             <SidebarToggleIconComponent>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"
                      style="display: inline-block; vertical-align: -0.125em">
@@ -17,8 +19,7 @@
 
     @if (!HideSidebarMenu && !HideToggleExpandSidebar)
     {
-        <SidebarToggler Class="d-none d-xxl-block"
-                        JsOnClick="@($"blueBlazor.layout.toggleExpandSidebar(event, {(UseStorage ? "true" : "false")})")">
+        <SidebarToggler OnClick="toggleExpandSidebar" Class="blue-sidebar-toggler-expandSidebar d-none d-xxl-block">
             <SidebarToggleIconComponent>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      viewBox="0 0 16 16" style="display: inline-block; vertical-align: -0.125em">
@@ -30,9 +31,11 @@
         </SidebarToggler>
     }
 
-    <div class="blue-outside" style="display: contents">
+    <Outside OnClick="() => SidebarIn = false" OnClickOutside="() => SidebarIn = false" IgnoreClasses="@(new List<string> { "blue-open-menu", "bi-menu", "blue-search", "blue-search-control",
+"blue-search-btn", "blue-search-btn-icon", "blue-menu-item-dropdown-toggle", "blue-menu-item-dropdown-caret",
+"blue-menu-item-dropdown-icon", "blue-sidebar-exception" })">
         @SideContent
-    </div>
+    </Outside>
 
     @if (PageContent != null)
     {
@@ -40,103 +43,6 @@
             @PageContent
         </div>
     }
-
-    <script>
-        window.blueBlazor = window.blueBlazor || {}
-
-        function findParentWithClass(element, className) {
-            while (element && !element.classList.contains(className)) {
-                element = element.parentElement
-            }
-            return element
-        }
-
-        function hasClass(el, className) {
-            if (el.classList) return el.classList.contains(className)
-            else
-                return !!el.className.match(
-                    new RegExp("(\\s|^)" + className + "(\\s|$)")
-                )
-        }
-
-        window.blueBlazor.layout = {
-            init: (layout) => {
-                const ignoreElements = [
-                    "blue-open-menu",
-                    "bi-menu",
-                    "blue-search",
-                    "blue-search-control",
-                    "blue-search-btn",
-                    "blue-search-btn-icon",
-                    "blue-menu-item-dropdown-toggle",
-                    "blue-menu-item-dropdown-caret",
-                    "blue-menu-item-dropdown-icon",
-                    "blue-sidebar-exception"
-                ]
-
-                if (layout) {
-                    const fromStorage = localStorage.getItem("blueLayoutShrinkSidebar")
-                    const shrinkSidebar =
-                        fromStorage !== "null" && fromStorage !== null ? true : false
-                    const expandSidebar = !shrinkSidebar
-                    if (expandSidebar) {
-                        layout.classList.add("expandSidebar")
-                    } else {
-                        layout.classList.remove("expandSidebar")
-                    }
-
-                    document.addEventListener("click", ({ target }) => {
-                        const outsideElement = layout.querySelector(".blue-outside")
-                        if (outsideElement) {
-                            const isClickInside = outsideElement.contains(target)
-
-                            if (ignoreElements) {
-                                for (let i = 0; i < ignoreElements.length; i++) {
-                                    if (hasClass(target, ignoreElements[i])) {
-                                        return
-                                    }
-                                }
-                            }
-
-                            if (!isClickInside) {
-                                layout.classList.remove("open")
-                            }
-                        }
-                    })
-                }
-            },
-            toggleSidebarIn: (event) => {
-                const layout = findParentWithClass(event.target, "blue-layout")
-                if (layout) {
-                    layout.classList.toggle("open")
-                }
-            },
-            toggleExpandSidebar: (event, useStorage = true) => {
-                const layout = findParentWithClass(event.target, "blue-layout")
-                if (layout) {
-                    if (useStorage) {
-                        const expandSidebar = layout.classList.contains("expandSidebar")
-                        if (expandSidebar) {
-                            localStorage.setItem("blueLayoutShrinkSidebar", "true")
-                        } else {
-                            localStorage.removeItem("blueLayoutShrinkSidebar")
-                        }
-                    }
-
-                    layout.classList.toggle("expandSidebar")
-                }
-            },
-            unsetSidebarIn: (event) => {
-                const layout = findParentWithClass(event.target, "blue-layout")
-                if (layout) {
-                    layout.classList.remove("open")
-                }
-            }
-        }
-
-        const layout = document.currentScript.closest(".blue-layout")
-        blueBlazor.layout.init(layout)
-    </script>
 </div>
 
 
@@ -144,13 +50,22 @@
     [Parameter] public RenderFragment? SideContent { get; set; }
     [Parameter] public RenderFragment? PageContent { get; set; }
 
-    [Parameter] public string Id { get; set; } = "blue-layout-" + Guid.NewGuid().ToString();
+    [Parameter] public string? Id { get; set; }
 
+    bool sidebarIn;
     /// <summary>
     /// By default, the side bar is "in". Is two-way bindable.
     /// </summary>
     [Parameter]
-    public bool SidebarIn { get; set; }
+    public bool SidebarIn
+    {
+        get => sidebarIn; set
+        {
+            sidebarIn = value;
+            SidebarInChanged.InvokeAsync(value);
+        }
+    }
+    [Parameter] public EventCallback<bool> SidebarInChanged { get; set; }
 
     [Parameter] public string? Style { get; set; }
 
@@ -159,11 +74,20 @@
     /// </summary>
     [Parameter] public bool HideToggleExpandSidebar { get; set; } = false;
 
+    bool? expandSidebar;
     /// <summary>
     /// Sidebar is automatically expanded on wider views. Is two-way bindable.
     /// </summary>
     [Parameter]
-    public bool? ExpandSidebar { get; set; }
+    public bool? ExpandSidebar
+    {
+        get => expandSidebar; set
+        {
+            expandSidebar = value == true;
+            ExpandSidebarChanged.InvokeAsync(value);
+        }
+    }
+    [Parameter] public EventCallback<bool?> ExpandSidebarChanged { get; set; }
 
 
     /// <summary>
@@ -184,4 +108,35 @@
     /// Won't use local storage to set the `expandSidebar` state.
     /// </summary>
     [Parameter] public bool UseStorage { get; set; } = true;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (UseStorage && ExpandSidebar == null)
+            {
+                string fromStorage = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "blueLayoutShrinkSidebar");
+                bool shrinkSidebar = fromStorage != "null" && fromStorage != null ? true : false;
+                expandSidebar = !shrinkSidebar;
+            }
+            StateHasChanged();
+        }
+    }
+
+    void toggleExpandSidebar()
+    {
+        if (UseStorage)
+        {
+            if (ExpandSidebar == true)
+            {
+                JSRuntime.InvokeVoidAsync("localStorage.setItem", "blueLayoutShrinkSidebar", "true");
+            }
+            else
+            {
+                JSRuntime.InvokeVoidAsync("localStorage.removeItem", "blueLayoutShrinkSidebar");
+            }
+        }
+
+        ExpandSidebar = !ExpandSidebar;
+    }
 }

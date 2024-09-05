@@ -5,6 +5,8 @@
 <div class="md-block"><h1>Blue Blazor</h1>
 <p>Blue Blazor is an adaptation of <a href="https://bruegmann.github.io/blue-web">Blue Web</a> for Blazor.</p>
 <h2>Getting started</h2>
+<h3>Create project</h3>
+<p>Use one of the official Blazor project templates like <strong>Blazor Web App</strong> or <strong>Blazor Server App (Empty)</strong> to create a new project using Visual Studio or CLI. Make sure, no sample content will be added.</p>
 <h3>Installation</h3>
 <pre><code>dotnet add package BlueBlazor
 </code></pre>
@@ -21,16 +23,42 @@
 <p>You can use the stylesheet of Blue Web by adding the following line to the head of your HTML:</p>
 <pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;_content/BlueBlazor/css/blue-web.min.css&quot; /&gt;
 </code></pre>
-<h3>JavaScript</h3>
-<p>Some components require JavaScript. You can embed all together:</p>
-<pre><code class="language-html">&lt;script src=&quot;_content/BlueBlazor/js/all.bundle.js&quot;&gt;&lt;/script&gt;
+<h3>Add layout</h3>
+<p>Put this to your <code>MainLayout.razor</code> file:</p>
+<pre><code class="language-razor">&lt;Layout&gt;
+    &lt;SideContent&gt;
+        &lt;SidebarMenu&gt;
+            &lt;MenuItem Label=&quot;Home&quot; Href=&quot;&quot;&gt;
+                &lt;Icon&gt;🏠&lt;/Icon&gt;
+            &lt;/MenuItem&gt;
+        &lt;/SidebarMenu&gt;
+    &lt;/SideContent&gt;
+    &lt;PageContent&gt;@@Body&lt;/PageContent&gt;
+&lt;/Layout&gt;
 </code></pre>
-<p>If you don't them all, you can also embed them individually:</p>
+<h3>Add page</h3>
+<p>Your project probably already has at least one page component. Change its content to this:</p>
+<pre><code class="language-razor">@@page &quot;/&quot;
+
+&lt;Page&gt;
+    &lt;Body&gt;
+        &lt;h1&gt;Hello, world!&lt;/h1&gt;
+    &lt;/Body&gt;
+&lt;/Page&gt;
+
+</code></pre>
+<h3>JavaScript (optional)</h3>
+<p>Some components require JavaScript. Take a look at the individual component page. You can embed them like this:</p>
 <pre><code class="language-html">&lt;script src=&quot;_content/BlueBlazor/js/dialog.bundle.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;_content/BlueBlazor/js/modal.bundle.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;_content/BlueBlazor/js/qrCodeGen.bundle.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;_content/BlueBlazor/js/totpInput.bundle.js&quot;&gt;&lt;/script&gt;
 </code></pre>
+<p>When you know, you will use all components, you can also embed them all together:</p>
+<pre><code class="language-html">&lt;script src=&quot;_content/BlueBlazor/js/all.bundle.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h3>Next steps</h3>
+<p>You now have a very basic app with Blue Blazor. To learn more, check out <a href="https://github.com/bruegmann/blue-blazor/tree/master/examples">the examples</a> and the <a href="https://bruegmann.github.io/blue-blazor/">component docs</a>.</p>
 <h2>Theming</h2>
 <p>You can use <a href="https://github.com/bruegmann/themify">Themify</a> to create custom themes. Enable <strong>&quot;Export only CSS variables&quot;</strong> for your theme and put the exported CSS to your project.
 It needs to be embedded after the Blue Blazor stylesheet:</p>
@@ -51,15 +79,17 @@ It needs to be embedded after the Blue Blazor stylesheet:</p>
 /&gt;
 </code></pre>
 <h2>JavaScript helpers</h2>
-<p>Blue Blazor provides some JavaScript helpers that aren't bound to any component. You can use them by injecting the <code>IJSRuntime</code> service and calling the methods:</p>
+<p>Blue Blazor provides some JavaScript helpers that aren't bound to any component. You can use them by injecting the <code>IJSRuntime</code> service and calling the methods.</p>
+<h3>Dialog</h3>
+<p>You can use the <a href="https://bruegmann.github.io/blue-web/v1/utilities#dialog">dialog function from Blue Web</a> like this:</p>
 <pre><code class="language-csharp">@@inject IJSRuntime JSRuntime
 
 @@code {
-	async Task ask()
+	async Task verify()
 	{
 		if (firstRender)
 		{
-			await JSRuntime.InvokeVoidAsync(&quot;BlueBlazor.Helpers.scrollToTop&quot;);
+			bool confirmed = await JSRuntime.InvokeAsync&lt;bool&gt;(&quot;blueBlazor.dialog.verify&quot;, &quot;Are you sure?&quot;);
 		}
 	}
 }
