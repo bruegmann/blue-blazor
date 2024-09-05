@@ -89,7 +89,9 @@ When you know, you will use all components, you can also embed them all together
 <script src="_content/BlueBlazor/js/all.bundle.js"></script>
 ```
 
-You now have a very basic app with Blue Blazor. To learn more, check out [the examples](examples) and the [component docs](https://bruegmann.github.io/blue-blazor/).
+### Next steps
+
+You now have a very basic app with Blue Blazor. To learn more, check out [the examples](https://github.com/bruegmann/blue-blazor/tree/master/examples) and the [component docs](https://bruegmann.github.io/blue-blazor/).
 
 ## Theming
 
