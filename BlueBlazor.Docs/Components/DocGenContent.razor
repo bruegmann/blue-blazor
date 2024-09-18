@@ -1,6 +1,50 @@
-﻿<Page>
+﻿@using Microsoft.AspNetCore.Components.Rendering
+
+<Page>
     <Body ContainerClass="docgen container pb-3">
         @ChildContent
+
+        @if (PropsContent != null || ExamplesContent != null)
+        {
+            <ul class="nav nav-tabs" role="tablist">
+                @if (PropsContent != null)
+                {
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link @(activeTab == "props" ? "active" : "")" @onclick="@(() => setActiveTab("props"))" id="props-tab" type="button" role="tab" aria-controls="props-tab-pane" aria-selected="true">
+                            Props
+                        </button>
+                    </li>
+                }
+                @if (ExamplesContent != null)
+                {
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link @(activeTab == "examples" ? "active" : "")" @onclick="@(() => setActiveTab("examples"))" id="examples-tab" type="button" role="tab" aria-controls="examples-tab-pane" aria-selected="false">
+                            Examples
+                        </button>
+                    </li>
+                }
+            </ul>
+            <div class="tab-content">
+                @if (PropsContent != null)
+                {
+                    <div class="tab-pane fade @(activeTab == "props" ? "show active" : "")" id="props-tab-pane" role="tabpanel" aria-labelledby="props-tab" tabindex="0">
+                        @PropsContent
+                    </div>
+                }
+                @if (ExamplesContent != null)
+                {
+                    <div class="tab-pane fade @(activeTab == "examples" ? "show active" : "")" id="examples-tab-pane" role="tabpanel" aria-labelledby="examples-tab" tabindex="0">
+                        @ExamplesContent
+                        <script>
+                            // Removes nav item when tab has no content
+                            if (document.currentScript.previousElementSibling === null) {
+                                document.getElementById("examples-tab")?.parentNode.remove()
+                            }
+                        </script>
+                    </div>
+                }
+            </div>
+        }
 
         <Footer />
     </Body>
@@ -11,4 +55,30 @@
 @code {
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment? PropsContent { get; set; }
+
+    [Parameter]
+    public RenderFragment? ExamplesContent { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (PropsContent != null)
+        {
+            activeTab = "props";
+        }
+        else if (ExamplesContent != null)
+        {
+            activeTab = "examples";
+        }
+    }
+
+    void setActiveTab(string tab)
+    {
+        activeTab = tab;
+    }
+
+    string activeTab = "props";
 }

@@ -4,7 +4,9 @@
         "sass-watch": "sass --watch --load-path=. --style=compressed --quiet-deps ./src/docs.scss:./wwwroot/css/docs.css"
     },
     "devDependencies": {
-        "blue-web": "^1.0.1",
         "sass": "^1.77.8"
+    },
+    "dependencies": {
+        "blue-web": "^1.2.0"
     }
 }

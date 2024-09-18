@@ -1,4 +1,7 @@
+@using Microsoft.AspNetCore.Components.Routing
 @inject IJSRuntime JSRuntime
+@implements IDisposable
+@inject NavigationManager NavigationManager
 
 <PageScript Src="./_content/BlueBlazor/Components/Layout.razor.js"></PageScript>
 
@@ -31,7 +34,7 @@
         </SidebarToggler>
     }
 
-    <Outside OnClick="() => SidebarIn = false" OnClickOutside="() => SidebarIn = false" IgnoreClasses="@(new List<string> { "blue-open-menu", "bi-menu", "blue-search", "blue-search-control",
+    <Outside OnClickOutside="() => SidebarIn = false" IgnoreClasses="@(new List<string> { "blue-open-menu", "bi-menu", "blue-search", "blue-search-control",
 "blue-search-btn", "blue-search-btn-icon", "blue-menu-item-dropdown-toggle", "blue-menu-item-dropdown-caret",
 "blue-menu-item-dropdown-icon", "blue-sidebar-exception" })">
         @SideContent
@@ -121,6 +124,26 @@
             }
             StateHasChanged();
         }
+    }
+
+    protected override void OnInitialized()
+    {
+        NavigationManager.LocationChanged += locationChanged!;
+        base.OnInitialized();
+    }
+
+    void locationChanged(object sender, LocationChangedEventArgs e)
+    {
+        if (SidebarIn)
+        {
+            SidebarIn = false;
+            StateHasChanged();
+        }
+    }
+
+    void IDisposable.Dispose()
+    {
+        NavigationManager.LocationChanged -= locationChanged!;
     }
 
     void toggleExpandSidebar()

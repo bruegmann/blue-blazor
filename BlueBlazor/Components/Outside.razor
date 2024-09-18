@@ -1,22 +1,29 @@
 @inject IJSRuntime JSRuntime
 
-<div @ref="myRef" class="blue-outside" style="display: contents" @onclick="OnClick">
+<div @ref="myRef" class="blue-outside @Class" style="display: contents" @onclick="OnClick">
     @ChildContent
 </div>
 
 <script>
+    function findParentWithClass(element, className) {
+        while (element && !element.classList.contains(className)) {
+            element = element.parentElement
+        }
+        return element
+    }
+
     function hasClass(el, className) {
         if (el.classList) return el.classList.contains(className)
         else return !!el.className.match(new RegExp("(\\s|^)" + className + "(\\s|$)"))
     }
 
-    window.initOutsite = function (element, dotNetObjectReference, ignoreElements) {
+    window.initOutsite = function (element, dotNetObjectReference, ignoreClasses) {
         document.addEventListener("click", function ({ target }) {
             const isClickInside = element.contains(target)
 
-            if (ignoreElements) {
-                for (let i = 0; i < ignoreElements.length; i++) {
-                    if (hasClass(target, ignoreElements[i])) {
+            if (ignoreClasses) {
+                for (let i = 0; i < ignoreClasses.length; i++) {
+                    if (hasClass(target, ignoreClasses[i]) || findParentWithClass(target, ignoreClasses[i])) {
                         return
                     }
                 }
@@ -41,6 +48,9 @@
 
     [Parameter]
     public List<string> IgnoreClasses { get; set; } = new() { "blue-outside-exception" };
+
+    [Parameter]
+    public string? Class { get; set; }
 
     [JSInvokable]
     public void OnClickOutsideHandler()

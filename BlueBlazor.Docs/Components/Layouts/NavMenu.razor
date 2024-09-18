@@ -2,7 +2,7 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
-<SidebarMenu>
+<SidebarMenu MenuClass="overflow-x-hidden overflow-y-auto">
     <TopContent>
         <MenuItem Label="Home" Href="" IsActive="@isActive("")">
             <Icon>
@@ -107,7 +107,11 @@
         },
         {"QrCodeGen", new() {
             Icon = @<BiQrCode />}
-        }};
+        },
+        {"MenuItem", new() {
+            Icon = @<BiMenuButton />,
+            IconForActive = @<BiMenuButtonFill />
+        } } };
     RenderFragment defaultIcon = @<BiFileCode />;
 
     class ComponentIcon

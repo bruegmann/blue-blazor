@@ -1,0 +1,40 @@
+﻿@{
+    /*docs {
+    "iframeUrl": "components/action-menu/stories/page-with-action-menu"
+    } */
+}
+@layout EmptyLayout
+@page "/components/action-menu/stories/page-with-action-menu"
+
+<Page>
+    <Header>
+        <ActionMenu>
+            <MenuItem Label="Hello" />
+            <MenuItem Label="World" />
+            <div class="position-relative z-1">
+                <MenuItem Label="Dropdown" SupportOutside>
+                    <DropdownContent>
+                        <MenuItem Label="Hello" />
+                        <MenuItem Label="World" />
+                    </DropdownContent>
+                </MenuItem>
+            </div>
+            <div class="position-relative z-1">
+                <MenuItem Label="Another dropdown" SupportOutside>
+                    <DropdownContent>
+                        <MenuItem Label="Even more">
+                            <DropdownContent>
+                                <MenuItem Label="Hello" />
+                                <MenuItem Label="World" />
+                            </DropdownContent>
+                        </MenuItem>
+                        <MenuItem Label="World" />
+                    </DropdownContent>
+                </MenuItem>
+            </div>
+        </ActionMenu>
+    </Header>
+    <Body>
+        <h1>Hello World</h1>
+    </Body>
+</Page>

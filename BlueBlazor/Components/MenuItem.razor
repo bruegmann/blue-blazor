@@ -1,59 +1,83 @@
-<Button @attributes="AdditionalAttributes" draggable="@Draggable" OnClick="@onClick"
-        Href="@Href" Target="@Target" Busy="@Busy" Class="@className" Disabled="@Disabled">
-    @if (Draggable && !HideDraggableIcon)
-    {
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-             className="bi bi-grip-vertical opacity-50" viewBox="0 0 8 16">
-            <path d="M3.376 1.876c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1">
-            </path>
-        </svg>
-    }
+@using Microsoft.AspNetCore.Components.Routing
+@implements IDisposable
+@inject NavigationManager NavigationManager
 
-    @if (Icon != null)
-    {
-        <span class="blue-menu-item-icon @IconClass @(IconForActive != null ? "hasIconForActive" : "")">
-            @Icon
-        </span>
-    }
+<div class="blue-menu-item-wrapper @(id)">
+    <Button @attributes="AdditionalAttributes" draggable="@Draggable" OnClick="@onClick"
+            Href="@Href" Target="@Target" Busy="@Busy" Class="@className" Disabled="@Disabled">
+        @if (Draggable && !HideDraggableIcon)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                 className="bi bi-grip-vertical opacity-50" viewBox="0 0 8 16">
+                <path d="M3.376 1.876c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1">
+                </path>
+            </svg>
+        }
 
-    @if (IconForActive != null && IsActive)
-    {
-        <span class="blue-menu-item-icon iconForActive @IconClass">
-            @IconForActive
-        </span>
-    }
+        @if (Icon != null)
+        {
+            <span class="blue-menu-item-icon @IconClass @(IconForActive != null ? "hasIconForActive" : "")">
+                @Icon
+            </span>
+        }
 
-    @if (Label != null)
-    {
-        <span class="blue-menu-item-label text-truncate @LabelClass">
-            @Label
-        </span>
-    }
+        @if (IconForActive != null && IsActive)
+        {
+            <span class="blue-menu-item-icon iconForActive @IconClass">
+                @IconForActive
+            </span>
+        }
 
-    @if (DropdownContent != null)
-    {
-        <Chevron Open="@showDropdown" Mirrored="true" Class="blue-menu-item-chevron ms-auto" />
-    }
-</Button>
+        @if (Label != null)
+        {
+            <span class="blue-menu-item-label text-truncate @LabelClass">
+                @Label
+            </span>
+        }
 
-@if (showDropdown)
-{
-    @if (SupportOutside)
+        @if (DropdownContent != null)
+        {
+            <Chevron Open="@showDropdown" Mirrored="true" Class="blue-menu-item-dropdown-toggle blue-menu-item-chevron ms-auto" />
+        }
+    </Button>
+
+    @if (showDropdown)
     {
-        <Outside OnClickOutside="onClickOutside"
-                 IgnoreClasses="@(new List<string> { "blue-menu-item-dropdown-toggle", "blue-menu-item-label", "blue-menu-item" })">
+        @if (SupportOutside)
+        {
+            <Outside OnClickOutside="onClickOutside"
+                     IgnoreClasses="@(OutsideIgnoreClasses ?? new List<string> { id })">
+                <div class="blue-menu-item-dropdown @DropdownClass" style="@DropdownStyle">
+                    @DropdownContent
+                    <script>
+                        (() => {
+                            const el = document.currentScript.parentNode
+                            if (el && el.getBoundingClientRect) {
+                                const rect = el.getBoundingClientRect()
+                                el.style.setProperty("--offset-top", rect.top + "px")
+                            }
+                        })()
+                    </script>
+                </div>
+            </Outside>
+        }
+        else
+        {
             <div class="blue-menu-item-dropdown @DropdownClass" style="@DropdownStyle">
                 @DropdownContent
+                <script>
+                    (() => {
+                        const el = document.currentScript.parentNode
+                        if (el && el.getBoundingClientRect) {
+                            const rect = el.getBoundingClientRect()
+                            el.style.setProperty("--offset-top", rect.top+ "px")
+                        }
+                    })()
+                </script>
             </div>
-        </Outside>
+        }
     }
-    else
-    {
-        <div class="blue-menu-item-dropdown @DropdownClass" style="@DropdownStyle">
-            @DropdownContent
-        </div>
-    }
-}
+</div>
 
 @code {
     [Parameter]
@@ -142,7 +166,7 @@
     /// Defines dropdown status from outside.
     /// </summary>
     [Parameter]
-    public bool ShowDropdown { get; set; } = false;
+    public bool? ShowDropdown { get; set; }
 
     [Parameter]
     public EventCallback<bool> ShowDropdownChanged { get; set; }
@@ -152,6 +176,14 @@
     /// </summary>
     [Parameter]
     public bool SupportOutside { get; set; } = false;
+
+    /// <summary>
+    /// Overrides `IgnoreClasses` prop `MenuItem` will pass to `Outside`.<br/>
+    /// Hint: If you want this menu item to stay open when others will open, set:
+    /// `OutsideIgnoreClasses="@(new List&lt;string&gt; { "blue-menu-item-wrapper" })"`
+    /// </summary>
+    [Parameter]
+    public List<string>? OutsideIgnoreClasses { get; set; }
 
     [Parameter]
     public bool Busy { get; set; } = false;
@@ -164,8 +196,31 @@
         string? classFromAttr = AdditionalAttributes?.ContainsKey("class") == true ? AdditionalAttributes["class"]?.ToString() :
         null;
         className = $"blue-menu-item btn {(IsActive ? "active" : "")} {classFromAttr} {(Highlighted ? "highlighted" : "")} {Class}";
-        showDropdown = ShowDropdown;
+
+        if (ShowDropdown != null)
+            showDropdown = ShowDropdown == true;
     }
+
+    protected override void OnInitialized()
+    {
+        NavigationManager.LocationChanged += locationChanged!;
+        base.OnInitialized();
+    }
+
+    void locationChanged(object sender, LocationChangedEventArgs e)
+    {
+        if (showDropdown)
+        {
+            showDropdown = false;
+            StateHasChanged();
+        }
+    }
+
+    void IDisposable.Dispose()
+    {
+        NavigationManager.LocationChanged -= locationChanged!;
+    }
+
     string className = "";
     bool showDropdown = false;
 
@@ -191,4 +246,6 @@
             ShowDropdownChanged.InvokeAsync(showDropdown);
         }
     }
+
+    string id = $"blue-menu-item-wrapper-{Guid.NewGuid().ToString()}";
 }
