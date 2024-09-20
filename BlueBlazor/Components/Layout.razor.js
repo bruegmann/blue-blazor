@@ -54,7 +54,7 @@ function hasClass(el, className) {
 function initLayout(layout) {
     initExpandSidebar(layout)
 
-    if (layout) {
+    if (layout && !layout.classList.contains("hasNoSidebarMenu")) {
         const fromStorage = localStorage.getItem("blueLayoutShrinkSidebar")
         const shrinkSidebar =
             fromStorage !== "null" && fromStorage !== null ? true : false
@@ -70,7 +70,7 @@ function initLayout(layout) {
 }
 
 function initExpandSidebar(layout) {
-    if (layout) {
+    if (layout && !layout.classList.contains("hasNoSidebarMenu")) {
         const fromStorage = localStorage.getItem("blueLayoutShrinkSidebar")
         const shrinkSidebar =
             fromStorage !== "null" && fromStorage !== null ? true : false
