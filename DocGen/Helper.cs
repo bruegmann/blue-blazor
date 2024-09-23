@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Components;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using System.Text.Json;
+using Microsoft.AspNetCore.Components.Web;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Helper
 {
@@ -152,15 +155,177 @@ public class Helper
         var xmlDoc = XDocument.Load(xmlDocumentationPath);
         var memberNodes = xmlDoc.Descendants("member");
 
+     
         return componentType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                             .Where(prop => Attribute.IsDefined(prop, typeof(ParameterAttribute)))
                             .Select(prop => new ComponentParameterInfo
                             {
                                 Name = prop.Name,
-                                ParameterType = prop.PropertyType,
-                                DefaultValue = prop.GetValue(Activator.CreateInstance(componentType)) ?? "",
+                                ParameterType = GetPropertyType(prop.PropertyType),
+                                DefaultValue = GetDefaultValue(prop, componentType),
                                 Comment = getXmlDocumentationCommentForProp(memberNodes, prop)
                             });
+    }
+
+    object? GetDefaultValue(PropertyInfo prop, Type componentType)
+    {
+        var instance = Activator.CreateInstance(componentType);
+        var value = prop.GetValue(instance);
+
+        if (value is EventCallback<bool> || value is EventCallback<bool?> || value is EventCallback<MouseEventArgs> ||
+         value is EventCallback<string> || value is EventCallback<ElementReference> || value is EventCallback)
+        {
+            return "";
+        }
+        else if (value is IDictionary)
+        {
+            if (value is IDictionary dictionary && dictionary.Count > 0)
+            {
+                var valueOfDictionary = "{";
+                int i = 0;
+                foreach (DictionaryEntry entry in (IDictionary)value)
+                {
+                    var key = entry.Key;
+                    var val = entry.Value;
+                    if (i > 0)
+                    {
+                        valueOfDictionary += ",";
+                    }
+                    valueOfDictionary += $"'{key}': '{val}'";
+                    i++;
+                }
+
+                return $"{valueOfDictionary}}}";
+            }
+            return "";
+        }
+        else if (value is List<string>)
+        {
+            if(value != null && ((List<string>)value).Count > 0)
+            {
+                string valueOfList = "[";
+               for( int i = 0; i < ((List<string>)value).Count; i++)
+                {
+                   if(i > 0)
+                    {
+                        valueOfList += ",";
+                    }
+                    valueOfList += $"'{((List<string>)value)[i]}'";
+                }
+               return $"{valueOfList}]";
+            }
+            return "";
+        }
+        else if (value is IList && prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
+        {
+            return "";
+        }
+        else if (value is IDictionary)
+        {
+            if (value is IDictionary dictionary && dictionary.Count > 0)
+            {
+                var valueOfDictionary = "{";
+                int i = 0;
+                foreach (DictionaryEntry entry in (IDictionary)value)
+                {
+                    var key = entry.Key;
+                    var val = entry.Value;
+                    if (i > 0)
+                    {
+                        valueOfDictionary += ",";
+                    }
+                    valueOfDictionary += $"'{key}': '{val}'";
+                    i++;
+                }
+
+                return $"{valueOfDictionary}}}";
+            }
+            return "";
+        }
+        else if (value is IList && prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
+        {
+            if (value != null && ((IList)value).Count > 0)
+            {
+                string valueOfList = "[";
+                for (int i = 0; i < ((IList)value).Count; i++)
+                {
+                    if (i > 0)
+                    {
+                        valueOfList += ",";
+                    }
+                    valueOfList += $"'{((IList)value)[i]}'";
+                }
+                return $"{valueOfList}]";
+            }
+            return "";
+        }
+        else if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+        {
+            var underlyingType = prop.PropertyType.GetGenericArguments()[0];
+            var defaultValue = Activator.CreateInstance(underlyingType);
+            return defaultValue?.ToString() ?? "null";
+        }
+
+        return value ?? "";
+    }
+
+    string GetPropertyType(Type propertyType)
+    {
+
+        if (propertyType == typeof(EventCallback<bool>))
+        {
+            return "EventCallback&lt;bool&gt;";
+        }
+        else if (propertyType == typeof(EventCallback<bool?>))
+        {
+            return "EventCallback&lt;bool?&gt;";
+        }
+        else if (propertyType == typeof(Nullable))
+        {
+            return "Nullable";
+        }else if (propertyType == typeof(List<string>))
+        {
+            return "List&lt;String&gt;";
+        }
+        else if (propertyType.IsEnum)
+        {
+            var enumValues = Enum.GetValues(propertyType);
+            return $"{propertyType.Name}&lt;{string.Join("|", enumValues.Cast<object>())}&gt;";
+        }
+        else if (propertyType.IsGenericType)
+        {
+            var genericTypeDefinition = propertyType.GetGenericTypeDefinition();
+            if (genericTypeDefinition == typeof(IDictionary<,>))
+            {
+                var keyType = propertyType.GetGenericArguments()[0];
+                var valueType = propertyType.GetGenericArguments()[1];
+
+                return $"IDictionary&lt;{keyType.Name},{valueType.Name}&gt;";
+            }
+            else if (genericTypeDefinition == typeof(List<>))
+            {
+                var elementType = propertyType.GetGenericArguments()[0];
+              
+                return $"List&lt;{elementType.Name}&gt;";
+            }
+            else if (genericTypeDefinition == typeof(EventCallback<>))
+            {
+                var callbackType = propertyType.GetGenericArguments()[0];
+                return $"EventCallback&lt;{callbackType.Name}&gt;";
+            }
+            else if (genericTypeDefinition == typeof(Nullable<>))
+            {
+                var underlyingType = propertyType.GetGenericArguments()[0];
+                if (underlyingType.IsEnum)
+                {
+                    var enumValues = Enum.GetValues(underlyingType);
+                    return $"{underlyingType.Name}&lt;{string.Join("|", enumValues.Cast<object>())}&gt;?";
+                }
+                return $"{underlyingType.Name}?";
+            }
+        }
+
+        return propertyType.Name;
     }
 
     string componentParameterInfoToHtml(IEnumerable<ComponentParameterInfo> parameter)
@@ -174,7 +339,7 @@ public class Helper
             table += "\n        <tr>";
             table += $"<td><code>{param.Name}</code></td>";
             table += $"<td>{markdownToHtml(param.Comment ?? "")}</td>";
-            table += $"<td>{param.ParameterType?.Name}</td>";
+            table += $"<td>{param.ParameterType}</td>";
             table += $"<td>{param.DefaultValue}</td>";
             table += "</tr>";
         }
@@ -242,7 +407,7 @@ public class Helper
 public class ComponentParameterInfo
 {
     public string? Name { get; set; }
-    public Type? ParameterType { get; set; }
+    public String? ParameterType { get; set; }
     public object? DefaultValue { get; set; }
     public string? Comment { get; set; }
 }
