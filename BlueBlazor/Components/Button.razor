@@ -4,7 +4,9 @@
 <ButtonOrA @attributes="AdditionalAttributes"
            Disabled="@(Busy || busy || Disabled)"
            ButtonType="@ButtonType"
-           OnClick="@onClick" Href="@Href" Target="@Target" Class="@Class" aria-label="@(LabelHidden ? Label : null)">
+           OnClick="@onClick" Href="@Href" Target="@Target" 
+           Class="@(OverrideClass ?? $"{Utils.GetButtonClass(Style, Tone, Size)} {Class}")"
+           aria-label="@(LabelHidden ? Label : null)">
     @if (Busy || busy)
     {
         <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
@@ -13,6 +15,7 @@
     }
     else
     {
+        @TopContent
         @if (!string.IsNullOrWhiteSpace(Label) && !LabelHidden)
         {
             @L[Label]
@@ -24,6 +27,9 @@
 @code {
     [Parameter(CaptureUnmatchedValues = true)]
     public IDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    [Parameter]
+    public RenderFragment? TopContent { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
@@ -41,7 +47,10 @@
     public string? Target { get; set; }
 
     [Parameter]
-    public string Class { get; set; } = "btn blue-btn-soft-primary";
+    public string Class { get; set; } = "";
+
+    [Parameter]
+    public string? OverrideClass { get; set; }
 
     /// <summary>
     /// Let the button appear busy.
@@ -61,6 +70,18 @@
 
     [Parameter]
     public ButtonType? ButtonType { get; set; } = Shared.ButtonType.Button;
+
+    [Parameter]
+    public ButtonStyle Style { get; set; } = Shared.ButtonStyle.Soft;
+
+    [Parameter]
+    public ButtonTone Tone { get; set; } = Shared.ButtonTone.Secondary;
+
+    [Parameter]
+    public ButtonSize? Size { get; set; }
+
+    [Parameter]
+    public ButtonVariant Variant { get; set; } = new();
 
     [Parameter]
     public bool Disabled { get; set; } = false;
