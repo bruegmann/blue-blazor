@@ -1,0 +1,52 @@
+@import "node_modules/bootstrap/scss/functions";
+
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/variables-dark";
+
+@import "node_modules/bootstrap/scss/maps";
+@import "node_modules/bootstrap/scss/mixins";
+
+@mixin make-grid-columns-cq($columns: $grid-columns, $gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
+    .col {
+        flex: initial;
+        max-width: initial;
+        width: 100%;
+    }
+
+    @each $breakpoint in map-keys($breakpoints) {
+        $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+        @for $i from 1 through $columns {
+            .col#{$infix}-#{$i} {
+                @extend .col;
+            }
+        }
+    }
+
+    @each $breakpoint in map-keys($breakpoints) {
+        $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+        // @for $i from 1 through $columns {
+        //     .col#{$infix}-#{$i} {
+        //         flex: initial;
+        //         max-width: initial;
+        //         width: 100%;
+        //     }
+        // }
+
+        @if breakpoint-min($breakpoint, $breakpoints) {
+            @container (min-width: #{breakpoint-min($breakpoint, $breakpoints)}) {
+                @for $i from 1 through $columns {
+                    .col#{$infix}-#{$i} {
+                        @include make-col($i, $columns);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.blue-container-grid {
+    container-type: inline-size;
+    @include make-grid-columns-cq();
+}

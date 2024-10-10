@@ -3,6 +3,11 @@
 <DocGenContent>
 <ChildContent><div class="md-block"><h1>Blue Blazor</h1>
 <p>Blue Blazor is an adaptation of <a href="https://bruegmann.github.io/blue-web">Blue Web</a> for Blazor.</p>
+<h2>Breaking change!</h2>
+<p>The way to embed Blue Web CSS has changed. You now need to change the following line to the head of your HTML:</p>
+<pre><code class="language-diff">- &lt;link rel=&quot;stylesheet&quot; href=&quot;_content/BlueBlazor/css/blue-web.min.css&quot; /&gt;
++ &lt;link rel=&quot;stylesheet&quot; href=&quot;_content/BlueBlazor/blue-web/style.min.css&quot; /&gt;
+</code></pre>
 <h2>Getting started</h2>
 <h3>Create project</h3>
 <p>Use one of the official Blazor project templates like <strong>Blazor Web App</strong> or <strong>Blazor Server App (Empty)</strong> to create a new project using Visual Studio or CLI. Make sure, no sample content will be added.</p>
@@ -20,7 +25,7 @@
 </code></pre>
 <h3>Stylesheet</h3>
 <p>You can use the stylesheet of Blue Web by adding the following line to the head of your HTML:</p>
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;_content/BlueBlazor/css/blue-web.min.css&quot; /&gt;
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;_content/BlueBlazor/blue-web/style.min.css&quot; /&gt;
 </code></pre>
 <h3>Add layout</h3>
 <p>Put this to your <code>MainLayout.razor</code> file:</p>
@@ -61,11 +66,11 @@
 <h2>Theming</h2>
 <p>You can use <a href="https://github.com/bruegmann/themify">Themify</a> to create custom themes. Enable <strong>&quot;Export only CSS variables&quot;</strong> for your theme and put the exported CSS to your project.
 It needs to be embedded after the Blue Blazor stylesheet:</p>
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;_content/BlueBlazor/css/blue-web.min.css&quot; /&gt;
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;_content/BlueBlazor/blue-web/style.min.css&quot; /&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;css/your-theme.css&quot; /&gt;
 </code></pre>
 <p>To support dark mode, you should create a separated theme. You can then use media queries to switch between the themes:</p>
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;_content/BlueBlazor/css/blue-web.min.css&quot; /&gt;
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;_content/BlueBlazor/blue-web/style.min.css&quot; /&gt;
 &lt;link
   rel=&quot;stylesheet&quot;
   href=&quot;css/your-light-theme.css&quot;

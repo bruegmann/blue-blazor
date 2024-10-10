@@ -2,6 +2,15 @@
 
 Blue Blazor is an adaptation of [Blue Web](https://bruegmann.github.io/blue-web) for Blazor.
 
+## Breaking change!
+
+The way to embed Blue Web CSS has changed. You now need to change the following line to the head of your HTML:
+
+```diff
+- <link rel="stylesheet" href="_content/BlueBlazor/css/blue-web.min.css" />
++ <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
+```
+
 ## Getting started
 
 ### Create project
@@ -37,7 +46,7 @@ builder.Services.AddLocalization();
 You can use the stylesheet of Blue Web by adding the following line to the head of your HTML:
 
 ```html
-<link rel="stylesheet" href="_content/BlueBlazor/css/blue-web.min.css" />
+<link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
 ```
 
 ### Add layout
@@ -99,14 +108,14 @@ You can use [Themify](https://github.com/bruegmann/themify) to create custom the
 It needs to be embedded after the Blue Blazor stylesheet:
 
 ```html
-<link rel="stylesheet" href="_content/BlueBlazor/css/blue-web.min.css" />
+<link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
 <link rel="stylesheet" href="css/your-theme.css" />
 ```
 
 To support dark mode, you should create a separated theme. You can then use media queries to switch between the themes:
 
 ```html
-<link rel="stylesheet" href="_content/BlueBlazor/css/blue-web.min.css" />
+<link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
 <link
   rel="stylesheet"
   href="css/your-light-theme.css"
