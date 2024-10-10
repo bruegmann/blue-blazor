@@ -46,12 +46,18 @@
             @PageContent
         </div>
     }
+
+    @if (ChildContent != null)
+    {
+        @ChildContent
+    }
 </div>
 
 
 @code {
     [Parameter] public RenderFragment? SideContent { get; set; }
     [Parameter] public RenderFragment? PageContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
 
     [Parameter] public string? Id { get; set; }
 
