@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Components;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using System.Text.Json;
+using Microsoft.AspNetCore.Components.Web;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Helper
 {
@@ -152,15 +155,69 @@ public class Helper
         var xmlDoc = XDocument.Load(xmlDocumentationPath);
         var memberNodes = xmlDoc.Descendants("member");
 
+
         return componentType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                             .Where(prop => Attribute.IsDefined(prop, typeof(ParameterAttribute)))
                             .Select(prop => new ComponentParameterInfo
                             {
                                 Name = prop.Name,
-                                ParameterType = prop.PropertyType,
-                                DefaultValue = prop.GetValue(Activator.CreateInstance(componentType)) ?? "",
+                                ParameterType = prettyTypeName(prop.PropertyType),
+                                DefaultValue = getDefaultValue(prop, componentType),
                                 Comment = getXmlDocumentationCommentForProp(memberNodes, prop)
                             });
+    }
+
+    object? getDefaultValue(PropertyInfo prop, Type componentType)
+    {
+        var instance = Activator.CreateInstance(componentType);
+        var value = prop.GetValue(instance);
+
+        if (value == null)
+        {
+            return "null";
+        }
+
+        Type type = value.GetType();
+
+        // Primitives
+        if (type.IsPrimitive || value is string)
+        {
+            return value is string ? $"\"{value}\"" : value.ToString()?.ToLower(); // true/false klein schreiben
+        }
+
+        // Nullable types
+        if (Nullable.GetUnderlyingType(type) != null)
+        {
+            return value.ToString();
+        }
+
+        // Arrays
+        if (type.IsArray)
+        {
+            var array = value as Array;
+            if (array != null && array.Length == 0)
+            {
+                return $"new {type.GetElementType()?.Name}[0]";
+            }
+            // Hier kannst du weitere Logik hinzufügen, um Arrays zu formatieren
+        }
+
+        // EventCallbacks oder andere generische Typen
+        if (type.IsGenericType)
+        {
+            var genericTypeDefinition = type.GetGenericTypeDefinition();
+            if (genericTypeDefinition == typeof(EventCallback<>))
+            {
+                return "EventCallback.Empty";
+            }
+
+            // Generische Typen formatieren
+            var genericArgs = string.Join(", ", type.GetGenericArguments().Select(t => t.Name));
+            return $"{genericTypeDefinition.Name.Split('`')[0]}&lt;{genericArgs}&gt;";
+        }
+
+        // Für alle anderen Fälle
+        return value.ToString() ?? "unknown";
     }
 
     string componentParameterInfoToHtml(IEnumerable<ComponentParameterInfo> parameter)
@@ -174,7 +231,7 @@ public class Helper
             table += "\n        <tr>";
             table += $"<td><code>{param.Name}</code></td>";
             table += $"<td>{markdownToHtml(param.Comment ?? "")}</td>";
-            table += $"<td>{param.ParameterType?.Name}</td>";
+            table += $"<td>{param.ParameterType}</td>";
             table += $"<td>{param.DefaultValue}</td>";
             table += "</tr>";
         }
@@ -237,12 +294,24 @@ public class Helper
         // Konvertieren Sie den ersten Buchstaben in Großbuchstaben und den Rest in Kleinbuchstaben
         return char.ToUpper(result[0]) + result.Substring(1).ToLower();
     }
+
+    string prettyTypeName(Type type)
+    {
+        if (type.GetGenericArguments().Length == 0)
+        {
+            return type.Name;
+        }
+        var genericArguments = type.GetGenericArguments();
+        var typeDefinition = type.Name;
+        var unmangledName = typeDefinition.Substring(0, typeDefinition.IndexOf("`"));
+        return unmangledName + "&lt;" + string.Join(",", genericArguments.Select(prettyTypeName)) + "&gt;";
+    }
 }
 
 public class ComponentParameterInfo
 {
     public string? Name { get; set; }
-    public Type? ParameterType { get; set; }
+    public string? ParameterType { get; set; }
     public object? DefaultValue { get; set; }
     public string? Comment { get; set; }
 }
