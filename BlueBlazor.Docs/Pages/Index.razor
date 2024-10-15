@@ -52,10 +52,8 @@
 
 </code></pre>
 <h3>JavaScript (optional)</h3>
-<p>Some components require JavaScript. Take a look at the individual component page. You can embed them like this:</p>
-<pre><code class="language-html">&lt;script src=&quot;_content/BlueBlazor/js/dialog.bundle.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;_content/BlueBlazor/js/modal.bundle.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;_content/BlueBlazor/js/qrCodeGen.bundle.js&quot;&gt;&lt;/script&gt;
+<p>Single components require JavaScript. Take a look at the individual component page. You can embed them like this:</p>
+<pre><code class="language-html">&lt;script src=&quot;_content/BlueBlazor/js/qrCodeGen.bundle.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;_content/BlueBlazor/js/totpInput.bundle.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 <p>When you know, you will use all components, you can also embed them all together:</p>
@@ -82,20 +80,44 @@ It needs to be embedded after the Blue Blazor stylesheet:</p>
   media=&quot;(prefers-color-scheme: dark)&quot;
 /&gt;
 </code></pre>
-<h2>JavaScript helpers</h2>
-<p>Blue Blazor provides some JavaScript helpers that aren't bound to any component. You can use them by injecting the <code>IJSRuntime</code> service and calling the methods.</p>
-<h3>Dialog</h3>
-<p>You can use the <a href="https://bruegmann.github.io/blue-web/v1/utilities#dialog">dialog function from Blue Web</a> like this:</p>
-<pre><code class="language-csharp">@@inject IJSRuntime JSRuntime
+<h2>Use JavaScript from Blue Web</h2>
+<p>Blue Blazor comes with the whole output folder of <a href="https://bruegmann.github.io/blue-web">Blue Web</a> in it's <code>wwwroot</code> folder.
+That means, you can use all of <a href="https://bruegmann.github.io/blue-web/v1/js">Blue Web's JavaScript functions</a>.</p>
+<h3>Example 1: Progress</h3>
+<pre><code class="language-razor">@@inject IJSRuntime JSRuntime
+
+&lt;script src=&quot;_content/BlueBlazor/blue-web/js/progress.bundle.js&quot;&gt;&lt;/script&gt;
+
+&lt;Button Label=&quot;Load data&quot; OnClick=&quot;loadData&quot; /&gt;
 
 @@code {
-	async Task verify()
-	{
-		if (firstRender)
-		{
-			bool confirmed = await JSRuntime.InvokeAsync&lt;bool&gt;(&quot;blueBlazor.dialog.verify&quot;, &quot;Are you sure?&quot;);
-		}
-	}
+    async Task loadData()
+    {
+        await JSRuntime.InvokeVoidAsync(&quot;window.blueWeb.progress.start&quot;);
+
+        // do something to load data
+
+        JSRuntime.InvokeVoidAsync(&quot;window.blueWeb.progress.stop&quot;);
+    }
+}
+</code></pre>
+<h3>Example 2: Dialog</h3>
+<pre><code class="language-razor">@@inject IJSRuntime JSRuntime
+
+&lt;script src=&quot;_content/BlueBlazor/blue-web/js/dialog.bundle.js&quot;&gt;&lt;/script&gt;
+
+&lt;Button Label=&quot;Delete&quot; OnClick=&quot;delete&quot; /&gt;
+
+@@code {
+    async Task delete()
+    {
+        bool confirmed = await JSRuntime.InvokeAsync&lt;bool&gt;(&quot;blueWeb.dialog.verify&quot;, &quot;Are you sure?&quot;);
+
+        if (confirmed)
+        {
+            // do something to delete
+        }
+    }
 }
 </code></pre>
 </div></ChildContent>

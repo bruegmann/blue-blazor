@@ -83,11 +83,9 @@ Your project probably already has at least one page component. Change its conten
 
 ### JavaScript (optional)
 
-Some components require JavaScript. Take a look at the individual component page. You can embed them like this:
+Single components require JavaScript. Take a look at the individual component page. You can embed them like this:
 
 ```html
-<script src="_content/BlueBlazor/js/dialog.bundle.js"></script>
-<script src="_content/BlueBlazor/js/modal.bundle.js"></script>
 <script src="_content/BlueBlazor/js/qrCodeGen.bundle.js"></script>
 <script src="_content/BlueBlazor/js/totpInput.bundle.js"></script>
 ```
@@ -128,24 +126,50 @@ To support dark mode, you should create a separated theme. You can then use medi
 />
 ```
 
-## JavaScript helpers
+## Use JavaScript from Blue Web
 
-Blue Blazor provides some JavaScript helpers that aren't bound to any component. You can use them by injecting the `IJSRuntime` service and calling the methods.
+Blue Blazor comes with the whole output folder of [Blue Web](https://bruegmann.github.io/blue-web) in it's `wwwroot` folder.
+That means, you can use all of [Blue Web's JavaScript functions](https://bruegmann.github.io/blue-web/v1/js).
 
-### Dialog
+### Example 1: Progress
 
-You can use the [dialog function from Blue Web](https://bruegmann.github.io/blue-web/v1/utilities#dialog) like this:
-
-```csharp
+```razor
 @inject IJSRuntime JSRuntime
 
+<script src="_content/BlueBlazor/blue-web/js/progress.bundle.js"></script>
+
+<Button Label="Load data" OnClick="loadData" />
+
 @code {
-	async Task verify()
-	{
-		if (firstRender)
-		{
-			bool confirmed = await JSRuntime.InvokeAsync<bool>("blueBlazor.dialog.verify", "Are you sure?");
-		}
-	}
+    async Task loadData()
+    {
+        await JSRuntime.InvokeVoidAsync("window.blueWeb.progress.start");
+
+        // do something to load data
+
+        JSRuntime.InvokeVoidAsync("window.blueWeb.progress.stop");
+    }
+}
+```
+
+### Example 2: Dialog
+
+```razor
+@inject IJSRuntime JSRuntime
+
+<script src="_content/BlueBlazor/blue-web/js/dialog.bundle.js"></script>
+
+<Button Label="Delete" OnClick="delete" />
+
+@code {
+    async Task delete()
+    {
+        bool confirmed = await JSRuntime.InvokeAsync<bool>("blueWeb.dialog.verify", "Are you sure?");
+
+        if (confirmed)
+        {
+            // do something to delete
+        }
+    }
 }
 ```
