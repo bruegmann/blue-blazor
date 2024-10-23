@@ -1,5 +1,9 @@
 # BlueBlazor.Docs
 
+## Run the docs
+
+You need to execute `DocGen` once to generate the pages. After that, you can run the `BlueBlazor.Docs` project like any other Blazor project.
+
 ## Writing stories
 
 In the `BlueBlazor` Visual Studio solution you'll find the project `DocGen`. It's a console app to generate pages for this docs. Source files for the generator are inside the `BlueBlazor.Docs` project inside the **Stories** folder. The structure is like this:
