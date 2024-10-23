@@ -44,6 +44,10 @@
 
         .blue-sidebar-hidden-on-open {
             animation: fade-in 1s;
+
+            @media (prefers-reduced-motion) {
+                animation-duration: 0s;
+            }
         }
     }
 
@@ -129,6 +133,11 @@
 .blue-page {
     margin-left: $normal-size;
     animation: enabledBlueAppPage 0.5s;
+
+    @media (prefers-reduced-motion) {
+        animation-duration: 0s;
+    }
+
     border-top-left-radius: var(--bs-border-radius, 0.5rem);
     border-top-right-radius: var(--bs-border-radius, 0.5rem);
     --bs-bg-opacity: 1;
@@ -161,6 +170,10 @@
 
     .blue-sidebar-toggler {
         transition: transform 0.5s;
+
+        @media (prefers-reduced-motion) {
+            transition: none;
+        }
     }
 
     .blue-layout:not(.open).disableHeaders .blue-sidebar-toggler {
@@ -227,6 +240,10 @@
     background-color: var(--blue-sidebar-bg);
     transition: box-shadow 0.2s;
 
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
+
     &.has-shadow {
         box-shadow: 0 -2rem 2rem rgba(black, 0.1);
     }
@@ -263,6 +280,11 @@
 
 .blue-menu-item {
     transition: width 0.5s, background-color 0.3s, color 0.15s, box-shadow 0.3s, opacity 0.3s !important;
+
+    @media (prefers-reduced-motion) {
+        transition: none !important;
+    }
+
     padding: 0.5rem 0.75rem;
     border: none;
 
@@ -303,6 +325,11 @@
 .blue-menu-item-dropdown {
     margin-left: 1rem;
     animation: blue-menu-item-dropdown 0.15s;
+
+    @media (prefers-reduced-motion) {
+        animation-duration: 0s;
+    }
+
     position: relative;
 
     &::before {

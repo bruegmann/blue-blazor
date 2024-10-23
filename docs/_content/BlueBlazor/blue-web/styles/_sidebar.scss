@@ -22,6 +22,10 @@
 
         .blue-sidebar-hidden-on-open {
             animation: fade-in 1s;
+
+            @media (prefers-reduced-motion) {
+                animation-duration: 0s;
+            }
         }
     }
 }
@@ -35,6 +39,10 @@
 
 .blue-menu-item-dropdown-from-start {
     animation: blue-menu-item-dropdown-from-start 0.15s;
+
+    @media (prefers-reduced-motion) {
+        animation-duration: 0s;
+    }
 }
 
 .blue-sidebar {

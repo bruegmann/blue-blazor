@@ -55,6 +55,10 @@
 
 .blue-search.blue-search-sidebar {
     transition: opacity 0.2s ease-in-out;
+
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
 }
 
 .blue-search.blue-search-sidebar:not(:hover):not(.focus) {

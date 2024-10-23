@@ -19,6 +19,10 @@
 
     .navbar-nav > li > a {
         animation: fadeInDown 0.5s;
+
+        @media (prefers-reduced-motion) {
+            animation-duration: 0s;
+        }
     }
 
     &.none {
