@@ -1,10 +1,12 @@
+@using BlueBlazor.Shared.Button
 @using Microsoft.AspNetCore.Components.Routing
 @implements IDisposable
 @inject NavigationManager NavigationManager
 
 <div class="blue-menu-item-wrapper @(id)">
     <Button @attributes="AdditionalAttributes" draggable="@Draggable" OnClick="@onClick"
-            Href="@Href" Target="@Target" Busy="@Busy" Class="@className" Disabled="@Disabled">
+            Href="@Href" Target="@Target" Busy="@Busy" Class="@className" 
+            Disabled="@Disabled" Variant="Variant.None">
         @if (Draggable && !HideDraggableIcon)
         {
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"

@@ -1,13 +1,17 @@
 ﻿@using Microsoft.Extensions.Localization
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
+@using BlueBlazor.Shared.Button
 
 <ButtonOrA @attributes="AdditionalAttributes"
            Disabled="@(Busy || busy || Disabled)"
            ButtonType="@ButtonType"
-           OnClick="@onClick" Href="@Href" Target="@Target" Class="@Class" aria-label="@(LabelHidden ? Label : null)">
+           OnClick="@onClick" Href="@Href" Target="@Target"
+           Class="@className"
+           aria-label="@(LabelHidden ? Label : null)">
+    @IconBefore
     @if (Busy || busy)
     {
-        <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+        <span class="spinner-border spinner-border-sm me-1 bi" aria-hidden="true"></span>
 
         <span role="status">@L["Loading"]...</span>
     }
@@ -19,6 +23,7 @@
         }
         @ChildContent
     }
+    @IconAfter
 </ButtonOrA>
 
 @code {
@@ -27,6 +32,12 @@
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment? IconBefore { get; set; }
+
+    [Parameter]
+    public RenderFragment? IconAfter { get; set; }
 
     [Parameter]
     public EventCallback<MouseEventArgs> OnClick { get; set; }
@@ -41,7 +52,7 @@
     public string? Target { get; set; }
 
     [Parameter]
-    public string Class { get; set; } = "btn blue-btn-soft-primary";
+    public string Class { get; set; } = "";
 
     /// <summary>
     /// Let the button appear busy.
@@ -60,17 +71,63 @@
     public bool LabelHidden { get; set; } = false;
 
     [Parameter]
-    public ButtonType? ButtonType { get; set; } = Shared.ButtonType.Button;
+    public ButtonType? ButtonType { get; set; } = Shared.Button.ButtonType.Button;
+
+    [Parameter]
+    public Variant Variant { get; set; } = Shared.Button.Variant.Soft;
+
+    [Parameter]
+    public Color Color { get; set; } = Shared.Button.Color.Secondary;
+
+    [Parameter]
+    public Size? Size { get; set; }
 
     [Parameter]
     public bool Disabled { get; set; } = false;
 
+    protected override void OnParametersSet()
+    {
+        buildClass();
+    }
+
     bool busy = false;
+    string className = "";
 
     async Task onClick(MouseEventArgs args)
     {
         busy = true;
         await OnClick.InvokeAsync(args);
         busy = false;
+    }
+
+    string getButtonVariantClass(Variant variant, Color buttonColor)
+    {
+        string color = buttonColor.ToString().ToLower();
+
+        switch (variant)
+        {
+            case Variant.Soft:
+                return $"blue-btn-soft-{color}";
+            case Variant.Plain:
+                return $"blue-btn-plain-{color}";
+            case Variant.Outline:
+                return $"btn-outline-{color}";
+            case Variant.Link:
+                return $"btn-link link-{color}";
+            case Variant.None:
+                return "";
+            default:
+                return $"btn-{color}";
+        }
+    }
+
+    void buildClass()
+    {
+        className = new CssBuilder(Class)
+            .AddClass("btn", Variant != Variant.None)
+            .AddClass(getButtonVariantClass(Variant, Color))
+            .AddClass($"btn-{Size?.ToString().ToLower()}", Size != null)
+            .AddClass("icon-link", Busy || busy || IconBefore != null || IconAfter != null)
+            .Build()!;
     }
 }
