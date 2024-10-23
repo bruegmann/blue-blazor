@@ -3,10 +3,10 @@
     "description": "You can customize buttons using `Variant`, `Color` and `Size`. To have full control, set `Variant` to `Variant.None` and use the `Class` property."
     } */
 }
-@using BlueBlazor.Shared.Button
+@using BlueBlazor.Shared
 
 <Button Label="Default" />
-<Button Label="Filled Primary" Variant="Variant.Filled" Color="Color.Primary" />
+<Button Label="Filled Primary" Variant="Variant.Outline" Color="Color.Danger" Size="Size.Lg" />
 <Button Label="Outline Danger" Variant="Variant.Filled" Color="Color.Danger" />
 <Button Label="Plain Success" Variant="Variant.Plain" Color="Color.Success" />
 <Button Label="Link" Variant="Variant.Link" />
@@ -16,3 +16,5 @@
 <Button Label="Small" Size="Size.Sm" />
 
 <Button Label="Custom" Variant="Variant.None" Class="bg-body-tertiary rounded-5" />
+
+<Button Label="Filled primary shortcut" FilledPrimary />
