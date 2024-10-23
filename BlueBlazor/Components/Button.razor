@@ -1,6 +1,5 @@
 ﻿@using Microsoft.Extensions.Localization
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
-@using BlueBlazor.Shared.Button
 
 <ButtonOrA @attributes="AdditionalAttributes"
            Disabled="@(Busy || busy || Disabled)"
@@ -8,7 +7,6 @@
            OnClick="@onClick" Href="@Href" Target="@Target"
            Class="@className"
            aria-label="@(LabelHidden ? Label : null)">
-    @IconBefore
     @if (Busy || busy)
     {
         <span class="spinner-border spinner-border-sm me-1 bi" aria-hidden="true"></span>
@@ -17,13 +15,14 @@
     }
     else
     {
+        @IconBefore
         @if (!string.IsNullOrWhiteSpace(Label) && !LabelHidden)
         {
             @L[Label]
         }
         @ChildContent
+        @IconAfter
     }
-    @IconAfter
 </ButtonOrA>
 
 @code {
@@ -71,13 +70,19 @@
     public bool LabelHidden { get; set; } = false;
 
     [Parameter]
-    public ButtonType? ButtonType { get; set; } = Shared.Button.ButtonType.Button;
+    public ButtonType? ButtonType { get; set; } = Shared.ButtonType.Button;
+
+    /// <summary>
+    /// Shortcut to set `Variant` to `Variant.Filled` and `Color` to `Color.Primary`.
+    /// </summary>
+    [Parameter]
+    public bool FilledPrimary { get; set; } = false;
 
     [Parameter]
-    public Variant Variant { get; set; } = Shared.Button.Variant.Soft;
+    public Variant Variant { get; set; } = Shared.Variant.Soft;
 
     [Parameter]
-    public Color Color { get; set; } = Shared.Button.Color.Secondary;
+    public Color Color { get; set; } = Shared.Color.Secondary;
 
     [Parameter]
     public Size? Size { get; set; }
@@ -87,6 +92,10 @@
 
     protected override void OnParametersSet()
     {
+        if (FilledPrimary)
+        {
+            Variant = Variant.Filled; Color = Color.Primary;
+        }
         buildClass();
     }
 
