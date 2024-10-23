@@ -34,6 +34,10 @@
         transform: rotate(-45deg) translate(-50%, -50%);
         margin-top: calc((var(--caret-size) + var(--caret-strength)) * -1);
         transition: all 0.2s;
+
+        @media (prefers-reduced-motion) {
+            transition: none;
+        }
     }
 
     &.blue-caret-mirrored {

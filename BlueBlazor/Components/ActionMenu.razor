@@ -2,7 +2,7 @@
 
 <Outside OnClickOutside="disableActionsToggledIn">
     <div
-        class="blue-actions navbar @Class navbar-expand@(Break != null ? "-" + Break.ToString() : "") @Break.ToString() @(actionsToggledIn ? "open" : "")">
+        class="blue-actions navbar @Class navbar-expand@(Break != null ? "-" + Break.ToString()?.ToLower() : "") @Break.ToString()?.ToLower() @(actionsToggledIn ? "open" : "")">
         <div class="blue-actions-menu nav navbar-nav navbar-right">
             @if (!actionsToggledIn && !HideToggleAction)
             {
@@ -40,7 +40,7 @@
     public string Class { get; set; } = "";
 
     [Parameter]
-    public BreakSize? Break { get; set; } = BreakSize.lg;
+    public BreakSize? Break { get; set; } = BreakSize.Lg;
 
     [Parameter]
     public RenderFragment? ToggleIcon { get; set; }

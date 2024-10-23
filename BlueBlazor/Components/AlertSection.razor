@@ -35,7 +35,7 @@
                 @alert.Message
                 @if (alert.Dismissible)
                 {
-                    <Button Label="@L["Close"]" LabelHidden Class="btn-close" OnClick="() => {Alerts.Remove(alert);}" />
+                    <Button Label="@L["Close"]" LabelHidden Variant="Variant.None" Class="btn-close" OnClick="() => {Alerts.Remove(alert);}" />
                 }
             </div>
         }

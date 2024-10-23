@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components.Rendering
+@inject NavigationManager NavigationManager
 
 <Page>
     <Body ContainerClass="docgen container pb-3">
@@ -54,6 +55,12 @@
 
 @code {
     [Parameter]
+    public string BasePath { get; set; } = "";
+
+    [Parameter]
+    public string? Section { get; set; }
+
+    [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
@@ -65,11 +72,11 @@
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        if (PropsContent != null)
+        if (PropsContent != null && Section == "props")
         {
             activeTab = "props";
         }
-        else if (ExamplesContent != null)
+        else if (ExamplesContent != null && Section == "examples")
         {
             activeTab = "examples";
         }
@@ -77,7 +84,7 @@
 
     void setActiveTab(string tab)
     {
-        activeTab = tab;
+        NavigationManager.NavigateTo($"{BasePath}/{tab}");
     }
 
     string? activeTab = "props";

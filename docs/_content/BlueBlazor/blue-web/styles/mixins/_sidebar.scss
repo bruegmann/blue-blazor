@@ -11,6 +11,10 @@
     .blue-sidebar-d-flex-on-open,
     .blue-sidebar-d-block-on-open {
         animation: fade-in 1s;
+
+        @media (prefers-reduced-motion) {
+            animation-duration: 0s;
+        }
     }
 
     .blue-sidebar-visible-on-open,
@@ -111,6 +115,10 @@
             transform: scale(0.9);
             opacity: 0;
             transition: all 0.2s;
+
+            @media (prefers-reduced-motion) {
+                transition: none;
+            }
         }
 
         &[draggable] {

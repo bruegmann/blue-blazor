@@ -30,9 +30,18 @@
         background-repeat: no-repeat;
         background-position: 50%;
         animation: alert-in 1s;
+
+        @media (prefers-reduced-motion) {
+            animation-duration: 0s;
+        }
+
         transform: scale(10, 10);
         opacity: 0;
         transition: transform 0.5s, opacity 1s;
+
+        @media (prefers-reduced-motion) {
+            transition: none;
+        }
     }
 
     transform: translate3d(0, 0, 0);
@@ -109,39 +118,10 @@
     top: 0;
     left: 0;
 
-    -webkit-animation: circlebounce 2s infinite ease-in-out;
     animation: circlebounce 2s infinite ease-in-out;
 }
 
 .spinner-bounce-circle div:nth-child(1) {
     -webkit-animation-delay: -1s;
     animation-delay: -1s;
-}
-
-$bla-status-bar-width: 37.5rem;
-$bla-status-bar-loading-height: 2px;
-
-.blue-status-bar {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    position: fixed;
-    z-index: 6;
-    // width: 100%;
-    box-sizing: border-box;
-    right: 0;
-    bottom: 0;
-    padding: 0.4rem;
-    padding-top: calc(0.4rem + #{$bla-status-bar-loading-height});
-    overflow: hidden;
-
-    &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: $bla-status-bar-loading-height;
-        background-color: #5cb85c;
-        animation: scrolling 1s linear infinite;
-    }
 }

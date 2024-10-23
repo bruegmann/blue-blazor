@@ -1,0 +1,25 @@
+﻿@{
+        /*docs {
+        "description": "Using the render fragments `IconBefore` or `IconAfter` will automatically set the [Bootstrap helper `icon-link`.](https://getbootstrap.com/docs/5.3/helpers/icon-link/#example)"
+    } */
+}
+
+<Button Label="No icon" />
+
+<Button Label="Let's have an icon">
+    <IconBefore>
+        <BiBox2Heart />
+    </IconBefore>
+</Button>
+
+<Button Label="Hover this and take a look at that arrow" Class="icon-link-hover">
+    <IconAfter>
+        <BiArrowRight />
+    </IconAfter>
+</Button>
+
+<Button Label="This icon should go up" Class="icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);">
+    <IconBefore>
+        <BiClipboard />
+    </IconBefore>
+</Button>
