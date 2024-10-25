@@ -1,4 +1,12 @@
-﻿using System.Text.RegularExpressions;
+﻿// `CssBuilder` from FluentUI Blazor.
+// Original source: https://github.com/microsoft/fluentui-blazor/blob/dev/src/Core/Utilities/CssBuilder.cs
+// License: MIT License (https://github.com/microsoft/fluentui-blazor/blob/dev/LICENSE)
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See the LICENSE file in the project root for license information.
+
+
+using System.Text.RegularExpressions;
 
 namespace BlueBlazor.Shared;
 

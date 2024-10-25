@@ -9,7 +9,7 @@
         @if (Draggable && !HideDraggableIcon)
         {
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                 className="bi bi-grip-vertical opacity-50" viewBox="0 0 8 16">
+                 className="bi bi-grip-vertical opacity-50" aria-hidden="true" viewBox="0 0 8 16">
                 <path d="M3.376 1.876c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1">
                 </path>
             </svg>
@@ -17,14 +17,14 @@
 
         @if (Icon != null)
         {
-            <span class="blue-menu-item-icon @IconClass @(IconForActive != null ? "hasIconForActive" : "")">
+            <span class="blue-menu-item-icon @IconClass @(IconForActive != null ? "hasIconForActive" : "")" aria-hidden="true">
                 @Icon
             </span>
         }
 
         @if (IconForActive != null && IsActive)
         {
-            <span class="blue-menu-item-icon iconForActive @IconClass">
+            <span class="blue-menu-item-icon iconForActive @IconClass" aria-hidden="true">
                 @IconForActive
             </span>
         }

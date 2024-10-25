@@ -15,13 +15,23 @@
     }
     else
     {
-        @IconBefore
+        @if (IconBefore != null)
+        {
+            <span class="blue-btn-icon-wrapper" aria-hidden="true">
+                @IconBefore
+            </span>
+        }
         @if (!string.IsNullOrWhiteSpace(Label) && !LabelHidden)
         {
             @L[Label]
         }
         @ChildContent
-        @IconAfter
+        @if (IconAfter != null)
+        {
+            <span class="blue-btn-icon-wrapper" aria-hidden="true">
+                @IconAfter
+            </span>
+        }
     }
 </ButtonOrA>
 
@@ -32,9 +42,17 @@
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
+    /// <summary>
+    /// Will be wrapped inside a `span` with the class `blue-btn-icon-wrapper` and `aria-hidden="true"`.
+    /// Class `icon-link` will be added to the button if `IconBefore` or `IconAfter` is set.
+    /// </summary>
     [Parameter]
     public RenderFragment? IconBefore { get; set; }
 
+    /// <summary>
+    /// Will be wrapped inside a `span` with the class `blue-btn-icon-wrapper` and `aria-hidden="true"`.
+    /// Class `icon-link` will be added to the button if `IconBefore` or `IconAfter` is set.
+    /// </summary>
     [Parameter]
     public RenderFragment? IconAfter { get; set; }
 
