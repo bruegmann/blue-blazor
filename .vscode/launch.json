@@ -1,0 +1,19 @@
+{
+  "configurations": [
+    {
+      "name": "C#: BlueBlazor.Docs",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}\\BlueBlazor.Docs\\BlueBlazor.Docs.csproj",
+      "launchBrowser": {
+        "enabled": true,
+        "args": "${auto-detect-url}",
+        "windows": {
+          "command": "cmd.exe",
+          "args": "/C start ${auto-detect-url}"
+        }
+      },
+      "launchConfigurationId": "TargetFramework=;http"
+    }
+  ]
+}
