@@ -1,15 +1,15 @@
 /*!
- * Blue Web v1.4.0 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.5.0 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
 @import "./styles/bootstrap-variables";
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
-@import "./styles/_variables";
+@import "./styles/variables";
 
-@import "./styles/_mixins";
-@import "./styles/_keyframes";
+@import "./styles/mixins";
+@import "./styles/keyframes";
 
 @import "./styles/bootstrap";
 
@@ -20,18 +20,19 @@
     border-color: var(--bs-primary, #{$form-check-input-checked-border-color});
 }
 
-@import "./styles/_text-icons";
-@import "./styles/_general";
-@import "./styles/_router";
-@import "./styles/_status";
-@import "./styles/_layout";
-@import "./styles/_grid-layout";
+@import "./styles/text-icons";
+@import "./styles/general";
+@import "./styles/router";
+@import "./styles/status";
+@import "./styles/layout";
+@import "./styles/grid-layout";
 @import "./styles/menu-item";
-@import "./styles/_sidebar";
-@import "./styles/_search";
+@import "./styles/sidebar";
+@import "./styles/search";
 @import "./styles/action-menu";
-@import "./styles/_caret";
-@import "./styles/_tooltips";
-@import "./styles/_hover";
+@import "./styles/caret";
+@import "./styles/tooltips";
+@import "./styles/hover";
+@import "./styles/button-icon-wrapper";
 @import "./styles/buttons";
 @import "./styles/container-grid";
