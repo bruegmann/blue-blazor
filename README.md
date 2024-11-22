@@ -4,12 +4,7 @@ Blue Blazor is an adaptation of [Blue Web](https://bruegmann.github.io/blue-web)
 
 ## Breaking change!
 
-The way to embed Blue Web CSS has changed. You now need to change the following line to the head of your HTML:
-
-```diff
-- <link rel="stylesheet" href="_content/BlueBlazor/css/blue-web.min.css" />
-+ <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
-```
+Component `Text` has been renamed to `TextInput` to avoid conflicts with `<text></text>` and for a more fitting name. Also the default styling for the label has changed. You can the look back by using the `SmallLabel` attribute.
 
 ## Getting started
 
@@ -172,4 +167,19 @@ That means, you can use all of [Blue Web's JavaScript functions](https://bruegma
         }
     }
 }
+```
+
+## Breaking changes
+
+### From v2 to v3
+
+Component `Text` has been renamed to `TextInput` to avoid conflicts with `<text></text>` and for a more fitting name. Also the default styling for the label has changed. You can the look back by using the `SmallLabel` attribute.
+
+### From v1 to v2
+
+The way to embed Blue Web CSS has changed. You now need to change the following line to the head of your HTML:
+
+```diff
+- <link rel="stylesheet" href="_content/BlueBlazor/css/blue-web.min.css" />
++ <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
 ```

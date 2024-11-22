@@ -1,0 +1,107 @@
+@using Microsoft.Extensions.Localization
+
+@if (Floating)
+{
+    <div class="form-floating">
+        <input @attributes="AdditionalAttributes" type="@Type" class="@inputClass"
+               id="@Id" placeholder="@placeholder" @bind="@Value"
+               @bind:event="@getBindEvent()" readonly="@ReadOnly" />
+
+        <label for="@Id" class="@labelClass">@Label</label>
+    </div>
+}
+else
+{
+    <label for="@Id" class="@labelClass">@Label</label>
+
+    <input @attributes="AdditionalAttributes" type="@Type" class="@inputClass"
+           id="@Id" placeholder="@placeholder" @bind="@Value"
+           @bind:event="@getBindEvent()" readonly="@ReadOnly" />
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+
+    [Parameter]
+    public string Type { get; set; } = "text";
+
+    [Parameter]
+    public string? Placeholder { get; set; }
+
+    [Parameter, EditorRequired]
+    public required string Label { get; set; }
+
+    [Parameter]
+    public bool LabelHidden { get; set; } = false;
+
+    [Parameter]
+    public bool Floating { get; set; } = false;
+
+    [Parameter]
+    public bool SmallLabel { get; set; } = false;
+
+    string? _value;
+    [Parameter]
+    public string? Value
+    {
+        get => _value;
+        set
+        {
+            if (_value != value)
+            {
+                _value = value;
+                ValueChanged.InvokeAsync(value);
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    [Parameter]
+    public bool ReadOnly { get; set; } = false;
+
+    /// <summary>
+    /// If true, the value is updated immediately on input, otherwise on change.
+    /// </summary>
+    [Parameter]
+    public bool Immediate { get; set; } = false;
+
+    [Parameter]
+    public string LabelClass { get; set; } = "";
+
+    [Parameter]
+    public string InputClass { get; set; } = "";
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        labelClass = new CssBuilder().AddClass(LabelClass)
+            .AddClass("d-none", LabelHidden)
+            .AddClass("form-label", !Floating)
+            .AddClass("my-0 lh-1 fw-bold small", SmallLabel).Build();
+        inputClass = new CssBuilder().AddClass(InputClass)
+            .AddClass("form-control", !ReadOnly)
+            .AddClass("form-control-plaintext", ReadOnly).Build();
+
+        placeholder = Placeholder;
+
+        if (Floating && string.IsNullOrEmpty(placeholder))
+        {
+            placeholder = Label;
+        }
+    }
+
+    string? labelClass;
+    string? inputClass;
+    string? placeholder;
+
+    string getBindEvent()
+    {
+        return Immediate ? "oninput" : "onchange";
+    }
+}

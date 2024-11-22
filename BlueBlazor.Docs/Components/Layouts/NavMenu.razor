@@ -4,7 +4,7 @@
 
 <SidebarMenu MenuClass="overflow-x-hidden overflow-y-auto">
     <TopContent>
-        <MenuItem Label="Home" Href="" IsActive="@isActive("")">
+        <MenuItem Label="Home" Href="" IsActive="@isActive("", true)">
             <Icon>
                 <BiHouse />
             </Icon>
@@ -56,11 +56,12 @@
         StateHasChanged();
     }
 
-    bool isActive(string href)
+    bool isActive(string href, bool exact = false)
     {
-        var uri = NavigationManager.ToAbsoluteUri(href);
+        Uri uri = NavigationManager.ToAbsoluteUri(href);
+        string uriString = uri.ToString();
 
-        if (NavigationManager.Uri == uri.ToString())
+        if (exact ? (NavigationManager.Uri == uriString) : (NavigationManager.Uri.StartsWith(uriString)))
         {
             return true;
         }

@@ -1,0 +1,10 @@
+﻿<TextInput Label="Without Immediate" @bind-Value="@value" SmallLabel />
+<p><code>value</code>: @value</p>
+
+<TextInput Label="With Immediate" @bind-Value="@valueImmediate" Immediate SmallLabel />
+<p><code>valueImmediate</code>: @valueImmediate</p>
+
+@code {
+    string value = "";
+    string valueImmediate = "";
+}
