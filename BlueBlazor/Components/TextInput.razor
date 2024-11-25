@@ -4,7 +4,7 @@
 {
     <div class="form-floating">
         <input @attributes="AdditionalAttributes" type="@Type" class="@inputClass"
-               id="@Id" placeholder="@placeholder" @bind="@Value"
+               id="@Id" placeholder="@placeholder" @bind="@value"
                @bind:event="@getBindEvent()" readonly="@ReadOnly" />
 
         <label for="@Id" class="@labelClass">@Label</label>
@@ -15,7 +15,7 @@ else
     <label for="@Id" class="@labelClass">@Label</label>
 
     <input @attributes="AdditionalAttributes" type="@Type" class="@inputClass"
-           id="@Id" placeholder="@placeholder" @bind="@Value"
+           id="@Id" placeholder="@placeholder" @bind="@value"
            @bind:event="@getBindEvent()" readonly="@ReadOnly" />
 }
 
@@ -41,20 +41,8 @@ else
     [Parameter]
     public bool SmallLabel { get; set; } = false;
 
-    string? _value;
     [Parameter]
-    public string? Value
-    {
-        get => _value;
-        set
-        {
-            if (_value != value)
-            {
-                _value = value;
-                ValueChanged.InvokeAsync(value);
-            }
-        }
-    }
+    public string Value { get; set; } = "";
 
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
@@ -103,5 +91,18 @@ else
     string getBindEvent()
     {
         return Immediate ? "oninput" : "onchange";
+    }
+
+    string value
+    {
+        get => Value;
+        set
+        {
+            if (Value != value)
+            {
+                Value = value;
+                ValueChanged.InvokeAsync(value);
+            }
+        }
     }
 }

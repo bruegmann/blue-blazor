@@ -4,16 +4,13 @@ Blue Blazor is an adaptation of [Blue Web](https://bruegmann.github.io/blue-web)
 
 ## Breaking change!
 
-The way to embed Blue Web CSS has changed. You now need to change the following line to the head of your HTML:
-
-```diff
-- <link rel="stylesheet" href="_content/BlueBlazor/css/blue-web.min.css" />
-+ <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
-
-```
-
+Component `Text` has been renamed to `TextInput` to avoid conflicts with `<text></text>` and for a more fitting name. Also the default styling for the label has changed. You can the look back by using the `SmallLabel` attribute.
 
 ## Getting started
+
+### Create project
+
+Use one of the official Blazor project templates like **Blazor Web App** or **Blazor Server App (Empty)** to create a new project using Visual Studio or CLI. Make sure, no sample content will be added.
 
 ### Installation
 
@@ -47,22 +44,56 @@ You can use the stylesheet of Blue Web by adding the following line to the head 
 <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
 ```
 
-### JavaScript
+### Add layout
 
-Some components require JavaScript. You can embed all together:
+Put this to your `MainLayout.razor` file:
+
+```razor
+<Layout>
+    <SideContent>
+        <SidebarMenu>
+            <MenuItem Label="Home" Href="">
+                <Icon>🏠</Icon>
+            </MenuItem>
+        </SidebarMenu>
+    </SideContent>
+    <PageContent>@Body</PageContent>
+</Layout>
+```
+
+### Add page
+
+Your project probably already has at least one page component. Change its content to this:
+
+```razor
+@page "/"
+
+<Page>
+    <Body>
+        <h1>Hello, world!</h1>
+    </Body>
+</Page>
+
+```
+
+### JavaScript (optional)
+
+Single components require JavaScript. Take a look at the individual component page. You can embed them like this:
+
+```html
+<script src="_content/BlueBlazor/js/qrCodeGen.bundle.js"></script>
+<script src="_content/BlueBlazor/js/totpInput.bundle.js"></script>
+```
+
+When you know, you will use all components, you can also embed them all together:
 
 ```html
 <script src="_content/BlueBlazor/js/all.bundle.js"></script>
 ```
 
-If you don't them all, you can also embed them individually:
+### Next steps
 
-```html
-<script src="_content/BlueBlazor/js/dialog.bundle.js"></script>
-<script src="_content/BlueBlazor/js/modal.bundle.js"></script>
-<script src="_content/BlueBlazor/js/qrCodeGen.bundle.js"></script>
-<script src="_content/BlueBlazor/js/totpInput.bundle.js"></script>
-```
+You now have a very basic app with Blue Blazor. To learn more, check out [the examples](https://github.com/bruegmann/blue-blazor/tree/master/examples) and the [component docs](https://bruegmann.github.io/blue-blazor/).
 
 ## Theming
 
@@ -90,20 +121,65 @@ To support dark mode, you should create a separated theme. You can then use medi
 />
 ```
 
-## JavaScript helpers
+## Use JavaScript from Blue Web
 
-Blue Blazor provides some JavaScript helpers that aren't bound to any component. You can use them by injecting the `IJSRuntime` service and calling the methods:
+Blue Blazor comes with the whole output folder of [Blue Web](https://bruegmann.github.io/blue-web) in it's `wwwroot` folder.
+That means, you can use all of [Blue Web's JavaScript functions](https://bruegmann.github.io/blue-web/v1/js).
 
-```csharp
+### Example 1: Progress
+
+```razor
 @inject IJSRuntime JSRuntime
 
+<script src="_content/BlueBlazor/blue-web/js/progress.bundle.js"></script>
+
+<Button Label="Load data" OnClick="loadData" />
+
 @code {
-	async Task ask()
-	{
-		if (firstRender)
-		{
-			await JSRuntime.InvokeVoidAsync("BlueBlazor.Helpers.scrollToTop");
-		}
-	}
+    async Task loadData()
+    {
+        await JSRuntime.InvokeVoidAsync("window.blueWeb.progress.start");
+
+        // do something to load data
+
+        JSRuntime.InvokeVoidAsync("window.blueWeb.progress.stop");
+    }
 }
+```
+
+### Example 2: Dialog
+
+```razor
+@inject IJSRuntime JSRuntime
+
+<script src="_content/BlueBlazor/blue-web/js/dialog.bundle.js"></script>
+
+<Button Label="Delete" OnClick="delete" />
+
+@code {
+    async Task delete()
+    {
+        bool confirmed = await JSRuntime.InvokeAsync<bool>("blueWeb.dialog.verify", "Are you sure?");
+
+        if (confirmed)
+        {
+            // do something to delete
+        }
+    }
+}
+```
+
+## Breaking changes
+
+### From v2 to v3
+
+Component `Text` has been renamed to `TextInput` to avoid conflicts with `<text></text>` and for a more fitting name. Also the default styling for the label has changed. You can the look back by using the `SmallLabel` attribute.
+
+### From v1 to v2
+
+The way to embed Blue Web CSS has changed. You now need to change the following line to the head of your HTML:
+
+```diff
+- <link rel="stylesheet" href="_content/BlueBlazor/css/blue-web.min.css" />
++ <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
 ```
