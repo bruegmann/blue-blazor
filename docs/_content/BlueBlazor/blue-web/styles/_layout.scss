@@ -24,7 +24,7 @@
     }
 
     &.open {
-        @media screen and (max-width: 1400px) {
+        @media screen and (max-width: $sidebar-expanded-breakpoint) {
             .router-page.active {
                 .blue-page {
                     filter: blur(3px) brightness(0.8);
@@ -150,45 +150,60 @@
     }
 }
 
-@include blue-sidebar($normal-size);
+@include blue-sidebar(0);
+.blue-layout:not(.open) .blue-sidebar {
+    left: -$normal-size;
+}
 
-@media (max-width: 600px) {
-    @include blue-sidebar(0);
-    .blue-layout:not(.open) .blue-sidebar {
-        left: -$normal-size;
-    }
+.blue-page {
+    margin-left: 0;
+}
 
+.blue-layout.disableHeaders {
     .blue-page {
-        margin-left: 0;
-    }
-
-    .blue-layout.disableHeaders {
-        .blue-page {
-            padding-top: $normal-size;
-        }
-    }
-
-    .blue-sidebar-toggler {
-        transition: transform 0.5s;
-
-        @media (prefers-reduced-motion) {
-            transition: none;
-        }
-    }
-
-    .blue-layout:not(.open).disableHeaders .blue-sidebar-toggler {
-        transform: translate(0.25rem, 0.25rem);
-        border-radius: $border-radius;
+        padding-top: $normal-size;
     }
 }
 
-@media (min-width: 1400px) {
+.blue-sidebar-toggler {
+    transition: transform 0.5s;
+
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
+}
+
+.blue-layout:not(.open).disableHeaders .blue-sidebar-toggler {
+    transform: translate(0.25rem, 0.25rem);
+    border-radius: $border-radius;
+    overflow: hidden;
+}
+
+@if $sidebar-shrink {
+    @media (min-width: $sidebar-shrink-breakpoint) {
+        @include blue-sidebar($normal-size);
+
+        .blue-layout:not(.open) .blue-sidebar {
+            left: 0;
+        }
+
+        .blue-page {
+            margin-left: $normal-size;
+        }
+
+        .blue-layout:not(.open).disableHeaders .blue-sidebar-toggler {
+            transform: translate(0, 0);
+        }
+    }
+}
+
+@media (min-width: $sidebar-expanded-breakpoint) {
     .blue-layout.expandSidebar {
         @include openSidebarMenu();
 
         .blue-sidebar {
+            left: 0;
             box-shadow: none !important;
-            // background: transparent;
         }
 
         .blue-page {

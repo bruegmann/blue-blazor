@@ -89,6 +89,15 @@ $actions-control-bg-hover: $bla-button-bg-hover !default;
 // Width and height of the scrollbar indicators
 $scrollbar-size: 10px;
 
+// Shrink sidebar on smaller screens
+$sidebar-shrink: true !default;
+
+// Breakpoint for sidebar shrink
+$sidebar-shrink-breakpoint: 600px !default;
+
+// Breakpoint for sidebar fully expanded
+$sidebar-expanded-breakpoint: 1400px !default;
+
 :root {
     --blue-scrollbar-thumb-color-rgb: #{$scrollbar-thumb-color-rgb};
     --blue-scrollbar-size: #{$scrollbar-size};

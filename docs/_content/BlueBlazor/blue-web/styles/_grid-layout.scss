@@ -16,14 +16,16 @@
     height: 100dvh;
 }
 
-@media (min-width: 600px) {
-    .blue-grid-layout {
-        grid-template-columns: $normal-size auto;
+@if $sidebar-shrink {
+    @media (min-width: $sidebar-shrink-breakpoint) {
+        .blue-grid-layout {
+            grid-template-columns: $normal-size auto;
+        }
     }
 }
 
-@media (min-width: 1400px) {
-    .blue-grid-layout {
+@media (min-width: $sidebar-expanded-breakpoint) {
+    .blue-grid-layout.expandSidebar {
         grid-template-columns: var(--blue-sidebar-width) auto;
     }
 }
