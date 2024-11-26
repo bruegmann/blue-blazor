@@ -4,7 +4,7 @@
 
 <div class="blue-menu-item-wrapper @(id)">
     <Button @attributes="AdditionalAttributes" draggable="@Draggable" OnClick="@onClick"
-            Href="@Href" Target="@Target" Busy="@Busy" Class="@className" 
+            Href="@Href" Target="@Target" Busy="@Busy" Class="@className"
             Disabled="@Disabled" Variant="Variant.None">
         @if (Draggable && !HideDraggableIcon)
         {
@@ -38,7 +38,8 @@
 
         @if (DropdownContent != null)
         {
-            <Chevron Open="@showDropdown" Mirrored="true" Class="blue-menu-item-dropdown-toggle blue-menu-item-chevron ms-auto" />
+            <Chevron Open="@showDropdown" Mirrored="true" Class="blue-menu-item-dropdown-toggle blue-menu-item-chevron ms-auto"
+                     PathClass="blue-sidebar-exception" />
         }
     </Button>
 

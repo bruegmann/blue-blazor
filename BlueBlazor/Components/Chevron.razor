@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="@Class"
-    style="@Style display: inline-block; vertical-align: -0.125em; transform: rotate(@(Open && Mirrored ? "-90" : Open ? "90" : "0")deg); transition: transform 0.2s;"
-    viewBox="0 0 16 16">
+style="@Style display: inline-block; vertical-align: -0.125em; transform: rotate(@(Open && Mirrored ? "-90" : Open ? "90" : "0")deg); transition: transform 0.2s;"
+viewBox="0 0 16 16">
     @if (Mirrored)
     {
-        <path fillRule="evenodd"
-            d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0" />
+        <path class="@PathClass" fillRule="evenodd"
+        d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0" />
     }
     else
     {
-        <path fillRule="evenodd"
-            d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708" />
+        <path class="@PathClass" fillRule="evenodd"
+        d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708" />
     }
 </svg>
 
@@ -31,6 +31,9 @@
     /// </summary>
     [Parameter]
     public string? Class { get; set; }
+
+    [Parameter]
+    public string? PathClass { get; set; }
 
     /// <summary>
     /// Additional styles.

@@ -11,9 +11,9 @@
         <SidebarToggler OnClick="() => SidebarIn = !SidebarIn" Class="blue-sidebar-toggler-sidebarIn">
             <SidebarToggleIconComponent>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"
-                     style="display: inline-block; vertical-align: -0.125em">
+                style="display: inline-block; vertical-align: -0.125em">
                     <path fillRule="evenodd"
-                          d="M2.5 12a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z">
+                    d="M2.5 12a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z">
                     </path>
                 </svg>
             </SidebarToggleIconComponent>
@@ -25,9 +25,9 @@
         <SidebarToggler OnClick="toggleExpandSidebar" Class="blue-sidebar-toggler-expandSidebar d-none d-xxl-block">
             <SidebarToggleIconComponent>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     viewBox="0 0 16 16" style="display: inline-block; vertical-align: -0.125em">
+                viewBox="0 0 16 16" style="display: inline-block; vertical-align: -0.125em">
                     <path fillRule="evenodd"
-                          d="M2.5 12a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z">
+                    d="M2.5 12a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z">
                     </path>
                 </svg>
             </SidebarToggleIconComponent>
@@ -61,19 +61,19 @@
 
     [Parameter] public string? Id { get; set; }
 
-    bool sidebarIn;
+    bool sidebarIn {
+        get => SidebarIn;
+        set
+        {
+            SidebarIn = value;
+            SidebarInChanged.InvokeAsync(value);
+        }
+    }
     /// <summary>
     /// By default, the side bar is "in". Is two-way bindable.
     /// </summary>
     [Parameter]
-    public bool SidebarIn
-    {
-        get => sidebarIn; set
-        {
-            sidebarIn = value;
-            SidebarInChanged.InvokeAsync(value);
-        }
-    }
+    public bool SidebarIn { get; set; }
     [Parameter] public EventCallback<bool> SidebarInChanged { get; set; }
 
     [Parameter] public string? Style { get; set; }
@@ -83,19 +83,18 @@
     /// </summary>
     [Parameter] public bool HideToggleExpandSidebar { get; set; } = false;
 
-    bool? expandSidebar;
+    bool? expandSidebar {
+        get => ExpandSidebar;
+        set {
+            ExpandSidebar = value == true;
+            ExpandSidebarChanged.InvokeAsync(value);
+        }
+    }
     /// <summary>
     /// Sidebar is automatically expanded on wider views. Is two-way bindable.
     /// </summary>
     [Parameter]
-    public bool? ExpandSidebar
-    {
-        get => expandSidebar; set
-        {
-            expandSidebar = value == true;
-            ExpandSidebarChanged.InvokeAsync(value);
-        }
-    }
+    public bool? ExpandSidebar { get; set; }
     [Parameter] public EventCallback<bool?> ExpandSidebarChanged { get; set; }
 
 
