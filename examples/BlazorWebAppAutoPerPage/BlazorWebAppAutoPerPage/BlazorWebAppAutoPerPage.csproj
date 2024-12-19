@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\BlueBlazor\BlueBlazor.csproj" />
     <ProjectReference Include="..\BlazorWebAppAutoPerPage.Client\BlazorWebAppAutoPerPage.Client.csproj" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.11" />
   </ItemGroup>
 
 </Project>
