@@ -1,8 +1,8 @@
 ﻿namespace BlueBlazor.Components;
 
 /// <summary>
-/// Contains the content of the page.
+/// Always use together with `Tabs`.
 /// </summary>
-public partial class Body
+public partial class Tab
 {
 }

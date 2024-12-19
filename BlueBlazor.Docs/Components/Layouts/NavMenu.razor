@@ -18,7 +18,7 @@
         {
             foreach (var item in componentPageUrls)
             {
-                <MenuItem Label="@item.Key" Href="@item.Value" IsActive="@isActive(item.Value)">
+                <MenuItem Label="@item.Key" Href="@(item.Value + "/props")" IsActive="@isActive(item.Value + "/")">
                     <Icon>
                         @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
                     </Icon>
@@ -115,6 +115,12 @@
         } },
         {"TotpInput", new() {
             Icon = @<BiInputCursorText />}
+        },
+        {"Tab", new() {
+            Icon = @<BiSegmentedNav />}
+        },
+        {"Tabs", new() {
+            Icon = @<BiSegmentedNav />}
         } };
     RenderFragment defaultIcon = @<BiFileCode />;
 

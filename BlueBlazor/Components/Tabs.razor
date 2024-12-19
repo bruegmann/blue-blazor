@@ -1,0 +1,16 @@
+﻿<div role="tablist" class="blue-tabs">
+    <CascadingValue Name="Tab_Name" Value="@Name">
+        @ChildContent
+    </CascadingValue>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// Will be passed down to `Tab` children as identifier. Default is `"TabList-" + Guid.NewGuid().ToString()`.
+    /// </summary>
+    [Parameter]
+    public string? Name { get; set; } = "TabList-" + Guid.NewGuid().ToString();
+}
