@@ -1,18 +1,18 @@
-<div class="blue-sidebar @SidebarClass" style="@SidebarStyle">
+<div class="d-flex flex-column h-100 @SidebarClass" style="@SidebarStyle">
     @if (TopContent != null)
     {
-        <div class="blue-sidebar-top">
+        <div>
             @TopContent
         </div>
     }
 
-    <div class="blue-menu @MenuClass" style="@MenuStyle">
+    <div class="flex-grow-1 overflow-auto @MenuClass" style="@MenuStyle">
         @ChildContent
     </div>
 
     @if (BottomContent != null)
     {
-        <div class="blue-sidebar-bottom @(hasShadow ? "has-shadow" : "")">
+        <div>
             @BottomContent
         </div>
     }
@@ -50,6 +50,4 @@
     [Parameter] public RenderFragment? BottomContent { get; set; }
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
-
-    bool hasShadow { get; set; } = false;
 }

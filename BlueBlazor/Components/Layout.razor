@@ -1,170 +1,51 @@
-@using Microsoft.AspNetCore.Components.Routing
-@inject IJSRuntime JSRuntime
-@implements IDisposable
-@inject NavigationManager NavigationManager
-
-<PageScript Src="./_content/BlueBlazor/Components/Layout.razor.js"></PageScript>
-
-<div id="@Id" class="blue-layout @Class @(SidebarIn ? "open" : "") @(HideSidebarMenu ? "hasNoSidebarMenu" : "hasSidebarMenu") @(ExpandSidebar == true ? "expandSidebar" : "") @(DisableHeaders ? "disableHeaders" : "") @(HideToggleExpandSidebar ? "hideToggleExpandSidebar" : "")">
-    @if (!HideSidebarMenu)
-    {
-        <SidebarToggler OnClick="() => SidebarIn = !SidebarIn" Class="blue-sidebar-toggler-sidebarIn">
-            <SidebarToggleIconComponent>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"
-                style="display: inline-block; vertical-align: -0.125em">
-                    <path fillRule="evenodd"
-                    d="M2.5 12a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z">
-                    </path>
-                </svg>
-            </SidebarToggleIconComponent>
-        </SidebarToggler>
-    }
-
-    @if (!HideSidebarMenu && !HideToggleExpandSidebar)
-    {
-        <SidebarToggler OnClick="toggleExpandSidebar" Class="blue-sidebar-toggler-expandSidebar d-none d-xxl-block">
-            <SidebarToggleIconComponent>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                viewBox="0 0 16 16" style="display: inline-block; vertical-align: -0.125em">
-                    <path fillRule="evenodd"
-                    d="M2.5 12a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z">
-                    </path>
-                </svg>
-            </SidebarToggleIconComponent>
-        </SidebarToggler>
-    }
-
-    <Outside OnClickOutside="() => SidebarIn = false" IgnoreClasses="@(new List<string> { "blue-open-menu", "bi-menu", "blue-search", "blue-search-control",
-"blue-search-btn", "blue-search-btn-icon", "blue-menu-item-dropdown-toggle", "blue-menu-item-dropdown-caret",
-"blue-menu-item-dropdown-icon", "blue-sidebar-exception" })">
-        @SideContent
-    </Outside>
-
-    @if (PageContent != null)
-    {
-        <div class="router-page active">
-            @PageContent
-        </div>
-    }
-
-    @if (ChildContent != null)
-    {
-        @ChildContent
-    }
-</div>
-
-
-@code {
-    [Parameter] public RenderFragment? SideContent { get; set; }
-    [Parameter] public RenderFragment? PageContent { get; set; }
-    [Parameter] public RenderFragment? ChildContent { get; set; }
-
-    [Parameter] public string? Id { get; set; }
-
-    bool sidebarIn {
-        get => SidebarIn;
-        set
-        {
-            SidebarIn = value;
-            SidebarInChanged.InvokeAsync(value);
-        }
-    }
-    /// <summary>
-    /// By default, the side bar is "in". Is two-way bindable.
-    /// </summary>
-    [Parameter]
-    public bool SidebarIn { get; set; }
-    [Parameter] public EventCallback<bool> SidebarInChanged { get; set; }
-
-    [Parameter] public string? Style { get; set; }
-
-    /// <summary>
-    /// Set `true` to hide button to toggle `expandSidebar` state.
-    /// </summary>
-    [Parameter] public bool HideToggleExpandSidebar { get; set; } = false;
-
-    bool? expandSidebar {
-        get => ExpandSidebar;
-        set {
-            ExpandSidebar = value == true;
-            ExpandSidebarChanged.InvokeAsync(value);
-        }
-    }
-    /// <summary>
-    /// Sidebar is automatically expanded on wider views. Is two-way bindable.
-    /// </summary>
-    [Parameter]
-    public bool? ExpandSidebar { get; set; }
-    [Parameter] public EventCallback<bool?> ExpandSidebarChanged { get; set; }
-
-
-    /// <summary>
-    /// Disables sidebar.
-    /// </summary>
-    [Parameter] public bool HideSidebarMenu { get; set; } = false;
-
-    [Parameter] public string? Class { get; set; }
-
-    [Parameter] public RenderFragment? SidebarToggleIconComponent { get; set; }
-
-    /// <summary>
-    /// Disables the header bars on pages.
-    /// </summary>
-    [Parameter] public bool DisableHeaders { get; set; }
-
-    /// <summary>
-    /// Won't use local storage to set the `expandSidebar` state.
-    /// </summary>
-    [Parameter] public bool UseStorage { get; set; } = true;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            if (UseStorage && ExpandSidebar == null)
-            {
-                string fromStorage = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "blueLayoutShrinkSidebar");
-                bool shrinkSidebar = fromStorage != "null" && fromStorage != null ? true : false;
-                expandSidebar = !shrinkSidebar;
-            }
-            StateHasChanged();
-        }
-    }
-
-    protected override void OnInitialized()
-    {
-        NavigationManager.LocationChanged += locationChanged!;
-        base.OnInitialized();
-    }
-
-    void locationChanged(object sender, LocationChangedEventArgs e)
-    {
-        if (SidebarIn)
-        {
-            SidebarIn = false;
-            StateHasChanged();
-        }
-    }
-
-    void IDisposable.Dispose()
-    {
-        NavigationManager.LocationChanged -= locationChanged!;
-    }
-
-    void toggleExpandSidebar()
-    {
-        if (UseStorage)
-        {
-            if (ExpandSidebar == true)
-            {
-                JSRuntime.InvokeVoidAsync("localStorage.setItem", "blueLayoutShrinkSidebar", "true");
-            }
-            else
-            {
-                JSRuntime.InvokeVoidAsync("localStorage.removeItem", "blueLayoutShrinkSidebar");
-            }
-        }
-
-        ExpandSidebar = !ExpandSidebar;
-    }
+﻿@{
+    /* JS Import especially for "Blazor Web Apps" */
 }
+<PageScript Src="./_content/BlueBlazor/blue-web/js/side-layout.bundle.js"></PageScript>
+
+<div style="height: 100dvh;">
+    <side-layout style="--base-z-index: 500">
+        <div slot="expand-toggler" class="w-100 h-100" style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg);">
+            <div class="btn blue-menu-item w-100 h-100 d-flex align-items-center justify-content-center p-0">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 16 16"
+                     aria-hidden="true"
+                     width="1em"
+                     height="1em"
+                     fill="currentColor"
+                     class="bi bi-layout-sidebar">
+                    <path d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5-1v12h9a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM4 2H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h2z"></path>
+                </svg>
+            </div>
+        </div>
+        <div slot="drawer-toggler" class="w-100 h-100" style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg);">
+            <div class="btn blue-menu-item w-100 h-100 d-flex align-items-center justify-content-center p-0">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 16 16"
+                     aria-hidden="true"
+                     width="1em"
+                     height="1em"
+                     fill="currentColor"
+                     class="bi bi-layout-sidebar-inset">
+                    <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"></path>
+                    <path d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"></path>
+                </svg>
+            </div>
+        </div>
+        <div slot="overlay"
+             class="bg-dark w-100 h-100"
+             style="--bs-bg-opacity: 0.5;"></div>
+        <header slot="header">
+            @HeaderContent
+        </header>
+        <div slot="side" class="blue-sidebar-state open overflow-x-hidden overflow-y-auto h-100"
+             style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg);">
+            @SideContent
+        </div>
+        <div class="w-100 h-100 p-1">
+            <div class="w-100 h-100 overflow-auto rounded @(NoPageBorder ? "" : "border ")bg-body shadow-sm">
+                @PageContent
+            </div>
+        </div>
+    </side-layout>
+</div>

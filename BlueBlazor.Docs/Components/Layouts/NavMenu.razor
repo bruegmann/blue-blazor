@@ -2,31 +2,37 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
-<div slot="side" class="blue-sidebar-state open overflow-x-hidden overflow-y-auto bg-theme h-100">
-    <MenuItem Label="Home" Href="" IsActive="@isActive("", true)">
-        <Icon>
-            <BiHouse />
-        </Icon>
-        <IconForActive>
-            <BiHouseFill />
-        </IconForActive>
-    </MenuItem>
+<SidebarMenu>
+    <TopContent>
+        <MenuItem Label="Home" Href="" IsActive="@isActive("", true)">
+            <Icon>
+                <BiHouse />
+            </Icon>
+            <IconForActive>
+                <BiHouseFill />
+            </IconForActive>
+        </MenuItem>
+    </TopContent>
 
-    @if (componentPageUrls != null)
-    {
-        foreach (var item in componentPageUrls)
+    <ChildContent>
+        @if (componentPageUrls != null)
         {
-            <MenuItem Label="@item.Key" Href="@(item.Value + "/props")" IsActive="@isActive(item.Value + "/")">
-                <Icon>
-                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
-                </Icon>
-                <IconForActive>
-                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ?? (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
-                </IconForActive>
-            </MenuItem>
+            foreach (var item in componentPageUrls)
+            {
+                <MenuItem Label="@item.Key" Href="@(item.Value + "/props")" IsActive="@isActive(item.Value + "/")">
+                    <Icon>
+                        @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
+                    </Icon>
+                    <IconForActive>
+                        @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ?? (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
+                    </IconForActive>
+                </MenuItem>
+            }
         }
-    }
-</div>
+    </ChildContent>
+</SidebarMenu>
+
+
 
 @code {
     public void Dispose()

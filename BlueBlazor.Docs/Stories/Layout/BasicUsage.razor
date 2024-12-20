@@ -1,0 +1,40 @@
+﻿@{
+    /*docs {
+    "iframeUrl": "components/layout/stories/basic-usage"
+    } */
+}
+@layout EmptyLayout
+@page "/components/layout/stories/basic-usage"
+
+<Layout NoPageBorder="@NoPageBorder">
+    <HeaderContent>
+        HeaderContent
+    </HeaderContent>
+
+    <SideContent>
+        SideContent
+    </SideContent>
+
+    <PageContent>
+        <div class="container">
+            <Heading PageHeader>PageContent</Heading>
+
+            <p>For better contrast, the page content has a border. If it doesn't fit with your design, you can disable by setting <code>NoPageBorder</code></p>.
+
+            <Button OnClick="@(() => NoPageBorder = !NoPageBorder)">
+                @if (NoPageBorder)
+                {
+                    <span>Enable Page Border</span>
+                }
+                else
+                {
+                    <span>Disable Page Border</span>
+                }
+            </Button>
+        </div>
+    </PageContent>
+</Layout>
+
+@code {
+    private bool NoPageBorder { get; set; } = false;
+}
