@@ -195,24 +195,6 @@
     }
 }
 
-@keyframes blue-menu-item-indicator-in-from-side {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(1);
-    }
-}
-
-@keyframes blue-menu-item-indicator-in-from-below {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(1);
-    }
-}
-
 .blue-sidebar-visible-on-open,
 .blue-sidebar-d-flex-on-open,
 .blue-sidebar-d-block-on-open {

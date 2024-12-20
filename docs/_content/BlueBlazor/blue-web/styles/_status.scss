@@ -15,8 +15,6 @@
 }
 
 .blue-status-alert {
-    @extend .blue-normal-scrollbar;
-
     &:after {
         content: "";
         display: block;

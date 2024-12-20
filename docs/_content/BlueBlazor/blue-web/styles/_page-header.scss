@@ -1,0 +1,63 @@
+.blue-header {
+    @include header-bg();
+    color: var(--blue-header-color);
+}
+
+.blue-header {
+    height: $normal-size;
+    position: fixed;
+    top: 0;
+    left: $normal-size;
+    right: 0;
+    z-index: 4;
+
+    @media screen and (min-width: 768px) {
+        right: $scrollbar-size;
+    }
+
+    .navbar-nav {
+        margin: 0;
+
+        > li {
+            float: left;
+
+            > a {
+                background-color: transparent;
+                color: var(--blue-header-color);
+                padding: $bla-header-nav-padding;
+
+                &:hover,
+                &:focus {
+                    background-color: $bla-button-bg-hover;
+                }
+            }
+        }
+    }
+
+    .navbar-left {
+        float: left !important;
+    }
+
+    .navbar-right {
+        float: right !important;
+    }
+
+    .blue-search {
+        width: 16rem;
+    }
+}
+
+.blue-header-title {
+    a {
+        color: inherit;
+
+        &:focus {
+            text-decoration: none;
+        }
+    }
+}
+
+.blue-header-title-image {
+    width: 2rem;
+    height: 2rem;
+}

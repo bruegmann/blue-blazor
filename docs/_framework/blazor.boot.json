@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "BlueBlazor.Docs",
   "resources": {
-    "hash": "sha256-6FDFcarvbbZwA4NtiRFVcojBdvWYI1x4nceGzQtyK9I=",
+    "hash": "sha256-bIAGlIkNOtE+juBNHIfG64xq1xMYvTgkVVSgKA8cJ5U=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-VdKq87/z5NIxZKmuM+fv38XF+RcEb/bg3jVBwQSfwP4="
     },
@@ -19,9 +19,9 @@
     "coreAssembly": {},
     "assembly": {
       "Blazor.Bootstrap.Icons.wasm": "sha256-h1mi6ARc7pW/FNSyxqObRsDoJ8IdMD89+ZOJhn6hFy8=",
-      "BlueBlazor.Docs.wasm": "sha256-JcGFK4RP9ecxfqzS2r8Vf7VX46V4sJuCjctFVE/oM9k=",
-      "BlueBlazor.wasm": "sha256-P5SrRpI2NEUxLaOTftoev3XEbnwOMIDYWbNCUZk2Q74=",
-      "Microsoft.AspNetCore.Components.wasm": "sha256-MppjyjZ4qwnQGuoHeESZiG2nNDd8tgHnuIluep1vbUM=",
+      "BlueBlazor.Docs.wasm": "sha256-wR8AGAzQBmN4qHKsjXJcgWwTJDDed5/AHij/jMFqjaA=",
+      "BlueBlazor.wasm": "sha256-SkoVSwlE8w2FWOnHXAOKWGJ7qMC/AG122cP4TBdoHu4=",
+      "Microsoft.AspNetCore.Components.wasm": "sha256-poDKbX6f+8CZeY9cvEZHFpero0uO0D6/8WW1O1DjzPg=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-yllz2uzErKX9gM4yVOEJZwHOrfq7m3onCrijPUlvX4U=",
       "Microsoft.AspNetCore.Components.WebAssembly.wasm": "sha256-QQOcBDu5Rl/lLCWkwHn7BGdAtS9Eg1Qbafc/mUV3kKU=",
       "Microsoft.Extensions.Configuration.Abstractions.wasm": "sha256-XR+WUfg8LtnrwdXFBnV+qO3ROyp6cYCfl1AZajIAheM=",
@@ -49,14 +49,14 @@
       "System.Private.CoreLib.wasm": "sha256-nFumkhhJIU+37Bdtkz7yDWJvbfxQyjw0cGp2z5QGP48=",
       "System.Private.Uri.wasm": "sha256-YBHZyGjMxQ4adq4AbKwPDasx7hcLqx5S8UZq5lY4Z9s=",
       "System.Runtime.InteropServices.JavaScript.wasm": "sha256-dYY0hFaxSwims03bYEZhp8dIIrXz0/bsRBcSirAmGnk=",
-      "System.Runtime.wasm": "sha256-86H5ViH9pDqHh11CbAAgu51spu52lZ+rra8yNOGzdUY=",
+      "System.Runtime.wasm": "sha256-mR4JcC8EKN6GSuQfpskoVlw37CCTBOlt0GjISpmPoT4=",
       "System.Text.Encodings.Web.wasm": "sha256-8bGWqRgVH+mdpB+8p7f5fWm47T2FwtwPQ17GhM/E1qA=",
       "System.Text.Json.wasm": "sha256-JVGknk7sowKfr5FRDqt/3QM3ngXsoOEwyC35gzVj3go=",
       "System.Text.RegularExpressions.wasm": "sha256-Vl6qsUyQnmrFUIVFVAqnAW1pMOKHVi0p3ZmPfB2mQ98="
     },
     "satelliteResources": {
       "de": {
-        "BlueBlazor.resources.wasm": "sha256-VrGULFLgURSS1vfG4q0VkFmMPspltqf+cHXtc/GI5Kk="
+        "BlueBlazor.resources.wasm": "sha256-YYKupE5Sxk75hrRe6WBWRxa1YkvHuJIDexD8smEraqg="
       }
     },
     "libraryInitializers": {
