@@ -35,15 +35,17 @@
         <div slot="overlay"
              class="bg-dark w-100 h-100"
              style="--bs-bg-opacity: 0.5;"></div>
-        <header slot="header">
+        <header slot="header" class="d-flex justify-content-between position-relative h-100"
+                style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg); z-index: var(--blue-layout-header-z-index, 4);
+                    --blue-menu-item-dropdown-bg: var(--blue-sidebar-bg);">
             @HeaderContent
         </header>
         <div slot="side" class="blue-sidebar-state open overflow-x-hidden overflow-y-auto h-100"
              style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg);">
             @SideContent
         </div>
-        <div class="w-100 h-100 p-1">
-            <div class="w-100 h-100 overflow-auto rounded @(NoPageBorder ? "" : "border ")bg-body shadow-sm">
+        <div class="w-100 h-100 p-1 pt-0">
+            <div class="w-100 h-100 overflow-auto rounded-3 @(NoPageBorder ? "" : "border ")bg-body shadow-sm">
                 @PageContent
             </div>
         </div>

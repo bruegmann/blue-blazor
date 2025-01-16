@@ -1,5 +1,7 @@
-﻿<div
-    class="blue-header-title d-inline-flex gap-2 fw-medium align-items-center px-3 py-2 position-absolute z-1 @Class @(Sidebar ? "sidebar" : "")">
+﻿@using Microsoft.AspNetCore.Components.RenderTree
+@using Microsoft.AspNetCore.Components.Rendering
+
+<div class="blue-header-title d-inline-flex gap-2 fw-medium align-items-center px-3 py-2 @Class @(Sidebar ? "sidebar" : "")">
     @if (Logo != null)
     {
         <a href="@Href">
@@ -7,32 +9,40 @@
         </a>
     }
 
-    @if (H1)
-    {
-        <h1 class="blue-header-title-labels h6 my-0 @(KeepAppTitle ? "keep" : "")">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0">
             @if (!string.IsNullOrEmpty(AppTitle))
             {
-                <a href="@Href">@AppTitle</a> @if (ChildContent != null)
-                {
-                    <span class="blue-header-title-separator"> / </span>
-                }
+                <li class="breadcrumb-item">
+                    <a href="@Href">@AppTitle</a>
+                </li>
             }
-            @ChildContent
-        </h1>
-    }
-    else
-    {
-        <span class="blue-header-title-labels @(KeepAppTitle ? "keep" : "")">
-            @if (!string.IsNullOrEmpty(AppTitle))
+
+            @if (Breadcrumb != null)
             {
-                <a href="@Href">@AppTitle</a> @if (!string.IsNullOrEmpty(ChildContent?.ToString()))
+                @foreach (var item in Breadcrumb)
                 {
-                    <span class="blue-header-title-separator"> / </span>
+                    <li class="breadcrumb-item @((item == Breadcrumb.LastOrDefault() ? "active" : ""))"
+                        aria-current="@((item == Breadcrumb.LastOrDefault() ? "page" : ""))">
+                        @if (item.Href != null)
+                        {
+                            <a href="@item.Href">
+                                @item.Text
+                                @item.Content
+                            </a>
+                        }
+                        else
+                        {
+                            @item.Text
+                            @item.Content
+                        }
+                    </li>
                 }
             }
-            @ChildContent
-        </span>
-    }
+        </ol>
+    </nav>
+
+    @ChildContent
 </div>
 
 @code {
@@ -60,9 +70,13 @@
     [Parameter]
     public string Href { get; set; } = "";
 
-    /// <summary>
-    /// By default, the title is an h1 element. Set to false to use a span element instead.
-    /// </summary>
     [Parameter]
-    public bool H1 { get; set; } = true;
+    public List<BreadcrumbItem>? Breadcrumb { get; set; }
+
+    public class BreadcrumbItem
+    {
+        public string? Href { get; set; }
+        public string? Text { get; set; }
+        public RenderFragment? Content { get; set; }
+    }
 }

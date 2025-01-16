@@ -1,0 +1,34 @@
+﻿@{
+    /*docs {
+    "iframeUrl": "components/layout/stories/with-page-and-header"
+    } */
+}
+@layout EmptyLayout
+@page "/components/layout/stories/with-page-and-header"
+
+<Layout>
+    <HeaderContent>
+        <HeaderTitle AppTitle="My app" />
+    </HeaderContent>
+
+    <SideContent>
+        SideContent
+    </SideContent>
+
+    <PageContent>
+        <Header>
+            <HeaderTitle AppTitle="Home"
+                         Breadcrumb="@(new() {
+                                new() { Href = "components/header-title", Text = "First" },
+                                new() { Text = "Current page" }
+                             })" />
+        </Header>
+
+        <div class="container">
+            <Heading PageHeader>PageContent</Heading>
+
+            <p>For better contrast, the page content has a border. If it doesn't fit with your design, you can disable by setting <code>NoPageBorder</code></p>.
+
+        </div>
+    </PageContent>
+</Layout>

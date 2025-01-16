@@ -13,7 +13,7 @@
         "webpack-cli": "^5.1.4"
     },
     "dependencies": {
-        "blue-web": "^1.7.0",
+        "blue-web": "file:../../blue-web/blue-web-1.7.1.tgz",
         "blue-web-components": "^1.0.7"
     }
 }
