@@ -1,0 +1,6 @@
+﻿@using BlueBlazor.Components.LayoutParts
+
+<div class="vh-100 d-grid" style="grid-template-rows: var(--blue-menu-item-height) auto">
+    <LayoutHeader slot="header">@HeaderContent</LayoutHeader>
+    <LayoutMain NoPageBorder="@NoPageBorder" Class="overflow-auto">@PageContent</LayoutMain>
+</div>

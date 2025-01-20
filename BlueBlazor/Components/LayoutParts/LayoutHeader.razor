@@ -1,0 +1,13 @@
+﻿<header class="d-flex justify-content-between position-relative h-100"
+        style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg); z-index: var(--blue-layout-header-z-index, 4);
+                    --blue-menu-item-dropdown-bg: var(--blue-sidebar-bg);" @attributes="AdditionalAttributes">
+    @ChildContent
+</header>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object>? AdditionalAttributes { get; set; }
+}

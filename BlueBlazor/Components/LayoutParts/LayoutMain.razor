@@ -1,0 +1,19 @@
+﻿<div class="w-100 h-100 p-1 pt-0 @Class" @attributes="AdditionalAttributes">
+    <div class="w-100 h-100 overflow-auto rounded-3 @(NoPageBorder ? "" : "border ")bg-body shadow-sm">
+        @ChildContent
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public bool NoPageBorder { get; set; } = false;
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object>? AdditionalAttributes { get; set; }
+}

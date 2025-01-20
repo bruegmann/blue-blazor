@@ -1,12 +1,14 @@
-﻿@{
+﻿@using BlueBlazor.Components.LayoutParts
+@{
     /* JS Import especially for "Blazor Web Apps" */
 }
 <PageScript Src="./_content/BlueBlazor/blue-web/js/side-layout.bundle.js"></PageScript>
 
-<div style="height: 100dvh;">
-    <side-layout style="--base-z-index: 500">
+<div class="vh-100">
+    <side-layout style="--base-z-index: 500; --side-width: var(--blue-sidebar-width); --toggler-size: var(--blue-menu-item-height);">
         <div slot="expand-toggler" class="w-100 h-100" style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg);">
-            <div class="btn blue-menu-item w-100 h-100 d-flex align-items-center justify-content-center p-0">
+            <div class="btn blue-menu-item w-100 h-100 d-flex align-items-center justify-content-center p-0"
+                 style="box-shadow: var(--trigger-box-shadow)">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 16 16"
                      aria-hidden="true"
@@ -19,7 +21,8 @@
             </div>
         </div>
         <div slot="drawer-toggler" class="w-100 h-100" style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg);">
-            <div class="btn blue-menu-item w-100 h-100 d-flex align-items-center justify-content-center p-0">
+            <div class="btn blue-menu-item w-100 h-100 d-flex align-items-center justify-content-center p-0"
+                 style="box-shadow: var(--trigger-box-shadow)">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 16 16"
                      aria-hidden="true"
@@ -35,19 +38,14 @@
         <div slot="overlay"
              class="bg-dark w-100 h-100"
              style="--bs-bg-opacity: 0.5;"></div>
-        <header slot="header" class="d-flex justify-content-between position-relative h-100"
-                style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg); z-index: var(--blue-layout-header-z-index, 4);
-                    --blue-menu-item-dropdown-bg: var(--blue-sidebar-bg);">
-            @HeaderContent
-        </header>
+
+        <LayoutHeader slot="header">@HeaderContent</LayoutHeader>
+
         <div slot="side" class="blue-sidebar-state open overflow-x-hidden overflow-y-auto h-100"
              style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg);">
             @SideContent
         </div>
-        <div class="w-100 h-100 p-1 pt-0">
-            <div class="w-100 h-100 overflow-auto rounded-3 @(NoPageBorder ? "" : "border ")bg-body shadow-sm">
-                @PageContent
-            </div>
-        </div>
+        
+        <LayoutMain NoPageBorder="@NoPageBorder">@PageContent</LayoutMain>
     </side-layout>
 </div>

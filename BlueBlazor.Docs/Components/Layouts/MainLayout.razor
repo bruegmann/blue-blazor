@@ -1,34 +1,34 @@
 ﻿@inherits LayoutComponentBase
 
-<nav class="docs-nav">
-    <a class="navbar-brand" href="">
-        <img src="images/blue.svg" alt="Blue Logo" width="32" height="32" class="d-inline-block" /> Blue Blazor
-    </a>
-
-    <div class="navbar-nav">
-        <a href="https://bruegmann.github.io/blue-web" class="nav-link">
-            Web
-        </a>
-        <a href="https://bruegmann.github.io/blue-react" class="nav-link">
-            React
-        </a>
-        <a href="https://bruegmann.github.io/blue-blazor"
-           class="nav-link active"
-           aria-current="page">
-            Blazor
-        </a>
-    </div>
-</nav>
 
 <Layout>
     <HeaderContent>
-       <ActionMenu Class="ms-auto" Break="Shared.BreakSize.Sm">
+        <HeaderTitle AppTitle="Blue Blazor"
+                     Logo="images/blue.svg" LogoAlt="Blue Logo" />
+
+        <nav class="docs-nav">
+            <div class="navbar-nav">
+                <a href="https://bruegmann.github.io/blue-web" class="nav-link">
+                    Web
+                </a>
+                <a href="https://bruegmann.github.io/blue-react" class="nav-link">
+                    React
+                </a>
+                <a href="https://bruegmann.github.io/blue-blazor"
+                   class="nav-link active"
+                   aria-current="page">
+                    Blazor
+                </a>
+            </div>
+        </nav>
+
+        <ActionMenu Break="Shared.BreakSize.Sm">
             <MenuItem Label="Code on GitHub" Href="https://github.com/bruegmann/blue-blazor" Target="_blank" Class="w-auto">
                 <Icon>
                     <BiCodeSquare />
                 </Icon>
             </MenuItem>
-       </ActionMenu>
+        </ActionMenu>
     </HeaderContent>
     <SideContent>
         <NavMenu />

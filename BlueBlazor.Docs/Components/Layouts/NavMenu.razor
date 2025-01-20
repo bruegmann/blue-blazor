@@ -26,6 +26,13 @@
                     <IconForActive>
                         @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ?? (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
                     </IconForActive>
+
+                    <AfterLabelContent>
+                        @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
+                        {
+                            <span class="badge bg-primary ms-1 mt-1">New</span>
+                        }
+                    </AfterLabelContent>
                 </MenuItem>
             }
         }
@@ -116,6 +123,9 @@
         },
         {"Tabs", new() {
             Icon = @<BiSegmentedNav />}
+        },
+        {"SimpleLayout", new() {
+            Icon = @<BiWindow />, IsNew = true }
         } };
     RenderFragment defaultIcon = @<BiFileCode />;
 
@@ -123,5 +133,6 @@
     {
         public RenderFragment Icon { get; set; } = @<BiFileCode />;
         public RenderFragment? IconForActive { get; set; }
+        public bool IsNew { get; set; } = false;
     }
 }

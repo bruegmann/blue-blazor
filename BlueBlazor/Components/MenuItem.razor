@@ -36,6 +36,8 @@
             </span>
         }
 
+        @AfterLabelContent
+
         @if (DropdownContent != null)
         {
             <Chevron Open="@showDropdown" Mirrored="true" Class="blue-menu-item-dropdown-toggle blue-menu-item-chevron ms-auto"
@@ -53,11 +55,11 @@
                     @DropdownContent
                     <script>
                         (() => {
-                            const el = document.currentScript.parentNode
-                            if (el && el.getBoundingClientRect) {
-                                const rect = el.getBoundingClientRect()
-                                el.style.setProperty("--offset-top", rect.top + "px")
-                            }
+                        const el = document.currentScript.parentNode
+                        if (el && el.getBoundingClientRect) {
+                        const rect = el.getBoundingClientRect()
+                        el.style.setProperty("--offset-top", rect.top + "px")
+                        }
                         })()
                     </script>
                 </div>
@@ -69,11 +71,11 @@
                 @DropdownContent
                 <script>
                     (() => {
-                        const el = document.currentScript.parentNode
-                        if (el && el.getBoundingClientRect) {
-                            const rect = el.getBoundingClientRect()
-                            el.style.setProperty("--offset-top", rect.top+ "px")
-                        }
+                    const el = document.currentScript.parentNode
+                    if (el && el.getBoundingClientRect) {
+                    const rect = el.getBoundingClientRect()
+                    el.style.setProperty("--offset-top", rect.top+ "px")
+                    }
                     })()
                 </script>
             </div>
@@ -123,6 +125,9 @@
     /// </summary>
     [Parameter]
     public string? Label { get; set; }
+
+    [Parameter]
+    public RenderFragment? AfterLabelContent { get; set; }
 
     /// <summary>
     /// Addition to class name of label wrapper element.
