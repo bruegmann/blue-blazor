@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<PackageId>BlueBlazor</PackageId>
-		<Version>3.1.0.13</Version>
+		<Version>3.2.0</Version>
 
 		<Summary>Component library for Blazor.</Summary>
 		<PackageTags>blue blue-web blazor components bootstrap</PackageTags>
@@ -30,7 +30,7 @@
 		<PackageIcon>logo.png</PackageIcon>
 		<ProjectUrl>https://github.com/bruegmann/</ProjectUrl>
 		
-		<Copyright>Copyright © 2024</Copyright>
+		<Copyright>Copyright © 2025</Copyright>
 		<RepositoryUrl>https://github.com/bruegmann/</RepositoryUrl>
 	</PropertyGroup>
 
