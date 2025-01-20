@@ -3,6 +3,15 @@ $light: #ecedf0 !default;
 // Components
 //
 
+$font-size-base: 1rem !default;
+
+$h1-font-size: $font-size-base * 2 !default;
+$h2-font-size: $font-size-base * 1.5 !default;
+$h3-font-size: $font-size-base * 1.25 !default;
+$h4-font-size: $font-size-base * 1.125 !default;
+$h5-font-size: $font-size-base * 1.1 !default;
+$h6-font-size: $font-size-base !default;
+
 $border-radius: 0.5rem !default;
 $border-radius-lg: 0.7rem !default;
 $border-radius-sm: 0.3rem !default;

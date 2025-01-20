@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "BlueBlazor.Docs",
   "resources": {
-    "hash": "sha256-bIAGlIkNOtE+juBNHIfG64xq1xMYvTgkVVSgKA8cJ5U=",
+    "hash": "sha256-NQn+r2zqlVSjGNtAbL1aFXSjyYxHxUz4vHFjN/6+Ntc=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-VdKq87/z5NIxZKmuM+fv38XF+RcEb/bg3jVBwQSfwP4="
     },
@@ -19,8 +19,8 @@
     "coreAssembly": {},
     "assembly": {
       "Blazor.Bootstrap.Icons.wasm": "sha256-h1mi6ARc7pW/FNSyxqObRsDoJ8IdMD89+ZOJhn6hFy8=",
-      "BlueBlazor.Docs.wasm": "sha256-wR8AGAzQBmN4qHKsjXJcgWwTJDDed5/AHij/jMFqjaA=",
-      "BlueBlazor.wasm": "sha256-SkoVSwlE8w2FWOnHXAOKWGJ7qMC/AG122cP4TBdoHu4=",
+      "BlueBlazor.Docs.wasm": "sha256-0F5mdABruY5EBI9iTyAaJ4V8eeoPizVcJyfJSn3688w=",
+      "BlueBlazor.wasm": "sha256-/uMZ7tXL58gHNb6Q/TWOdLBlbbEBGsU/eYhrnYD2LmM=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-poDKbX6f+8CZeY9cvEZHFpero0uO0D6/8WW1O1DjzPg=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-yllz2uzErKX9gM4yVOEJZwHOrfq7m3onCrijPUlvX4U=",
       "Microsoft.AspNetCore.Components.WebAssembly.wasm": "sha256-QQOcBDu5Rl/lLCWkwHn7BGdAtS9Eg1Qbafc/mUV3kKU=",
@@ -42,7 +42,7 @@
       "System.ComponentModel.wasm": "sha256-0D0DRqYaKmrhzGtdZW6smjKyylnAR86CtU2JGYAUBY8=",
       "System.Console.wasm": "sha256-ki+D+mS+zaOdTimoxo5+mm0mVaT8myPLJBR0fbzm2QU=",
       "System.Diagnostics.DiagnosticSource.wasm": "sha256-ZGKa+e40kveXA/MwD7H1Ci+mNMXXNgh1cJmXoKrCi1s=",
-      "System.Linq.wasm": "sha256-bDXOL4mQk/1oo69caspnJsuB+bC7iOLF2D06m+DvhAg=",
+      "System.Linq.wasm": "sha256-sxPC7jlUgaxPHFssbRUhCPSZAGl8oYPYmSwTsqba4XY=",
       "System.Memory.wasm": "sha256-NAKrQMUUvSudKcjn2jktMUKpoYGlvmMd2QMg4kr4OU0=",
       "System.Net.Http.wasm": "sha256-QEL6/9k90RfzsyQdix9zdUfFD8dBilLaOqgKYSccoR8=",
       "System.Net.Primitives.wasm": "sha256-T2vqVvqgCwYT2qk072KYLAPaDVRtrs8hnWq9qGszRWU=",
@@ -56,7 +56,7 @@
     },
     "satelliteResources": {
       "de": {
-        "BlueBlazor.resources.wasm": "sha256-YYKupE5Sxk75hrRe6WBWRxa1YkvHuJIDexD8smEraqg="
+        "BlueBlazor.resources.wasm": "sha256-8DlRJLymSqh41xI7nVnTAm07mFqIM2cqBIBbRV9t4xs="
       }
     },
     "libraryInitializers": {

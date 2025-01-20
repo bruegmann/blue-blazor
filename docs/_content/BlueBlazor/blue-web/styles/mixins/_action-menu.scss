@@ -8,10 +8,9 @@
 }
 
 @mixin actions($breakpoint) {
-    @media screen and (max-width: #{$breakpoint + 1px}) {
+    @media (max-width: #{$breakpoint + 1px}) {
         &.open {
             display: block;
-            background-color: var(--blue-header-depth-1-bg, #{darken($theme, 30%)});
             width: auto;
             position: absolute;
             z-index: 1;
@@ -28,25 +27,12 @@
 
             @include show-action-menu-again();
 
-            .navbar-nav {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                flex-direction: column;
-
-                > li {
-                    text-align: center;
-                    height: $actions-height;
-                    display: flex;
-                    align-items: center;
-                }
-            }
-
             .blue-actions-menu-item:not(.blue-actions-menu-toggle) {
                 display: flex;
             }
 
             .blue-actions-menu {
+                flex-direction: column;
                 .blue-menu-item-dropdown {
                     --blue-sidebar-bg: #{darken($theme, 34%)};
                 }
@@ -58,7 +44,7 @@
         }
     }
 
-    @media screen and (min-width: $breakpoint) {
+    @media (min-width: $breakpoint) {
         @include show-action-menu-again();
 
         .blue-actions-menu .blue-actions-label {
@@ -67,6 +53,12 @@
 
         .blue-actions-menu-toggle {
             display: none;
+        }
+
+        .blue-actions-menu > .blue-menu-item-wrapper > .blue-menu-item-dropdown,
+        .blue-actions-menu > .blue-menu-item-wrapper > * > .blue-menu-item-dropdown {
+            position: absolute;
+            right: 0;
         }
     }
 }

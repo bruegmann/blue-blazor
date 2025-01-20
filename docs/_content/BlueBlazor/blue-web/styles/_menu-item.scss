@@ -23,7 +23,6 @@
         transition: none !important;
     }
 
-    padding: 0.5rem 0.75rem;
     border: none;
 
     &:focus {
@@ -80,6 +79,7 @@
         border-radius: $border-radius;
         box-shadow: $box-shadow;
         border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+        background-color: var(--blue-menu-item-dropdown-bg);
     }
 }
 
@@ -155,7 +155,6 @@
     color: inherit;
     width: auto;
     height: $normal-size;
-    padding: 0.25rem 0.75rem;
     font-size: $bla-btn-font-size;
     display: flex;
     align-items: center;
@@ -165,10 +164,10 @@
     &::before {
         content: "";
         position: absolute;
-        top: 0.25rem;
-        right: 0.25rem;
-        bottom: 0.25rem;
-        left: 0.25rem;
+        top: 0.125rem;
+        right: 0.125rem;
+        bottom: 0.125rem;
+        left: 0.125rem;
         background-color: currentColor;
         border-radius: $border-radius;
         transform: scale(0.9);
