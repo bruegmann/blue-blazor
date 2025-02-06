@@ -1,0 +1,18 @@
+﻿<CascadingValue Name="EditMode" Value="EditMode">
+    <CascadingValue Name="EditModeChanged" Value="EditModeChanged">
+        <InlineEdit Header="Your name" ReadText="@YourName">
+            <input type="text" class="form-control" @bind="@YourName" autofocus />
+        </InlineEdit>
+    </CascadingValue>
+</CascadingValue>
+
+
+@code {
+    private string YourName { get; set; } = "John";
+    private bool EditMode { get; set; }
+    private void HandleEditModeChanged(bool editMode)
+    {
+        EditMode = editMode;
+    }
+    private EventCallback<bool> EditModeChanged => EventCallback.Factory.Create<bool>(this, HandleEditModeChanged);
+}

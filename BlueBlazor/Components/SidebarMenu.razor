@@ -1,21 +1,11 @@
 <div class="d-flex flex-column h-100 @SidebarClass" style="@SidebarStyle">
-    @if (TopContent != null)
-    {
-        <div>
-            @TopContent
-        </div>
-    }
+    @TopContent
 
     <div class="flex-grow-1 overflow-auto @MenuClass" style="@MenuStyle">
         @ChildContent
     </div>
 
-    @if (BottomContent != null)
-    {
-        <div>
-            @BottomContent
-        </div>
-    }
+    @BottomContent
 </div>
 
 @code {

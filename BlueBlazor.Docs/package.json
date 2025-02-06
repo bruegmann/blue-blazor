@@ -7,6 +7,6 @@
         "sass": "1.77.6"
     },
     "dependencies": {
-        "blue-web": "^1.8.0"
+        "blue-web": "file:../../blue-web/blue-web-1.8.5.tgz"
     }
 }
