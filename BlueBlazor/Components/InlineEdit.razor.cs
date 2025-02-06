@@ -1,26 +1,45 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Reflection.Metadata;
 
 namespace BlueBlazor.Components;
 
-/**
- * A wrapper component that allows for inline editing of content.
- * It starts in read mode and when the user clicks on the content, it switches to edit mode.
- * State for the edit mode and the event callback have to be passed as a cascading parameter.
- * Take a look at the example in the docs to see how to use it.
- */
+/// <summary>
+/// A wrapper component that allows inline editing of content.
+/// It starts in read mode and when the user clicks on the content, it switches to edit mode.
+/// 
+/// Inline edit is designed to be used deeper inside a context, which handles state for edit mode.
+/// That's why the state for the edit mode and the event callback have to be passed as cascading parameters.
+/// Take a look at the example in the docs to see how to use it.
+/// 
+/// The component itself passes two cascading parameters down to its children:
+/// * `"ControlId"` with value `@Id`.
+/// * `"AutoFocus"` with value `true`.
+/// </summary>
 public partial class InlineEdit
 {
     private bool ShowEdit { get; set; }
 
+    /// <summary>
+    /// Content for edit mode.
+    /// </summary>
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
+    /// <summary>
+    /// Content for read mode. If you just need to display a string, you should use `ReadText` instead.
+    /// </summary>
     [Parameter]
     public RenderFragment? ReadContent { get; set; }
 
+    /// <summary>
+    /// Text that will displayed in read mode.
+    /// </summary>
     [Parameter]
     public string? ReadText { get; set; }
 
+    /// <summary>
+    /// Optional, by default an unique ID will be generated.
+    /// </summary>
     [Parameter]
     public string Id { get; set; } = "InlineEdit-" + Guid.NewGuid().ToString();
 

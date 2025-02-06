@@ -157,14 +157,15 @@ public class Helper
         var memberNodes = xmlDoc.Descendants("member");
 
 
-        return componentType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                            .Where(prop => Attribute.IsDefined(prop, typeof(ParameterAttribute)))
+        return componentType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                            .Where(prop => Attribute.IsDefined(prop, typeof(ParameterAttribute)) || Attribute.IsDefined(prop, typeof(CascadingParameterAttribute)))
                             .Select(prop => new ComponentParameterInfo
                             {
                                 Name = prop.Name,
                                 ParameterType = prettyTypeName(prop.PropertyType),
                                 DefaultValue = getDefaultValue(prop, componentType),
-                                Comment = getXmlDocumentationCommentForProp(memberNodes, prop)
+                                Comment = getXmlDocumentationCommentForProp(memberNodes, prop),
+                                CascadingParameter = Attribute.IsDefined(prop, typeof(CascadingParameterAttribute))
                             });
     }
 
@@ -230,7 +231,12 @@ public class Helper
         foreach (var param in parameter)
         {
             table += "\n        <tr>";
-            table += $"<td><code>{param.Name}</code></td>";
+            table += $"<td><code>{param.Name}</code>";
+            if (param.CascadingParameter)
+            {
+                table += $"<br/>(Cascading Parameter)";
+            }
+            table += $"</td>";
             table += $"<td>{markdownToHtml(param.Comment ?? "")}</td>";
             table += $"<td>{param.ParameterType}</td>";
             table += $"<td>{param.DefaultValue}</td>";
@@ -315,6 +321,7 @@ public class ComponentParameterInfo
     public string? ParameterType { get; set; }
     public object? DefaultValue { get; set; }
     public string? Comment { get; set; }
+    public bool CascadingParameter { get; set; }
 }
 
 public class DocsMeta
