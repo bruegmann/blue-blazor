@@ -1,0 +1,7 @@
+/* _content/BlueBlazor/Components/Layout.razor.rz.scp.css */
+side-layout:not(:defined)[b-a714t2hzfx] {
+    /* To reduce Flash of Undefined Custom Elements (FOUCE) */
+    display: grid;
+    height: 100%;
+    grid-template-rows: 0 0;
+}

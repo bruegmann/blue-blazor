@@ -1,0 +1,31 @@
+/**
+ * A Web Component that displays a read view of its content and allows the user to switch to an edit view.
+ * Fires event "EditRequested" when the user clicks the read view.
+ * @element read-view
+ * @fires EditRequested
+ * @cssprop --bs-primary-rgb - The primary color as an RGB value.
+ * @cssprop --bs-secondary-bg-subtle - The subtle background color for the read view.
+ * @cssprop --bs-border-radius-sm - The border radius for the read view.
+ * @slot - The content to display in the read view.
+ * @example
+ * <read-view id="my-read-view" onEditRequested="setEditing(true)">
+ *    <a href="#">bla</a> {value}
+ * </read-view>
+ * @example
+ * document.getElementById("my-read-view").addEventListener("EditRequested", () => {
+ *    setEditing(true)
+ * })
+ */
+export declare class ReadView extends HTMLElement {
+    private button;
+    private container;
+    private startX;
+    private startY;
+    constructor();
+    connectedCallback(): void;
+    private render;
+    private onEditRequested;
+    private onMouseDown;
+    private mouseHasMovedAfterMouseDown;
+    private onReadViewClick;
+}

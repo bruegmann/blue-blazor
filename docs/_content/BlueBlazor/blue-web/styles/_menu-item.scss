@@ -159,6 +159,7 @@
     display: flex;
     align-items: center;
     border-color: transparent;
+    --bs-btn-padding-x: 0.437rem;
     @include slide-transition();
 
     &::before {

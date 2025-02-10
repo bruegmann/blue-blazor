@@ -14,18 +14,20 @@ window.blueWeb.progress = {
     let id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "blueWebProgress";
     let parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document.body;
     let ariaLabel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "Loading data";
+    let positionClass = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "fixed-top";
+    const parentEl = typeof parent === "string" || parent instanceof String ? document.querySelector(parent.toString()) : parent;
     let progressEl = document.getElementById(id);
     if (!progressEl) {
       progressEl = document.createElement("div");
       progressEl.id = id;
-      progressEl.className = "progress fixed-top rounded-0";
+      progressEl.className = "progress ".concat(positionClass, " rounded-0");
       progressEl.setAttribute("style", "--bs-progress-height: 0.25rem");
       progressEl.setAttribute("role", "progressbar");
       progressEl.setAttribute("aria-label", ariaLabel);
       progressEl.setAttribute("aria-valuemin", "0");
       progressEl.setAttribute("aria-valuemax", "100");
       progressEl.innerHTML = /*html*/"<div class=\"progress-bar progress-bar-striped progress-bar-animated\" style=\"width: 0%\"></div>";
-      parent.appendChild(progressEl);
+      parentEl.appendChild(progressEl);
     }
     const progressBar = progressEl.querySelector(".progress-bar");
     if (!progressBar) return;
