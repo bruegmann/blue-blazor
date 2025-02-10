@@ -6,7 +6,7 @@
     <label for="@Id" class="text-primary-emphasis fw-medium" style="margin-left: .75rem">@Header</label>
     @if (ShowEdit)
     {
-        <EditView OnConfirm="ToggleShowEdit" OnDismiss="ToggleShowEdit" class="position-relative">
+        <EditView OnConfirm="ToggleShowEdit" OnDismiss="ToggleShowEdit" ConfirmOnLoseFocus="@ConfirmOnLoseFocus" class="position-relative">
             <CascadingValue Name="ControlId" Value="@Id">
                 <CascadingValue Name="AutoFocus" Value="true">
                     @ChildContent

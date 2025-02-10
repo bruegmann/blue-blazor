@@ -46,6 +46,9 @@ public partial class InlineEdit
     [Parameter]
     public string? Header { get; set; }
 
+    [Parameter]
+    public bool ConfirmOnLoseFocus { get; set; }
+
     [CascadingParameter(Name = "EditMode")]
     protected bool? EditMode { get; set; } = null;
 
