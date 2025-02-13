@@ -1,0 +1,8 @@
+﻿<TuiEditor @bind-Value="@Input" />
+
+<Heading Level="3">Markdown</Heading>
+@Input
+
+@code {
+    private string Input { get; set; } = "**Initial value**";
+}

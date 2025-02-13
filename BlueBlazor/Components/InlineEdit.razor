@@ -6,7 +6,8 @@
     <label for="@Id" class="text-primary-emphasis fw-medium" style="margin-left: .75rem">@Header</label>
     @if (ShowEdit)
     {
-        <EditView OnConfirm="ToggleShowEdit" OnDismiss="ToggleShowEdit" ConfirmOnLoseFocus="@ConfirmOnLoseFocus" class="position-relative">
+        <EditView OnConfirm="ToggleShowEdit" OnDismiss="ToggleShowEdit" ConfirmOnLoseFocus="@ConfirmOnLoseFocus" PreventConfirmOnSubmit="@PreventConfirmOnSubmit"
+                  class="position-relative">
             <CascadingValue Name="ControlId" Value="@Id">
                 <CascadingValue Name="AutoFocus" Value="true">
                     @ChildContent
@@ -14,17 +15,10 @@
             </CascadingValue>
 
             <div class="d-flex position-absolute flex-shrink-0 mt-1" style="z-index: 4; inset-block-start: 100%; inset-inline-end: 0;" role="group">
-                <Button Label="Save" LabelHidden FilledPrimary ButtonType="ButtonType.Submit" Class="shadow me-1">
+                <Button Label="Save" LabelHidden FilledPrimary ButtonType="ButtonType.Submit" OnClick="OnClickSubmitButton" Class="shadow me-1">
                     <IconBefore>
                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z" />
-                        </svg>
-                    </IconBefore>
-                </Button>
-                <Button Label="Cancel" LabelHidden Color="Color.Primary" OnClick="ToggleShowEdit" Class="shadow">
-                    <IconBefore>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
                         </svg>
                     </IconBefore>
                 </Button>

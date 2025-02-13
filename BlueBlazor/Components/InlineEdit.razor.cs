@@ -49,6 +49,13 @@ public partial class InlineEdit
     [Parameter]
     public bool ConfirmOnLoseFocus { get; set; }
 
+    /// <summary>
+    /// By default if the edit form is submitted, the confirm action will be fired.
+    /// You can prevent this. Might be useful if your edit view is more complex and has forms in itself.
+    /// </summary>
+    [Parameter]
+    public bool PreventConfirmOnSubmit { get; set; }
+
     [CascadingParameter(Name = "EditMode")]
     protected bool? EditMode { get; set; } = null;
 
@@ -76,5 +83,13 @@ public partial class InlineEdit
             await EditModeChanged.InvokeAsync(true);
 
         ShowEdit = true;
+    }
+
+    private void OnClickSubmitButton()
+    {
+        if (PreventConfirmOnSubmit)
+        {
+            ToggleShowEdit();
+        }
     }
 }

@@ -23,6 +23,13 @@ public partial class EditView
     [Parameter]
     public bool ConfirmOnLoseFocus { get; set; }
 
+    /// <summary>
+    /// By default if the edit form is submitted, the confirm action will be fired.
+    /// You can prevent this. Might be useful if your edit view is more complex and has forms in itself.
+    /// </summary>
+    [Parameter]
+    public bool PreventConfirmOnSubmit { get; set; }
+
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
@@ -42,7 +49,7 @@ public partial class EditView
     {
         if (_module is not null)
         {
-            await _module.InvokeVoidAsync("Initialize", element, DotNetObjectReference.Create(this));
+            await _module.InvokeVoidAsync("Initialize", element, DotNetObjectReference.Create(this), PreventConfirmOnSubmit);
         }
     }
 

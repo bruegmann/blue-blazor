@@ -1,4 +1,4 @@
-﻿export function Initialize(element, dotNetHelper) {
+﻿export function Initialize(element, dotNetHelper, preventConfirmOnSubmit) {
     const confirm = () => dotNetHelper.invokeMethodAsync("InvokeConfirm")
     const dismiss = () => dotNetHelper.invokeMethodAsync("InvokeDismiss")
     const loseFocus = () => dotNetHelper.invokeMethodAsync("InvokeLoseFocus")
@@ -6,7 +6,7 @@
 
     element.addEventListener("submit", (e) => {
         e.preventDefault()
-        confirm()
+        if (!preventConfirmOnSubmit) confirm()
     })
 
     element.addEventListener("keydown", (e) => {

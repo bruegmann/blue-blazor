@@ -1,0 +1,49 @@
+﻿@{
+    /*docs {
+    "description": "In this case we use third-party library [Markdig](https://www.nuget.org/packages/Markdig/) to render markdown content for the read view.",
+    } */
+}
+
+<CascadingValue Name="EditMode" Value="EditMode">
+    <CascadingValue Name="EditModeChanged" Value="EditModeChanged">
+        <InlineEdit Header="Your content" PreventConfirmOnSubmit>
+            <ReadContent>
+                @((MarkupString)Html)
+            </ReadContent>
+            <ChildContent>
+                <TuiEditor @bind-Value="@Input" />
+            </ChildContent>
+        </InlineEdit>
+    </CascadingValue>
+</CascadingValue>
+
+@code {
+    private string _input = "**Initial value**";
+    private string Input
+    {
+        get => _input;
+        set
+        {
+            _input = value;
+            RenderHtml();
+        }
+    }
+    private string Html { get; set; } = "";
+
+    private bool EditMode { get; set; }
+    private void HandleEditModeChanged(bool editMode)
+    {
+        EditMode = editMode;
+    }
+    private EventCallback<bool> EditModeChanged => EventCallback.Factory.Create<bool>(this, HandleEditModeChanged);
+
+    protected override void OnInitialized()
+    {
+        RenderHtml();
+    }
+
+    private void RenderHtml()
+    {
+        Html = Markdig.Markdown.ToHtml(Input);
+    }
+}
