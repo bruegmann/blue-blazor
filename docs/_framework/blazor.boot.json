@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "BlueBlazor.Docs",
   "resources": {
-    "hash": "sha256-GxgLKSmTIdPsgsgFntFP70G9tAUeq16XUXf1YlfogP8=",
+    "hash": "sha256-WsPZnk/GSLa1pIpAM0IxbKPZeCsNmOofueYqWWwwaDw=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-VdKq87/z5NIxZKmuM+fv38XF+RcEb/bg3jVBwQSfwP4="
     },
@@ -19,8 +19,8 @@
     "coreAssembly": {},
     "assembly": {
       "Blazor.Bootstrap.Icons.wasm": "sha256-h1mi6ARc7pW/FNSyxqObRsDoJ8IdMD89+ZOJhn6hFy8=",
-      "BlueBlazor.Docs.wasm": "sha256-Jrp24PmbHWBeibV4qBL5jTb0owXwroZSmNvfsYJc0eU=",
-      "BlueBlazor.wasm": "sha256-HhjLkk41Gp58L3+TBYDelXAimm+rbQNVmD6c9/3nzM4=",
+      "BlueBlazor.Docs.wasm": "sha256-Tt5/fozUgY+u2DeETziksKh3QSVJfu6ncE9Poj0NWGw=",
+      "BlueBlazor.wasm": "sha256-awXN/C36BBm8a62AHsFpbtmA4lpX59Kz9KH1nSCudKE=",
       "Markdig.wasm": "sha256-BCoBn+BlapZA1pBPQsEXOsBb1W9Jfjpsvl0+Q4cX4Xc=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-rXNVwR6HF5GzklGC9D9s88Ynm679pF2ZESCO62WfoOg=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-yllz2uzErKX9gM4yVOEJZwHOrfq7m3onCrijPUlvX4U=",
@@ -59,7 +59,7 @@
     },
     "satelliteResources": {
       "de": {
-        "BlueBlazor.resources.wasm": "sha256-hhWqS33NAmIu8n6oTQ9Fy9kbWidkyXw+YlKYxFi1Qmw="
+        "BlueBlazor.resources.wasm": "sha256-MalWcdNc2+YxcZ/HB4MKIplkyrJhRzwTCtkO01p0CYs="
       }
     },
     "libraryInitializers": {

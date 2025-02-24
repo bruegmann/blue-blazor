@@ -6,7 +6,7 @@ namespace BlueBlazor.Components;
 
 /// <summary>
 /// Based on styling Bootstrap's Modal component but uses the native `&lt;dialog&gt;` HTML element.
-/// Modal body will be rendered when the `show.bs.modal` event is fired.
+/// Modal body and footer will not be rendered until the open event triggered.
 /// </summary>
 public partial class Modal
 {
