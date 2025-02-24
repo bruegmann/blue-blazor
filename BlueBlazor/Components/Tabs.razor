@@ -1,4 +1,4 @@
-﻿<div role="tablist" class="blue-tabs">
+﻿<div role="tablist" class="blue-tabs @Class">
     <CascadingValue Name="Tab_Name" Value="@Name">
         @ChildContent
     </CascadingValue>
@@ -13,4 +13,7 @@
     /// </summary>
     [Parameter]
     public string? Name { get; set; } = "TabList-" + Guid.NewGuid().ToString();
+
+    [Parameter]
+    public string? Class { get; set; }
 }

@@ -43,3 +43,10 @@ public enum BreakSize
     Lg,
     Xl
 }
+
+public enum ModalSize
+{
+    Sm,
+    Lg,
+    Xl
+}
