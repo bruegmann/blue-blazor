@@ -1,8 +1,4 @@
-﻿import "/_content/BlueBlazor/tui-editor/toastui-editor-all.min.js"
-import "/_content/BlueBlazor/tui-editor/i18n/de-de.js"
-import "/_content/BlueBlazor/tui-editor/i18n/fr-fr.js"
-
-const Editor = toastui.Editor
+﻿const Editor = toastui.Editor
 
 let editor
 
