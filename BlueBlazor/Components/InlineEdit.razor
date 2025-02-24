@@ -3,7 +3,7 @@
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
 <div style="margin-left: -.75rem">
-    <label for="@Id" class="text-primary-emphasis fw-medium" style="margin-left: .75rem">@Header</label>
+    <label for="@Id" class="text-primary-emphasis fw-medium" style="margin-left: .75rem">@Header @HeaderContent</label>
     @if (ShowEdit)
     {
         <EditView OnConfirm="ToggleShowEdit" OnDismiss="ToggleShowEdit" ConfirmOnLoseFocus="@ConfirmOnLoseFocus" PreventConfirmOnSubmit="@PreventConfirmOnSubmit"

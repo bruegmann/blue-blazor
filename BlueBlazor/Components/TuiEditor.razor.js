@@ -11,7 +11,8 @@ export function Initialize(
     dotNetHelper,
     initialValue,
     language,
-    height
+    height,
+    autoFocus
 ) {
     if (!language) language = document.documentElement.lang
 
@@ -29,7 +30,8 @@ export function Initialize(
             ["hr", "quote"],
             ["ul", "ol", "task", "indent", "outdent"],
             ["link"]
-        ]
+        ],
+        autofocus: autoFocus || element.getAttribute("autofocus") !== null
     })
 
     editor.on("change", () => {

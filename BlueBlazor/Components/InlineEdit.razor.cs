@@ -47,6 +47,9 @@ public partial class InlineEdit
     public string? Header { get; set; }
 
     [Parameter]
+    public RenderFragment? HeaderContent { get; set; }
+
+    [Parameter]
     public bool ConfirmOnLoseFocus { get; set; }
 
     /// <summary>

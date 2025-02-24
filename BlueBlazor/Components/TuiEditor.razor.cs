@@ -41,6 +41,9 @@ public partial class TuiEditor : ComponentBase, IDisposable
     [Parameter(CaptureUnmatchedValues = true)]
     public IDictionary<string, object>? AdditionalAttributes { get; set; }
 
+    [CascadingParameter(Name = "AutoFocus")]
+    protected bool AutoFocus { get; set; }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -54,7 +57,7 @@ public partial class TuiEditor : ComponentBase, IDisposable
     {
         if (_module is not null)
         {
-            await _module.InvokeVoidAsync("Initialize", element, DotNetObjectReference.Create(this), Value, Language, Height);
+            await _module.InvokeVoidAsync("Initialize", element, DotNetObjectReference.Create(this), Value, Language, Height, AutoFocus);
         }
     }
 
