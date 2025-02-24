@@ -48,6 +48,9 @@ public partial class TuiEditor : ComponentBase, IDisposable
     {
         if (firstRender)
         {
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/tui-editor/toastui-editor-all.min.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/tui-editor/i18n/de-de.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/tui-editor/i18n/fr-fr.js");
             _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/TuiEditor.razor.js");
             await Initialize(_element);
         }
