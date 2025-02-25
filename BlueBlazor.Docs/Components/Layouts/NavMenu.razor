@@ -32,6 +32,10 @@
                         {
                             <span class="badge bg-primary ms-1 mt-1">New</span>
                         }
+                        @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
+                        {
+                            <span class="badge bg-info ms-1 mt-1">Update</span>
+                        }
                     </AfterLabelContent>
                 </MenuItem>
             }
@@ -106,7 +110,8 @@
             IconForActive = @<BiPostcardFill />}
         },
         {"Layout", new() {
-            Icon = @<BiLayoutTextWindowReverse />}
+            Icon = @<BiLayoutTextWindowReverse />,
+            IsUpdate = true}
         },
         {"QrCodeGen", new() {
             Icon = @<BiQrCode />}
@@ -143,5 +148,6 @@
         public RenderFragment Icon { get; set; } = @<BiFileCode />;
         public RenderFragment? IconForActive { get; set; }
         public bool IsNew { get; set; } = false;
+        public bool IsUpdate { get; set; } = false;
     }
 }

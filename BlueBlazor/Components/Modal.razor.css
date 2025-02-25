@@ -1,16 +1,50 @@
-﻿dialog {
-    border: none;
-    background: none;
+﻿@keyframes open {
+    from {
+        opacity: 0;
+        scale: 95%;
+    }
+    to {
+        opacity: 1;
+        scale: 100%;
+    }
 }
 
-dialog[open] {
-    display: block;
+@keyframes close {
+    from {
+        opacity: 1;
+        scale: 100%;
+    }
+    to {
+        opacity: 0;
+        scale: 95%;
+    }
 }
+
+dialog {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    max-height: none;
+    transition: display .2s allow-discrete, overlay .2s allow-discrete;
+    animation: close .2s forwards;
+}
+
+    dialog[open] {
+        display: block;
+        animation: open .2s forwards;
+    }
 
     dialog::backdrop {
         --bs-backdrop-bg: #000;
         --bs-backdrop-opacity: 0.5;
         background-color: var(--bs-backdrop-bg);
+        transition: opacity .2s;
+        opacity: 0;
+    }
+
+    dialog[open]::backdrop {
         opacity: var(--bs-backdrop-opacity);
     }
 
@@ -31,4 +65,11 @@ dialog[open] {
 .blue-blazor-modal-backdrop > button {
     opacity: 0;
     cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    dialog, dialog[open], dialog::backdrop {
+        transition: none;
+        animation: none;
+    }
 }

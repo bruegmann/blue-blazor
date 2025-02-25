@@ -1,51 +1,46 @@
 ﻿@using BlueBlazor.Components.LayoutParts
-@{
-    /* JS Import especially for "Blazor Web Apps" */
-}
-<PageScript Src="./_content/BlueBlazor/blue-web/js/side-layout.bundle.js"></PageScript>
 
-<div class="vh-100">
-    <side-layout style="--base-z-index: 500; --side-width: var(--blue-sidebar-width); --toggler-size: var(--blue-menu-item-height);">
-        <div slot="expand-toggler" class="w-100 h-100" style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg);">
-            <div class="btn blue-menu-item w-100 h-100 d-flex align-items-center justify-content-center p-0"
-                 style="box-shadow: var(--trigger-box-shadow)">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 16 16"
-                     aria-hidden="true"
-                     width="1em"
-                     height="1em"
-                     fill="currentColor"
-                     class="bi bi-layout-sidebar">
-                    <path d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5-1v12h9a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM4 2H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h2z"></path>
-                </svg>
-            </div>
-        </div>
-        <div slot="drawer-toggler" class="w-100 h-100" style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg);">
-            <div class="btn blue-menu-item w-100 h-100 d-flex align-items-center justify-content-center p-0"
-                 style="box-shadow: var(--trigger-box-shadow)">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 16 16"
-                     aria-hidden="true"
-                     width="1em"
-                     height="1em"
-                     fill="currentColor"
-                     class="bi bi-layout-sidebar-inset">
-                    <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"></path>
-                    <path d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"></path>
-                </svg>
-            </div>
-        </div>
-        <div slot="overlay"
-             class="bg-dark w-100 h-100"
-             style="--bs-bg-opacity: 0.5;"></div>
+<PageScript Src="./_content/BlueBlazor/Components/Layout.razor.js"></PageScript>
 
-        <LayoutHeader slot="header">@HeaderContent</LayoutHeader>
+<div class="root vh-100">
+    <input id="layout-expand"
+           type="checkbox"
+           class="hidden-input"
+           checked />
+    <label class="toggler btn blue-menu-item w-100 h-100 d-flex align-items-center justify-content-center p-0" for="layout-expand" title="${toggleSidebarText}" role="button">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             aria-hidden="true"
+             width="1em"
+             height="1em"
+             fill="currentColor"
+             class="bi bi-layout-sidebar">
+            <path d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5-1v12h9a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM4 2H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h2z"></path>
+        </svg>
+    </label>
 
-        <div slot="side" class="blue-sidebar-state open overflow-x-hidden overflow-y-auto h-100"
+    <input id="layout-drawer" type="checkbox" class="hidden-input" />
+    <label class="toggler btn blue-menu-item w-100 h-100 d-flex align-items-center justify-content-center p-0" for="layout-drawer" title="${toggleSidebarText}" role="button">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 16 16"
+             aria-hidden="true"
+             width="1em"
+             height="1em"
+             fill="currentColor"
+             class="bi bi-layout-sidebar-inset">
+            <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2z"></path>
+            <path d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"></path>
+        </svg>
+    </label>
+
+    <header class="header"><LayoutHeader>@HeaderContent</LayoutHeader></header>
+    <div class="side">
+        <div class="blue-sidebar-state open overflow-x-hidden overflow-y-auto h-100"
              style="color: var(--blue-sidebar-color); background: var(--blue-sidebar-bg);">
             @SideContent
         </div>
-        
-        <LayoutMain NoPageBorder="@NoPageBorder">@PageContent</LayoutMain>
-    </side-layout>
+    </div>
+    <main class="main"><LayoutMain NoPageBorder="@NoPageBorder">@PageContent</LayoutMain></main>
+    <label aria-label="Close sidebar" for="layout-drawer" class="overlay bg-dark w-100 h-100" style="--bs-bg-opacity: 0.5;">
+    </label>
 </div>

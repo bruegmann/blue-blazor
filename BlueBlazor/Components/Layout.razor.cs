@@ -4,9 +4,9 @@ using Microsoft.JSInterop;
 namespace BlueBlazor.Components;
 
 /// <summary>
-/// Implementation of Web Component SideLayout by Blue Web.
-/// In some cases, like when using .NET 8's new SSR (Static Server Rendering) rendermode, it might be necessary to include our library script in your App.razor manually. You can do so as follows:
-/// `<script src="_content/BlueBlazor/blue-web/js/side-layout.bundle.js"></script>
+/// Implementation of SideLayout by Blue Web.
+/// Since 3.4.1 this component no longer uses the Web Component for simplification and 
+/// to avoid flickering while rendering.
 /// </summary>
 public partial class Layout
 {
@@ -29,8 +29,11 @@ public partial class Layout
     {
         if (firstRender)
         {
-            // JS Import especially for "Blazor Server Apps"
-            await JSRuntime.InvokeVoidAsync("import", "./_content/BlueBlazor/blue-web/js/side-layout.bundle.js");
+            IJSObjectReference module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/Layout.razor.js");
+            if (module is not null)
+            {
+                await module.InvokeVoidAsync("onLoad");
+            }
         }
     }
 }
