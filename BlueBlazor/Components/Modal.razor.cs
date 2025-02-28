@@ -63,8 +63,8 @@ public partial class Modal
     {
         if (_module is not null)
         {
-            await _module.InvokeVoidAsync("Show", _element);
             _render = true;
+            await _module.InvokeVoidAsync("Show", _element);
         }
     }
 
