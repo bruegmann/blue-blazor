@@ -50,3 +50,11 @@ public enum ModalSize
     Lg,
     Xl
 }
+
+public enum OffcanvasPlacement
+{
+    Start,
+    End,
+    Top,
+    Bottom
+}

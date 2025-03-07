@@ -1,6 +1,6 @@
 ﻿using BlueBlazor.Shared;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+using BlueBlazor.Components.DialogBaseParts;
 
 namespace BlueBlazor.Components;
 
@@ -8,37 +8,9 @@ namespace BlueBlazor.Components;
 /// Based on styling Bootstrap's Modal component but uses the native `&lt;dialog&gt;` HTML element.
 /// Modal body and footer will not be rendered until the open event triggered.
 /// </summary>
-public partial class Modal
+public partial class Modal : DialogBase
 {
-    private string _id = "Modal-" + Guid.NewGuid().ToString();
-    private bool _render = false;
-    private ElementReference _element;
-    private IJSObjectReference? _module;
     private string? _dialogClass = "modal-dialog";
-
-    [Inject]
-    private IJSRuntime JSRuntime { get; set; } = default!;
-
-    [Parameter, EditorRequired]
-    public RenderFragment? ToggleContent { get; set; }
-
-    [Parameter]
-    public RenderFragment? BodyContent { get; set; }
-
-    /// <summary>
-    /// Additional CSS class to be added to the modal body.
-    /// </summary>
-    [Parameter]
-    public string? BodyClass { get; set; }
-
-    [Parameter]
-    public RenderFragment? FooterContent { get; set; }
-
-    [Parameter]
-    public string? TitleText { get; set; }
-
-    [Parameter]
-    public RenderFragment? TitleContent { get; set; }
 
     [Parameter]
     public ModalSize? Size { get; set; }
@@ -47,28 +19,6 @@ public partial class Modal
     public bool Scrollable { get; set; }
 
     protected override void OnParametersSet()
-    {
-        BuildCss();
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/Modal.razor.js");
-        }
-    }
-
-    public async Task Open()
-    {
-        if (_module is not null)
-        {
-            _render = true;
-            await _module.InvokeVoidAsync("Show", _element);
-        }
-    }
-
-    private void BuildCss()
     {
         _dialogClass = new CssBuilder("modal-dialog")
             .AddClass("modal-dialog-scrollable", Scrollable)
