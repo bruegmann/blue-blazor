@@ -5,7 +5,7 @@
     @ToggleContent
 </div>
 
-<dialog class="modal" @ref="_element" id="@_id" aria-labelledby="@(_id + "-label")">
+<dialog class="blue-modal modal" @ref="_element" id="@_id" aria-labelledby="@(_id + "-label")">
     <div class="@_dialogClass" style="transition: max-width .2s">
         <div class="modal-content">
             <div class="modal-header">
@@ -32,7 +32,7 @@
             }
         </div>
     </div>
-    <form method="dialog" class="blue-blazor-modal-backdrop">
+    <form method="dialog" class="blue-modal-backdrop">
         <button>@L["Close"]</button>
     </form>
 </dialog>
