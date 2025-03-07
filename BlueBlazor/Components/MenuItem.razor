@@ -1,15 +1,11 @@
-@using Microsoft.AspNetCore.Components.Routing
-@implements IDisposable
-@inject NavigationManager NavigationManager
-
 <div class="blue-menu-item-wrapper @(id)">
     <Button @attributes="AdditionalAttributes" draggable="@Draggable" OnClick="@onClick"
-    Href="@Href" Target="@Target" Busy="@Busy" Class="@className"
-    Disabled="@Disabled" Variant="Variant.None">
+            Href="@Href" Target="@Target" Busy="@Busy" Class="@className"
+            Disabled="@Disabled" Variant="Variant.None">
         @if (Draggable && !HideDraggableIcon)
         {
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-            className="bi bi-grip-vertical opacity-50" aria-hidden="true" viewBox="0 0 8 16">
+                 className="bi bi-grip-vertical opacity-50" aria-hidden="true" viewBox="0 0 8 16">
                 <path d="M3.376 1.876c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1">
                 </path>
             </svg>
@@ -41,7 +37,7 @@
         @if (HideChevronIcon != true && DropdownContent != null)
         {
             <Chevron Open="@showDropdown" Mirrored="true" Class="blue-menu-item-dropdown-toggle blue-menu-item-chevron ms-auto"
-            PathClass="blue-sidebar-exception" />
+                     PathClass="blue-sidebar-exception" />
         }
     </Button>
 
@@ -50,7 +46,7 @@
         @if (SupportOutside)
         {
             <Outside OnClickOutside="onClickOutside"
-            IgnoreClasses="@(OutsideIgnoreClasses ?? new List<string> { id })">
+                     IgnoreClasses="@(OutsideIgnoreClasses ?? new List<string> { id })">
                 <div class="blue-menu-item-dropdown @DropdownClass" style="@DropdownStyle">
                     @DropdownContent
                     <script>
@@ -212,26 +208,6 @@
 
         if (ShowDropdown != null)
             showDropdown = ShowDropdown == true;
-    }
-
-    protected override void OnInitialized()
-    {
-        NavigationManager.LocationChanged += locationChanged!;
-        base.OnInitialized();
-    }
-
-    void locationChanged(object sender, LocationChangedEventArgs e)
-    {
-        if (showDropdown)
-        {
-            showDropdown = false;
-            StateHasChanged();
-        }
-    }
-
-    void IDisposable.Dispose()
-    {
-        NavigationManager.LocationChanged -= locationChanged!;
     }
 
     string className = "";
