@@ -1,0 +1,111 @@
+/**
+ * Allows to use Bootstrap Modals but with the native dialog element 
+ * without the need of Bootstrap's JavaScript.
+ * Even works with Bootstrap's Offcanvas classes.
+ */
+
+@keyframes blue-modal-open {
+    from {
+        opacity: 0;
+        scale: var(--ani-scale-from, 95%);
+        translate: var(--ani-translate-from, 0 0);
+    }
+    to {
+        opacity: 1;
+        scale: var(--ani-scale-to, 100%);
+        translate: var(--ani-translate-to, 0 0);
+    }
+}
+
+@keyframes blue-modal-close {
+    from {
+        opacity: 1;
+        scale: var(--ani-scale-to, 100%);
+        translate: var(--ani-translate-to, 0 0);
+    }
+    to {
+        opacity: 0;
+        scale: var(--ani-scale-from, 95%);
+        translate: var(--ani-translate-from, 0 0);
+    }
+}
+
+dialog.blue-modal {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    max-height: none;
+    transition: display 0.2s allow-discrete, overlay 0.2s allow-discrete;
+    animation: blue-modal-close 0.2s forwards;
+
+    .offcanvas-backdrop {
+        display: none;
+    }
+}
+
+dialog.blue-modal[open] {
+    display: block;
+    animation: blue-modal-open 0.2s forwards;
+}
+
+dialog.blue-modal::backdrop {
+    --bs-backdrop-bg: #000;
+    --bs-backdrop-opacity: 0.5;
+    background-color: var(--bs-backdrop-bg);
+    transition: opacity 0.2s;
+    opacity: 0;
+}
+
+dialog.blue-modal[open]::backdrop {
+    opacity: var(--bs-backdrop-opacity);
+}
+
+.blue-modal-backdrop {
+    color: #0000;
+    z-index: -1;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    place-self: stretch stretch;
+    display: grid;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.blue-modal-backdrop > button {
+    opacity: 0;
+    cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    dialog.blue-modal,
+    dialog.blue-modal[open],
+    dialog.blue-modal::backdrop {
+        transition: none;
+        animation: none;
+    }
+}
+
+dialog.blue-modal:has(.offcanvas) {
+    --ani-scale-from: 100%;
+}
+
+dialog.blue-modal:has(.offcanvas-top) {
+    --ani-translate-from: 0 -100%;
+}
+
+dialog.blue-modal:has(.offcanvas-end) {
+    --ani-translate-from: 100% 0;
+}
+
+dialog.blue-modal:has(.offcanvas-bottom) {
+    --ani-translate-from: 0 100%;
+}
+
+dialog.blue-modal:has(.offcanvas-start) {
+    --ani-translate-from: -100% 0;
+}
