@@ -35,13 +35,13 @@
 }
 
 @media (width < 64rem) {
-    .toggler[for="layout-expand"] {
+    .toggler[for="layout-expand"], #layout-expand {
         display: none !important;
     }
 }
 
 @media (width >= 64rem) {
-    .toggler[for="layout-drawer"] {
+    .toggler[for="layout-drawer"], #layout-drawer {
         display: none !important;
     }
 }
