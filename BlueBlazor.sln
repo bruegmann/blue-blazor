@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppAutoPerPage.Cli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueBlazor.Tests", "BlueBlazor.Tests\BlueBlazor.Tests.csproj", "{FEE262AB-0615-4368-8F23-F31FC255E15C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueBlazor.Cli", "BlueBlazor.Cli\BlueBlazor.Cli.csproj", "{428409D9-601F-47DD-830F-34850DFD2EB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{FEE262AB-0615-4368-8F23-F31FC255E15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEE262AB-0615-4368-8F23-F31FC255E15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEE262AB-0615-4368-8F23-F31FC255E15C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{428409D9-601F-47DD-830F-34850DFD2EB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{428409D9-601F-47DD-830F-34850DFD2EB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{428409D9-601F-47DD-830F-34850DFD2EB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{428409D9-601F-47DD-830F-34850DFD2EB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
