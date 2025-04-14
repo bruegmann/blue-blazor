@@ -80,19 +80,16 @@ public partial class InlineEdit
 
     private void ToggleShowEdit()
     {
-        if (Disabled == false)
-        {
-            ShowEdit = !ShowEdit;
-        }
+        ShowEdit = !ShowEdit;
     }
 
     private async Task EditRequested()
     {
-        if (EditMode == false && Disabled == false)
+        if (EditMode == false)
         {
             await EditModeChanged.InvokeAsync(true);
-            ShowEdit = true;
         }
+        ShowEdit = true;
     }
 
     private void OnClickSubmitButton()
