@@ -6,20 +6,17 @@ namespace BlueBlazor.Cli.Commands;
 
 public static class ListCommand
 {
-    public static Command Create()
+    public static Command Create(Option<string?> sourceOption, Option<string?> repoOption)
     {
-        var command = new Command("list", "Lists available components in the source folder");
-
-        var sourceOption = new Option<string>(
-            name: "--source",
-            description: "Path to the component source (local or GitHub)",
-            getDefaultValue: () => "./Components");
-
-        command.AddOption(sourceOption);
-
-        command.SetHandler(async source =>
+        var command = new Command("list", "Lists available components in the source folder")
         {
-            var sourceDir = await SourceResolver.ResolveAsync(source);
+            sourceOption,
+            repoOption
+        };
+
+        command.SetHandler(async (string? source, string? repo) =>
+        {
+            var sourceDir = await SourceResolver.ResolveAsync(source, repo);
             if (sourceDir == null)
             {
                 Console.WriteLine($"❌ Source not found: {source}");
@@ -28,7 +25,7 @@ public static class ListCommand
 
             var lister = new ComponentLister(sourceDir);
             lister.ListAvailableComponents();
-        }, sourceOption);
+        }, sourceOption, repoOption);
 
         return command;
     }

@@ -20,27 +20,29 @@ public class ComponentInstaller
         var matchingFiles = _sourceRoot.GetFiles($"{baseName}.*", SearchOption.TopDirectoryOnly);
         if (matchingFiles.Length == 0)
         {
-            Console.WriteLine($"❌ Komponente \"{baseName}\" wurde nicht gefunden.");
+            Console.WriteLine($"❌ Component \"{baseName}\" was not found.");
             return;
         }
 
-        var targetDir = Path.Combine(_targetRoot.FullName, baseName);
-        Directory.CreateDirectory(targetDir);
+        if (!_targetRoot.Exists)
+        {
+            _targetRoot.Create();
+        }
 
         foreach (var file in matchingFiles)
         {
-            var dest = Path.Combine(targetDir, file.Name);
+            var dest = Path.Combine(_targetRoot.FullName, file.Name);
             File.Copy(file.FullName, dest, overwrite: true);
-            Console.WriteLine($"✅ Kopiert: {file.Name}");
+            Console.WriteLine($"✅ Copied: {file.Name}");
         }
 
-        // Optional: Metadaten ausgeben
+        // Optional: Display metadata
         var metaFile = matchingFiles.FirstOrDefault(f => f.Name == $"{baseName}.meta.json");
         if (metaFile != null)
         {
             using var stream = metaFile.OpenRead();
             var meta = await JsonSerializer.DeserializeAsync<ComponentMeta>(stream);
-            Console.WriteLine($"ℹ️  Beschreibung: {meta?.Description}");
+            Console.WriteLine($"ℹ️  Description: {meta?.Description}");
         }
     }
 
