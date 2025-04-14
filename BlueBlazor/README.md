@@ -2,10 +2,6 @@
 
 Blue Blazor is an adaptation of [Blue Web](https://bruegmann.github.io/blue-web) for Blazor.
 
-## Breaking change!
-
-Component `Text` has been renamed to `TextInput` to avoid conflicts with `<text></text>` and for a more fitting name. Also the default styling for the label has changed. You can the look back by using the `SmallLabel` attribute.
-
 ## Getting started
 
 ### Create project

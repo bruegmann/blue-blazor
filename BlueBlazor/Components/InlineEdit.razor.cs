@@ -59,6 +59,9 @@ public partial class InlineEdit
     [Parameter]
     public bool PreventConfirmOnSubmit { get; set; }
 
+    [CascadingParameter(Name = "Disabled")]
+    protected bool Disabled { get; set; } = false;
+
     [CascadingParameter(Name = "EditMode")]
     protected bool? EditMode { get; set; } = null;
 
@@ -83,8 +86,9 @@ public partial class InlineEdit
     private async Task EditRequested()
     {
         if (EditMode == false)
+        {
             await EditModeChanged.InvokeAsync(true);
-
+        }
         ShowEdit = true;
     }
 
