@@ -20,20 +20,19 @@ window.blueWeb.progress = {
     if (!progressEl) {
       progressEl = document.createElement("div");
       progressEl.id = id;
-      progressEl.className = "progress ".concat(positionClass, " rounded-0");
+      progressEl.className = `progress ${positionClass} rounded-0`;
       progressEl.setAttribute("style", "--bs-progress-height: 0.25rem");
       progressEl.setAttribute("role", "progressbar");
       progressEl.setAttribute("aria-label", ariaLabel);
       progressEl.setAttribute("aria-valuemin", "0");
       progressEl.setAttribute("aria-valuemax", "100");
-      progressEl.innerHTML = /*html*/"<div class=\"progress-bar progress-bar-striped progress-bar-animated\" style=\"width: 0%\"></div>";
+      progressEl.innerHTML = /*html*/`<div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>`;
       parentEl.appendChild(progressEl);
     }
     const progressBar = progressEl.querySelector(".progress-bar");
     if (!progressBar) return;
     window.blueWeb.progress.progress = 0;
     var interval = setInterval(function () {
-      var _progressEl;
       // Simuliere einen natürlichen Anstieg
       var increment = Math.random() * 5; // Zufälliger Anstieg zwischen 0 und 5
       window.blueWeb.progress.progress += increment;
@@ -41,7 +40,7 @@ window.blueWeb.progress = {
 
       // Aktualisiere die Progressbar
       progressBar.style.width = window.blueWeb.progress.progress + "%";
-      (_progressEl = progressEl) === null || _progressEl === void 0 || _progressEl.setAttribute("aria-valuenow", Math.round(window.blueWeb.progress.progress).toString());
+      progressEl?.setAttribute("aria-valuenow", Math.round(window.blueWeb.progress.progress).toString());
 
       // Stoppe das Intervall, wenn 100% erreicht sind
       if (window.blueWeb.progress.progress >= 100) {

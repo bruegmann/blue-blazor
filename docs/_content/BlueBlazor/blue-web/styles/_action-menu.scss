@@ -1,8 +1,7 @@
 .blue-actions {
     --max-width: calc(
-        var(--bs-btn-border-width, 1px) + var(--bs-btn-padding-x, 0.75rem) +
-            (var(--bs-btn-font-size, 1rem) * var(--bs-btn-line-height, 1.5)) + var(--bs-btn-padding-x, 0.75rem) +
-            var(--bs-btn-border-width, 1px)
+        var(--bs-btn-border-width, 1px) + var(--bs-btn-padding-x, 0.75rem) + var(--bs-btn-font-size, 1rem) +
+            var(--bs-btn-padding-x, 0.75rem) + var(--bs-btn-border-width, 1px)
     );
 
     display: inline;

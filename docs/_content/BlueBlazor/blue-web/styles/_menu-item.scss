@@ -181,7 +181,7 @@
     }
 
     &[draggable] {
-        cursor: move;
+        cursor: grab;
 
         &:active {
             box-shadow: inset 0 0 0.25rem;

@@ -32,13 +32,52 @@ async function dialog(dialogType, text) {
   } = options;
   const id = (0, _utils.guid)();
   const addToDom = () => {
-    document.body.insertAdjacentHTML("beforeend", /* HTML */"<dialog class=\"blue-modal modal\" id=\"".concat(id, "\" aria-labelledby=\"").concat(id, "-label\">\n                <div class=\"modal-dialog\">\n                    <div class=\"modal-content\">\n                        <form>\n                            <div class=\"modal-header\">\n                                ").concat(icon ? /* html */"<div class=\"me-2\">".concat(icon, "</div>") : "", "\n                                <h1 class=\"modal-title fs-5\" id=\"").concat(id, "-label\">").concat(title, "</h1>\n                                <button\n                                    type=\"button\"\n                                    class=\"btn-close\"\n                                    aria-label=\"").concat(cancelBtnText, "\"\n                                    onclick=\"document.getElementById('").concat(id, "').close()\"\n                                ></button>\n                            </div>\n                            <div class=\"modal-body\">\n                                ").concat(dialogType === "ask" ? /* HTML */"<label for=\"".concat(id, "-input\">").concat(text, "</label>\n                                          <input type=\"").concat(inputType, "\" id=\"").concat(id, "-input\" class=\"form-control mt-3\" />") : text, "\n                            </div>\n                            <div class=\"modal-footer\">\n                                ").concat(dialogType === "verify" || dialogType === "ask" ? /* HTML */"<button\n                                          type=\"button\"\n                                          class=\"btn ".concat(switchPrimaryBtn ? "btn-primary" : "blue-btn-plain-primary", "\"\n                                          onclick=\"document.getElementById('").concat(id, "').close()\"\n                                      >\n                                          ").concat(cancelBtnText, "\n                                      </button>") : "", "\n                                <button\n                                    type=\"submit\"\n                                    class=\"btn ").concat(switchPrimaryBtn ? "blue-btn-plain-primary" : "btn-primary", "\"\n                                >\n                                    ").concat(acceptBtnText, "\n                                </button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n\n                <form method=\"dialog\" class=\"blue-modal-backdrop\">\n                    <button>").concat(cancelBtnText, "</button>\n                </form>\n            </dialog>"));
+    document.body.insertAdjacentHTML("beforeend", /* HTML */`<dialog class="blue-modal modal" id="${id}" aria-labelledby="${id}-label">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form>
+                            <div class="modal-header">
+                                ${icon ? /* html */`<div class="me-2">${icon}</div>` : ""}
+                                <h1 class="modal-title fs-5" id="${id}-label">${title}</h1>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    aria-label="${cancelBtnText}"
+                                    onclick="document.getElementById('${id}').close()"
+                                ></button>
+                            </div>
+                            <div class="modal-body">
+                                ${dialogType === "ask" ? /* HTML */`<label for="${id}-input">${text}</label>
+                                          <input type="${inputType}" id="${id}-input" class="form-control mt-3" />` : text}
+                            </div>
+                            <div class="modal-footer">
+                                ${dialogType === "verify" || dialogType === "ask" ? /* HTML */`<button
+                                          type="button"
+                                          class="btn ${switchPrimaryBtn ? "btn-primary" : "blue-btn-plain-primary"}"
+                                          onclick="document.getElementById('${id}').close()"
+                                      >
+                                          ${cancelBtnText}
+                                      </button>` : ""}
+                                <button
+                                    type="submit"
+                                    class="btn ${switchPrimaryBtn ? "blue-btn-plain-primary" : "btn-primary"}"
+                                >
+                                    ${acceptBtnText}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <form method="dialog" class="blue-modal-backdrop">
+                    <button>${cancelBtnText}</button>
+                </form>
+            </dialog>`);
   };
   if (!document.getElementById(id)) {
     addToDom();
   }
   return new Promise(resolve => {
-    var _modalEl$querySelecto;
     const modalEl = document.getElementById(id);
     const removeFromDom = () => {
       const modalEl = document.getElementById(id);
@@ -50,14 +89,14 @@ async function dialog(dialogType, text) {
       removeFromDom();
       resolve(false);
     };
-    modalEl === null || modalEl === void 0 || modalEl.showModal();
-    modalEl === null || modalEl === void 0 || modalEl.addEventListener("close", onHidden);
-    modalEl === null || modalEl === void 0 || (_modalEl$querySelecto = modalEl.querySelector(".modal-content > form")) === null || _modalEl$querySelecto === void 0 || _modalEl$querySelecto.addEventListener("submit", e => {
+    modalEl?.showModal();
+    modalEl?.addEventListener("close", onHidden);
+    modalEl?.querySelector(".modal-content > form")?.addEventListener("submit", e => {
       e.preventDefault();
       if (dialogType === "ask") {
         modalEl.close();
         removeFromDom();
-        resolve((modalEl === null || modalEl === void 0 ? void 0 : modalEl.querySelector("input")).value || "");
+        resolve((modalEl?.querySelector("input")).value || "");
       }
       modalEl.close();
       removeFromDom();
