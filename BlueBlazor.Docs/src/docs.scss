@@ -1,7 +1,7 @@
 // Blue variables
 //
 
-$theme: hsl(238deg 76% 94%);
+/*$theme: hsl(238deg 76% 94%);
 $primary: hsl(238deg 76% 50%);
 $white: #fff;
 $gray-100: hsl(238deg 17% 90%);
@@ -15,14 +15,14 @@ $gray-800: hsl(238deg 10% 23%);
 $gray-900: hsl(238deg 11% 15%);
 $black: #000;
 $header-color: $gray-900;
-$sidebar-color: $gray-900;
+$sidebar-color: $gray-900;*/
 
 @import "node_modules/blue-web/dist/style";
 @import "node_modules/blue-web/dist/neu";
 
-.blue-menu-item-icon {
+/*.blue-menu-item-icon {
     @extend .text-primary;
-}
+}*/
 
 .md-block {
     display: contents;

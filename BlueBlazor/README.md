@@ -40,6 +40,27 @@ You can use the stylesheet of Blue Web by adding the following line to the head 
 <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
 ```
 
+In .NET 9 you can do it like this:
+
+```razor
+<link rel="stylesheet" href="@Assets["_content/BlueBlazor/blue-web/style.min.css"]">
+```
+
+### Font family
+
+As mentioned in [Blue Web docs](https://bruegmann.github.io/blue-web/v1/typography), [Inter](https://rsms.me/inter/) ([licensed under SIL](https://github.com/rsms/inter/blob/master/LICENSE.txt)) with some default font settings is preconfigured.
+Blue Blazor ships the required files. You can embed them like this:
+
+```razor
+<link rel="stylesheet" href="_content/BlueBlazor/inter/web/inter.css">
+```
+
+In .NET 9 you can do it like this:
+
+```razor
+<link rel="stylesheet" href="@Assets["_content/BlueBlazor/inter/web/inter.css"]">
+```
+
 ### Add layout
 
 Put this to your `MainLayout.razor` file:
