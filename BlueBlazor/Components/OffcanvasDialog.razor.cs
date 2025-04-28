@@ -1,35 +1,21 @@
-﻿using BlueBlazor.Shared;
+﻿using BlueBlazor.Components.DialogBaseParts;
+using BlueBlazor.Shared;
 using Microsoft.AspNetCore.Components;
 
 namespace BlueBlazor.Components;
 
-public partial class OffcanvasDialog : ComponentBase
+/// <summary>
+/// This provides the template for a Offcanvas.
+/// Should be used together with the `DialogService` and [`DialogProvider`](components/dialog-provider) and optionally with [`DialogOpener`](components/dialog-opener).
+/// 
+/// Based on styling Bootstrap's Offcanvas component but uses the native `&lt;dialog&gt;` HTML element.
+/// Offcanvas body will not be rendered until the open event triggered.
+/// 
+/// Uses `&lt;dxbl-popup-root&gt;&lt;/dxbl-popup-root&gt;` for compatibility with DevExpress Popups.
+/// </summary>
+public partial class OffcanvasDialog : NewDialogBase
 {
     private string? _offcanvasClass = "offcanvas";
-
-    [Parameter]
-    public string? Id { get; set; } = "OffcanvasDialog-" + Guid.NewGuid().ToString();
-
-    [Parameter]
-    public bool Render { get; set; }
-
-    [Parameter]
-    public RenderFragment? BodyContent { get; set; }
-
-    /// <summary>
-    /// Additional CSS class to be added to the body.
-    /// </summary>
-    [Parameter]
-    public string? BodyClass { get; set; }
-
-    [Parameter]
-    public RenderFragment? FooterContent { get; set; }
-
-    [Parameter]
-    public string? TitleText { get; set; }
-
-    [Parameter]
-    public RenderFragment? TitleContent { get; set; }
 
     /// <summary>
     /// Additional CSS class to be added to the offcanvas element.

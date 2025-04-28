@@ -1,9 +1,9 @@
 ﻿@using BlueBlazor.Services
-@using BlueBlazor.Docs.Stories.ModalDialog
 @inject DialogService DialogService
 
 <Button OnClick="OpenModalDialog">Open Modal Dialog</Button>
 <Button OnClick="OpenOffcanvasDialog">Open Offcanvas Dialog</Button>
+<Button OnClick="OpenModalDialogDirectCall">Open Modal Dialog by direct call</Button>
 
 <DialogProvider />
 
@@ -17,33 +17,34 @@
         DialogService.OnClosed += HandleClosed;
     }
 
+    protected void Dispose()
+    {
+        DialogService.OnClosed -= HandleClosed;
+    }
+
     private async Task OpenModalDialog()
     {
-        var dialogReference = new DialogReference();
-
-        dialogReference.DialogContent = builder =>
-        {
-            builder.OpenComponent(0, typeof(ModalDialogBasicUsage));
-            builder.CloseComponent();
-        };
-
-        await DialogService.InitializeAsync(dialogReference);
-        await DialogService.ShowAsync(dialogReference);
+        var dialogReference = await DialogService.ShowAsync(@<ModalDialog TitleText="This will close after 3 seconds" />);
+        await Task.Delay(3000);
+        await DialogService.CloseAsync(dialogReference);
     }
 
     private async Task OpenOffcanvasDialog()
     {
         var dialogReference = new DialogReference();
-
-        dialogReference.DialogContent = builder =>
-        {
-            builder.OpenComponent(0, typeof(OffcanvasDialog));
-            builder.AddAttribute(1, "TitleText", "Hello World");
-            builder.CloseComponent();
-        };
-
-        await DialogService.InitializeAsync(dialogReference);
+        dialogReference.DialogContent = @<OffcanvasDialog TitleText="Hello Offcanvas" />;
         await DialogService.ShowAsync(dialogReference);
+    }
+
+    private async Task OpenModalDialogDirectCall()
+    {
+        await DialogService.ShowAsync(@<ModalDialog TitleText="This one has been called directly">
+            <BodyContent>
+                <form method="dialog">
+                    <Button ButtonType="Shared.ButtonType.Submit" Label="Close modal" />
+                </form>
+            </BodyContent>
+        </ModalDialog>);
     }
 
     private async Task HandleClosed(DialogReference dialogReference)

@@ -32,6 +32,11 @@ Register the service for localization in your `Program.cs` file:
 builder.Services.AddLocalization();
 ```
 
+If you want to use dialogs (Modals, Offcanvas) you need to register the `DialogService`:
+```csharp
+builder.Services.AddScoped<BlueBlazor.Services.DialogService>();
+```
+
 ### Stylesheet
 
 You can use the stylesheet of Blue Web by adding the following line to the head of your HTML:
@@ -187,6 +192,34 @@ That means, you can use all of [Blue Web's JavaScript functions](https://bruegma
 ```
 
 ## Breaking changes
+
+### From v3 to v4
+
+Dialogs (Modal and Offcanvas) now use the new `DialogService` to open dialogs. Also these components were removed:
+- `Modal`
+- `Offcanvas`
+
+Instead, you can use the `DialogService` to open dialogs. With `<DialogProvider />` you define the place where the dialogs will be rendered.
+
+To open a dialog, you can use the new `DialogOpener` component together with `ModalDialog` or `OffcanvasDialog`:
+```diff
+- <Modal TitleText="Modal Title">
+-     <ToggleContent><Button Label="Show Modal" /></ToggleContent>
+-     <BodyContent>
+-         <p>Modal body content</p>
+-     </BodyContent>
+- </Modal>
++ <DialogOpener>
++     <ToggleContent><Button Label="Show Modal" /></ToggleContent>
++     <DialogContent>
++         <ModalDialog TitleText="Modal Title">
++             <BodyContent>
++                 <p>Modal body content</p>
++             </BodyContent>
++         </ModalDialog>
++     </DialogContent>
++ </DialogOpener>
+```
 
 ### From v2 to v3
 

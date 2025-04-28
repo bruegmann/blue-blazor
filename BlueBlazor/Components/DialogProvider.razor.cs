@@ -1,11 +1,21 @@
 ﻿using BlueBlazor.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System.Threading.Tasks;
 
 namespace BlueBlazor.Components;
 
-public partial class DialogProvider : ComponentBase
+/// <summary>
+/// Contains and manages dialogs coming from the `DialogService`.
+/// `DialogService` has to be registered inside your `Program.cs` like this:
+/// 
+/// ```csharp
+/// builder.Services.AddScoped&lt;DialogService&gt;();
+/// ```
+/// 
+/// You have to put `&lt;DialogProvider /&gt;` somewhere in your app if you want to use the `DialogService`. Like in your `App.razor` or `MainLayout.razor`.
+/// `DialogProvider` has to be interactive. So maybe you have to set `&lt;DialogProvider @rendermode="InteractiveServer" /&gt;` or `&lt;DialogProvider @rendermode="InteractiveAuto" /&gt;`.
+/// </summary>
+public partial class DialogProvider : ComponentBase, IDisposable
 {
     private IJSObjectReference? Module;
 
@@ -15,12 +25,16 @@ public partial class DialogProvider : ComponentBase
     [Inject]
     private DialogService DialogService { get; set; } = default!;
 
-    private List<DialogReference> Dialogs { get; set; } = new List<DialogReference>();
+    private List<DialogReference> _dialogs = new List<DialogReference>();
+
+    public void Dispose()
+    {
+        DialogService.OnShow -= ShowDialog;
+        DialogService.OnClose -= CloseDialog;
+    }
 
     protected override void OnInitialized()
     {
-        DialogService.OnInitialize += InitializeDialog;
-        DialogService.OnDestroy += DestroyDialog;
         DialogService.OnShow += ShowDialog;
         DialogService.OnClose += CloseDialog;
     }
@@ -33,33 +47,17 @@ public partial class DialogProvider : ComponentBase
         }
     }
 
-    private async Task InitializeDialog(DialogReference dialogReference)
+    private async Task<DialogReference> ShowDialog(DialogReference dialogReference)
     {
-        Dialogs.Add(dialogReference);
+        _dialogs.Add(dialogReference);
         StateHasChanged();
-        await Task.Delay(1); // sicherstellen, dass das Element gerendert ist
-
+        await Task.Delay(1);
         if (Module is not null && dialogReference.Element is not null)
         {
             await Module.InvokeVoidAsync("Initialize", dialogReference.Element, DotNetObjectReference.Create(this));
-        }
-    }
-
-    private async Task DestroyDialog(DialogReference dialogReference)
-    {
-        Dialogs.Remove(dialogReference);
-        StateHasChanged();
-        await Task.Delay(1);
-    }
-
-    private async Task ShowDialog(DialogReference dialogReference)
-    {
-        dialogReference.Render = true;
-        StateHasChanged();
-        if (Module is not null && dialogReference.Element is not null)
-        {
             await Module.InvokeVoidAsync("Show", dialogReference.Element);
         }
+        return dialogReference;
     }
 
     private async Task CloseDialog(DialogReference dialogReference)
@@ -72,14 +70,24 @@ public partial class DialogProvider : ComponentBase
         StateHasChanged();
     }
 
+    private void DestroyDialog(DialogReference dialogReference)
+    {
+        _dialogs.Remove(dialogReference);
+        StateHasChanged();
+    }
+
     [JSInvokable]
     public async Task InvokeClose(string id)
     {
-        DialogReference? dialogReference = Dialogs.Where(d => d.Id == id).FirstOrDefault();
+        DialogReference? dialogReference = _dialogs.Where(d => d.Id == id).FirstOrDefault();
         if (dialogReference is not null)
         {
             StateHasChanged();
             await DialogService.ClosedAsync(dialogReference);
+            if (dialogReference.DestroyOnClose)
+            {
+                DestroyDialog(dialogReference);
+            } 
         }
     }
 }

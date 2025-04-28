@@ -12,3 +12,7 @@ export function Show(element) {
 export function Close(element) {
     element.close()
 }
+
+export function Destroy(element) {
+    element.remove()
+}

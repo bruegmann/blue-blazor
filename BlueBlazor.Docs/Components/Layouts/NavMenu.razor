@@ -132,16 +132,22 @@
             Icon = @<BiWindow /> }
         },
         {"InlineEdit", new() {
-            Icon = @<BiCursorText />, IsUpdate = true }
+            Icon = @<BiCursorText /> }
         },
         {"TuiEditor", new() {
             Icon = @<BiPencilSquare /> }
         },
-        {"Modal", new() {
-            Icon = @<BiWindowStack /> }
+        {"ModalDialog", new() {
+            Icon = @<BiWindowStack />, IsNew = true }
         },
-        {"Offcanvas", new() {
-            Icon = @<BiLayoutSidebarInset /> }
+        {"OffcanvasDialog", new() {
+            Icon = @<BiLayoutSidebarInset />, IsNew = true }
+        },
+        {"DialogOpener", new() {
+            Icon = @<BiArrowUpRightSquare />, IsNew = true }
+        },
+        {"DialogProvider", new() {
+            Icon = @<BiSquare />, IsNew = true }
         } };
     RenderFragment defaultIcon = @<BiFileCode />;
 

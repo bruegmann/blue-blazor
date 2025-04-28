@@ -5,8 +5,7 @@
 
 @inherits ComponentBase
 
-
-@foreach (var dialog in Dialogs)
+@foreach (var dialog in _dialogs)
 {
     <dialog class="blue-modal modal" @ref="dialog.Element" id="@dialog.Id" aria-labelledby="@(dialog.Id + "-label")">
         @dialog.DialogContent

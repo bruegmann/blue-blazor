@@ -1,35 +1,21 @@
-﻿using BlueBlazor.Shared;
+﻿using BlueBlazor.Components.DialogBaseParts;
+using BlueBlazor.Shared;
 using Microsoft.AspNetCore.Components;
 
 namespace BlueBlazor.Components;
 
-public partial class ModalDialog : ComponentBase
+/// <summary>
+/// This provides the template for a Modal.
+/// Should be used together with the `DialogService` and [`DialogProvider`](components/dialog-provider) and optionally with [`DialogOpener`](components/dialog-opener).
+/// 
+/// Based on styling Bootstrap's Modal component but uses the native `&lt;dialog&gt;` HTML element.
+/// Modal body and footer will not be rendered until the open event triggered.
+/// 
+/// Uses `&lt;dxbl-popup-root&gt;&lt;/dxbl-popup-root&gt;` for compatibility with DevExpress Popups.
+/// </summary>
+public partial class ModalDialog : NewDialogBase
 {
     private string? _dialogClass = "modal-dialog";
-
-    [Parameter]
-    public string? Id { get; set; } = "ModalDialog-" + Guid.NewGuid().ToString();
-
-    [Parameter]
-    public bool Render { get; set; }
-
-    [Parameter]
-    public RenderFragment? BodyContent { get; set; }
-
-    /// <summary>
-    /// Additional CSS class to be added to the body.
-    /// </summary>
-    [Parameter]
-    public string? BodyClass { get; set; }
-
-    [Parameter]
-    public RenderFragment? FooterContent { get; set; }
-
-    [Parameter]
-    public string? TitleText { get; set; }
-
-    [Parameter]
-    public RenderFragment? TitleContent { get; set; }
 
     [Parameter]
     public ModalSize? Size { get; set; }
