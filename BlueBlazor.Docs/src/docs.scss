@@ -39,7 +39,8 @@ $sidebar-color: $gray-900;*/
 }
 
 .example {
-    @extend .rounded, .rounded-top-5, .border, .p-1;
+    @extend .rounded-top-5, .border, .p-1;
+    border-radius: calc(var(--bs-border-radius) + .25rem);
 }
 
 .example-demo {

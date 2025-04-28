@@ -1,0 +1,54 @@
+﻿@using BlueBlazor.Services
+@using BlueBlazor.Docs.Stories.ModalDialog
+@inject DialogService DialogService
+
+<Button OnClick="OpenModalDialog">Open Modal Dialog</Button>
+<Button OnClick="OpenOffcanvasDialog">Open Offcanvas Dialog</Button>
+
+<DialogProvider />
+
+<p>Closed Count: @closedTimer</p>
+
+@code {
+    int closedTimer = 0;
+
+    protected override void OnInitialized()
+    {
+        DialogService.OnClosed += HandleClosed;
+    }
+
+    private async Task OpenModalDialog()
+    {
+        var dialogReference = new DialogReference();
+
+        dialogReference.DialogContent = builder =>
+        {
+            builder.OpenComponent(0, typeof(ModalDialogBasicUsage));
+            builder.CloseComponent();
+        };
+
+        await DialogService.InitializeAsync(dialogReference);
+        await DialogService.ShowAsync(dialogReference);
+    }
+
+    private async Task OpenOffcanvasDialog()
+    {
+        var dialogReference = new DialogReference();
+
+        dialogReference.DialogContent = builder =>
+        {
+            builder.OpenComponent(0, typeof(OffcanvasDialog));
+            builder.AddAttribute(1, "TitleText", "Hello World");
+            builder.CloseComponent();
+        };
+
+        await DialogService.InitializeAsync(dialogReference);
+        await DialogService.ShowAsync(dialogReference);
+    }
+
+    private async Task HandleClosed(DialogReference dialogReference)
+    {
+        closedTimer++;
+        StateHasChanged();
+    }
+}

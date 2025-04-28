@@ -1,6 +1,7 @@
 ﻿export function Initialize(element, dotNetHelper) {
     element.onclose = (event) => {
-        dotNetHelper.invokeMethodAsync("InvokeClose")
+        console.log(event.target.id)
+        dotNetHelper.invokeMethodAsync("InvokeClose", event.target.id)
     }
 }
 

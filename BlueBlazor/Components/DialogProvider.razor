@@ -1,0 +1,18 @@
+﻿@using BlueBlazor.Components.DialogBaseParts
+@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
+
+@inherits ComponentBase
+
+
+@foreach (var dialog in Dialogs)
+{
+    <dialog class="blue-modal modal" @ref="dialog.Element" id="@dialog.Id" aria-labelledby="@(dialog.Id + "-label")">
+        @dialog.DialogContent
+
+        <form method="dialog" class="blue-modal-backdrop">
+            <button>@L["Close"]</button>
+        </form>
+    </dialog>
+}
