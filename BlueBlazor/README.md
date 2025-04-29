@@ -32,12 +32,38 @@ Register the service for localization in your `Program.cs` file:
 builder.Services.AddLocalization();
 ```
 
+If you want to use dialogs (Modals, Offcanvas) you need to register the `DialogService`:
+```csharp
+builder.Services.AddScoped<BlueBlazor.Services.DialogService>();
+```
+
 ### Stylesheet
 
 You can use the stylesheet of Blue Web by adding the following line to the head of your HTML:
 
 ```html
 <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
+```
+
+In .NET 9 you can do it like this:
+
+```razor
+<link rel="stylesheet" href="@Assets["_content/BlueBlazor/blue-web/style.min.css"]">
+```
+
+### Font family
+
+As mentioned in [Blue Web docs](https://bruegmann.github.io/blue-web/v1/typography), [Inter](https://rsms.me/inter/) ([licensed under SIL](https://github.com/rsms/inter/blob/master/LICENSE.txt)) with some default font settings is preconfigured.
+Blue Blazor ships the required files. You can embed them like this:
+
+```razor
+<link rel="stylesheet" href="_content/BlueBlazor/inter/web/inter.css">
+```
+
+In .NET 9 you can do it like this:
+
+```razor
+<link rel="stylesheet" href="@Assets["_content/BlueBlazor/inter/web/inter.css"]">
 ```
 
 ### Add layout
@@ -166,6 +192,36 @@ That means, you can use all of [Blue Web's JavaScript functions](https://bruegma
 ```
 
 ## Breaking changes
+
+### From v3 to v4
+
+Dialogs (Modal and Offcanvas) now use the new `DialogService` to open dialogs. Also these components were removed:
+- `Modal`
+- `Offcanvas`
+
+Instead, you can use the `DialogService` to open dialogs. With `<DialogProvider />` you define the place where the dialogs will be rendered.
+
+To open a dialog, you can use the new `DialogOpener` component together with `ModalDialog` or `OffcanvasDialog`:
+```diff
+- <Modal TitleText="Modal Title">
+-     <ToggleContent><Button Label="Show Modal" /></ToggleContent>
+-     <BodyContent>
+-         <p>Modal body content</p>
+-     </BodyContent>
+- </Modal>
++ <DialogOpener>
++     <ToggleContent><Button Label="Show Modal" /></ToggleContent>
++     <DialogContent>
++         <ModalDialog TitleText="Modal Title">
++             <BodyContent>
++                 <p>Modal body content</p>
++             </BodyContent>
++         </ModalDialog>
++     </DialogContent>
++ </DialogOpener>
+```
+
+For more information, check out the Getting Started section above and the doc pages for `DialogProvider` and `DialogOpener`.
 
 ### From v2 to v3
 

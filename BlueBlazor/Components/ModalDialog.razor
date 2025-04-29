@@ -1,0 +1,32 @@
+﻿@using Microsoft.Extensions.Localization
+
+@inherits BlueBlazor.Components.DialogBaseParts.DialogBase
+
+@inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
+
+<div class="@_dialogClass" style="transition: max-width .2s">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="@(Id + "-label")">@TitleText @TitleContent</h1>
+            <form method="dialog" style="display: contents">
+                <button type="submit" class="btn-close" aria-label="@L["Close"]"></button>
+            </form>
+        </div>
+        <div class="@(new CssBuilder("modal-body").AddClass(BodyClass))">
+            @BodyContent
+
+            @if (IsLastDialog)
+            {
+                <!-- Compatibility with DevExpress Popups -->
+                <dxbl-popup-root class="position-fixed top-0 start-0 z-1"></dxbl-popup-root>
+            }
+        </div>
+
+        @if (FooterContent != null)
+        {
+            <div class="modal-footer">
+                @FooterContent
+            </div>
+        }
+    </div>
+</div>

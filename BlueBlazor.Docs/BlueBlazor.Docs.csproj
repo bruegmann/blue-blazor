@@ -31,7 +31,7 @@
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
 		<Exec Command="npm i" />
-		<Exec Command="npm run sass" />
+		<Exec Command="npm run build" />
 	</Target>
 
 	<Target Name="PostPublishScript" AfterTargets="AfterPublish">

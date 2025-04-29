@@ -1,0 +1,55 @@
+﻿@using BlueBlazor.Services
+@inject DialogService DialogService
+
+<Button OnClick="OpenModalDialog">Open Modal Dialog</Button>
+<Button OnClick="OpenOffcanvasDialog">Open Offcanvas Dialog</Button>
+<Button OnClick="OpenModalDialogDirectCall">Open Modal Dialog by direct call</Button>
+
+<DialogProvider />
+
+<p>Closed Count: @closedTimer</p>
+
+@code {
+    int closedTimer = 0;
+
+    protected override void OnInitialized()
+    {
+        DialogService.OnClosed += HandleClosed;
+    }
+
+    protected void Dispose()
+    {
+        DialogService.OnClosed -= HandleClosed;
+    }
+
+    private async Task OpenModalDialog()
+    {
+        var dialogReference = await DialogService.ShowAsync(@<ModalDialog TitleText="This will close after 3 seconds" />);
+        await Task.Delay(3000);
+        await DialogService.CloseAsync(dialogReference);
+    }
+
+    private async Task OpenOffcanvasDialog()
+    {
+        var dialogReference = new DialogReference();
+        dialogReference.DialogContent = @<OffcanvasDialog TitleText="Hello Offcanvas" />;
+        await DialogService.ShowAsync(dialogReference);
+    }
+
+    private async Task OpenModalDialogDirectCall()
+    {
+        await DialogService.ShowAsync(@<ModalDialog TitleText="This one has been called directly">
+            <BodyContent>
+                <form method="dialog">
+                    <Button ButtonType="Shared.ButtonType.Submit" Label="Close modal" />
+                </form>
+            </BodyContent>
+        </ModalDialog>);
+    }
+
+    private async Task HandleClosed(DialogReference dialogReference)
+    {
+        closedTimer++;
+        StateHasChanged();
+    }
+}
