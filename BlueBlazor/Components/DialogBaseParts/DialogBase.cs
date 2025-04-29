@@ -2,13 +2,10 @@
 
 namespace BlueBlazor.Components.DialogBaseParts;
 
-public class NewDialogBase : ComponentBase
+public class DialogBase : ComponentBase
 {
     [Parameter]
     public string? Id { get; set; } = "DialogBase-" + Guid.NewGuid().ToString();
-
-    [Parameter]
-    public bool Render { get; set; } = true;
 
     [Parameter]
     public RenderFragment? BodyContent { get; set; }
@@ -27,4 +24,7 @@ public class NewDialogBase : ComponentBase
 
     [Parameter]
     public RenderFragment? TitleContent { get; set; }
+
+    [CascadingParameter(Name = "DialogProvider_IsLastDialog")]
+    protected bool IsLastDialog { get; set; }
 }

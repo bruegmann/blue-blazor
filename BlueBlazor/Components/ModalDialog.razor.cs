@@ -13,7 +13,7 @@ namespace BlueBlazor.Components;
 /// 
 /// Uses `&lt;dxbl-popup-root&gt;&lt;/dxbl-popup-root&gt;` for compatibility with DevExpress Popups.
 /// </summary>
-public partial class ModalDialog : NewDialogBase
+public partial class ModalDialog : DialogBase
 {
     private string? _dialogClass = "modal-dialog";
 

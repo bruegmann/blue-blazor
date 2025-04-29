@@ -84,8 +84,9 @@ public partial class DialogProvider : ComponentBase, IDisposable
         {
             StateHasChanged();
             await DialogService.ClosedAsync(dialogReference);
-            if (dialogReference.DestroyOnClose)
+            if (!dialogReference.KeepOnClose)
             {
+                await Task.Delay(500);
                 DestroyDialog(dialogReference);
             } 
         }

@@ -13,7 +13,7 @@ namespace BlueBlazor.Components;
 /// 
 /// Uses `&lt;dxbl-popup-root&gt;&lt;/dxbl-popup-root&gt;` for compatibility with DevExpress Popups.
 /// </summary>
-public partial class OffcanvasDialog : NewDialogBase
+public partial class OffcanvasDialog : DialogBase
 {
     private string? _offcanvasClass = "offcanvas";
 

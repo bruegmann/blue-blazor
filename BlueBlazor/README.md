@@ -221,6 +221,8 @@ To open a dialog, you can use the new `DialogOpener` component together with `Mo
 + </DialogOpener>
 ```
 
+For more information, check out the Getting Started section above and the doc pages for `DialogProvider` and `DialogOpener`.
+
 ### From v2 to v3
 
 Component `Text` has been renamed to `TextInput` to avoid conflicts with `<text></text>` and for a more fitting name. Also the default styling for the label has changed. You can the look back by using the `SmallLabel` attribute.

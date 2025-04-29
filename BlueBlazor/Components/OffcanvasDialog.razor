@@ -1,6 +1,6 @@
 ﻿@using Microsoft.Extensions.Localization
 
-@inherits BlueBlazor.Components.DialogBaseParts.NewDialogBase
+@inherits BlueBlazor.Components.DialogBaseParts.DialogBase
 
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
@@ -12,10 +12,10 @@
         </form>
     </div>
     <div class="@(new CssBuilder("offcanvas-body").AddClass(BodyClass))">
-        @if (Render)
-        {
-            @BodyContent
+        @BodyContent
 
+        @if (IsLastDialog)
+        {
             <!-- Compatibility with DevExpress Popups -->
             <dxbl-popup-root class="position-fixed top-0 start-0 z-1"></dxbl-popup-root>
         }

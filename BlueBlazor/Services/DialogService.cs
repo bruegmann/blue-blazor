@@ -35,8 +35,8 @@ public class DialogReference
     public RenderFragment? DialogContent { get; set; }
 
     /// <summary>
-    /// When the dialog is closed (HTML Dialog Close Event has fired), 
-    /// dialog element and reference in DialogProvider will be removed.
+    /// By default, when the dialog is closed (HTML Dialog Close Event has fired), 
+    /// dialog element and reference in DialogProvider will be removed. If you want to keep the dialog element in the DOM, set this property to true.
     /// </summary>
-    public bool DestroyOnClose { get; set; } = true;
+    public bool KeepOnClose { get; set; } = false;
 }
