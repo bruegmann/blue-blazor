@@ -1,3 +1,20 @@
+// Main color theme. E.g. used for background for body and sidebar.
+$theme: hsl(217deg 10% 94%) !default;
+$primary: hsl(217deg 91% 50%) !default;
+$white: #fff !default;
+$gray-100: hsl(217deg 17% 98%) !default;
+$gray-200: hsl(217deg 16% 93%) !default;
+$gray-300: hsl(217deg 14% 89%) !default;
+$gray-400: hsl(217deg 14% 83%) !default;
+$gray-500: hsl(217deg 11% 71%) !default;
+$gray-600: hsl(217deg 7% 46%) !default;
+$gray-700: hsl(217deg 9% 31%) !default;
+$gray-800: hsl(217deg 10% 23%) !default;
+$gray-900: hsl(217deg 11% 15%) !default;
+$black: #000 !default;
+$header-color: $gray-900 !default;
+$sidebar-color: $gray-900 !default;
+
 $light: #ecedf0 !default;
 
 // Components
@@ -20,9 +37,6 @@ $custom-checkbox-indicator-border-radius: $border-radius-sm !default;
 
 $link-decoration: none !default;
 $link-hover-decoration: underline !default;
-
-$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Roboto, Oxygen-Sans,
-    Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
 
 // Tint focus border and shadow in primary color.
 // In a future Bootstrap release, this might not be necessary anymore.

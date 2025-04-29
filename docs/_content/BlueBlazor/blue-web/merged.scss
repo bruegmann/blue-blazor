@@ -1,7 +1,24 @@
 /*!
- * Blue Web v1.11.1 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.12.0 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
+
+// Main color theme. E.g. used for background for body and sidebar.
+$theme: hsl(217deg 10% 94%) !default;
+$primary: hsl(217deg 91% 50%) !default;
+$white: #fff !default;
+$gray-100: hsl(217deg 17% 98%) !default;
+$gray-200: hsl(217deg 16% 93%) !default;
+$gray-300: hsl(217deg 14% 89%) !default;
+$gray-400: hsl(217deg 14% 83%) !default;
+$gray-500: hsl(217deg 11% 71%) !default;
+$gray-600: hsl(217deg 7% 46%) !default;
+$gray-700: hsl(217deg 9% 31%) !default;
+$gray-800: hsl(217deg 10% 23%) !default;
+$gray-900: hsl(217deg 11% 15%) !default;
+$black: #000 !default;
+$header-color: $gray-900 !default;
+$sidebar-color: $gray-900 !default;
 
 $light: #ecedf0 !default;
 
@@ -25,9 +42,6 @@ $custom-checkbox-indicator-border-radius: $border-radius-sm !default;
 
 $link-decoration: none !default;
 $link-hover-decoration: underline !default;
-
-$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Roboto, Oxygen-Sans,
-    Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
 
 // Tint focus border and shadow in primary color.
 // In a future Bootstrap release, this might not be necessary anymore.
@@ -2194,9 +2208,6 @@ $carousel-control-icon-filter-dark:   $carousel-dark-control-icon-filter !defaul
 $btn-close-filter-dark:             $btn-close-white-filter !default;
  // TODO: can be removed safely in v6, only here to avoid breaking changes in v5.3
 
-// Main color theme. E.g. used for background for body and sidebar.
-$theme: $primary !default;
-
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(
@@ -2223,7 +2234,8 @@ $shimmering: 0.8 !default;
 $scrollbar-thumb-color: white !default;
 
 // Thumb color of scrollbar as RGB (like `255, 255, 255`).
-$scrollbar-thumb-color-rgb: red($scrollbar-thumb-color), green($scrollbar-thumb-color), blue($scrollbar-thumb-color) !default;
+$scrollbar-thumb-color-rgb:
+    red($scrollbar-thumb-color), green($scrollbar-thumb-color), blue($scrollbar-thumb-color) !default;
 
 // Default size for many components, like sidebar menu items.
 $normal-size: calc(
@@ -12034,13 +12046,20 @@ input.blue-tab:checked + .blue-tab-content {
 }
 
 dialog.blue-modal {
+    --ani-scale-from: 95%;
+    --ani-scale-to: 100%;
+    --ani-translate-from: 0 0;
+    --ani-translate-to: 0 0;
+
     border: none;
     background: none;
     padding: 0;
     margin: 0;
     max-width: none;
     max-height: none;
-    transition: display 0.2s allow-discrete, overlay 0.2s allow-discrete;
+    transition:
+        display 0.2s allow-discrete,
+        overlay 0.2s allow-discrete;
     animation: blue-modal-close 0.2s forwards;
 
     .offcanvas-backdrop {
@@ -12120,8 +12139,9 @@ dialog.blue-modal:has(.offcanvas-start) {
 
 .blue-layout {
     --spacing: 0.25rem;
-    --drawer-side-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-        rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    --drawer-side-shadow:
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+        rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
     --toggler-size: calc(
         var(--bs-btn-border-width, 1px) + var(--bs-btn-padding-y, 0.375rem) +
             (var(--bs-btn-font-size, 1rem) * var(--bs-btn-line-height, 1.5)) + var(--bs-btn-padding-y, 0.375rem) +
@@ -12134,7 +12154,7 @@ dialog.blue-modal:has(.offcanvas-start) {
     --side-width: var(--blue-sidebar-width);
     --toggler-size: var(--blue-menu-item-height);
 
-    min-height: 100dvh;
+    height: 100dvh;
     position: relative;
     display: grid;
     grid-template-columns: 0 var(--toggler-size) calc(var(--side-width) - var(--toggler-size)) auto;
@@ -12232,5 +12252,88 @@ dialog.blue-modal:has(.offcanvas-start) {
     .blue-layout-state-drawer:checked ~ .blue-layout-overlay {
         display: block;
     }
+}
+
+// Collapse with details and animated
+// Right now not part of Blue Web, but could become one
+
+.blue-collapse {
+    interpolate-size: allow-keywords;
+
+    &:has(summary:focus) {
+        overflow: hidden;
+    }
+
+    summary {
+        list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .blue-collapse-chevron {
+        transition: transform 0.2s;
+    }
+
+    &[open] > summary > .blue-collapse-header > .blue-collapse-chevron,
+    &[open] > summary > .blue-collapse-chevron {
+        --blue-collapse-chevron-rotate: 90deg;
+
+        // If chevron is on the end, rotate has to be -90deg
+        &:is(:last-child) {
+            --blue-collapse-chevron-rotate: -90deg;
+        }
+
+        &:is(:first-child) {
+            --blue-collapse-chevron-rotate: 90deg;
+        }
+
+        transform: rotate(var(--blue-collapse-chevron-rotate));
+    }
+
+    &::details-content {
+        block-size: 0;
+        transition:
+            block-size 0.2s,
+            content-visibility 0.2s;
+        transition-behavior: allow-discrete;
+    }
+
+    &[open]::details-content {
+        block-size: auto;
+    }
+}
+
+@media (prefers-reduced-motion) {
+    .blue-collapse .blue-collapse-chevron,
+    .blue-collapse::details-content {
+        transition: none;
+    }
+}
+
+
+:root {
+    --bs-font-sans-serif: Inter, #{$font-family-sans-serif};
+    font-feature-settings:
+        "liga" 1,
+        "calt" 1,
+        "cv05" 1,
+        "cv07" 1,
+        "tnum" 1,
+        "zero" 1;
+}
+@supports (font-variation-settings: normal) {
+    :root {
+        --bs-font-sans-serif: InterVariable, #{$font-family-sans-serif};
+    }
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+    font-feature-settings: inherit;
 }
 

@@ -31,13 +31,20 @@
 }
 
 dialog.blue-modal {
+    --ani-scale-from: 95%;
+    --ani-scale-to: 100%;
+    --ani-translate-from: 0 0;
+    --ani-translate-to: 0 0;
+
     border: none;
     background: none;
     padding: 0;
     margin: 0;
     max-width: none;
     max-height: none;
-    transition: display 0.2s allow-discrete, overlay 0.2s allow-discrete;
+    transition:
+        display 0.2s allow-discrete,
+        overlay 0.2s allow-discrete;
     animation: blue-modal-close 0.2s forwards;
 
     .offcanvas-backdrop {

@@ -1,6 +1,3 @@
-// Main color theme. E.g. used for background for body and sidebar.
-$theme: $primary !default;
-
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(
@@ -27,7 +24,8 @@ $shimmering: 0.8 !default;
 $scrollbar-thumb-color: white !default;
 
 // Thumb color of scrollbar as RGB (like `255, 255, 255`).
-$scrollbar-thumb-color-rgb: red($scrollbar-thumb-color), green($scrollbar-thumb-color), blue($scrollbar-thumb-color) !default;
+$scrollbar-thumb-color-rgb:
+    red($scrollbar-thumb-color), green($scrollbar-thumb-color), blue($scrollbar-thumb-color) !default;
 
 // Default size for many components, like sidebar menu items.
 $normal-size: calc(

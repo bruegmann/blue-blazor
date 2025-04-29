@@ -1,0 +1,23 @@
+:root {
+    --bs-font-sans-serif: Inter, #{$font-family-sans-serif};
+    font-feature-settings:
+        "liga" 1,
+        "calt" 1,
+        "cv05" 1,
+        "cv07" 1,
+        "tnum" 1,
+        "zero" 1;
+}
+@supports (font-variation-settings: normal) {
+    :root {
+        --bs-font-sans-serif: InterVariable, #{$font-family-sans-serif};
+    }
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+    font-feature-settings: inherit;
+}
