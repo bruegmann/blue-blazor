@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "blue-web": "^1.12.0",
-        "blue-web-components": "^1.0.7"
+        "blue-web-components": "^1.0.7",
+        "themify": "file:../../themify/themify-0.0.13.tgz"
     }
 }

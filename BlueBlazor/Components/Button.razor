@@ -1,4 +1,5 @@
 ﻿@using Microsoft.Extensions.Localization
+@namespace BlueBlazor.Components
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
 <ButtonOrA @attributes="AdditionalAttributes"
@@ -9,8 +10,7 @@
            aria-label="@(LabelHidden ? Label : null)">
     @if (Busy || busy)
     {
-        <span class="spinner-border spinner-border-sm me-1 bi" aria-hidden="true"></span>
-
+        <span class="spinner-border spinner-border-sm bi me-1" aria-hidden="true"></span>
         <span role="status">@L["Loading"]…</span>
     }
     else

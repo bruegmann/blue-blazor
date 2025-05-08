@@ -27,7 +27,10 @@ async function copyDirectory(source, destination) {
     }
 }
 
-const sourceDir = path.join(__dirname, "..", "node_modules", "blue-web", "dist")
-const destinationDir = path.join(__dirname, "..", "wwwroot", "blue-web")
+copyDirectory(
+    path.join(__dirname, "..", "node_modules", "blue-web", "dist"),
+    path.join(__dirname, "..", "wwwroot", "blue-web"))
 
-copyDirectory(sourceDir, destinationDir)
+copyDirectory(
+    path.join(__dirname, "..", "node_modules", "themify", "dist"),
+    path.join(__dirname, "..", "wwwroot", "themify"))
