@@ -36,6 +36,10 @@
                         {
                             <span class="badge bg-info ms-1 mt-1">Update</span>
                         }
+                        @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
+                        {
+                            <span class="badge text-bg-warning ms-1 mt-1" title="Experimental"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10240 10240" class="o-collection-icon" width="1em" height="1em" fill="currentColor"><path fill="" d="M7144 5440c139,291 216,616 216,960 0,1237 -1003,2240 -2240,2240 -1237,0 -2240,-1003 -2240,-2240 0,-344 77,-669 216,-960l4048 0zm-1224 320c-442,0 -800,358 -800,800 0,442 358,800 800,800 442,0 800,-358 800,-800 0,-442 -358,-800 -800,-800zm-1280 1600c-265,0 -480,215 -480,480 0,265 215,480 480,480 265,0 480,-215 480,-480 0,-265 -215,-480 -480,-480z"></path><path fill="" d="M6400 3467c1130,493 1920,1621 1920,2933 0,1767 -1433,3200 -3200,3200 -1767,0 -3200,-1433 -3200,-3200 0,-1312 790,-2440 1920,-2933l0 -2187 -320 0c-176,0 -320,-144 -320,-320l0 0c0,-176 144,-320 320,-320l640 0c176,0 320,144 320,320l0 2925 -384 168c-932,407 -1536,1327 -1536,2347 0,1414 1146,2560 2560,2560 1414,0 2560,-1146 2560,-2560 0,-1020 -604,-1940 -1536,-2347l-384 -168 0 -2925c0,-176 144,-320 320,-320l640 0c176,0 320,144 320,320l0 0c0,176 -144,320 -320,320l-320 0 0 2187z"></path></svg></span>
+                        }
                     </AfterLabelContent>
                 </MenuItem>
             }
@@ -148,6 +152,9 @@
         },
         {"DialogProvider", new() {
             Icon = @<BiSquare />, IsNew = true }
+        },
+        {"ThemeGenerator", new() {
+            Icon = @<BiPalette />, IconForActive = @<BiPaletteFill />, IsExperimental = true }
         } };
     RenderFragment defaultIcon = @<BiFileCode />;
 
@@ -157,5 +164,6 @@
         public RenderFragment? IconForActive { get; set; }
         public bool IsNew { get; set; } = false;
         public bool IsUpdate { get; set; } = false;
+        public bool IsExperimental { get; set; } = false;
     }
 }
