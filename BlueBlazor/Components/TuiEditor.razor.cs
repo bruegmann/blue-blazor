@@ -38,6 +38,9 @@ public partial class TuiEditor : ComponentBase, IDisposable
     [Parameter]
     public string Height { get; set; } = "200px";
 
+    [Parameter]
+    public string? Placeholder { get; set; }
+
     [Parameter(CaptureUnmatchedValues = true)]
     public IDictionary<string, object>? AdditionalAttributes { get; set; }
 
@@ -60,7 +63,7 @@ public partial class TuiEditor : ComponentBase, IDisposable
     {
         if (_module is not null)
         {
-            await _module.InvokeVoidAsync("Initialize", element, DotNetObjectReference.Create(this), Value, Language, Height, AutoFocus);
+            await _module.InvokeVoidAsync("Initialize", element, DotNetObjectReference.Create(this), Value, Language, Height, AutoFocus, Placeholder);
         }
     }
 

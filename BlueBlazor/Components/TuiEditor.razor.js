@@ -8,7 +8,8 @@ export function Initialize(
     initialValue,
     language,
     height,
-    autoFocus
+    autoFocus,
+    placeholder = undefined
 ) {
     if (!language) language = document.documentElement.lang
 
@@ -27,7 +28,8 @@ export function Initialize(
             ["ul", "ol", "task", "indent", "outdent"],
             ["link"]
         ],
-        autofocus: autoFocus || element.getAttribute("autofocus") !== null
+        autofocus: autoFocus || element.getAttribute("autofocus") !== null,
+        placeholder: placeholder
     })
 
     editor.on("change", () => {

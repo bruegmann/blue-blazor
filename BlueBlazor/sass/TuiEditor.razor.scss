@@ -1,3 +1,10 @@
+.blue-blazor-toast-ui-editor ::deep .placeholder {
+    /* Solves conflict with Bootstrap and unsets styles for `.placeholder` */
+    cursor: inherit;
+    background-color: inherit;
+    opacity: inherit;
+}
+
 /*!
  * Original by
  * @toast-ui/editor
