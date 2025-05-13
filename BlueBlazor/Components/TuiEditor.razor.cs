@@ -17,10 +17,12 @@ public partial class TuiEditor : ComponentBase, IDisposable
 {
     private ElementReference _element;
     private IJSObjectReference? _module;
+    private string _id = Guid.NewGuid().ToString();
 
     [Inject]
     private IJSRuntime JSRuntime { get; set; } = default!;
 
+    private string? _value;
     [Parameter]
     public string Value { get; set; } = "";
 
@@ -41,11 +43,22 @@ public partial class TuiEditor : ComponentBase, IDisposable
     [Parameter]
     public string? Placeholder { get; set; }
 
+    /// <summary>
+    /// Will be fired when user presses Ctrl (or Control) and Enter together.
+    /// </summary>
+    [Parameter]
+    public EventCallback OnApply { get; set; }
+
     [Parameter(CaptureUnmatchedValues = true)]
     public IDictionary<string, object>? AdditionalAttributes { get; set; }
 
     [CascadingParameter(Name = "AutoFocus")]
     protected bool AutoFocus { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _value = Value;
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -59,25 +72,44 @@ public partial class TuiEditor : ComponentBase, IDisposable
         }
     }
 
+    protected override async Task OnParametersSetAsync()
+    {
+        if (_value != Value)
+        {
+            _value = Value;
+            if (_module is not null)
+            {
+                await _module.InvokeVoidAsync("SetValue", _id, Value);
+            }
+        }
+    }
+
     public async Task Initialize(ElementReference element)
     {
         if (_module is not null)
         {
-            await _module.InvokeVoidAsync("Initialize", element, DotNetObjectReference.Create(this), Value, Language, Height, AutoFocus, Placeholder);
+            await _module.InvokeVoidAsync("Initialize", _id, element, DotNetObjectReference.Create(this), Value, Language, Height, AutoFocus, Placeholder);
         }
     }
 
     [JSInvokable]
     public async Task InvokeChange(string value)
     {
+        _value = value;
         await ValueChanged.InvokeAsync(value);
+    }
+
+    [JSInvokable]
+    public async Task InvokeApply()
+    {
+        await OnApply.InvokeAsync();
     }
 
     public void Dispose()
     {
         if (_module is not null)
         {
-            _module.InvokeVoidAsync("Destroy");
+            _module.InvokeVoidAsync("Destroy", _id);
         }
     }
 }

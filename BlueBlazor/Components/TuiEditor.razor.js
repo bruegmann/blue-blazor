@@ -1,8 +1,9 @@
 ﻿const Editor = toastui.Editor
 
-let editor
+const collection = {}
 
 export function Initialize(
+    id,
     element,
     dotNetHelper,
     initialValue,
@@ -13,7 +14,7 @@ export function Initialize(
 ) {
     if (!language) language = document.documentElement.lang
 
-    editor = new Editor({
+    const editor = new Editor({
         el: element,
         initialValue,
         height,
@@ -35,8 +36,26 @@ export function Initialize(
     editor.on("change", () => {
         dotNetHelper.invokeMethodAsync("InvokeChange", editor.getMarkdown())
     })
+
+    element.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && e.ctrlKey) {
+            dotNetHelper.invokeMethodAsync("InvokeApply")
+        }
+    })
+    collection[id] = editor
 }
 
-export function Destroy() {
-    if (editor && editor.Destroy) editor.Destroy()
+export function SetValue(id, value) {
+    const editor = collection[id]
+    if (editor) {
+        editor.setMarkdown(value, false)
+    }
+}
+
+export function Destroy(id) {
+    const editor = collection[id]
+    if (editor && editor.Destroy) {
+        editor.Destroy()
+        delete collection[id]
+    }
 }

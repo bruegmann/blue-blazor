@@ -1,21 +1,4 @@
-// Blue variables
-//
-
-/*$theme: hsl(238deg 76% 94%);
-$primary: hsl(238deg 76% 50%);
-$white: #fff;
-$gray-100: hsl(238deg 17% 90%);
-$gray-200: hsl(238deg 16% 93%);
-$gray-300: hsl(238deg 14% 89%);
-$gray-400: hsl(238deg 14% 83%);
-$gray-500: hsl(238deg 11% 71%);
-$gray-600: hsl(238deg 7% 46%);
-$gray-700: hsl(238deg 9% 31%);
-$gray-800: hsl(238deg 10% 23%);
-$gray-900: hsl(238deg 11% 15%);
-$black: #000;
-$header-color: $gray-900;
-$sidebar-color: $gray-900;*/
+$color-mode-type: media-query;
 
 @import "node_modules/blue-web/dist/style";
 @import "node_modules/blue-web/dist/neu";
@@ -54,7 +37,7 @@ $sidebar-color: $gray-900;*/
 }
 
 .example-code {
-    @extend .border, .rounded, .bg-light;
+    @extend .border, .rounded, .bg-body-secondary;
 }
 
 .example-code summary {

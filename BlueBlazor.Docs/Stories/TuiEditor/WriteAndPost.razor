@@ -1,0 +1,24 @@
+﻿<div class="d-flex flex-column gap-3">
+    <TuiEditor @bind-Value="@Input" OnApply="HandleApply" Placeholder="Enter a text" />
+    <Button Label="Submit" FilledPrimary OnClick="HandleApply" />
+
+    @foreach (string post in _posts)
+    {
+        <div class="card">
+            <div class="card-body">
+                @post
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<string> _posts = [];
+    private string Input { get; set; } = "";
+
+    private void HandleApply()
+    {
+        _posts.Add(Input);
+        Input = string.Empty;
+    }
+}
