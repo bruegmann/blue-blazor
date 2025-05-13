@@ -1,10 +1,3 @@
-.blue-btn-silent {
-    &:not(:hover):not(:focus):not(:active) {
-        border-color: transparent;
-        color: inherit;
-    }
-}
-
 @media (hover: hover) {
     .blue-d-hover {
         &:not(:hover):not(:focus):not(:active):not(.active):not(:focus-within) {

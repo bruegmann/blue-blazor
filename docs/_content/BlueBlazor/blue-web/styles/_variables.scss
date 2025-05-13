@@ -2,20 +2,10 @@ $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(
     (
-        "theme": $theme,
-        "white": white,
-        "black": #212529
+        "theme": $theme
     ),
     $theme-colors
 );
-
-// For Bootstrap 5.1 this needs to be set. Otherwise we couldn't use .bg-* and .text-* utils with our custom $theme
-// Since Bootstrap 5.2 it's no longer required, so it's commented out. If everything works fine, this can be removed for
-// future releases.
-// $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
-// $utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
-// $utilities-text-colors: map-merge($utilities-text-colors, map-loop($utilities-colors, rgba-css-var, "$key", "text"));
-// $utilities-bg-colors: map-merge($utilities-bg-colors, map-loop($utilities-colors, rgba-css-var, "$key", "bg"));
 
 // Alpha value (RGBA) e.g. for header background.
 $shimmering: 0.8 !default;
@@ -54,6 +44,7 @@ $bla-sidebar-width: 16.563rem !default;
 
 // Background of sidebar.
 $sidebar-bg: $theme !default;
+$sidebar-bg-dark: $theme-dark !default;
 
 // Background of sidebar when it's opened (on mobile devices).
 $sidebar-open-bg: darken($sidebar-bg, 30%) !default;
@@ -62,25 +53,27 @@ $sidebar-open-bg: darken($sidebar-bg, 30%) !default;
 $sidebar-deep-bg: darken($sidebar-bg, 4%) !default;
 
 // Text color of sidebar.
-$sidebar-color: #fff !default;
+$sidebar-color: color-contrast($sidebar-bg, $gray-900) !default;
+$sidebar-color-dark: color-contrast($sidebar-bg-dark, $gray-900) !default;
 
 // Color of indicator for active sidebar item.
 $sidebar-indicator-color: $sidebar-color !default;
+$sidebar-indicator-color-dark: $sidebar-color-dark !default;
 
 // Background of search control in sidebar.
 $sidebar-search-bg: $input-bg !default;
 
 // Background of the body element
-$app-bg: $sidebar-bg !default;
-
-// Text color of header elements
-$header-color: #fff !default;
+$app-bg: $theme !default;
+$app-bg-dark: $theme-dark !default;
 
 // Background color of Header
 $header-bg: $theme !default;
+$header-bg-dark: $theme-dark !default;
 
-// Background color of Header as RGB (like `255, 255, 255`).
-$header-bg-rgb: red($header-bg), green($header-bg), blue($header-bg) !default;
+// Text color of header elements
+$header-color: color-contrast($header-bg, $gray-900) !default;
+$header-color-dark: color-contrast($header-bg-dark, $gray-900) !default;
 
 // Background of header action menu dropdown menus
 $header-deep-bg: darken($header-bg, 4%) !default;
@@ -101,6 +94,8 @@ $sidebar-shrink-breakpoint: 600px !default;
 $sidebar-expanded-breakpoint: 1400px !default;
 
 :root {
+    --blue-app-bg: #{$app-bg};
+
     --blue-scrollbar-thumb-color-rgb: #{$scrollbar-thumb-color-rgb};
     --blue-scrollbar-size: #{$scrollbar-size};
 
@@ -109,27 +104,24 @@ $sidebar-expanded-breakpoint: 1400px !default;
     --blue-theme: var(--theme, #{$theme});
     --blue-shimmering: 0.9;
 
-    --blue-app-bg: #{$app-bg};
-
     --blue-sidebar-bg: #{$sidebar-bg};
-    --blue-sidebar-depth-1-bg: #{darken($sidebar-bg, 4%)};
-    --blue-sidebar-depth-2-bg: #{darken(darken($sidebar-bg, 4%), 4%)};
-    --blue-sidebar-depth-3-bg: #{darken(darken($sidebar-bg, 4%), 8%)};
-    --blue-sidebar-depth-4-bg: #{darken(darken($sidebar-bg, 4%), 12%)};
-    --blue-sidebar-depth-5-bg: #{darken(darken($sidebar-bg, 4%), 16%)};
-    --blue-sidebar-depth-6-bg: #{darken(darken($sidebar-bg, 4%), 20%)};
-
     --blue-header-bg: #{$header-bg};
-    --blue-header-bg-rgb: #{$header-bg-rgb};
-    --blue-header-depth-1-bg: #{darken($header-bg, 4%)};
-    --blue-header-depth-2-bg: #{darken(darken($header-bg, 4%), 4%)};
-    --blue-header-depth-3-bg: #{darken(darken($header-bg, 4%), 8%)};
-    --blue-header-depth-4-bg: #{darken(darken($header-bg, 4%), 12%)};
-    --blue-header-depth-5-bg: #{darken(darken($header-bg, 4%), 16%)};
-    --blue-header-depth-6-bg: #{darken(darken($header-bg, 4%), 20%)};
 
     --blue-header-color: #{$header-color};
     --blue-action-link-bg-color: var(--blue-theme);
     --blue-menu-item-indicator-bg: #{$sidebar-indicator-color};
     --blue-menu-item-height: #{$normal-size};
+}
+
+@include color-mode(dark, true) {
+    --blue-app-bg: #{$app-bg-dark};
+
+    --blue-sidebar-color: #{$sidebar-color-dark};
+
+    --blue-sidebar-bg: #{$sidebar-bg-dark};
+    --blue-header-bg: #{$header-bg-dark};
+
+    --blue-header-color: #{$header-color-dark};
+
+    --blue-menu-item-indicator-bg: #{$sidebar-indicator-color-dark};
 }

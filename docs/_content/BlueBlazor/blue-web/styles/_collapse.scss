@@ -4,10 +4,6 @@
 .blue-collapse {
     interpolate-size: allow-keywords;
 
-    &:has(summary:focus) {
-        overflow: hidden;
-    }
-
     summary {
         list-style: none;
     }

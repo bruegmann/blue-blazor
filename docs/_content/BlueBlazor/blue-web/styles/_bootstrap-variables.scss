@@ -1,5 +1,6 @@
 // Main color theme. E.g. used for background for body and sidebar.
 $theme: hsl(217deg 10% 94%) !default;
+$theme-dark: hsl(217deg 10% 8%) !default;
 $primary: hsl(217deg 91% 50%) !default;
 $white: #fff !default;
 $gray-100: hsl(217deg 17% 98%) !default;
@@ -12,8 +13,6 @@ $gray-700: hsl(217deg 9% 31%) !default;
 $gray-800: hsl(217deg 10% 23%) !default;
 $gray-900: hsl(217deg 11% 15%) !default;
 $black: #000 !default;
-$header-color: $gray-900 !default;
-$sidebar-color: $gray-900 !default;
 
 $light: #ecedf0 !default;
 

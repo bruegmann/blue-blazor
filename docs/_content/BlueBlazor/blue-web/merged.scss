@@ -1,10 +1,11 @@
 /*!
- * Blue Web v1.12.0 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.13.0 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
 // Main color theme. E.g. used for background for body and sidebar.
 $theme: hsl(217deg 10% 94%) !default;
+$theme-dark: hsl(217deg 10% 8%) !default;
 $primary: hsl(217deg 91% 50%) !default;
 $white: #fff !default;
 $gray-100: hsl(217deg 17% 98%) !default;
@@ -17,8 +18,6 @@ $gray-700: hsl(217deg 9% 31%) !default;
 $gray-800: hsl(217deg 10% 23%) !default;
 $gray-900: hsl(217deg 11% 15%) !default;
 $black: #000 !default;
-$header-color: $gray-900 !default;
-$sidebar-color: $gray-900 !default;
 
 $light: #ecedf0 !default;
 
@@ -2208,729 +2207,6 @@ $carousel-control-icon-filter-dark:   $carousel-dark-control-icon-filter !defaul
 $btn-close-filter-dark:             $btn-close-white-filter !default;
  // TODO: can be removed safely in v6, only here to avoid breaking changes in v5.3
 
-$theme-colors: () !default;
-// stylelint-disable-next-line scss/dollar-variable-default
-$theme-colors: map-merge(
-    (
-        "theme": $theme,
-        "white": white,
-        "black": #212529
-    ),
-    $theme-colors
-);
-
-// For Bootstrap 5.1 this needs to be set. Otherwise we couldn't use .bg-* and .text-* utils with our custom $theme
-// Since Bootstrap 5.2 it's no longer required, so it's commented out. If everything works fine, this can be removed for
-// future releases.
-// $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
-// $utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
-// $utilities-text-colors: map-merge($utilities-text-colors, map-loop($utilities-colors, rgba-css-var, "$key", "text"));
-// $utilities-bg-colors: map-merge($utilities-bg-colors, map-loop($utilities-colors, rgba-css-var, "$key", "bg"));
-
-// Alpha value (RGBA) e.g. for header background.
-$shimmering: 0.8 !default;
-
-// Thumb color of scrollbar.
-$scrollbar-thumb-color: white !default;
-
-// Thumb color of scrollbar as RGB (like `255, 255, 255`).
-$scrollbar-thumb-color-rgb:
-    red($scrollbar-thumb-color), green($scrollbar-thumb-color), blue($scrollbar-thumb-color) !default;
-
-// Default size for many components, like sidebar menu items.
-$normal-size: calc(
-    var(--bs-btn-border-width, 1px) + var(--bs-btn-padding-y, 0.375rem) +
-        (var(--bs-btn-font-size, 1rem) * var(--bs-btn-line-height, 1.5)) + var(--bs-btn-padding-y, 0.375rem) +
-        var(--bs-btn-border-width, 1px)
-) !default;
-
-// Height of actions menu when it is expanded, like on mobile devices.
-$actions-height: 7.5rem !default;
-
-// Background color of menu toggle button.
-$bla-button-bg-normal: rgba(0, 0, 0, 0.1) !default;
-
-// Background color of menu toggle button on hover state.
-$bla-button-bg-hover: rgba(white, 0.25) !default;
-
-// Font size for sidebar menu items.
-$bla-btn-font-size: 1em !default;
-
-// Padding for action menu items.
-$bla-header-nav-padding: 0.75rem !default;
-
-// Width of the sidebar.
-$bla-sidebar-width: 16.563rem !default;
-
-// Background of sidebar.
-$sidebar-bg: $theme !default;
-
-// Background of sidebar when it's opened (on mobile devices).
-$sidebar-open-bg: darken($sidebar-bg, 30%) !default;
-
-// Background of sidebar menu dropdown menus
-$sidebar-deep-bg: darken($sidebar-bg, 4%) !default;
-
-// Text color of sidebar.
-$sidebar-color: #fff !default;
-
-// Color of indicator for active sidebar item.
-$sidebar-indicator-color: $sidebar-color !default;
-
-// Background of search control in sidebar.
-$sidebar-search-bg: $input-bg !default;
-
-// Background of the body element
-$app-bg: $sidebar-bg !default;
-
-// Text color of header elements
-$header-color: #fff !default;
-
-// Background color of Header
-$header-bg: $theme !default;
-
-// Background color of Header as RGB (like `255, 255, 255`).
-$header-bg-rgb: red($header-bg), green($header-bg), blue($header-bg) !default;
-
-// Background of header action menu dropdown menus
-$header-deep-bg: darken($header-bg, 4%) !default;
-
-// Background color, when hovering action menu item.
-$actions-control-bg-hover: $bla-button-bg-hover !default;
-
-// Width and height of the scrollbar indicators
-$scrollbar-size: 10px;
-
-// Shrink sidebar on smaller screens
-$sidebar-shrink: true !default;
-
-// Breakpoint for sidebar shrink
-$sidebar-shrink-breakpoint: 600px !default;
-
-// Breakpoint for sidebar fully expanded
-$sidebar-expanded-breakpoint: 1400px !default;
-
-:root {
-    --blue-scrollbar-thumb-color-rgb: #{$scrollbar-thumb-color-rgb};
-    --blue-scrollbar-size: #{$scrollbar-size};
-
-    --blue-sidebar-width: #{$bla-sidebar-width};
-    --blue-sidebar-color: #{$sidebar-color};
-    --blue-theme: var(--theme, #{$theme});
-    --blue-shimmering: 0.9;
-
-    --blue-app-bg: #{$app-bg};
-
-    --blue-sidebar-bg: #{$sidebar-bg};
-    --blue-sidebar-depth-1-bg: #{darken($sidebar-bg, 4%)};
-    --blue-sidebar-depth-2-bg: #{darken(darken($sidebar-bg, 4%), 4%)};
-    --blue-sidebar-depth-3-bg: #{darken(darken($sidebar-bg, 4%), 8%)};
-    --blue-sidebar-depth-4-bg: #{darken(darken($sidebar-bg, 4%), 12%)};
-    --blue-sidebar-depth-5-bg: #{darken(darken($sidebar-bg, 4%), 16%)};
-    --blue-sidebar-depth-6-bg: #{darken(darken($sidebar-bg, 4%), 20%)};
-
-    --blue-header-bg: #{$header-bg};
-    --blue-header-bg-rgb: #{$header-bg-rgb};
-    --blue-header-depth-1-bg: #{darken($header-bg, 4%)};
-    --blue-header-depth-2-bg: #{darken(darken($header-bg, 4%), 4%)};
-    --blue-header-depth-3-bg: #{darken(darken($header-bg, 4%), 8%)};
-    --blue-header-depth-4-bg: #{darken(darken($header-bg, 4%), 12%)};
-    --blue-header-depth-5-bg: #{darken(darken($header-bg, 4%), 16%)};
-    --blue-header-depth-6-bg: #{darken(darken($header-bg, 4%), 20%)};
-
-    --blue-header-color: #{$header-color};
-    --blue-action-link-bg-color: var(--blue-theme);
-    --blue-menu-item-indicator-bg: #{$sidebar-indicator-color};
-    --blue-menu-item-height: #{$normal-size};
-}
-
-
-@mixin slide-transition() {
-    $slide-transition: width 0.5s;
-    transition: $slide-transition;
-
-    @media (prefers-reduced-motion) {
-        transition: none;
-    }
-
-    @media (prefers-reduced-motion) {
-        transition: none;
-    }
-}
-
-@mixin header-bg() {
-    background-image: linear-gradient(
-        var(--blue-header-bg, $header-bg),
-        rgba(var(--blue-header-bg-rgb, var(--bs-theme-rgb)), var(--blue-shimmering, $shimmering))
-    );
-    backdrop-filter: blur(3px) saturate(125%);
-}
-
-@mixin blue-menu-item-indicator() {
-    content: "";
-    position: absolute;
-    top: 0.625rem;
-    bottom: 0.625rem;
-    left: 0.125rem;
-    right: initial;
-    width: 0.25rem;
-    height: auto;
-    background-color: var(--blue-menu-item-indicator-bg);
-    border-radius: 1rem;
-    animation: blue-menu-item-indicator-in-from-side 0.2s ease-in-out;
-
-    @media (prefers-reduced-motion) {
-        animation-duration: 0s;
-    }
-}
-
-@mixin blue-menu-item-indicator-horizontal() {
-    top: initial;
-    bottom: 0.125rem;
-    left: 0.625rem;
-    right: 0.625rem;
-    width: auto;
-    height: 0.25rem;
-    animation: blue-menu-item-indicator-in-from-below 0.2s ease-in-out;
-
-    @media (prefers-reduced-motion) {
-        animation-duration: 0s;
-    }
-}
-
-@mixin blue-menu-item-dropdown-for-shrunk-sidebar() {
-    & > .blue-menu-item-wrapper {
-        display: block;
-        position: relative;
-
-        &:not(:has(.blue-menu-item-dropdown)) > .blue-menu-item:hover {
-            .blue-menu-item-label {
-                &::before,
-                & {
-                    animation: tips-horz 150ms cubic-bezier(0.5, 0, 0.6, 1.3) 1ms forwards;
-
-                    @media (prefers-reduced-motion) {
-                        animation-duration: 0s;
-                    }
-                }
-
-                &::before {
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    border: 5px solid transparent;
-                    z-index: 1001;
-
-                    top: 50%;
-                    border-left-width: 0;
-                    border-right-color: var(--bs-tooltip-bg, #353539);
-                    left: calc(0em - 5px);
-                    transform: translate(0.5em, -50%);
-                    opacity: 0;
-                }
-
-                display: block;
-                text-transform: none;
-                line-height: 1;
-                font-size: 0.9em;
-                -webkit-user-select: none;
-                user-select: none;
-                pointer-events: none;
-                position: absolute;
-                font-family: var(--bs-font-sans-serif);
-                text-align: center;
-                min-width: 3em;
-                max-width: var(--bs-tooltip-max-width, 21em);
-                padding: var(--bs-tooltip-padding-y, 1ch) var(--bs-tooltip-padding-x, 1.5ch);
-                border-radius: var(--bs-tooltip-border-radius, 0.3em);
-                box-shadow: 0 1em 2em -0.5em rgba(0, 0, 0, 0.35);
-                background: var(--bs-tooltip-bg, #353539);
-                color: var(--bs-tooltip-color, #fff);
-                z-index: 1000;
-                width: auto;
-                top: 50%;
-                left: calc(100% + 5px);
-                transform: translate(-0.5em, -50%);
-                overflow: visible;
-                opacity: 0;
-            }
-        }
-
-        & > .blue-menu-item-dropdown,
-        & > .blue-outside > .blue-menu-item-dropdown {
-            @extend .ms-1;
-            @extend .rounded;
-            @extend .shadow;
-            @extend .blue-menu-item-dropdown-from-start;
-            @extend .blue-sidebar-state;
-            @extend .open;
-
-            position: absolute;
-            top: 0;
-            width: $bla-sidebar-width;
-            left: $normal-size;
-            max-height: calc(100vh - (var(--offset-top, 0px) + 1rem));
-            overflow-y: auto;
-            overflow-x: hidden;
-            background-color: var(--blue-sidebar-bg);
-
-            &::before {
-                content: none;
-            }
-        }
-
-        &:has(.blue-menu-item-dropdown) {
-            & > .blue-menu-item {
-                @extend .highlighted;
-            }
-        }
-    }
-}
-
-@mixin show-action-menu-again() {
-    max-height: initial;
-    overflow: initial;
-
-    .blue-actions-menu {
-        max-width: initial;
-    }
-}
-
-@mixin actions($breakpoint) {
-    @media (max-width: #{$breakpoint + 1px}) {
-        &.open {
-            display: block;
-            width: auto;
-            position: absolute;
-            z-index: 1;
-            left: unset;
-            top: 0.25rem;
-            box-shadow: 0.6rem 6rem 6rem rgba(0, 0, 0, 0.3);
-            animation: fadeInDown 0.5s;
-
-            @media (prefers-reduced-motion) {
-                animation-duration: 0s;
-            }
-
-            border-radius: $border-radius;
-
-            @include show-action-menu-again();
-
-            .blue-actions-menu-item:not(.blue-actions-menu-toggle) {
-                display: flex;
-            }
-
-            .blue-actions-menu {
-                flex-direction: column;
-                .blue-menu-item-dropdown {
-                    --blue-sidebar-bg: #{darken($theme, 34%)};
-                }
-            }
-        }
-
-        .blue-actions-menu-item:not(.blue-actions-menu-toggle) {
-            display: none;
-        }
-    }
-
-    @media (min-width: $breakpoint) {
-        @include show-action-menu-again();
-
-        .blue-actions-menu .blue-actions-label {
-            display: inline;
-        }
-
-        .blue-actions-menu-toggle {
-            display: none;
-        }
-
-        .blue-actions-menu > .blue-menu-item-wrapper > .blue-menu-item-dropdown,
-        .blue-actions-menu > .blue-menu-item-wrapper > * > .blue-menu-item-dropdown {
-            position: absolute;
-            right: 0;
-        }
-    }
-}
-
-@mixin switch($width: 35px, $height: 20px, $padding: 3px, $color: $body-color, $color-active: $success) {
-    $slider-size: $height - ($padding * 2);
-
-    & {
-        position: relative;
-        display: inline-block;
-        width: $width;
-        height: $height;
-
-        input {
-            display: none;
-        }
-
-        &.disabled {
-            opacity: 0.8;
-        }
-
-        &:not(.disabled) {
-            .slider {
-                cursor: pointer;
-            }
-        }
-
-        .slider {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: $input-group-addon-bg;
-            transition: 0.4s;
-
-            @media (prefers-reduced-motion) {
-                transition: none;
-            }
-
-            box-shadow: inset 0 0 0 1px rgba($color, 0.5);
-
-            &::before {
-                content: "";
-                position: absolute;
-                height: $slider-size;
-                width: $slider-size;
-                left: $padding;
-                bottom: $padding;
-                background-color: $color;
-                transition: 0.4s;
-
-                @media (prefers-reduced-motion) {
-                    transition: none;
-                }
-            }
-
-            &::after {
-                content: attr(data-label);
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                margin-left: ($slider-size * 0.5);
-                transition: margin-left 0.4s;
-
-                @media (prefers-reduced-motion) {
-                    transition: none;
-                }
-
-                color: $color;
-            }
-        }
-
-        input:checked {
-            & + .slider {
-                background-color: $color-active;
-                box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.3);
-
-                &::before {
-                    transform: translateX($width - $slider-size - ($padding * 2));
-                    background-color: white;
-                }
-
-                &::after {
-                    color: white;
-                    margin-left: ($slider-size * 0.5) * -1;
-                }
-            }
-        }
-        input:focus + .slider {
-            box-shadow: 0 0 1px $color-active;
-        }
-    }
-}
-
-@mixin customProperty($name, $value) {
-    // fallback for older browser who do not support custom properties / css variables
-    #{$name}: #{$value};
-
-    // create a css variable (this might override the variable on any of the ancestor elements)
-    --#{$name}: #{$value};
-
-    // use the css variable on the property
-    #{$name}: var(--#{$name}, #{$value});
-}
-
-@mixin scroll-shadow($bg, $light-base: white) {
-    background: linear-gradient($bg 30%, rgba($light-base, 0)),
-        linear-gradient(rgba($light-base, 0) 10px, $bg 70%) bottom,
-        radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
-        radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%) bottom;
-    background-repeat: no-repeat;
-    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
-    background-attachment: local, local, scroll, scroll;
-}
-
-
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes blAppearUp {
-    from {
-        margin-top: 2.5rem;
-    }
-    to {
-        margin-top: 0;
-    }
-}
-
-@keyframes blue-menu-item-dropdown {
-    from {
-        transform: translateY(-50%);
-        opacity: 0;
-    }
-}
-
-@keyframes enabledBlueAppPage {
-    from {
-        transform: scale(0.98);
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translate3d(0, -100%, 0);
-    }
-
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-@keyframes alert-in {
-    from {
-        transform: scale(0, 0);
-        opacity: 0.2;
-        transition: 0s;
-    }
-}
-
-@keyframes circlebounce {
-    0%,
-    100% {
-        transform: scale(0);
-    }
-    50% {
-        transform: scale(1);
-    }
-}
-
-@keyframes scrolling {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(100%);
-    }
-}
-
-
-@mixin bsBanner($file) {
-  /*!
-   * Bootstrap #{$file} v5.3.5 (https://getbootstrap.com/)
-   * Copyright 2011-2025 The Bootstrap Authors
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-   */
-}
-
-@include bsBanner("");
-
-// scss-docs-start import-stack
-// Configuration
-
-
-
-// Re-assigned maps
-//
-// Placed here so that others can override the default Sass maps and see automatic updates to utilities and more.
-
-// scss-docs-start theme-colors-rgb
-$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value") !default;
-// scss-docs-end theme-colors-rgb
-
-// scss-docs-start theme-text-map
-$theme-colors-text: (
-  "primary": $primary-text-emphasis,
-  "secondary": $secondary-text-emphasis,
-  "success": $success-text-emphasis,
-  "info": $info-text-emphasis,
-  "warning": $warning-text-emphasis,
-  "danger": $danger-text-emphasis,
-  "light": $light-text-emphasis,
-  "dark": $dark-text-emphasis,
-) !default;
-// scss-docs-end theme-text-map
-
-// scss-docs-start theme-bg-subtle-map
-$theme-colors-bg-subtle: (
-  "primary": $primary-bg-subtle,
-  "secondary": $secondary-bg-subtle,
-  "success": $success-bg-subtle,
-  "info": $info-bg-subtle,
-  "warning": $warning-bg-subtle,
-  "danger": $danger-bg-subtle,
-  "light": $light-bg-subtle,
-  "dark": $dark-bg-subtle,
-) !default;
-// scss-docs-end theme-bg-subtle-map
-
-// scss-docs-start theme-border-subtle-map
-$theme-colors-border-subtle: (
-  "primary": $primary-border-subtle,
-  "secondary": $secondary-border-subtle,
-  "success": $success-border-subtle,
-  "info": $info-border-subtle,
-  "warning": $warning-border-subtle,
-  "danger": $danger-border-subtle,
-  "light": $light-border-subtle,
-  "dark": $dark-border-subtle,
-) !default;
-// scss-docs-end theme-border-subtle-map
-
-$theme-colors-text-dark: null !default;
-$theme-colors-bg-subtle-dark: null !default;
-$theme-colors-border-subtle-dark: null !default;
-
-@if $enable-dark-mode {
-  // scss-docs-start theme-text-dark-map
-  $theme-colors-text-dark: (
-    "primary": $primary-text-emphasis-dark,
-    "secondary": $secondary-text-emphasis-dark,
-    "success": $success-text-emphasis-dark,
-    "info": $info-text-emphasis-dark,
-    "warning": $warning-text-emphasis-dark,
-    "danger": $danger-text-emphasis-dark,
-    "light": $light-text-emphasis-dark,
-    "dark": $dark-text-emphasis-dark,
-  ) !default;
-  // scss-docs-end theme-text-dark-map
-
-  // scss-docs-start theme-bg-subtle-dark-map
-  $theme-colors-bg-subtle-dark: (
-    "primary": $primary-bg-subtle-dark,
-    "secondary": $secondary-bg-subtle-dark,
-    "success": $success-bg-subtle-dark,
-    "info": $info-bg-subtle-dark,
-    "warning": $warning-bg-subtle-dark,
-    "danger": $danger-bg-subtle-dark,
-    "light": $light-bg-subtle-dark,
-    "dark": $dark-bg-subtle-dark,
-  ) !default;
-  // scss-docs-end theme-bg-subtle-dark-map
-
-  // scss-docs-start theme-border-subtle-dark-map
-  $theme-colors-border-subtle-dark: (
-    "primary": $primary-border-subtle-dark,
-    "secondary": $secondary-border-subtle-dark,
-    "success": $success-border-subtle-dark,
-    "info": $info-border-subtle-dark,
-    "warning": $warning-border-subtle-dark,
-    "danger": $danger-border-subtle-dark,
-    "light": $light-border-subtle-dark,
-    "dark": $dark-border-subtle-dark,
-  ) !default;
-  // scss-docs-end theme-border-subtle-dark-map
-}
-
-// Utilities maps
-//
-// Extends the default `$theme-colors` maps to help create our utilities.
-
-// Come v6, we'll de-dupe these variables. Until then, for backward compatibility, we keep them to reassign.
-// scss-docs-start utilities-colors
-$utilities-colors: $theme-colors-rgb !default;
-// scss-docs-end utilities-colors
-
-// scss-docs-start utilities-text-colors
-$utilities-text: map-merge(
-  $utilities-colors,
-  (
-    "black": to-rgb($black),
-    "white": to-rgb($white),
-    "body": to-rgb($body-color)
-  )
-) !default;
-$utilities-text-colors: map-loop($utilities-text, rgba-css-var, "$key", "text") !default;
-
-$utilities-text-emphasis-colors: (
-  "primary-emphasis": var(--#{$prefix}primary-text-emphasis),
-  "secondary-emphasis": var(--#{$prefix}secondary-text-emphasis),
-  "success-emphasis": var(--#{$prefix}success-text-emphasis),
-  "info-emphasis": var(--#{$prefix}info-text-emphasis),
-  "warning-emphasis": var(--#{$prefix}warning-text-emphasis),
-  "danger-emphasis": var(--#{$prefix}danger-text-emphasis),
-  "light-emphasis": var(--#{$prefix}light-text-emphasis),
-  "dark-emphasis": var(--#{$prefix}dark-text-emphasis)
-) !default;
-// scss-docs-end utilities-text-colors
-
-// scss-docs-start utilities-bg-colors
-$utilities-bg: map-merge(
-  $utilities-colors,
-  (
-    "black": to-rgb($black),
-    "white": to-rgb($white),
-    "body": to-rgb($body-bg)
-  )
-) !default;
-$utilities-bg-colors: map-loop($utilities-bg, rgba-css-var, "$key", "bg") !default;
-
-$utilities-bg-subtle: (
-  "primary-subtle": var(--#{$prefix}primary-bg-subtle),
-  "secondary-subtle": var(--#{$prefix}secondary-bg-subtle),
-  "success-subtle": var(--#{$prefix}success-bg-subtle),
-  "info-subtle": var(--#{$prefix}info-bg-subtle),
-  "warning-subtle": var(--#{$prefix}warning-bg-subtle),
-  "danger-subtle": var(--#{$prefix}danger-bg-subtle),
-  "light-subtle": var(--#{$prefix}light-bg-subtle),
-  "dark-subtle": var(--#{$prefix}dark-bg-subtle)
-) !default;
-// scss-docs-end utilities-bg-colors
-
-// scss-docs-start utilities-border-colors
-$utilities-border: map-merge(
-  $utilities-colors,
-  (
-    "black": to-rgb($black),
-    "white": to-rgb($white)
-  )
-) !default;
-$utilities-border-colors: map-loop($utilities-border, rgba-css-var, "$key", "border") !default;
-
-$utilities-border-subtle: (
-  "primary-subtle": var(--#{$prefix}primary-border-subtle),
-  "secondary-subtle": var(--#{$prefix}secondary-border-subtle),
-  "success-subtle": var(--#{$prefix}success-border-subtle),
-  "info-subtle": var(--#{$prefix}info-border-subtle),
-  "warning-subtle": var(--#{$prefix}warning-border-subtle),
-  "danger-subtle": var(--#{$prefix}danger-border-subtle),
-  "light-subtle": var(--#{$prefix}light-border-subtle),
-  "dark-subtle": var(--#{$prefix}dark-border-subtle)
-) !default;
-// scss-docs-end utilities-border-colors
-
-$utilities-links-underline: map-loop($utilities-colors, rgba-css-var, "$key", "link-underline") !default;
-
-$negative-spacers: if($enable-negative-margins, negativify-map($spacers), null) !default;
-
-$gutters: $spacers !default;
-
 // Toggles
 //
 // Used in conjunction with global variables to enable certain theme features.
@@ -4359,6 +3635,722 @@ $rfs-mq-property-height: if($rfs-mode == max-media-query, max-height, min-height
     }
   }
 }
+
+
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+    (
+        "theme": $theme
+    ),
+    $theme-colors
+);
+
+// Alpha value (RGBA) e.g. for header background.
+$shimmering: 0.8 !default;
+
+// Thumb color of scrollbar.
+$scrollbar-thumb-color: white !default;
+
+// Thumb color of scrollbar as RGB (like `255, 255, 255`).
+$scrollbar-thumb-color-rgb:
+    red($scrollbar-thumb-color), green($scrollbar-thumb-color), blue($scrollbar-thumb-color) !default;
+
+// Default size for many components, like sidebar menu items.
+$normal-size: calc(
+    var(--bs-btn-border-width, 1px) + var(--bs-btn-padding-y, 0.375rem) +
+        (var(--bs-btn-font-size, 1rem) * var(--bs-btn-line-height, 1.5)) + var(--bs-btn-padding-y, 0.375rem) +
+        var(--bs-btn-border-width, 1px)
+) !default;
+
+// Height of actions menu when it is expanded, like on mobile devices.
+$actions-height: 7.5rem !default;
+
+// Background color of menu toggle button.
+$bla-button-bg-normal: rgba(0, 0, 0, 0.1) !default;
+
+// Background color of menu toggle button on hover state.
+$bla-button-bg-hover: rgba(white, 0.25) !default;
+
+// Font size for sidebar menu items.
+$bla-btn-font-size: 1em !default;
+
+// Padding for action menu items.
+$bla-header-nav-padding: 0.75rem !default;
+
+// Width of the sidebar.
+$bla-sidebar-width: 16.563rem !default;
+
+// Background of sidebar.
+$sidebar-bg: $theme !default;
+$sidebar-bg-dark: $theme-dark !default;
+
+// Background of sidebar when it's opened (on mobile devices).
+$sidebar-open-bg: darken($sidebar-bg, 30%) !default;
+
+// Background of sidebar menu dropdown menus
+$sidebar-deep-bg: darken($sidebar-bg, 4%) !default;
+
+// Text color of sidebar.
+$sidebar-color: color-contrast($sidebar-bg, $gray-900) !default;
+$sidebar-color-dark: color-contrast($sidebar-bg-dark, $gray-900) !default;
+
+// Color of indicator for active sidebar item.
+$sidebar-indicator-color: $sidebar-color !default;
+$sidebar-indicator-color-dark: $sidebar-color-dark !default;
+
+// Background of search control in sidebar.
+$sidebar-search-bg: $input-bg !default;
+
+// Background of the body element
+$app-bg: $theme !default;
+$app-bg-dark: $theme-dark !default;
+
+// Background color of Header
+$header-bg: $theme !default;
+$header-bg-dark: $theme-dark !default;
+
+// Text color of header elements
+$header-color: color-contrast($header-bg, $gray-900) !default;
+$header-color-dark: color-contrast($header-bg-dark, $gray-900) !default;
+
+// Background of header action menu dropdown menus
+$header-deep-bg: darken($header-bg, 4%) !default;
+
+// Background color, when hovering action menu item.
+$actions-control-bg-hover: $bla-button-bg-hover !default;
+
+// Width and height of the scrollbar indicators
+$scrollbar-size: 10px;
+
+// Shrink sidebar on smaller screens
+$sidebar-shrink: true !default;
+
+// Breakpoint for sidebar shrink
+$sidebar-shrink-breakpoint: 600px !default;
+
+// Breakpoint for sidebar fully expanded
+$sidebar-expanded-breakpoint: 1400px !default;
+
+:root {
+    --blue-app-bg: #{$app-bg};
+
+    --blue-scrollbar-thumb-color-rgb: #{$scrollbar-thumb-color-rgb};
+    --blue-scrollbar-size: #{$scrollbar-size};
+
+    --blue-sidebar-width: #{$bla-sidebar-width};
+    --blue-sidebar-color: #{$sidebar-color};
+    --blue-theme: var(--theme, #{$theme});
+    --blue-shimmering: 0.9;
+
+    --blue-sidebar-bg: #{$sidebar-bg};
+    --blue-header-bg: #{$header-bg};
+
+    --blue-header-color: #{$header-color};
+    --blue-action-link-bg-color: var(--blue-theme);
+    --blue-menu-item-indicator-bg: #{$sidebar-indicator-color};
+    --blue-menu-item-height: #{$normal-size};
+}
+
+@include color-mode(dark, true) {
+    --blue-app-bg: #{$app-bg-dark};
+
+    --blue-sidebar-color: #{$sidebar-color-dark};
+
+    --blue-sidebar-bg: #{$sidebar-bg-dark};
+    --blue-header-bg: #{$header-bg-dark};
+
+    --blue-header-color: #{$header-color-dark};
+
+    --blue-menu-item-indicator-bg: #{$sidebar-indicator-color-dark};
+}
+
+
+@mixin slide-transition() {
+    $slide-transition: width 0.5s;
+    transition: $slide-transition;
+
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
+
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
+}
+
+@mixin header-bg() {
+    background-image: linear-gradient(
+        var(--blue-header-bg, $header-bg),
+        rgba(var(--blue-header-bg-rgb, var(--bs-theme-rgb)), var(--blue-shimmering, $shimmering))
+    );
+    backdrop-filter: blur(3px) saturate(125%);
+}
+
+@mixin blue-menu-item-indicator() {
+    content: "";
+    position: absolute;
+    top: 0.625rem;
+    bottom: 0.625rem;
+    left: 0.125rem;
+    right: initial;
+    width: 0.25rem;
+    height: auto;
+    background-color: var(--blue-menu-item-indicator-bg);
+    border-radius: 1rem;
+    animation: blue-menu-item-indicator-in-from-side 0.2s ease-in-out;
+
+    @media (prefers-reduced-motion) {
+        animation-duration: 0s;
+    }
+}
+
+@mixin blue-menu-item-indicator-horizontal() {
+    top: initial;
+    bottom: 0.125rem;
+    left: 0.625rem;
+    right: 0.625rem;
+    width: auto;
+    height: 0.25rem;
+    animation: blue-menu-item-indicator-in-from-below 0.2s ease-in-out;
+
+    @media (prefers-reduced-motion) {
+        animation-duration: 0s;
+    }
+}
+
+@mixin blue-menu-item-dropdown-for-shrunk-sidebar() {
+    & > .blue-menu-item-wrapper {
+        display: block;
+        position: relative;
+
+        &:not(:has(.blue-menu-item-dropdown)) > .blue-menu-item:hover {
+            .blue-menu-item-label {
+                &::before,
+                & {
+                    animation: tips-horz 150ms cubic-bezier(0.5, 0, 0.6, 1.3) 1ms forwards;
+
+                    @media (prefers-reduced-motion) {
+                        animation-duration: 0s;
+                    }
+                }
+
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    border: 5px solid transparent;
+                    z-index: 1001;
+
+                    top: 50%;
+                    border-left-width: 0;
+                    border-right-color: var(--bs-tooltip-bg, #353539);
+                    left: calc(0em - 5px);
+                    transform: translate(0.5em, -50%);
+                    opacity: 0;
+                }
+
+                display: block;
+                text-transform: none;
+                line-height: 1;
+                font-size: 0.9em;
+                -webkit-user-select: none;
+                user-select: none;
+                pointer-events: none;
+                position: absolute;
+                font-family: var(--bs-font-sans-serif);
+                text-align: center;
+                min-width: 3em;
+                max-width: var(--bs-tooltip-max-width, 21em);
+                padding: var(--bs-tooltip-padding-y, 1ch) var(--bs-tooltip-padding-x, 1.5ch);
+                border-radius: var(--bs-tooltip-border-radius, 0.3em);
+                box-shadow: 0 1em 2em -0.5em rgba(0, 0, 0, 0.35);
+                background: var(--bs-tooltip-bg, #353539);
+                color: var(--bs-tooltip-color, #fff);
+                z-index: 1000;
+                width: auto;
+                top: 50%;
+                left: calc(100% + 5px);
+                transform: translate(-0.5em, -50%);
+                overflow: visible;
+                opacity: 0;
+            }
+        }
+
+        & > .blue-menu-item-dropdown,
+        & > .blue-outside > .blue-menu-item-dropdown {
+            @extend .ms-1;
+            @extend .rounded;
+            @extend .shadow;
+            @extend .blue-menu-item-dropdown-from-start;
+            @extend .blue-sidebar-state;
+            @extend .open;
+
+            position: absolute;
+            top: 0;
+            width: $bla-sidebar-width;
+            left: $normal-size;
+            max-height: calc(100vh - (var(--offset-top, 0px) + 1rem));
+            overflow-y: auto;
+            overflow-x: hidden;
+            background-color: var(--blue-sidebar-bg);
+
+            &::before {
+                content: none;
+            }
+        }
+
+        &:has(.blue-menu-item-dropdown) {
+            & > .blue-menu-item {
+                @extend .highlighted;
+            }
+        }
+    }
+}
+
+@mixin show-action-menu-again() {
+    max-height: initial;
+    overflow: initial;
+
+    .blue-actions-menu {
+        max-width: initial;
+    }
+}
+
+@mixin actions($breakpoint) {
+    @media (max-width: #{$breakpoint + 1px}) {
+        &.open {
+            display: block;
+            width: auto;
+            position: absolute;
+            z-index: 1;
+            left: unset;
+            top: 0.25rem;
+            box-shadow: 0.6rem 6rem 6rem rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 0.5s;
+
+            @media (prefers-reduced-motion) {
+                animation-duration: 0s;
+            }
+
+            border-radius: $border-radius;
+
+            @include show-action-menu-again();
+
+            .blue-actions-menu-item:not(.blue-actions-menu-toggle) {
+                display: flex;
+            }
+
+            .blue-actions-menu {
+                flex-direction: column;
+                .blue-menu-item-dropdown {
+                    --blue-sidebar-bg: #{darken($theme, 34%)};
+                }
+            }
+        }
+
+        .blue-actions-menu-item:not(.blue-actions-menu-toggle) {
+            display: none;
+        }
+    }
+
+    @media (min-width: $breakpoint) {
+        @include show-action-menu-again();
+
+        .blue-actions-menu .blue-actions-label {
+            display: inline;
+        }
+
+        .blue-actions-menu-toggle {
+            display: none;
+        }
+
+        .blue-actions-menu > .blue-menu-item-wrapper > .blue-menu-item-dropdown,
+        .blue-actions-menu > .blue-menu-item-wrapper > * > .blue-menu-item-dropdown {
+            position: absolute;
+            right: 0;
+        }
+    }
+}
+
+@mixin switch($width: 35px, $height: 20px, $padding: 3px, $color: $body-color, $color-active: $success) {
+    $slider-size: $height - ($padding * 2);
+
+    & {
+        position: relative;
+        display: inline-block;
+        width: $width;
+        height: $height;
+
+        input {
+            display: none;
+        }
+
+        &.disabled {
+            opacity: 0.8;
+        }
+
+        &:not(.disabled) {
+            .slider {
+                cursor: pointer;
+            }
+        }
+
+        .slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $input-group-addon-bg;
+            transition: 0.4s;
+
+            @media (prefers-reduced-motion) {
+                transition: none;
+            }
+
+            box-shadow: inset 0 0 0 1px rgba($color, 0.5);
+
+            &::before {
+                content: "";
+                position: absolute;
+                height: $slider-size;
+                width: $slider-size;
+                left: $padding;
+                bottom: $padding;
+                background-color: $color;
+                transition: 0.4s;
+
+                @media (prefers-reduced-motion) {
+                    transition: none;
+                }
+            }
+
+            &::after {
+                content: attr(data-label);
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin-left: ($slider-size * 0.5);
+                transition: margin-left 0.4s;
+
+                @media (prefers-reduced-motion) {
+                    transition: none;
+                }
+
+                color: $color;
+            }
+        }
+
+        input:checked {
+            & + .slider {
+                background-color: $color-active;
+                box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.3);
+
+                &::before {
+                    transform: translateX($width - $slider-size - ($padding * 2));
+                    background-color: white;
+                }
+
+                &::after {
+                    color: white;
+                    margin-left: ($slider-size * 0.5) * -1;
+                }
+            }
+        }
+        input:focus + .slider {
+            box-shadow: 0 0 1px $color-active;
+        }
+    }
+}
+
+@mixin customProperty($name, $value) {
+    // fallback for older browser who do not support custom properties / css variables
+    #{$name}: #{$value};
+
+    // create a css variable (this might override the variable on any of the ancestor elements)
+    --#{$name}: #{$value};
+
+    // use the css variable on the property
+    #{$name}: var(--#{$name}, #{$value});
+}
+
+@mixin scroll-shadow($bg, $light-base: white) {
+    background: linear-gradient($bg 30%, rgba($light-base, 0)),
+        linear-gradient(rgba($light-base, 0) 10px, $bg 70%) bottom,
+        radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
+        radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%) bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+    background-attachment: local, local, scroll, scroll;
+}
+
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes blAppearUp {
+    from {
+        margin-top: 2.5rem;
+    }
+    to {
+        margin-top: 0;
+    }
+}
+
+@keyframes blue-menu-item-dropdown {
+    from {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+}
+
+@keyframes enabledBlueAppPage {
+    from {
+        transform: scale(0.98);
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes alert-in {
+    from {
+        transform: scale(0, 0);
+        opacity: 0.2;
+        transition: 0s;
+    }
+}
+
+@keyframes circlebounce {
+    0%,
+    100% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+
+@keyframes scrolling {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+
+@mixin bsBanner($file) {
+  /*!
+   * Bootstrap #{$file} v5.3.5 (https://getbootstrap.com/)
+   * Copyright 2011-2025 The Bootstrap Authors
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   */
+}
+
+@include bsBanner("");
+
+// scss-docs-start import-stack
+// Configuration
+
+
+
+// Re-assigned maps
+//
+// Placed here so that others can override the default Sass maps and see automatic updates to utilities and more.
+
+// scss-docs-start theme-colors-rgb
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value") !default;
+// scss-docs-end theme-colors-rgb
+
+// scss-docs-start theme-text-map
+$theme-colors-text: (
+  "primary": $primary-text-emphasis,
+  "secondary": $secondary-text-emphasis,
+  "success": $success-text-emphasis,
+  "info": $info-text-emphasis,
+  "warning": $warning-text-emphasis,
+  "danger": $danger-text-emphasis,
+  "light": $light-text-emphasis,
+  "dark": $dark-text-emphasis,
+) !default;
+// scss-docs-end theme-text-map
+
+// scss-docs-start theme-bg-subtle-map
+$theme-colors-bg-subtle: (
+  "primary": $primary-bg-subtle,
+  "secondary": $secondary-bg-subtle,
+  "success": $success-bg-subtle,
+  "info": $info-bg-subtle,
+  "warning": $warning-bg-subtle,
+  "danger": $danger-bg-subtle,
+  "light": $light-bg-subtle,
+  "dark": $dark-bg-subtle,
+) !default;
+// scss-docs-end theme-bg-subtle-map
+
+// scss-docs-start theme-border-subtle-map
+$theme-colors-border-subtle: (
+  "primary": $primary-border-subtle,
+  "secondary": $secondary-border-subtle,
+  "success": $success-border-subtle,
+  "info": $info-border-subtle,
+  "warning": $warning-border-subtle,
+  "danger": $danger-border-subtle,
+  "light": $light-border-subtle,
+  "dark": $dark-border-subtle,
+) !default;
+// scss-docs-end theme-border-subtle-map
+
+$theme-colors-text-dark: null !default;
+$theme-colors-bg-subtle-dark: null !default;
+$theme-colors-border-subtle-dark: null !default;
+
+@if $enable-dark-mode {
+  // scss-docs-start theme-text-dark-map
+  $theme-colors-text-dark: (
+    "primary": $primary-text-emphasis-dark,
+    "secondary": $secondary-text-emphasis-dark,
+    "success": $success-text-emphasis-dark,
+    "info": $info-text-emphasis-dark,
+    "warning": $warning-text-emphasis-dark,
+    "danger": $danger-text-emphasis-dark,
+    "light": $light-text-emphasis-dark,
+    "dark": $dark-text-emphasis-dark,
+  ) !default;
+  // scss-docs-end theme-text-dark-map
+
+  // scss-docs-start theme-bg-subtle-dark-map
+  $theme-colors-bg-subtle-dark: (
+    "primary": $primary-bg-subtle-dark,
+    "secondary": $secondary-bg-subtle-dark,
+    "success": $success-bg-subtle-dark,
+    "info": $info-bg-subtle-dark,
+    "warning": $warning-bg-subtle-dark,
+    "danger": $danger-bg-subtle-dark,
+    "light": $light-bg-subtle-dark,
+    "dark": $dark-bg-subtle-dark,
+  ) !default;
+  // scss-docs-end theme-bg-subtle-dark-map
+
+  // scss-docs-start theme-border-subtle-dark-map
+  $theme-colors-border-subtle-dark: (
+    "primary": $primary-border-subtle-dark,
+    "secondary": $secondary-border-subtle-dark,
+    "success": $success-border-subtle-dark,
+    "info": $info-border-subtle-dark,
+    "warning": $warning-border-subtle-dark,
+    "danger": $danger-border-subtle-dark,
+    "light": $light-border-subtle-dark,
+    "dark": $dark-border-subtle-dark,
+  ) !default;
+  // scss-docs-end theme-border-subtle-dark-map
+}
+
+// Utilities maps
+//
+// Extends the default `$theme-colors` maps to help create our utilities.
+
+// Come v6, we'll de-dupe these variables. Until then, for backward compatibility, we keep them to reassign.
+// scss-docs-start utilities-colors
+$utilities-colors: $theme-colors-rgb !default;
+// scss-docs-end utilities-colors
+
+// scss-docs-start utilities-text-colors
+$utilities-text: map-merge(
+  $utilities-colors,
+  (
+    "black": to-rgb($black),
+    "white": to-rgb($white),
+    "body": to-rgb($body-color)
+  )
+) !default;
+$utilities-text-colors: map-loop($utilities-text, rgba-css-var, "$key", "text") !default;
+
+$utilities-text-emphasis-colors: (
+  "primary-emphasis": var(--#{$prefix}primary-text-emphasis),
+  "secondary-emphasis": var(--#{$prefix}secondary-text-emphasis),
+  "success-emphasis": var(--#{$prefix}success-text-emphasis),
+  "info-emphasis": var(--#{$prefix}info-text-emphasis),
+  "warning-emphasis": var(--#{$prefix}warning-text-emphasis),
+  "danger-emphasis": var(--#{$prefix}danger-text-emphasis),
+  "light-emphasis": var(--#{$prefix}light-text-emphasis),
+  "dark-emphasis": var(--#{$prefix}dark-text-emphasis)
+) !default;
+// scss-docs-end utilities-text-colors
+
+// scss-docs-start utilities-bg-colors
+$utilities-bg: map-merge(
+  $utilities-colors,
+  (
+    "black": to-rgb($black),
+    "white": to-rgb($white),
+    "body": to-rgb($body-bg)
+  )
+) !default;
+$utilities-bg-colors: map-loop($utilities-bg, rgba-css-var, "$key", "bg") !default;
+
+$utilities-bg-subtle: (
+  "primary-subtle": var(--#{$prefix}primary-bg-subtle),
+  "secondary-subtle": var(--#{$prefix}secondary-bg-subtle),
+  "success-subtle": var(--#{$prefix}success-bg-subtle),
+  "info-subtle": var(--#{$prefix}info-bg-subtle),
+  "warning-subtle": var(--#{$prefix}warning-bg-subtle),
+  "danger-subtle": var(--#{$prefix}danger-bg-subtle),
+  "light-subtle": var(--#{$prefix}light-bg-subtle),
+  "dark-subtle": var(--#{$prefix}dark-bg-subtle)
+) !default;
+// scss-docs-end utilities-bg-colors
+
+// scss-docs-start utilities-border-colors
+$utilities-border: map-merge(
+  $utilities-colors,
+  (
+    "black": to-rgb($black),
+    "white": to-rgb($white)
+  )
+) !default;
+$utilities-border-colors: map-loop($utilities-border, rgba-css-var, "$key", "border") !default;
+
+$utilities-border-subtle: (
+  "primary-subtle": var(--#{$prefix}primary-border-subtle),
+  "secondary-subtle": var(--#{$prefix}secondary-border-subtle),
+  "success-subtle": var(--#{$prefix}success-border-subtle),
+  "info-subtle": var(--#{$prefix}info-border-subtle),
+  "warning-subtle": var(--#{$prefix}warning-border-subtle),
+  "danger-subtle": var(--#{$prefix}danger-border-subtle),
+  "light-subtle": var(--#{$prefix}light-border-subtle),
+  "dark-subtle": var(--#{$prefix}dark-border-subtle)
+) !default;
+// scss-docs-end utilities-border-colors
+
+$utilities-links-underline: map-loop($utilities-colors, rgba-css-var, "$key", "link-underline") !default;
+
+$negative-spacers: if($enable-negative-margins, negativify-map($spacers), null) !default;
+
+$gutters: $spacers !default;
 
 
 // Utilities
@@ -11089,7 +11081,12 @@ body {
 }
 
 .blue-menu-item {
-    transition: width 0.5s, background-color 0.3s, color 0.15s, box-shadow 0.3s, opacity 0.3s !important;
+    transition:
+        width 0.5s,
+        background-color 0.3s,
+        color 0.15s,
+        box-shadow 0.3s,
+        opacity 0.3s !important;
 
     @media (prefers-reduced-motion) {
         transition: none !important;
@@ -11152,65 +11149,6 @@ body {
         box-shadow: $box-shadow;
         border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
         background-color: var(--blue-menu-item-dropdown-bg);
-    }
-}
-
-.blue-sidebar .blue-menu-item-dropdown {
-    --blue-sidebar-bg: var(--blue-sidebar-depth-1-bg, #{$sidebar-deep-bg});
-
-    &::before {
-        background-color: var(--blue-sidebar-bg);
-        box-shadow: 0 0.5rem 1rem $black;
-        opacity: 0.15;
-        border-color: currentColor;
-    }
-
-    .blue-menu-item-dropdown {
-        --blue-sidebar-bg: var(--blue-sidebar-depth-2-bg, #{darken($sidebar-deep-bg, 4%)});
-
-        .blue-menu-item-dropdown {
-            --blue-sidebar-bg: var(--blue-sidebar-depth-3-bg, #{darken($sidebar-deep-bg, 8%)});
-
-            .blue-menu-item-dropdown {
-                --blue-sidebar-bg: var(--blue-sidebar-depth-4-bg, #{darken($sidebar-deep-bg, 12%)});
-
-                .blue-menu-item-dropdown {
-                    --blue-sidebar-bg: var(--blue-sidebar-depth-5-bg, #{darken($sidebar-deep-bg, 16%)});
-
-                    .blue-menu-item-dropdown {
-                        --blue-sidebar-bg: var(--blue-sidebar-depth-6-bg, #{darken($sidebar-deep-bg, 20%)});
-                    }
-                }
-            }
-        }
-    }
-}
-
-.blue-header .blue-menu-item-dropdown {
-    --blue-sidebar-bg: #{$header-deep-bg};
-
-    &::before {
-        background-color: var(--blue-header-bg);
-    }
-
-    .blue-menu-item-dropdown {
-        --blue-sidebar-bg: #{darken($header-deep-bg, 4%)};
-
-        .blue-menu-item-dropdown {
-            --blue-sidebar-bg: #{darken($header-deep-bg, 8%)};
-
-            .blue-menu-item-dropdown {
-                --blue-sidebar-bg: #{darken($header-deep-bg, 12%)};
-
-                .blue-menu-item-dropdown {
-                    --blue-sidebar-bg: #{darken($header-deep-bg, 16%)};
-
-                    .blue-menu-item-dropdown {
-                        --blue-sidebar-bg: #{darken($header-deep-bg, 20%)};
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -11708,13 +11646,6 @@ body {
     &:after {
         transform: translateX(var(--tt-pos, -0.25rem)) translateY(-50%) rotate(90deg);
         inset: 50% auto auto calc(var(--tt-tail) + 1px);
-    }
-}
-
-.blue-btn-silent {
-    &:not(:hover):not(:focus):not(:active) {
-        border-color: transparent;
-        color: inherit;
     }
 }
 
@@ -12259,10 +12190,6 @@ dialog.blue-modal:has(.offcanvas-start) {
 
 .blue-collapse {
     interpolate-size: allow-keywords;
-
-    &:has(summary:focus) {
-        overflow: hidden;
-    }
 
     summary {
         list-style: none;
