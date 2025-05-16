@@ -9,7 +9,6 @@ public partial class ReadView
     private IJSRuntime JSRuntime { get; set; } = default!;
 
     private ElementReference _readViewElement;
-    private IJSObjectReference? _module;
 
     [Parameter]
     public EventCallback OnEditRequested { get; set; }
@@ -28,16 +27,11 @@ public partial class ReadView
         if (firstRender)
         {
             await JSRuntime.InvokeVoidAsync("import", "./_content/BlueBlazor/blue-web/js/read-view.bundle.js");
-            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/InlineEditParts/ReadView.razor.js");
-            await Initialize(_readViewElement);
-        }
-    }
-
-    public async Task Initialize(ElementReference element)
-    {
-        if (_module is not null)
-        {
-            await _module.InvokeVoidAsync("Initialize", element, DotNetObjectReference.Create(this));
+            var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/InlineEditParts/ReadView.razor.js");
+            if (module is not null)
+            {
+                await module.InvokeVoidAsync("Initialize", _readViewElement, DotNetObjectReference.Create(this));
+            }
         }
     }
 

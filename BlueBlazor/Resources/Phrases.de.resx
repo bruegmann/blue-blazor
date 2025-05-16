@@ -132,4 +132,7 @@
   <data name="ToggleSidebar" xml:space="preserve">
     <value>Sidebar umschalten</value>
   </data>
+  <data name="ToggleMenu" xml:space="preserve">
+    <value>Menü umschalten</value>
+  </data>
 </root>

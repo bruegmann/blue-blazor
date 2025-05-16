@@ -1,0 +1,20 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
+
+<div @ref="_element" class="BLUE-actions @Class" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="BLUE-actions-menu @MenuClass">
+        @ChildContent
+    </div>
+
+    <details class="BLUE-actions-collapse blue-collapse">
+        <summary class="blue-collapse-header blue-menu-item btn px-3">
+            <span class="blue-menu-item-icon" aria-hidden="true">&#8942;</span>
+            <span class="visually-hidden">@L["ToggleMenu"]</span>
+        </summary>
+
+        <div class="BLUE-actions-collapse-menu blue-menu-item-dropdown text-body end-0 @CollapseMenuClass"
+             style="--blue-menu-item-dropdown-bg: var(--bs-body-bg)">
+            @ChildContent
+        </div>
+    </details>
+</div>

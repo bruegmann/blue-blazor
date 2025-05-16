@@ -41,7 +41,8 @@ public enum BreakSize
     Sm,
     Md,
     Lg,
-    Xl
+    Xl,
+    None
 }
 
 public enum ModalSize

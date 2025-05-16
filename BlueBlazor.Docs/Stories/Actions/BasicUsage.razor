@@ -1,0 +1,33 @@
+﻿<div style="@($"width: {Width}px")">
+    <Actions>
+        <MenuItem Label="Child 1">
+            <Icon>🌍</Icon>
+        </MenuItem>
+
+        <MenuItem Label="Child 2">
+            <Icon>🌑</Icon>
+        </MenuItem>
+
+        <MenuItem Label="Child 3">
+            <Icon>☀️</Icon>
+        </MenuItem>
+
+        <MenuItem Label="Child 4">
+            <Icon>🚀</Icon>
+        </MenuItem>
+
+        <MenuItem Label="Child 5">
+            <Icon>🌌</Icon>
+        </MenuItem>
+    </Actions>
+</div>
+
+
+<label class="mt-3">
+    <span class="form-label">Change width</span>
+    <input type="range" class="form-range" min="100" max="1200" @bind="Width" @bind:event="oninput" /> @Width
+</label>
+
+@code {
+    private string Width { get; set; } = "460";
+}
