@@ -8,12 +8,13 @@ namespace BlueBlazor.Components;
 /// Otherwise they will be visible in the dropdown menu. JavaScript detects if space is changing and rearranges.
 /// IMPORTANT: As of right now, children you pass will be rendered twice. Once in the toolbar and once in the dropdown.
 /// </summary>
-public partial class Actions : ComponentBase
+public partial class Actions : ComponentBase, IDisposable
 {
     [Inject]
     private IJSRuntime JSRuntime { get; set; } = default!;
 
     private ElementReference _element;
+    private IJSObjectReference? _instance;
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
@@ -31,12 +32,19 @@ public partial class Actions : ComponentBase
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("import", "./_content/BlueBlazor/blue-web/js/actions.bundle.js");
-            IJSObjectReference? module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/Actions.razor.js");
+            IJSObjectReference? module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/blue-web/js/actions.js");
             if (module is not null)
             {
-                await module.InvokeVoidAsync("Initialize", _element);
+                _instance = await module.InvokeAsync<IJSObjectReference>("init", _element);
             }
+        }
+    }
+
+    public async void Dispose()
+    {
+        if (_instance is not null)
+        {
+            await _instance.InvokeVoidAsync("destroy");
         }
     }
 }

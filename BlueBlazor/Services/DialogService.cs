@@ -18,6 +18,8 @@ public class DialogService
         return ShowAsync(dialogReference);
     }
 
+    public bool DevExpressSupport { get; set; }
+
     public Task<DialogReference> ShowAsync(DialogReference dialogReference)
         => OnShow!.Invoke(dialogReference);
 

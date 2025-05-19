@@ -9,7 +9,9 @@
 {
     <dialog class="blue-modal modal" @ref="dialog.Element" id="@dialog.Id" aria-labelledby="@(dialog.Id + "-label")">
         <CascadingValue Name="DialogProvider_IsLastDialog" Value="@(dialog == _dialogs.Last())">
+            <CascadingValue Name="DialogProvider_DevExpressSupport" Value="@DialogService.DevExpressSupport">
             @dialog.DialogContent
+        </CascadingValue>
         </CascadingValue>
 
         <form method="dialog" class="blue-modal-backdrop">

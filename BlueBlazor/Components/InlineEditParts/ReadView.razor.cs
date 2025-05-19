@@ -26,7 +26,7 @@ public partial class ReadView
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("import", "./_content/BlueBlazor/blue-web/js/read-view.bundle.js");
+            await JSRuntime.InvokeVoidAsync("import", "./_content/BlueBlazor/blue-web/js/read-view.js");
             var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/InlineEditParts/ReadView.razor.js");
             if (module is not null)
             {

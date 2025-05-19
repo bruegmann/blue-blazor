@@ -7,7 +7,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddLocalization();
-builder.Services.AddScoped<BlueBlazor.Services.DialogService>();
+builder.Services.AddScoped(sp => new BlueBlazor.Services.DialogService() { DevExpressSupport = true });
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 await builder.Build().RunAsync();

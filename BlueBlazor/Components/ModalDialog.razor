@@ -15,10 +15,10 @@
         <div class="@(new CssBuilder("modal-body").AddClass(BodyClass))">
             @BodyContent
 
-            @if (IsLastDialog)
+            @if (DevExpressSupport && IsLastDialog)
             {
                 <!-- Compatibility with DevExpress Popups -->
-                <dxbl-popup-root class="position-fixed top-0 start-0 z-1"></dxbl-popup-root>
+                <dxbl-popup-root class="position-fixed z-1 start-0 top-0"></dxbl-popup-root>
             }
         </div>
 
