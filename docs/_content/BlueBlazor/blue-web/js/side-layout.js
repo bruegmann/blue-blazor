@@ -1,10 +1,4 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.SideLayout = void 0;
-class SideLayout extends HTMLElement {
+export class SideLayout extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({
@@ -173,5 +167,4 @@ class SideLayout extends HTMLElement {
     }
   }
 }
-exports.SideLayout = SideLayout;
 customElements.define("side-layout", SideLayout);

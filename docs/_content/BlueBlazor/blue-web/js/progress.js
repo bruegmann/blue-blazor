@@ -1,9 +1,3 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
 window.blueWeb = window.blueWeb || {};
 window.blueWeb.progress = {
   progress: 0
@@ -58,4 +52,4 @@ window.blueWeb.progress = {
     }, 500);
   }
 };
-var _default = exports.default = window.blueWeb.progress;
+export default window.blueWeb.progress;

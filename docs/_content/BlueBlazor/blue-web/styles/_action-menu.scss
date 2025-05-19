@@ -4,11 +4,6 @@
             var(--bs-btn-padding-x, 0.75rem) + var(--bs-btn-border-width, 1px)
     );
 
-    display: inline;
-    left: 0;
-    right: 0;
-    top: 0;
-    padding: 0;
     max-height: $normal-size;
     overflow: hidden;
 
@@ -21,6 +16,9 @@
     }
 
     &.open {
+        left: 0;
+        right: 0;
+        top: 0;
         background-color: var(--blue-menu-item-dropdown-bg);
     }
 
@@ -57,14 +55,4 @@
     .blue-menu-item-dropdown-caret.blue-caret {
         display: initial;
     }
-}
-
-.blue-actions-menu-toggle > span:first-child {
-    transform: rotate(90deg);
-}
-
-.blue-actions-menu-item {
-    display: flex;
-    align-items: center;
-    color: inherit;
 }

@@ -1,20 +1,12 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.set = exports.init = exports.getStored = exports.getPreferred = void 0;
-const getStored = () => localStorage.getItem("blue-web-color-mode");
-exports.getStored = getStored;
-const getPreferred = () => {
+export const getStored = () => localStorage.getItem("blue-web-color-mode");
+export const getPreferred = () => {
   const stored = getStored();
   if (stored) {
     return stored;
   }
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 };
-exports.getPreferred = getPreferred;
-const set = colorMode => {
+export const set = colorMode => {
   if (colorMode === "auto") {
     localStorage.removeItem("blue-web-color-mode");
   } else {
@@ -22,8 +14,7 @@ const set = colorMode => {
   }
   init();
 };
-exports.set = set;
-const init = () => {
+export const init = () => {
   const colorMode = getPreferred();
   if (colorMode === "auto" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
     document.documentElement.setAttribute("data-bs-theme", "dark");
@@ -31,7 +22,6 @@ const init = () => {
     document.documentElement.setAttribute("data-bs-theme", colorMode);
   }
 };
-exports.init = init;
 const onMatchMediaChange = () => {
   localStorage.removeItem("blue-web-color-mode");
   init();

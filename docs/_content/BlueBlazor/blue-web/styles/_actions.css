@@ -1,0 +1,21 @@
+.BLUE-actions {
+    display: flex;
+    white-space: nowrap;
+}
+
+.BLUE-actions-menu {
+    display: flex;
+    max-width: 100%;
+}
+
+.BLUE-actions-collapse {
+    position: relative;
+}
+
+.BLUE-actions-collapse:not(:has(.BLUE-actions-collapse-visible)) {
+    display: none;
+}
+
+.BLUE-actions-collapse-menu {
+    position: absolute;
+}

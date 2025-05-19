@@ -1,9 +1,3 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ReadView = void 0;
 const DRAG_THRESHOLD = 5;
 
 /**
@@ -25,7 +19,7 @@ const DRAG_THRESHOLD = 5;
  *    setEditing(true)
  * })
  */
-class ReadView extends HTMLElement {
+export class ReadView extends HTMLElement {
   startX = 0;
   startY = 0;
   constructor() {
@@ -126,5 +120,4 @@ class ReadView extends HTMLElement {
     }
   }
 }
-exports.ReadView = ReadView;
 customElements.define("read-view", ReadView);

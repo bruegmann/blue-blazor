@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.13.0 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.14.0 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -11378,11 +11378,6 @@ body {
             var(--bs-btn-padding-x, 0.75rem) + var(--bs-btn-border-width, 1px)
     );
 
-    display: inline;
-    left: 0;
-    right: 0;
-    top: 0;
-    padding: 0;
     max-height: $normal-size;
     overflow: hidden;
 
@@ -11395,6 +11390,9 @@ body {
     }
 
     &.open {
+        left: 0;
+        right: 0;
+        top: 0;
         background-color: var(--blue-menu-item-dropdown-bg);
     }
 
@@ -11431,16 +11429,6 @@ body {
     .blue-menu-item-dropdown-caret.blue-caret {
         display: initial;
     }
-}
-
-.blue-actions-menu-toggle > span:first-child {
-    transform: rotate(90deg);
-}
-
-.blue-actions-menu-item {
-    display: flex;
-    align-items: center;
-    color: inherit;
 }
 
 .blue-caret {
@@ -12239,6 +12227,62 @@ dialog.blue-modal:has(.offcanvas-start) {
     }
 }
 
+.BLUE-actions {
+    display: flex;
+    white-space: nowrap;
+}
+
+.BLUE-actions-menu {
+    display: flex;
+    max-width: 100%;
+}
+
+.BLUE-actions-collapse {
+    position: relative;
+}
+
+.BLUE-actions-collapse:not(:has(.BLUE-actions-collapse-visible)) {
+    display: none;
+}
+
+.BLUE-actions-collapse-menu {
+    position: absolute;
+}
+
+
+/* Make DevExpress components look more like Bootstrap/Blue */
+[class^="dxbl-"] {
+    --dxbl-text-edit-border-radius: var(--bs-border-radius) !important;
+    --dxbl-text-edit-padding-x: 0.75rem !important;
+    --dxbl-text-edit-padding-y: 0.375rem !important;
+    --dxbl-text-edit-line-height: 1.5 !important;
+    --dxbl-text-edit-focus-shadow-spread: 0.25rem !important;
+    --dxbl-listbox-border-radius: var(--bs-border-radius) !important;
+    --dxbl-toolbar-font-size: var(--bs-body-font-size) !important;
+    --dxbl-toolbar-btn-border-radius: var(--bs-border-radius) !important;
+    --dxbl-dropdown-border-radius: var(--bs-border-radius) !important;
+    --dxbl-btn-border-radius: var(--bs-border-radius) !important;
+    --dxbl-btn-padding-x: 0.75rem !important;
+    --dxbl-btn-padding-y: 0.375rem !important;
+}
+
+.dxbl-grid {
+    --dxbl-grid-font-size: 1rem;
+    border: none;
+}
+
+.dxbl-text-edit {
+    font-size: 1rem;
+}
+
+.dxbl-toolbar {
+    --dxbl-toolbar-font-size: var(--bs-body-font-size) !important;
+    font-size: var(--dxbl-toolbar-font-size);
+}
+
+body.modal-open .dxbl-popup-cell[style="z-index: 1050;"] {
+    z-index: 1056 !important;
+}
 
 :root {
     --bs-font-sans-serif: Inter, #{$font-family-sans-serif};

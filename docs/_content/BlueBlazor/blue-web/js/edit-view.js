@@ -1,13 +1,7 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.EditView = void 0;
 /**
  * EditView is a Custom Element that displays a edit view of its content and allows the user to confirm or dismiss the changes.
  */
-class EditView extends HTMLElement {
+export class EditView extends HTMLElement {
   connectedCallback() {
     this.render();
   }
@@ -59,5 +53,4 @@ class EditView extends HTMLElement {
     }));
   }
 }
-exports.EditView = EditView;
 customElements.define("edit-view", EditView);

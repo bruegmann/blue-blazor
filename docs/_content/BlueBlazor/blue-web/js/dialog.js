@@ -1,36 +1,28 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ask = ask;
-exports.tell = tell;
-exports.verify = verify;
-var _utils = require("./utils");
-var _shared = require("./shared");
-async function ask(text) {
+import { guid } from "./utils";
+import { getPhrase } from "./shared";
+export async function ask(text) {
   let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   return await dialog("ask", text, options);
 }
-async function tell(text) {
+export async function tell(text) {
   let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   await dialog("tell", text, options);
 }
-async function verify(text) {
+export async function verify(text) {
   let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   return (await dialog("verify", text, options)) === true;
 }
 async function dialog(dialogType, text) {
   let options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   let {
-    title = (0, _shared.getPhrase)("Message"),
+    title = getPhrase("Message"),
     icon = undefined,
     switchPrimaryBtn = false,
-    acceptBtnText = dialogType === "verify" ? (0, _shared.getPhrase)("Yes") : "OK",
-    cancelBtnText = dialogType === "verify" ? (0, _shared.getPhrase)("No") : (0, _shared.getPhrase)("Cancel"),
+    acceptBtnText = dialogType === "verify" ? getPhrase("Yes") : "OK",
+    cancelBtnText = dialogType === "verify" ? getPhrase("No") : getPhrase("Cancel"),
     inputType = "text"
   } = options;
-  const id = (0, _utils.guid)();
+  const id = guid();
   const addToDom = () => {
     document.body.insertAdjacentHTML("beforeend", /* HTML */`<dialog class="blue-modal modal" id="${id}" aria-labelledby="${id}-label">
                 <div class="modal-dialog">
