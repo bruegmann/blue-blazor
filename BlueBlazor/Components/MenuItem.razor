@@ -1,19 +1,20 @@
-<div class="blue-menu-item-wrapper @(id)">
-    <Button @attributes="AdditionalAttributes" draggable="@Draggable" OnClick="@onClick"
-            Href="@Href" Target="@Target" Busy="@Busy" Class="@className"
-            Disabled="@Disabled" Variant="Variant.None">
+<div class="blue-menu-item-wrapper @(_id)">
+    <Button @attributes="AdditionalAttributes" draggable="@Draggable" OnClick="@HandleClick" Href="@Href"
+        Target="@Target" Busy="@Busy" Class="@_className" Disabled="@Disabled" Variant="Variant.None">
         @if (Draggable && !HideDraggableIcon)
         {
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                 className="bi bi-grip-vertical opacity-50" aria-hidden="true" viewBox="0 0 8 16">
-                <path d="M3.376 1.876c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1">
+                className="bi bi-grip-vertical opacity-50" aria-hidden="true" viewBox="0 0 8 16">
+                <path
+                    d="M3.376 1.876c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1">
                 </path>
             </svg>
         }
 
         @if (Icon != null)
         {
-            <span class="blue-menu-item-icon @IconClass @(IconForActive != null ? "hasIconForActive" : "")" aria-hidden="true">
+            <span class="blue-menu-item-icon @IconClass @(IconForActive != null ? "hasIconForActive" : "")"
+                aria-hidden="true">
                 @Icon
             </span>
         }
@@ -36,26 +37,25 @@
 
         @if (HideChevronIcon != true && DropdownContent != null)
         {
-            <Chevron Open="@showDropdown" Mirrored="true" Class="blue-menu-item-dropdown-toggle blue-menu-item-chevron ms-auto"
-                     PathClass="blue-sidebar-exception" />
+            <Chevron Open="@_showDropdown" Mirrored="true"
+                Class="blue-menu-item-dropdown-toggle blue-menu-item-chevron ms-auto" PathClass="blue-sidebar-exception" />
         }
     </Button>
 
-    @if (showDropdown)
+    @if (_showDropdown)
     {
         @if (SupportOutside)
         {
-            <Outside OnClickOutside="onClickOutside"
-                     IgnoreClasses="@(OutsideIgnoreClasses ?? new List<string> { id })">
+            <Outside OnClickOutside="HandleClickOutside" IgnoreClasses="@(OutsideIgnoreClasses ?? new List<string> { _id })">
                 <div class="blue-menu-item-dropdown @DropdownClass" style="@DropdownStyle">
                     @DropdownContent
                     <script>
                         (() => {
-                        const el = document.currentScript.parentNode
-                        if (el && el.getBoundingClientRect) {
-                        const rect = el.getBoundingClientRect()
-                        el.style.setProperty("--offset-top", rect.top + "px")
-                        }
+                            const el = document.currentScript.parentNode
+                            if (el && el.getBoundingClientRect) {
+                                const rect = el.getBoundingClientRect()
+                                el.style.setProperty("--offset-top", rect.top + "px")
+                            }
                         })()
                     </script>
                 </div>
@@ -66,175 +66,15 @@
             <div class="blue-menu-item-dropdown @DropdownClass" style="@DropdownStyle">
                 @DropdownContent
                 <script>
-                    (() => {
-                    const el = document.currentScript.parentNode
-                    if (el && el.getBoundingClientRect) {
-                    const rect = el.getBoundingClientRect()
-                    el.style.setProperty("--offset-top", rect.top+ "px")
-                    }
-                    })()
+                        (() => {
+                            const el = document.currentScript.parentNode
+                            if (el && el.getBoundingClientRect) {
+                                const rect = el.getBoundingClientRect()
+                                el.style.setProperty("--offset-top", rect.top + "px")
+                            }
+                        })()
                 </script>
             </div>
         }
     }
 </div>
-
-@code {
-    [Parameter]
-    public RenderFragment? DropdownContent { get; set; }
-
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IDictionary<string, object>? AdditionalAttributes { get; set; }
-
-    [Parameter]
-    public EventCallback<MouseEventArgs> OnClick { get; set; }
-
-    [Parameter]
-    public string? Href { get; set; }
-
-    /// <summary>
-    /// `Target="_blank"` will automatically add `rel="noreferrer"` to the anchor tag.
-    /// </summary>
-    [Parameter]
-    public string? Target { get; set; }
-
-    [Parameter]
-    public string? Class { get; set; }
-
-    [Parameter]
-    public RenderFragment? Icon { get; set; }
-
-    /// <summary>
-    /// Alternative icon component when the MenuItem is active.
-    /// </summary>
-    [Parameter]
-    public RenderFragment? IconForActive { get; set; }
-
-    /// <summary>
-    /// Addition to class name of icon wrapper element.
-    /// </summary>
-    [Parameter]
-    public string? IconClass { get; set; }
-
-    /// <summary>
-    /// Label of the link.
-    /// </summary>
-    [Parameter]
-    public string? Label { get; set; }
-
-    [Parameter]
-    public RenderFragment? AfterLabelContent { get; set; }
-
-    /// <summary>
-    /// Addition to class name of label wrapper element.
-    /// </summary>
-    [Parameter]
-    public string? LabelClass { get; set; }
-
-    /// <summary>
-    /// Should be set as active.
-    /// </summary>
-    [Parameter]
-    public bool IsActive { get; set; } = false;
-
-    /// <summary>
-    /// Should be highlighted.
-    /// </summary>
-    [Parameter]
-    public bool Highlighted { get; set; } = false;
-
-    /// <summary>
-    /// **Important:** To make draggable menu items work in Firefox, the elementType must not be `"button"`. Set it to
-    /// something else, like `"div"`.
-    /// </summary>
-    [Parameter]
-    public bool Draggable { get; set; } = false;
-
-    /// <summary>
-    /// Extends class name of the dropdown menu.
-    /// </summary>
-    [Parameter]
-    public string? DropdownClass { get; set; }
-
-    /// <summary>
-    /// Extends style of the dropdown menu.
-    /// </summary>
-    [Parameter]
-    public string? DropdownStyle { get; set; }
-
-    [Parameter]
-    public bool HideDraggableIcon { get; set; } = false;
-
-    /// <summary>
-    /// Hides chevron icon for dropdown.
-    /// </summary>
-    [Parameter]
-    public bool HideChevronIcon { get; set; } = false;
-
-    /// <summary>
-    /// Defines dropdown status from outside.
-    /// </summary>
-    [Parameter]
-    public bool? ShowDropdown { get; set; }
-
-    [Parameter]
-    public EventCallback<bool> ShowDropdownChanged { get; set; }
-
-    /// <summary>
-    /// Close on click outside.
-    /// </summary>
-    [Parameter]
-    public bool SupportOutside { get; set; } = false;
-
-    /// <summary>
-    /// Overrides `IgnoreClasses` prop `MenuItem` will pass to `Outside`.<br/>
-    /// Hint: If you want this menu item to stay open when others will open, set:
-    /// `OutsideIgnoreClasses="@(new List&lt;string&gt; { "blue-menu-item-wrapper" })"`
-    /// </summary>
-    [Parameter]
-    public List<string>? OutsideIgnoreClasses { get; set; }
-
-    [Parameter]
-    public bool Busy { get; set; } = false;
-
-    [Parameter]
-    public bool Disabled { get; set; } = false;
-
-    protected override void OnParametersSet()
-    {
-        string? classFromAttr = AdditionalAttributes?.ContainsKey("class") == true ? AdditionalAttributes["class"]?.ToString() :
-        null;
-        className = $"blue-menu-item btn {(IsActive ? "active" : "")} {classFromAttr} {(Highlighted ? "highlighted" : "")} {Class}";
-
-        if (ShowDropdown != null)
-            showDropdown = ShowDropdown == true;
-    }
-
-    string className = "";
-    bool showDropdown = false;
-
-    async Task onClick(MouseEventArgs? arg)
-    {
-        await OnClick.InvokeAsync(arg);
-
-        if (DropdownContent != null)
-        {
-            showDropdown = !showDropdown;
-            if (ShowDropdownChanged.HasDelegate)
-            {
-                await ShowDropdownChanged.InvokeAsync(showDropdown);
-            }
-        }
-    }
-
-    void onClickOutside(ElementReference myRef)
-    {
-        showDropdown = false;
-        if (ShowDropdownChanged.HasDelegate)
-        {
-            ShowDropdownChanged.InvokeAsync(showDropdown);
-        }
-    }
-
-    string id = $"blue-menu-item-wrapper-{Guid.NewGuid().ToString()}";
-}
