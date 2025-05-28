@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.14.0 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.14.1 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -11150,6 +11150,17 @@ body {
         border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
         background-color: var(--blue-menu-item-dropdown-bg);
     }
+
+    &[popover] {
+        position: fixed;
+        margin: 0;
+        padding: 0;
+        z-index: 1000;
+        border: none;
+        background: transparent;
+        border-radius: calc(#{$border-radius} + 0.1rem);
+        box-shadow: $box-shadow;
+    }
 }
 
 .blue-menu-item-dropdown-caret.blue-caret {
@@ -11200,7 +11211,8 @@ body {
 
     &:hover,
     &:active,
-    &.highlighted {
+    &.highlighted,
+    &:has(+ :popover-open) {
         color: inherit;
         border-color: transparent;
 
@@ -11210,7 +11222,8 @@ body {
         }
     }
 
-    &.highlighted {
+    &.highlighted,
+    &:has(+ :popover-open) {
         &::before {
             opacity: 0.16;
         }
@@ -12174,8 +12187,6 @@ dialog.blue-modal:has(.offcanvas-start) {
 }
 
 // Collapse with details and animated
-// Right now not part of Blue Web, but could become one
-
 .blue-collapse {
     interpolate-size: allow-keywords;
 
@@ -12209,14 +12220,20 @@ dialog.blue-modal:has(.offcanvas-start) {
 
     &::details-content {
         block-size: 0;
+        opacity: 0;
+        translate: 0 -100%;
         transition:
             block-size 0.2s,
-            content-visibility 0.2s;
+            content-visibility 0.2s,
+            opacity 0.2s,
+            translate 0.2s;
         transition-behavior: allow-discrete;
     }
 
     &[open]::details-content {
         block-size: auto;
+        opacity: 1;
+        translate: 0;
     }
 }
 
@@ -12224,6 +12241,25 @@ dialog.blue-modal:has(.offcanvas-start) {
     .blue-collapse .blue-collapse-chevron,
     .blue-collapse::details-content {
         transition: none;
+    }
+}
+
+// Let's you group a collapse together with another UI element like a button that should come before the collapse summary.
+.blue-collapse-group {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+
+    & > details {
+        display: contents;
+
+        & > summary {
+            grid-column: 2;
+
+            & + * {
+                width: calc(100% + 1rem - 2px);
+            }
+        }
     }
 }
 
@@ -12247,6 +12283,43 @@ dialog.blue-modal:has(.offcanvas-start) {
 
 .BLUE-actions-collapse-menu {
     position: absolute;
+}
+
+.blue-anchor {
+    anchor-name: var(--blue-anchor-name, --anchor-1);
+}
+
+.blue-anchored {
+    top: anchor(var(--blue-anchor-name, --anchor-1) bottom);
+}
+
+.blue-anchored-start {
+    left: anchor(var(--blue-anchor-name, --anchor-1) left);
+}
+
+.blue-anchored-end {
+    left: anchor(var(--blue-anchor-name, --anchor-1) right);
+    translate: -100%;
+}
+
+@supports not (anchor-name: --anchor-1) {
+    .blue-anchored-end {
+        translate: none;
+    }
+
+    .blue-anchored-fallback {
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+
+        &::backdrop {
+            --bs-backdrop-bg: #000;
+            --bs-backdrop-opacity: 0.5;
+            background-color: var(--bs-backdrop-bg);
+            transition: opacity 0.2s;
+            opacity: var(--bs-backdrop-opacity);
+        }
+    }
 }
 
 

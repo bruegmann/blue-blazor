@@ -86,6 +86,17 @@
         border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
         background-color: var(--blue-menu-item-dropdown-bg);
     }
+
+    &[popover] {
+        position: fixed;
+        margin: 0;
+        padding: 0;
+        z-index: 1000;
+        border: none;
+        background: transparent;
+        border-radius: calc(#{$border-radius} + 0.1rem);
+        box-shadow: $box-shadow;
+    }
 }
 
 .blue-menu-item-dropdown-caret.blue-caret {
@@ -136,7 +147,8 @@
 
     &:hover,
     &:active,
-    &.highlighted {
+    &.highlighted,
+    &:has(+ :popover-open) {
         color: inherit;
         border-color: transparent;
 
@@ -146,7 +158,8 @@
         }
     }
 
-    &.highlighted {
+    &.highlighted,
+    &:has(+ :popover-open) {
         &::before {
             opacity: 0.16;
         }

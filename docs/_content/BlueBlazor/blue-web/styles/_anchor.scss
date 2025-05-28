@@ -1,0 +1,36 @@
+.blue-anchor {
+    anchor-name: var(--blue-anchor-name, --anchor-1);
+}
+
+.blue-anchored {
+    top: anchor(var(--blue-anchor-name, --anchor-1) bottom);
+}
+
+.blue-anchored-start {
+    left: anchor(var(--blue-anchor-name, --anchor-1) left);
+}
+
+.blue-anchored-end {
+    left: anchor(var(--blue-anchor-name, --anchor-1) right);
+    translate: -100%;
+}
+
+@supports not (anchor-name: --anchor-1) {
+    .blue-anchored-end {
+        translate: none;
+    }
+
+    .blue-anchored-fallback {
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+
+        &::backdrop {
+            --bs-backdrop-bg: #000;
+            --bs-backdrop-opacity: 0.5;
+            background-color: var(--bs-backdrop-bg);
+            transition: opacity 0.2s;
+            opacity: var(--bs-backdrop-opacity);
+        }
+    }
+}
