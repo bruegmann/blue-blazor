@@ -1,0 +1,30 @@
+﻿<button type="button" popovertarget="@_id" class="blue-anchor blue-menu-item btn @HeaderClass"
+    style="--blue-anchor-name: --anchor-@_id; @HeaderStyle">
+    @if (Icon != null)
+    {
+        <span class="blue-menu-item-icon @IconClass @(IconForActive != null ? "hasIconForActive" : "")" aria-hidden="true">
+            @Icon
+        </span>
+    }
+
+    @if (IconForActive != null && IsActive)
+    {
+        <span class="blue-menu-item-icon iconForActive @IconClass" aria-hidden="true">
+            @IconForActive
+        </span>
+    }
+
+    @if (Label != null)
+    {
+        <span class="blue-menu-item-label text-truncate @LabelClass">
+            @Label
+        </span>
+    }
+
+    @AfterLabelContent
+</button>
+<div class="blue-anchored blue-anchored-@(End ? "end" : "start") @(Fallback ? "blue-anchored-fallback" : "") blue-menu-item-dropdown text-body @DropdownClass"
+    id="@_id" popover
+    style="--blue-menu-item-dropdown-bg: var(--bs-body-bg); --blue-anchor-name: --anchor-@_id; @DropdownStyle">
+    @ChildContent
+</div>

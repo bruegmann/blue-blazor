@@ -13,6 +13,7 @@ public partial class Actions : ComponentBase, IDisposable
     [Inject]
     private IJSRuntime JSRuntime { get; set; } = default!;
 
+    private string _id = $"Actions_Dropdown_{Guid.NewGuid()}";
     private ElementReference _element;
     private IJSObjectReference? _instance;
 

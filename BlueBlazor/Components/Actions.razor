@@ -6,15 +6,16 @@
         @ChildContent
     </div>
 
-    <details class="BLUE-actions-collapse blue-collapse">
-        <summary class="blue-collapse-header blue-menu-item btn px-3">
+    <div class="BLUE-actions-collapse" style="--blue-anchor-name: --action-@_id">
+        <button type="button" popovertarget="@_id" class="blue-collapse-header blue-menu-item btn px-3">
             <span class="blue-menu-item-icon" aria-hidden="true">&#8942;</span>
             <span class="visually-hidden">@L["ToggleMenu"]</span>
-        </summary>
+        </button>
 
-        <div class="BLUE-actions-collapse-menu blue-menu-item-dropdown text-body end-0 @CollapseMenuClass"
-             style="--blue-menu-item-dropdown-bg: var(--bs-body-bg)">
+        <div id="@_id" popover
+            class="BLUE-actions-collapse-menu blue-anchored blue-anchored-end blue-anchored-fallback blue-menu-item-dropdown text-body @CollapseMenuClass"
+            style="--blue-menu-item-dropdown-bg: var(--bs-body-bg)">
             @ChildContent
         </div>
-    </details>
+    </div>
 </div>

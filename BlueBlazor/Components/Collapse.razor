@@ -1,0 +1,62 @@
+﻿<details class="blue-collapse @Class" style="@Style" draggable="@Draggable">
+    <summary class="blue-collapse-header blue-menu-item btn @HeaderClass" style="@HeaderStyle">
+        @if (HideChevronIcon != true && ChevronIconBefore)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                class="blue-menu-item-dropdown-toggle blue-collapse-chevron blue-menu-item-chevron" aria-hidden="true"
+                style=" display: inline-block; vertical-align: -0.125em; transition: transform 0.2s;" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+            </svg>
+        }
+
+        @if (Draggable && !HideDraggableIcon)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                className="bi bi-grip-vertical opacity-50" aria-hidden="true" viewBox="0 0 8 16">
+                <path
+                    d="M3.376 1.876c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1">
+                </path>
+            </svg>
+        }
+
+        @if (Icon != null)
+        {
+            <span class="blue-menu-item-icon @IconClass @(IconForActive != null ? "hasIconForActive" : "")"
+                aria-hidden="true">
+                @Icon
+            </span>
+        }
+
+        @if (IconForActive != null && IsActive)
+        {
+            <span class="blue-menu-item-icon iconForActive @IconClass" aria-hidden="true">
+                @IconForActive
+            </span>
+        }
+
+        @if (Label != null)
+        {
+            <span class="blue-menu-item-label text-truncate @LabelClass">
+                @Label
+            </span>
+        }
+
+        @AfterLabelContent
+
+        @if (HideChevronIcon != true && !ChevronIconBefore)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                class="blue-menu-item-dropdown-toggle blue-collapse-chevron blue-menu-item-chevron ms-auto"
+                aria-hidden="true" style=" display: inline-block; vertical-align: -0.125em; transition: transform 0.2s;"
+                viewBox="0 0 16 16">
+                <path class="blue-sidebar-exception" fillRule="evenodd"
+                    d="M11.354 1.646a.5.5 0 010 .708L5.707 8l5.647 5.646a.5.5 0 01-.708.708l-6-6a.5.5 0 010-.708l6-6a.5.5 0 01.708 0">
+                </path>
+            </svg>
+        }
+    </summary>
+    <div class="@DropdownClass" style="@DropdownStyle">
+        @ChildContent
+    </div>
+</details>

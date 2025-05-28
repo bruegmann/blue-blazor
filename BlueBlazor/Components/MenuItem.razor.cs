@@ -12,6 +12,10 @@ public partial class MenuItem
     private bool _showDropdown = false;
     private string _id = $"blue-menu-item-wrapper-{Guid.NewGuid()}";
 
+    /// <summary>
+    /// **Important:** There is now a dedicated component for dropdowns: `&lt;Dropdown /&gt;`.
+    /// Or use `&lt;Collapse /&gt;`.
+    /// </summary>
     [Parameter]
     public RenderFragment? DropdownContent { get; set; }
 
