@@ -81,9 +81,6 @@ $header-deep-bg: darken($header-bg, 4%) !default;
 // Background color, when hovering action menu item.
 $actions-control-bg-hover: $bla-button-bg-hover !default;
 
-// Width and height of the scrollbar indicators
-$scrollbar-size: 10px;
-
 // Shrink sidebar on smaller screens
 $sidebar-shrink: true !default;
 
@@ -97,7 +94,6 @@ $sidebar-expanded-breakpoint: 1400px !default;
     --blue-app-bg: #{$app-bg};
 
     --blue-scrollbar-thumb-color-rgb: #{$scrollbar-thumb-color-rgb};
-    --blue-scrollbar-size: #{$scrollbar-size};
 
     --blue-sidebar-width: #{$bla-sidebar-width};
     --blue-sidebar-color: #{$sidebar-color};

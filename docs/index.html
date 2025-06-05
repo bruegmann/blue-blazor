@@ -1,89 +1,95 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>Blue Blazor</title>
-    <base href="/blue-blazor/" />
+    <head>
+        <meta charset="utf-8" />
+        <title>Blue Blazor</title>
+        <base href="/blue-blazor/" />
 
-    <link rel="icon" href="images/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="UI library for Blazor using Custom Components and Bootstrap" />
-    <link rel="apple-touch-icon" href="images/logo192.png" />
-    <link rel="manifest" href="images/manifest.json" />
+        <link rel="icon" href="images/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="UI library for Blazor using Custom Components and Bootstrap"
+        />
+        <link rel="apple-touch-icon" href="images/logo192.png" />
+        <link rel="manifest" href="images/manifest.json" />
 
-    <link href="css/app.css" rel="stylesheet" />
-    <link href="lib/prism.css" rel="stylesheet" />
-    <link href="lib/prism-dark.css" rel="stylesheet" media="(prefers-color-scheme: dark)" />
+        <link href="css/app.css" rel="stylesheet" />
+        <link href="lib/prism.css" rel="stylesheet" />
+        <link
+            href="lib/prism-dark.css"
+            rel="stylesheet"
+            media="(prefers-color-scheme: dark)"
+        />
 
-    <link href="BlueBlazor.Docs.styles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/docs.css" />
+        <link href="BlueBlazor.Docs.styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/docs.css" />
 
-    <link rel="stylesheet" href="_content/BlueBlazor/inter/web/inter.css">
+        <link rel="stylesheet" href="_content/BlueBlazor/inter/web/inter.css" />
 
-    <!-- Start Single Page Apps for GitHub Pages -->
-    <script type="text/javascript">
-        // Single Page Apps for GitHub Pages
-        // MIT License
-        // https://github.com/rafgraph/spa-github-pages
-        // This script checks to see if a redirect is present in the query string,
-        // converts it back into the correct url and adds it to the
-        // browser's history using window.history.replaceState(...),
-        // which won't cause the browser to attempt to load the new url.
-        // When the single page app is loaded further down in this file,
-        // the correct url will be waiting in the browser's history for
-        // the single page app to route accordingly.
-        (function (l) {
-            if (l.search[1] === '/') {
-                var decoded = l.search.slice(1).split('&').map(function (s) {
-                    return s.replace(/~and~/g, '&')
-                }).join('?');
-                window.history.replaceState(null, null,
-                    l.pathname.slice(0, -1) + decoded + l.hash
-                );
-            }
-        }(window.location))
-    </script>
-    <!-- End Single Page Apps for GitHub Pages -->
-</head>
+        <!-- Start Single Page Apps for GitHub Pages -->
+        <script type="text/javascript">
+            // Single Page Apps for GitHub Pages
+            // MIT License
+            // https://github.com/rafgraph/spa-github-pages
+            // This script checks to see if a redirect is present in the query string,
+            // converts it back into the correct url and adds it to the
+            // browser's history using window.history.replaceState(...),
+            // which won't cause the browser to attempt to load the new url.
+            // When the single page app is loaded further down in this file,
+            // the correct url will be waiting in the browser's history for
+            // the single page app to route accordingly.
+            ;(function (l) {
+                if (l.search[1] === "/") {
+                    var decoded = l.search
+                        .slice(1)
+                        .split("&")
+                        .map(function (s) {
+                            return s.replace(/~and~/g, "&")
+                        })
+                        .join("?")
+                    window.history.replaceState(
+                        null,
+                        null,
+                        l.pathname.slice(0, -1) + decoded + l.hash
+                    )
+                }
+            })(window.location)
+        </script>
+        <!-- End Single Page Apps for GitHub Pages -->
+    </head>
 
-<body>
-    <div id="app">
-        <div class="card rounded-5 d-inline-flex flex-column align-items-center position-absolute p-5 shadow-lg"
-             style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
-            <div class="d-flex align-items-center mb-3 gap-2">
-                <img src="images/blue.svg" style="width: 2rem; height: 2rem;" alt="Blue Blazor logo" />
-                <h1>Blue Blazor</h1>
+    <body>
+        <div id="app">
+            <div
+                class="card rounded-5 d-inline-flex flex-column align-items-center position-absolute p-5 shadow-lg"
+                style="left: 50%; top: 50%; transform: translate(-50%, -50%)"
+            >
+                <div class="d-flex align-items-center mb-3 gap-2">
+                    <img
+                        src="images/blue.svg"
+                        style="width: 2rem; height: 2rem"
+                        alt="Blue Blazor logo"
+                    />
+                    <h1>Blue Blazor</h1>
+                </div>
+
+                <div class="progress w-100 mb-1" role="progressbar">
+                    <div
+                        class="progress-bar"
+                        style="width: var(--blazor-load-percentage)"
+                    ></div>
+                </div>
+                <span role="status">Loading...</span>
             </div>
-
-            <div class="progress w-100 mb-1" role="progressbar">
-                <div class="progress-bar" style="width: var(--blazor-load-percentage)"></div>
-            </div>
-            <span role="status">Loading...</span>
         </div>
-    </div>
 
-    <!--<div id="app">
-        <div class="card rounded-5 d-inline-flex flex-column align-items-center position-absolute p-5 shadow-lg"
-             style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
-            <div class="d-flex align-items-center mb-3 gap-2">
-                <img src="images/blue.svg" style="width: 2rem; height: 2rem;" alt="Blue Blazor logo" />
-                <h1>Blue Blazor</h1>
-            </div>
-            <span class="spinner-border text-primary" aria-hidden="true"></span>
-            <span role="status">Loading...</span>
-
-            <div class="progress" role="progressbar" aria-label="Loading webassembly" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar" style="width: 100%"></div>
-            </div>
+        <div id="blazor-error-ui">
+            An unhandled error has occurred.
+            <a href="" class="reload">Reload</a>
+            <a class="dismiss">🗙</a>
         </div>
-    </div>-->
-
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script src="_content/BlueBlazor/js/all.bundle.js"></script>
-</body>
+        <script src="_framework/blazor.webassembly.js"></script>
+        <script src="_content/BlueBlazor/js/all.bundle.js"></script>
+    </body>
 </html>

@@ -2,33 +2,6 @@
     scrollbar-width: thin;
 }
 
-@media screen and (min-width: 768px) {
-    ::-webkit-scrollbar {
-        height: var(--blue-scrollbar-size);
-        overflow: visible;
-        width: var(--blue-scrollbar-size);
-    }
-    ::-webkit-scrollbar-thumb {
-        background-clip: padding-box;
-        border: solid transparent;
-        border-width: 1px;
-        min-height: 28px;
-        padding: 100px 0 0;
-        border-radius: 0.3rem;
-    }
-    ::-webkit-scrollbar-button {
-        height: 0;
-        width: 0;
-    }
-    ::-webkit-scrollbar-track {
-        border: solid transparent;
-        border-width: 0 0 0 4px;
-    }
-    ::-webkit-scrollbar-corner {
-        background: 0 0;
-    }
-}
-
 html,
 body {
     height: 100%;
@@ -63,7 +36,11 @@ body {
 .pagination > li > a,
 .list-group a.list-group-item {
     &:not(.disabled):not(.readonly):not(.dropdown-toggle) {
-        transition: background-color 0.3s, color 0.15s, box-shadow 0.3s, opacity 0.3s;
+        transition:
+            background-color 0.3s,
+            color 0.15s,
+            box-shadow 0.3s,
+            opacity 0.3s;
 
         @media (prefers-reduced-motion) {
             transition: none;
