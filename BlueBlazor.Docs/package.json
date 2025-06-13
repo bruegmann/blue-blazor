@@ -7,6 +7,6 @@
         "sass": "1.77.6"
     },
     "dependencies": {
-        "blue-web": "^1.14.3"
+        "blue-web": "^1.15.0"
     }
 }

@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using System.Text.Json;
 using DocGen.Models;
+using Microsoft.AspNetCore.Components.Rendering;
 
 public class Helper
 {
@@ -47,7 +48,7 @@ public class Helper
             if (Directory.Exists(storyPath))
             {
                 storyImport = $"@using BlueBlazor.Docs.Stories.{component}\n";
-                storyHtml = await GetStoryContent(storyPath);
+                storyHtml = await GetStoryContent(storyPath, "html");
             }
 
             //string content = $"@page \"/{pageUrl}\"\n" +
@@ -73,6 +74,42 @@ public class Helper
         await File.WriteAllTextAsync(targetFilePath, razor);
     }
 
+    public async Task GenerateLLmsTxt(string llmsTxtPath, string readmePath, string componentsPath, string storiesPath,
+        string componentNamespace, string assemblyName, string? xmlDocumentationPath = null)
+    {
+        string markdown = await File.ReadAllTextAsync(readmePath);
+
+        var components = Directory.GetFiles(componentsPath, "*.razor").Select(Path.GetFileNameWithoutExtension);
+
+        foreach (var component in components)
+        {
+            string componentMarkdown = $"## {component!}";
+
+            Type? componentType = Type.GetType($"{componentNamespace}.{component}");
+            if (componentType == null)
+            {
+                componentType = Type.GetType($"{componentNamespace}.{component}, {assemblyName}");
+            }
+            if (componentType != null && xmlDocumentationPath != null)
+            {
+                string componentComment = GetXmlDocumentationCommentForClass(xmlDocumentationPath, componentType);
+                componentMarkdown += componentComment + "\n";
+            }
+
+            string storyPath = Path.Combine(storiesPath, component!);
+            if (Directory.Exists(storyPath))
+            {
+                componentMarkdown += await GetStoryContent(storyPath, "markdown");
+            }
+
+            markdown += $"\n\n{componentMarkdown}\n";
+        }
+
+        await File.WriteAllTextAsync(llmsTxtPath, markdown);
+    }
+
+
+
     private string ApplyRazorTemplate(string imports = "", string content = "", string props = "", string examples = "", string pageUrl = "")
     {
         return RazorTemplate.Replace("{imports}", imports)
@@ -82,11 +119,11 @@ public class Helper
                 .Replace("{pageUrl}", pageUrl);
     }
 
-    private async Task<string> GetStoryContent(string storyPath)
+    private async Task<string> GetStoryContent(string storyPath, string format = "html")
     {
         string docsRegex = "@\\{\\s*\\/\\*docs([\\s\\S]*?)\\*\\/\\s*\\}";
         var examples = Directory.GetFiles(storyPath, "*.razor");
-        string examplesHtml = "";
+        string examplesContent = "";
 
         foreach (var example in examples)
         {
@@ -122,26 +159,34 @@ public class Helper
                 catch { }
             }
 
-            code = code.Replace("@", "@@").Replace("<", "&lt;").Replace(">", "&gt;").Trim();
+            if (format == "html")
+            {
+                code = code.Replace("@", "@@").Replace("<", "&lt;").Replace(">", "&gt;").Trim();
 
-            examplesHtml += $"<h2>{docsMeta.Title}</h2>\n" +
-                (docsMeta.Description != "" ? MarkdownToHtml(docsMeta.Description ?? "") : "");
+                examplesContent += $"<h2>{docsMeta.Title}</h2>\n" +
+                    (docsMeta.Description != "" ? MarkdownToHtml(docsMeta.Description ?? "") : "");
 
-            examplesHtml += "<div class=\"example\">\n" +
-                $"    <div class=\"example-demo\">{(docsMeta.IframeUrl != null ?
-                $"<iframe class=\"example-iframe\" src=\"{docsMeta.IframeUrl}\"></iframe>" +
-                $"<a href=\"{docsMeta.IframeUrl}\" target=\"_blank\" rel=\"noreferrer\">" +
-                $"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" fill=\"currentColor\" class=\"bi bi-fullscreen\" viewBox=\"0 0 16 16\"><path d=\"M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5M.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5\" /></svg> " +
-                $"Open in full window</a>" :
-                $"<{exampleName} />")}</div>\n\n" +
-                $"    <details class=\"example-code\">\n" +
-                $"        <summary>Code</summary>\n" +
-                $"        <pre><code class=\"language-razor\">{code}</code></pre>\n" +
-                $"    </details>\n" +
-                "</div>";
+                examplesContent += "<div class=\"example\">\n" +
+                    $"    <div class=\"example-demo\">{(docsMeta.IframeUrl != null ?
+                    $"<iframe class=\"example-iframe\" src=\"{docsMeta.IframeUrl}\"></iframe>" +
+                    $"<a href=\"{docsMeta.IframeUrl}\" target=\"_blank\" rel=\"noreferrer\">" +
+                    $"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" fill=\"currentColor\" class=\"bi bi-fullscreen\" viewBox=\"0 0 16 16\"><path d=\"M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5M.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5\" /></svg> " +
+                    $"Open in full window</a>" :
+                    $"<{exampleName} />")}</div>\n\n" +
+                    $"    <details class=\"example-code\">\n" +
+                    $"        <summary>Code</summary>\n" +
+                    $"        <pre><code class=\"language-razor\">{code}</code></pre>\n" +
+                    $"    </details>\n" +
+                    "</div>";
+            }
+            else if (format == "markdown")
+            {
+                examplesContent += $"### {docsMeta.Title}\n" + docsMeta.Description + "\n";
+                examplesContent += $"```razor\n{code}\n```\n";
+            }
         }
 
-        return examplesHtml;
+        return examplesContent;
     }
 
     private IEnumerable<ComponentParameterInfo> GetComponentParameters(Type componentType, string xmlDocumentationPath)

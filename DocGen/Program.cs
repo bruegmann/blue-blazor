@@ -29,5 +29,9 @@
          "{imports}\n" +
          "<WelcomeJumbotron /><DocGenContent>\n<ChildContent>{content}</ChildContent>\n</DocGenContent>";
         helper.GeneratePage(readmePath, indexRazorPath).Wait();
+
+        string llmsTxtPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "BlueBlazor.Docs", "wwwroot", "llms.txt");
+        helper.GenerateLLmsTxt(llmsTxtPath, readmePath, componentsPath, storiesPath,
+            componentNamespace, assemblyName, xmlDocumentationPath).Wait();
     }
 }

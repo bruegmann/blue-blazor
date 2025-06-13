@@ -3,90 +3,110 @@
 @inject NavigationManager NavigationManager
 
 <SidebarMenu>
-    <TopContent>
-        <MenuItem Label="Home" Href="" IsActive="@isActive("", true)">
-        <Icon>
-            <BiHouse />
-        </Icon>
-        <IconForActive>
-            <BiHouseFill />
-        </IconForActive>
-        </MenuItem>
-    </TopContent>
-
-    <ChildContent>
-        <div class="blue-collapse-group" role="group">
-            <MenuItem Label="Dialogs" Href="topics/dialogs" IsActive="@isActive("topics/dialogs")">
-            <Icon>
-                <BiWindowStack />
-            </Icon>
-            </MenuItem>
-
-            <Collapse Label="Click to open" LabelClass="visually-hidden" DropdownClass="blue-menu-item-dropdown">
-                @if (componentPageUrls != null)
-                {
-                    foreach (var item in componentPageUrls.Where((kv) => kv.Key.ToLower().Contains("dialog")))
-                    {
-                        <MenuItem Label="@item.Key" Href="@(item.Value + "/props")" IsActive="@isActive(item.Value + "/")">
-                        <Icon>
-                            @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
-                        </Icon>
-                        <IconForActive>
-                            @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
-                                                (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
-                </IconForActive>
-
-                        <AfterLabelContent>
-                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
-                            {
-                                <span class="badge bg-primary ms-1 mt-1">New</span>
-                            }
-                            @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
-                            {
-                                <span class="badge bg-info ms-1 mt-1">Update</span>
-                            }
-                            @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
-                            {
-                                <span class="badge bg-warning ms-1 mt-1">Experimental</span>
-                            }
-                        </AfterLabelContent>
-                        </MenuItem>
-                    }
-                }
-            </Collapse>
-        </div>
-
-        @if (componentPageUrls != null)
-        {
-            foreach (var item in componentPageUrls.Where((kv) => !kv.Key.ToLower().Contains("dialog")))
-            {
-                <MenuItem Label="@item.Key" Href="@(item.Value + "/props")" IsActive="@isActive(item.Value + "/")">
+    <ul class="list-unstyled d-flex flex-column">
+        <li>
+            <MenuItem Label="Home" Href="" IsActive="@isActive("", true)">
                 <Icon>
-                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
+                    <BiHouse />
                 </Icon>
                 <IconForActive>
-                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
-                                (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
-        </IconForActive>
+                    <BiHouseFill />
+                </IconForActive>
+            </MenuItem>
+        </li>
 
-                <AfterLabelContent>
-            @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
-                    {
-                        <span class="badge bg-primary ms-1 mt-1">New</span>
-                    }
-                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
-                    {
-                        <span class="badge bg-info ms-1 mt-1">Update</span>
-                    }
-                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
-                    {
-                        <span class="badge bg-warning ms-1 mt-1">Experimental</span>
-                    }
-                </AfterLabelContent>
+        <li class="mb-3">
+            <div class="blue-collapse-group" role="group">
+                <MenuItem Label="Dialogs" Href="topics/dialogs" IsActive="@isActive("topics/dialogs")">
+                    <Icon>
+                        <BiWindowStack />
+                    </Icon>
                 </MenuItem>
-            }
-        }
-    </ChildContent>
+
+                <Collapse Label="Click to open" LabelClass="visually-hidden" DropdownClass="d-flex flex-column border-start position-relative ms-3">
+                    @if (componentPageUrls != null)
+                    {
+                        foreach (var item in componentPageUrls.Where((kv) => kv.Key.ToLower().Contains("dialog")))
+                        {
+                            <MenuItem Label="@item.Key" Href="@(item.Value + "/props")" IsActive="@isActive(item.Value + "/")">
+                                <Icon>
+                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
+                                </Icon>
+                                <IconForActive>
+                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
+                                        (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
+                                </IconForActive>
+
+                                <AfterLabelContent>
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
+                                    {
+                                        <span class="badge bg-primary ms-1 mt-1">New</span>
+                                    }
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
+                                    {
+                                        <span class="badge bg-info ms-1 mt-1">Update</span>
+                                    }
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
+                                    {
+                                        <span class="badge bg-warning ms-1 mt-1">Experimental</span>
+                                    }
+                                </AfterLabelContent>
+                            </MenuItem>
+                        }
+                    }
+                </Collapse>
+            </div>
+        </li>
+
+        <li class="mb-3">
+            <strong class="ps-2">Components</strong>
+            <ul class="list-unstyled">
+                @if (componentPageUrls != null)
+                {
+                    foreach (var item in componentPageUrls.Where((kv) => !kv.Key.ToLower().Contains("dialog")))
+                    {
+                        <li>
+                            <MenuItem Label="@item.Key" Href="@(item.Value + "/props")" IsActive="@isActive(item.Value + "/")">
+                                <Icon>
+                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
+                                </Icon>
+                                <IconForActive>
+                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
+                                        (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
+                                </IconForActive>
+
+                                <AfterLabelContent>
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
+                                    {
+                                        <span class="badge bg-primary ms-1 mt-1">New</span>
+                                    }
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
+                                    {
+                                        <span class="badge bg-info ms-1 mt-1">Update</span>
+                                    }
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
+                                    {
+                                        <span class="badge bg-warning ms-1 mt-1">Experimental</span>
+                                    }
+                                </AfterLabelContent>
+                            </MenuItem>
+                        </li>
+                    }
+                }
+            </ul>
+        </li>
+
+        <li>
+            <strong class="ps-2">Resources for AI agents</strong>
+            <ul class="list-unstyled">
+                <li>
+                    <MenuItem Href="llms.txt" Label="llms.txt">
+                        <Icon><BiBodyText /></Icon>
+                    </MenuItem>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </SidebarMenu>
 
 
@@ -140,7 +160,7 @@ IconForActive = @<BiExclamationDiamondFill />}
 },
 {"Button", new() {
 Icon = @<BiPlayBtn />,
-IconForActive = @<BiPlayBtnFill />}
+IconForActive = @<BiPlayBtnFill />, IsUpdate = true}
 },
 {"ButtonOrA", new() {
 Icon = @<BiLink45deg />}
@@ -162,16 +182,16 @@ Icon = @<BiLayoutTextWindowReverse />}
 Icon = @<BiQrCode />}
 },
 {"MenuItem", new() {
-Icon = @<BiApp />, IsUpdate = true
+Icon = @<BiApp />
 } },
 {"TotpInput", new() {
 Icon = @<BiInputCursorText />}
 },
 {"Tab", new() {
-Icon = @<BiSegmentedNav />, IsUpdate = true}
+Icon = @<BiSegmentedNav />}
 },
 {"Tabs", new() {
-Icon = @<BiSegmentedNav />, IsUpdate = true}
+Icon = @<BiSegmentedNav />}
 },
 {"SimpleLayout", new() {
 Icon = @<BiWindow /> }
@@ -198,14 +218,14 @@ Icon = @<BiSquare /> }
 Icon = @<BiMenuApp />, IsExperimental = true }
 },
 {"Collapse", new() {
-Icon = @<BiCardHeading />, IsNew = true }
+Icon = @<BiCardHeading /> }
 },
 {"Dropdown", new() {
-Icon = @<BiMenuDown />, IsNew = true }
+Icon = @<BiMenuDown /> }
 } };
-RenderFragment defaultIcon = @<BiFileCode />;
+    RenderFragment defaultIcon = @<BiFileCode />;
 
-class ComponentIcon
+    class ComponentIcon
     {
         public RenderFragment Icon { get; set; } = @<BiFileCode />;
         public RenderFragment? IconForActive { get; set; }
