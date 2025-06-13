@@ -2,16 +2,24 @@
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
 <ButtonOrA @attributes="AdditionalAttributes"
-           Disabled="@(Busy || busy || Disabled)"
+           Disabled="@(Busy || _busy || Disabled)"
            ButtonType="@ButtonType"
-           OnClick="@onClick" Href="@Href" Target="@Target"
-           Class="@className"
+           OnClick="@HandleClick" Href="@Href" Target="@Target"
+           Class="@_className"
            aria-label="@(LabelHidden ? Label : null)">
-    @if (Busy || busy)
+    @if (Busy || _busy)
     {
         <span class="spinner-border spinner-border-sm bi me-1" aria-hidden="true"></span>
 
         <span role="status">@L["Loading"]…</span>
+    }
+    else if (_success)
+    {
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-check-lg me-1" aria-hidden="true" viewBox="0 0 16 16">
+            <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z" />
+        </svg>
+
+        <span role="status">@L["Successful"]</span>
     }
     else
     {
@@ -34,127 +42,3 @@
         }
     }
 </ButtonOrA>
-
-@code {
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IDictionary<string, object>? AdditionalAttributes { get; set; }
-
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
-
-    /// <summary>
-    /// Will be wrapped inside a `span` with the class `blue-btn-icon-wrapper` and `aria-hidden="true"`.
-    /// Class `icon-link` will be added to the button if `IconBefore` or `IconAfter` is set.
-    /// </summary>
-    [Parameter]
-    public RenderFragment? IconBefore { get; set; }
-
-    /// <summary>
-    /// Will be wrapped inside a `span` with the class `blue-btn-icon-wrapper` and `aria-hidden="true"`.
-    /// Class `icon-link` will be added to the button if `IconBefore` or `IconAfter` is set.
-    /// </summary>
-    [Parameter]
-    public RenderFragment? IconAfter { get; set; }
-
-    [Parameter]
-    public EventCallback<MouseEventArgs> OnClick { get; set; }
-
-    [Parameter]
-    public string? Href { get; set; }
-
-    /// <summary>
-    /// `Target="_blank"` will automatically add `rel="noreferrer"` to the anchor tag.
-    /// </summary>
-    [Parameter]
-    public string? Target { get; set; }
-
-    [Parameter]
-    public string Class { get; set; } = "";
-
-    /// <summary>
-    /// Let the button appear busy.
-    /// Hint: busy state is set automatically when the button is clicked and the `OnClick` event handler is running.
-    /// </summary>
-    [Parameter]
-    public bool Busy { get; set; } = false;
-
-    [Parameter]
-    public string? Label { get; set; }
-
-    /// <summary>
-    /// The label is hidden, but still accessible for screen readers.
-    /// </summary>
-    [Parameter]
-    public bool LabelHidden { get; set; } = false;
-
-    [Parameter]
-    public ButtonType? ButtonType { get; set; } = Shared.ButtonType.Button;
-
-    /// <summary>
-    /// Shortcut to set `Variant` to `Variant.Filled` and `Color` to `Color.Primary`.
-    /// </summary>
-    [Parameter]
-    public bool FilledPrimary { get; set; } = false;
-
-    [Parameter]
-    public Variant Variant { get; set; } = Shared.Variant.Soft;
-
-    [Parameter]
-    public Color Color { get; set; } = Shared.Color.Secondary;
-
-    [Parameter]
-    public Size? Size { get; set; }
-
-    [Parameter]
-    public bool Disabled { get; set; } = false;
-
-    protected override void OnParametersSet()
-    {
-        if (FilledPrimary)
-        {
-            Variant = Variant.Filled; Color = Color.Primary;
-        }
-        buildClass();
-    }
-
-    bool busy = false;
-    string className = "";
-
-    async Task onClick(MouseEventArgs args)
-    {
-        busy = true;
-        await OnClick.InvokeAsync(args);
-        busy = false;
-    }
-
-    string getButtonVariantClass(Variant variant, Color buttonColor)
-    {
-        string color = buttonColor.ToString().ToLower();
-
-        switch (variant)
-        {
-            case Variant.Soft:
-                return $"blue-btn-soft-{color}";
-            case Variant.Plain:
-                return $"blue-btn-plain-{color}";
-            case Variant.Outline:
-                return $"btn-outline-{color}";
-            case Variant.Link:
-                return $"btn-link link-{color} link-offset-2";
-            case Variant.None:
-                return "";
-            default:
-                return $"btn-{color}";
-        }
-    }
-
-    void buildClass()
-    {
-        className = new CssBuilder(Class)
-            .AddClass("btn", Variant != Variant.None)
-            .AddClass(getButtonVariantClass(Variant, Color))
-            .AddClass($"btn-{Size?.ToString().ToLower()}", Size != null)
-            .AddClass("icon-link", Busy || busy || IconBefore != null || IconAfter != null)
-            .Build()!;
-    }
-}

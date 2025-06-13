@@ -135,4 +135,7 @@
   <data name="ToggleMenu" xml:space="preserve">
     <value>Menü umschalten</value>
   </data>
+  <data name="Successful" xml:space="preserve">
+    <value>Erfolgreich</value>
+  </data>
 </root>

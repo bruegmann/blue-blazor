@@ -1,0 +1,11 @@
+﻿<Button Label="Click me" OnClick="FakeProcess" @bind-Success="@_success" />
+
+@code {
+    private bool _success = false;
+
+    private async Task FakeProcess()
+    {
+        await Task.Delay(2000);
+        _success = true;
+    }
+}
