@@ -61,6 +61,11 @@
     );
 
     .blue-btn-plain-#{$color} {
+        &:not(:hover) {
+            box-shadow: none;
+            background-image: none;
+        }
+
         @if $color == "light" {
             $text-color: color-contrast($value);
         }
@@ -69,19 +74,14 @@
             transparent,
             transparent,
             $text-color,
-            $hover-background: shade-color($bg, $btn-hover-bg-shade-amount),
-            $hover-border: shade-color($bg, $btn-hover-border-shade-amount),
-            $active-background: $active-background,
-            $active-border:
-                if(
-                    $color == $color-contrast-light,
-                    shade-color($value, $btn-active-border-shade-amount),
-                    tint-color($value, $btn-active-border-tint-amount)
-                ),
-            $active-color: color-contrast($active-background),
-            $disabled-background: $value,
-            $disabled-border: $value,
-            $disabled-color: color-contrast($value)
+            $hover-background: tint-color($value, 80%),
+            $hover-border: tint-color($value, 80%),
+            $hover-color: if($color == "light", color-contrast($value), shade-color($value, 60%)),
+            $active-background: shade-color($bg, $btn-hover-bg-shade-amount),
+            $active-border: shade-color($bg, $btn-hover-border-shade-amount),
+            $disabled-background: transparent,
+            $disabled-border: transparent,
+            $disabled-color: $text-color
         );
     }
 }
@@ -89,7 +89,7 @@
 @include color-mode(dark) {
     @each $color, $value in $theme-colors {
         $bg: shade-color($value, 80%);
-        $text-color: $value;
+        $text-color: tint-color($value, 40%);
 
         .blue-btn-plain-#{$color} {
             @if $color == "dark" {
