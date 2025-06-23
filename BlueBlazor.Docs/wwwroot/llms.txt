@@ -1348,36 +1348,12 @@ Use together with `Tab`.
 
 
 ## TextInput
+Represents a text input component with customizable properties such as label, placeholder, value, and styling.
+
 ### Basic usage
 
 ```razor
 <TextInput Label="My label" />
-```
-### Binding bug
-
-```razor
-@foreach (var item in items)
-{
-    <div class="d-flex gap-2 mb-3">
-        <TextInput Label="@item.Label" Floating @bind-Value="item.Value" />
-        <Button Label="Delete" OnClick="() => items.Remove(item)" />
-        Value: @item.Value
-    </div>
-}
-
-@code {
-    List<Item> items = new (){ 
-        new () { Label = "Label for item 1", Value = "Item 1" },
-        new () { Label = "Label for item 2", Value = "Item 2" },
-        new () { Label = "Label for item 3", Value = "Item 3" }
-    };
-
-    class Item {
-        public string Label { get; set; } = "";
-        public string Value { get; set; } = "";
-    }
-}
-
 ```
 ### Floating label
 
@@ -1403,6 +1379,15 @@ Use together with `Tab`.
 
 ```razor
 <TextInput Label="My label" Value="My value" ReadOnly />
+```
+### Search input group
+
+```razor
+<div class="blue-input-group input-group">
+    <TextInput Label="Search" LabelHidden LabelClass="input-group-text">
+        <AfterLabelContent><BiSearch aria-hidden="true" /></AfterLabelContent>
+    </TextInput>
+</div>
 ```
 ### Small label
 
