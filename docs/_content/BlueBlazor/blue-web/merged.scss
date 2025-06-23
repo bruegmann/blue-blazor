@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.15.0 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.15.1 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -46,6 +46,8 @@ $link-hover-decoration: underline !default;
 // In a future Bootstrap release, this might not be necessary anymore.
 $focus-ring-color: #{rgba(var(--bs-primary-rgb), 25%)} !default;
 $input-focus-border-color: #{rgba(var(--bs-primary-rgb), 50%)} !default;
+
+$enable-button-pointers: false !default;
 
 
 // Bootstrap functions
@@ -10771,11 +10773,19 @@ $utilities: map-merge(
 // scss-docs-end import-stack
 
 
-// Per CSS-Variablen überschreibbar machen, da es von Bootstrap aus noch nicht möglich ist.
-// Bei neuer Bootstrap-Version prüfen, ob es noch nötig ist.
+// Make it overridable via CSS variables, as it is not yet possible in Bootstrap.
+// Check with a newer Bootstrap version to see if it is still necessary.
 .form-check-input:checked {
     background-color: var(--bs-primary, #{$form-check-input-checked-bg-color});
     border-color: var(--bs-primary, #{$form-check-input-checked-border-color});
+}
+
+// Resets cursor from Bootstrap' _reboot.scss based on option.
+@if ($enable-button-pointers: false) {
+    summary,
+    [role="button"] {
+        cursor: unset;
+    }
 }
 
 // In previous versions of Bootstrap, `.page-header` was a class that could be used to add a border to the bottom of a page header.
@@ -11294,71 +11304,34 @@ body {
     height: var(--blue-header-title-image-height, var(--blue-header-title-image-size, 2rem));
 }
 
-.blue-search {
-    display: flex;
-    align-items: center;
+.blue-input-group {
     border: $input-border-width solid $input-border-color;
     border-radius: $input-border-radius;
     background-color: $input-bg;
 
-    &.blue-search-body {
-        border: 1px solid $input-border-color;
+    &.focus,
+    &:has(input:focus) {
+        box-shadow: $input-btn-focus-box-shadow;
+        border-color: $input-focus-border-color;
 
-        .blue-search-input-group {
-            display: flex;
-        }
-
-        &.focus {
-            box-shadow: $input-btn-focus-box-shadow;
+        .input-group-text {
+            color: #{var(--bs-primary-text-emphasis)};
         }
     }
-
-    &.focus {
-        box-shadow: inset $input-btn-focus-box-shadow;
-    }
-}
-
-.blue-sidebar .blue-search:not(.blue-search-body) {
-    margin-left: map-get($spacers, 1);
-    margin-right: map-get($spacers, 1);
-}
-
-.blue-search-input-group {
-    display: none;
 
     .input-group-text {
         border-color: transparent;
         background-color: transparent;
     }
-}
 
-.blue-search-control {
-    border: none;
-    background-color: transparent !important;
+    .form-control {
+        border: none;
+        background-color: transparent !important;
 
-    &:focus {
-        box-shadow: none;
+        &:focus {
+            box-shadow: none;
+        }
     }
-}
-
-.blue-search-reset-btn {
-    color: rgba($input-color, 0.7);
-
-    &:hover {
-        color: $input-color;
-    }
-}
-
-.blue-search.blue-search-sidebar {
-    transition: opacity 0.2s ease-in-out;
-
-    @media (prefers-reduced-motion) {
-        transition: none;
-    }
-}
-
-.blue-search.blue-search-sidebar:not(:hover):not(.focus) {
-    opacity: 0.7;
 }
 
 .blue-actions {
@@ -11867,10 +11840,13 @@ body {
 
     position: relative;
     order: 0;
-    cursor: pointer;
     user-select: none;
     -webkit-appearance: none;
     appearance: none;
+
+    @if ($enable-button-pointers) {
+        cursor: pointer;
+    }
 }
 
 .blue-tab::before {
@@ -12311,6 +12287,10 @@ dialog.blue-modal:has(.offcanvas-start) {
 
 .dxbl-text-edit {
     font-size: 1rem;
+}
+
+.dxbl-pager-page-edit {
+    min-width: 2.5em;
 }
 
 .dxbl-toolbar {

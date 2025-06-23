@@ -41,3 +41,5 @@ $link-hover-decoration: underline !default;
 // In a future Bootstrap release, this might not be necessary anymore.
 $focus-ring-color: #{rgba(var(--bs-primary-rgb), 25%)} !default;
 $input-focus-border-color: #{rgba(var(--bs-primary-rgb), 50%)} !default;
+
+$enable-button-pointers: false !default;

@@ -12,10 +12,13 @@
 
     position: relative;
     order: 0;
-    cursor: pointer;
     user-select: none;
     -webkit-appearance: none;
     appearance: none;
+
+    @if ($enable-button-pointers) {
+        cursor: pointer;
+    }
 }
 
 .blue-tab::before {

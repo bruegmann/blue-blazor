@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.15.0 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.15.1 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -15,11 +15,19 @@
 
 @import "./styles/bootstrap";
 
-// Per CSS-Variablen überschreibbar machen, da es von Bootstrap aus noch nicht möglich ist.
-// Bei neuer Bootstrap-Version prüfen, ob es noch nötig ist.
+// Make it overridable via CSS variables, as it is not yet possible in Bootstrap.
+// Check with a newer Bootstrap version to see if it is still necessary.
 .form-check-input:checked {
     background-color: var(--bs-primary, #{$form-check-input-checked-bg-color});
     border-color: var(--bs-primary, #{$form-check-input-checked-border-color});
+}
+
+// Resets cursor from Bootstrap' _reboot.scss based on option.
+@if ($enable-button-pointers: false) {
+    summary,
+    [role="button"] {
+        cursor: unset;
+    }
 }
 
 @import "./styles/text-icons";
@@ -27,7 +35,7 @@
 @import "./styles/status";
 @import "./styles/menu-item";
 @import "./styles/page-header";
-@import "./styles/search";
+@import "./styles/input-group";
 @import "./styles/action-menu";
 @import "./styles/caret";
 @import "./styles/tooltips";
