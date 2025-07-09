@@ -21,6 +21,10 @@ $color-mode-type: media-query;
     @extend .mt-4, .mb-3;
 }
 
+.md-block blockquote {
+    @extend .alert, .alert-primary;
+}
+
 .example {
     @extend .rounded-top-5, .border, .p-1;
     border-radius: calc(var(--bs-border-radius) + .25rem);
@@ -41,7 +45,6 @@ $color-mode-type: media-query;
 }
 
 .example-code summary {
-    cursor: pointer;
     padding: 0.7rem 1rem;
 }
 

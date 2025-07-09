@@ -18,6 +18,9 @@
         <li class="mb-3">
             <div class="blue-collapse-group" role="group">
                 <MenuItem Label="Dialogs" Href="topics/dialogs" IsActive="@isActive("topics/dialogs")">
+                    <AfterLabelContent>
+                        <span class="badge bg-info ms-1 mt-1">Update</span>
+                    </AfterLabelContent>
                     <Icon>
                         <BiWindowStack />
                     </Icon>
@@ -143,7 +146,7 @@
 
     async Task loadPagesData()
     {
-        var json = await Http.GetStringAsync("data/pages-data.json?v=2");
+        var json = await Http.GetStringAsync("data/pages-data.json?v=3");
         componentPageUrls = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
     }
 
@@ -160,7 +163,7 @@ IconForActive = @<BiExclamationDiamondFill />}
 },
 {"Button", new() {
 Icon = @<BiPlayBtn />,
-IconForActive = @<BiPlayBtnFill />, IsUpdate = true}
+IconForActive = @<BiPlayBtnFill />}
 },
 {"ButtonOrA", new() {
 Icon = @<BiLink45deg />}
@@ -212,7 +215,7 @@ Icon = @<BiLayoutSidebarInset /> }
 Icon = @<BiArrowUpRightSquare /> }
 },
 {"DialogProvider", new() {
-Icon = @<BiSquare /> }
+Icon = @<BiSquare />, IsUpdate = true }
 },
 {"Actions", new() {
 Icon = @<BiMenuApp />, IsExperimental = true }

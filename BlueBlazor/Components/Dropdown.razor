@@ -23,7 +23,7 @@
 
     @AfterLabelContent
 </button>
-<div class="blue-anchored blue-anchored-@(End ? "end" : "start") @(Fallback ? "blue-anchored-fallback" : "") blue-menu-item-dropdown text-body @DropdownClass"
+<div @ref="_element" class="blue-anchored blue-menu-item-dropdown @(Fallback ? "blue-anchored-fallback" : "") text-body blue-anchored-@(End ? "end" : "start") @DropdownClass"
     id="@_id" popover
     style="--blue-menu-item-dropdown-bg: var(--bs-body-bg); --blue-anchor-name: --anchor-@_id; @DropdownStyle">
     @ChildContent

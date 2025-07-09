@@ -1,0 +1,26 @@
+﻿@{
+    /*docs { "description": "`DialogService` has shortcuts to use `blueWeb.dialog.ask`, `blueWeb.dialog.tell` and `blueWeb.dialog.verify`." } */
+}
+@using BlueBlazor.Services
+@inject DialogService DialogService
+
+<Button Label="Ask user" OnClick="AskUser" />
+<Button Label="Verify" OnClick="Verify" />
+
+@code {
+    private async Task AskUser()
+    {
+        string? result = await DialogService.AskAsync("What is your name?", defaultValue: "Jeff");
+        if (result is not null)
+        {
+            await DialogService.TellAsync("You answered: " + result);
+        }
+    }
+
+
+    private async Task Verify()
+    {
+        bool result = await DialogService.VerifyAsync("Do you agree?", "Say yes or no");
+        await DialogService.TellAsync("You answered: " + result);
+    }
+}

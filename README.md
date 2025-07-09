@@ -26,15 +26,12 @@ To make use of Blue Blazor, add the following to your `_Imports.razor` file:
 
 ### Register services
 
-Register the service for localization in your `Program.cs` file:
+> ⚠️ **Heads up!**
+> The recommended way to register services has changed. Instead of running `builder.Services.AddLocalization();` and `builder.Services.AddScoped<ILocalizationService, LocalizationService>();`, you now need to do the following:
 
+To use Blue Blazor components, you need to register the required services. Add the following lines to your `Program.cs` file:
 ```csharp
-builder.Services.AddLocalization();
-```
-
-If you want to use dialogs (Modals, Offcanvas) you need to register the `DialogService`:
-```csharp
-builder.Services.AddScoped<BlueBlazor.Services.DialogService>();
+builder.Services.AddBlueBlazor();
 ```
 
 ### Stylesheet
@@ -90,11 +87,9 @@ Your project probably already has at least one page component. Change its conten
 ```razor
 @page "/"
 
-<Page>
-    <Body>
-        <h1>Hello, world!</h1>
-    </Body>
-</Page>
+<div class="container">
+    <h1>Hello, world!</h1>
+</div>
 
 ```
 

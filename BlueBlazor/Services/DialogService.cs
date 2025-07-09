@@ -1,9 +1,20 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
+using Microsoft.JSInterop;
+using System.Text.Json.Serialization;
 
 namespace BlueBlazor.Services;
 
 public class DialogService
 {
+    private IJSRuntime JSRuntime { get; set; } = default!;
+
+    public DialogService(IOptions<Options> options, IJSRuntime jsRuntime)
+    {
+        DevExpressSupport = options.Value.DevExpressSupport;
+        JSRuntime = jsRuntime;
+    }
+
     public event Func<DialogReference, Task<DialogReference>>? OnShow;
 
     // Fires when C# Method `CloseAsync` has been executed
@@ -28,6 +39,53 @@ public class DialogService
 
     internal Task ClosedAsync(DialogReference dialogReference)
         => OnClosed?.Invoke(dialogReference) ?? Task.CompletedTask;
+
+    #region Blue Web JS Dialog Functions
+    public async Task<string?> AskAsync(string text,
+        string? title = null, string? defaultValue = null, string? icon = null, bool? switchPrimaryBtn = null,
+        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null)
+    {
+        string json = GetDialogOptionsJson(title, defaultValue, icon, switchPrimaryBtn, acceptBtnText, cancelBtnText, inputType);
+        var result = await JSRuntime.InvokeAsync<object>("blueWeb.dialog.ask", text, json);
+        if (result is System.Text.Json.JsonElement element && element.ValueKind == System.Text.Json.JsonValueKind.False)
+        {
+            return null;
+        }
+        return result?.ToString();
+    }
+
+    public async Task TellAsync(string text,
+        string? title = null, string? defaultValue = null, string? icon = null, bool? switchPrimaryBtn = null,
+        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null)
+    {
+        string json = GetDialogOptionsJson(title, defaultValue, icon, switchPrimaryBtn, acceptBtnText, cancelBtnText, inputType);
+        await JSRuntime.InvokeVoidAsync("blueWeb.dialog.tell", text, json);
+    }
+
+    public async Task<bool> VerifyAsync(string text,
+        string? title = null, string? defaultValue = null, string? icon = null, bool? switchPrimaryBtn = null,
+        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null)
+    {
+        string json = GetDialogOptionsJson(title, defaultValue, icon, switchPrimaryBtn, acceptBtnText, cancelBtnText, inputType);
+        return await JSRuntime.InvokeAsync<bool>("blueWeb.dialog.verify", text, json);
+    }
+
+    private string GetDialogOptionsJson(string? title = null, string? defaultValue = null, string? icon = null, bool? switchPrimaryBtn = null,
+        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null)
+        => System.Text.Json.JsonSerializer.Serialize(new
+        {
+            title,
+            defaultValue,
+            icon,
+            switchPrimaryBtn,
+            acceptBtnText,
+            cancelBtnText,
+            inputType
+        }, new System.Text.Json.JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        });
+    #endregion
 }
 
 public class DialogReference

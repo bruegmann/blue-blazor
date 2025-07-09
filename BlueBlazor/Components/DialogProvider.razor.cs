@@ -9,7 +9,7 @@ namespace BlueBlazor.Components;
 /// `DialogService` has to be registered inside your `Program.cs` like this:
 /// 
 /// ```csharp
-/// builder.Services.AddScoped&lt;DialogService&gt;();
+/// builder.Services.AddBlueBlazor();
 /// ```
 /// 
 /// You have to put `&lt;DialogProvider /&gt;` somewhere in your app if you want to use the `DialogService`. Like in your `App.razor` or `MainLayout.razor`.
@@ -43,6 +43,7 @@ public partial class DialogProvider : ComponentBase, IDisposable
     {
         if (firstRender)
         {
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/blue-web/js/dialog.bundle.js");
             Module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/DialogProvider.razor.js");
         }
     }
