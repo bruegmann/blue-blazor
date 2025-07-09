@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.15.1 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.16.0 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -32,6 +32,7 @@
 
 @import "./styles/text-icons";
 @import "./styles/general";
+@import "./styles/utils";
 @import "./styles/status";
 @import "./styles/menu-item";
 @import "./styles/page-header";
@@ -49,6 +50,7 @@
 @import "./styles/collapse";
 @import "./styles/actions";
 @import "./styles/anchor";
+@import "./styles/scrollspy";
 
 @import "./styles/devexpress";
 @import "./styles/inter";

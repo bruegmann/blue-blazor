@@ -60,7 +60,8 @@
 .blue-collapse-group {
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 100%;
 
     & > details {
         display: contents;

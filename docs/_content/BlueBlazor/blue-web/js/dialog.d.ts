@@ -6,10 +6,11 @@ export interface DialogOptions {
     acceptBtnText?: string;
     cancelBtnText?: string;
     inputType?: string;
+    defaultValue?: string;
 }
-export declare function ask(text: string, options?: DialogOptions): Promise<string | boolean>;
-export declare function tell(text: string, options?: DialogOptions): Promise<void>;
-export declare function verify(text: string, options?: DialogOptions): Promise<boolean>;
+export declare function ask(text: string, options?: DialogOptions | string): Promise<string | boolean>;
+export declare function tell(text: string, options?: DialogOptions | string): Promise<void>;
+export declare function verify(text: string, options?: DialogOptions | string): Promise<boolean>;
 declare global {
     interface Window {
         blueWeb: any;

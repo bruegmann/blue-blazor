@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.15.1 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.16.0 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -10924,6 +10924,13 @@ body {
     @include scroll-shadow(var(--bs-body-bg));
 }
 
+// Sets `margin: 0` to last child.
+// Useful for creating a gap between items together with `mb-3`.
+// Inspired by Tailwind CSS class `last:m-0`.
+.m-last-0:last-child {
+    margin: 0 !important;
+}
+
 .blue-loading {
     background-color: $primary;
 }
@@ -12189,7 +12196,8 @@ dialog.blue-modal:has(.offcanvas-start) {
 .blue-collapse-group {
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 100%;
 
     & > details {
         display: contents;
@@ -12260,6 +12268,78 @@ dialog.blue-modal:has(.offcanvas-start) {
             transition: opacity 0.2s;
             opacity: var(--bs-backdrop-opacity);
         }
+    }
+}
+
+.blue-scrollspy {
+    --#{$prefix}nav-link-padding-x: #{$nav-link-padding-x * 0.5};
+    --#{$prefix}nav-link-padding-y: #{$nav-link-padding-y * 0.5};
+    @include rfs(0.875rem, --#{$prefix}nav-link-font-size);
+    --#{$prefix}nav-link-font-weight: #{$nav-link-font-weight};
+    --#{$prefix}nav-link-color: #{$nav-link-color};
+    --#{$prefix}nav-link-hover-color: #{$nav-link-hover-color};
+    --#{$prefix}nav-link-disabled-color: #{$nav-link-disabled-color};
+
+    --#{$prefix}nav-tabs-border-width: #{$nav-tabs-border-width};
+    --#{$prefix}nav-tabs-border-color: #{$nav-tabs-border-color};
+    --#{$prefix}nav-tabs-border-radius: #{$nav-tabs-border-radius};
+    --#{$prefix}nav-tabs-link-hover-border-color: #{$nav-tabs-link-hover-border-color};
+    --#{$prefix}nav-tabs-link-active-color: #{$nav-tabs-link-active-color};
+    --#{$prefix}nav-tabs-link-active-bg: #{$nav-tabs-link-active-bg};
+    --#{$prefix}nav-tabs-link-active-border-color: #{$nav-tabs-link-active-border-color};
+
+    @media (prefers-reduced-motion: no-preference) {
+        scroll-behavior: smooth;
+    }
+
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scroll-snap-type: y mandatory;
+
+    scroll-marker-group: before;
+
+    &::scroll-marker-group {
+        display: flex;
+        min-height: calc(
+            (var(--#{$prefix}nav-link-padding-y) + var(--#{$prefix}nav-tabs-border-width)) * 2 +
+                (var(--#{$prefix}nav-link-font-size) * var(--#{$prefix}body-line-height))
+        );
+        margin-bottom: 0.25rem;
+    }
+
+    & > section {
+        &::scroll-marker {
+            content: attr(aria-label);
+
+            font-size: var(--#{$prefix}nav-link-font-size);
+            box-sizing: border-box;
+            text-decoration: none;
+
+            padding: var(--#{$prefix}nav-link-padding-y) var(--#{$prefix}nav-link-padding-x);
+            border: var(--#{$prefix}nav-tabs-border-width) solid transparent;
+
+            border-radius: var(--#{$prefix}nav-tabs-border-radius);
+
+            &:is(:hover, :focus) {
+                border-color: var(--#{$prefix}nav-tabs-link-hover-border-color);
+            }
+
+            &:target-current,
+            &:is(:active) {
+                color: var(--#{$prefix}nav-tabs-link-active-color);
+                background-color: var(--#{$prefix}nav-tabs-link-active-bg);
+                border-color: var(--#{$prefix}border-color);
+            }
+        }
+    }
+}
+
+.blue-scrollspy-after {
+    scroll-marker-group: after;
+
+    &::scroll-marker-group {
+        margin-bottom: 0;
+        margin-top: 0.25rem;
     }
 }
 

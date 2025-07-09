@@ -20,8 +20,9 @@ async function dialog(dialogType, text) {
     switchPrimaryBtn = false,
     acceptBtnText = dialogType === "verify" ? getPhrase("Yes") : "OK",
     cancelBtnText = dialogType === "verify" ? getPhrase("No") : getPhrase("Cancel"),
-    inputType = "text"
-  } = options;
+    inputType = "text",
+    defaultValue
+  } = typeof options === "string" ? JSON.parse(options) : options;
   const id = guid();
   const addToDom = () => {
     document.body.insertAdjacentHTML("beforeend", /* HTML */`<dialog class="blue-modal modal" id="${id}" aria-labelledby="${id}-label">
@@ -40,7 +41,12 @@ async function dialog(dialogType, text) {
                             </div>
                             <div class="modal-body">
                                 ${dialogType === "ask" ? /* HTML */`<label for="${id}-input">${text}</label>
-                                          <input type="${inputType}" id="${id}-input" class="form-control mt-3" />` : text}
+                                          <input
+                                              type="${inputType}"
+                                              ${defaultValue !== undefined ? ` value="${defaultValue}"` : ""}
+                                              id="${id}-input"
+                                              class="form-control mt-3"
+                                          />` : text}
                             </div>
                             <div class="modal-footer">
                                 ${dialogType === "verify" || dialogType === "ask" ? /* HTML */`<button

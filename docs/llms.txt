@@ -26,15 +26,12 @@ To make use of Blue Blazor, add the following to your `_Imports.razor` file:
 
 ### Register services
 
-Register the service for localization in your `Program.cs` file:
+> ⚠️ **Heads up!**
+> The recommended way to register services has changed. Instead of running `builder.Services.AddLocalization();` and `builder.Services.AddScoped<ILocalizationService, LocalizationService>();`, you now need to do the following:
 
+To use Blue Blazor components, you need to register the required services. Add the following lines to your `Program.cs` file:
 ```csharp
-builder.Services.AddLocalization();
-```
-
-If you want to use dialogs (Modals, Offcanvas) you need to register the `DialogService`:
-```csharp
-builder.Services.AddScoped<BlueBlazor.Services.DialogService>();
+builder.Services.AddBlueBlazor();
 ```
 
 ### Stylesheet
@@ -90,11 +87,9 @@ Your project probably already has at least one page component. Change its conten
 ```razor
 @page "/"
 
-<Page>
-    <Body>
-        <h1>Hello, world!</h1>
-    </Body>
-</Page>
+<div class="container">
+    <h1>Hello, world!</h1>
+</div>
 
 ```
 
@@ -733,7 +728,7 @@ Contains and manages dialogs coming from the `DialogService`.
 `DialogService` has to be registered inside your `Program.cs` like this:
 
 ```csharp
-builder.Services.AddScoped<DialogService>();
+builder.Services.AddBlueBlazor();
 ```
 
 You have to put `<DialogProvider />` somewhere in your app if you want to use the `DialogService`. Like in your `App.razor` or `MainLayout.razor`.
@@ -795,6 +790,35 @@ You have to put `<DialogProvider />` somewhere in your app if you want to use th
     {
         closedTimer++;
         StateHasChanged();
+    }
+}
+
+```
+### Simple questions
+`DialogService` has shortcuts to use `blueWeb.dialog.ask`, `blueWeb.dialog.tell` and `blueWeb.dialog.verify`.
+```razor
+
+@using BlueBlazor.Services
+@inject DialogService DialogService
+
+<Button Label="Ask user" OnClick="AskUser" />
+<Button Label="Verify" OnClick="Verify" />
+
+@code {
+    private async Task AskUser()
+    {
+        string? result = await DialogService.AskAsync("What is your name?", defaultValue: "Jeff");
+        if (result is not null)
+        {
+            await DialogService.TellAsync("You answered: " + result);
+        }
+    }
+
+
+    private async Task Verify()
+    {
+        bool result = await DialogService.VerifyAsync("Do you agree?", "Say yes or no");
+        await DialogService.TellAsync("You answered: " + result);
     }
 }
 
@@ -1383,10 +1407,19 @@ Represents a text input component with customizable properties such as label, pl
 ### Search input group
 
 ```razor
-<div class="blue-input-group input-group">
+<div popovertarget="SearchInputGroup_Popover" class="blue-anchor blue-input-group input-group"
+     style="--blue-anchor-name: --anchor-SearchInputGroup_Popover;">
     <TextInput Label="Search" LabelHidden LabelClass="input-group-text">
         <AfterLabelContent><BiSearch aria-hidden="true" /></AfterLabelContent>
     </TextInput>
+</div>
+
+<div class="blue-anchored blue-menu-item-dropdown text-body blue-anchored-start"
+     id="SearchInputGroup_Popover" popover
+     style="--blue-menu-item-dropdown-bg: var(--bs-body-bg); --blue-anchor-name: --anchor-SearchInputGroup_Popover;">
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action" href="#">Action</a>
+    </div>
 </div>
 ```
 ### Small label
