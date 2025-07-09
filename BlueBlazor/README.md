@@ -27,7 +27,7 @@ To make use of Blue Blazor, add the following to your `_Imports.razor` file:
 ### Register services
 
 > ⚠️ **Heads up!**
-> The recommended way to register services has changed. Instead of running `builder.Services.AddLocalization();` and `builder.Services.AddScoped<ILocalizationService, LocalizationService>();`, you now need to do the following:
+> The recommended way to register services has changed. Instead of running `builder.Services.AddLocalization();` and `builder.Services.AddScoped(sp => new BlueBlazor.Services.DialogService() { DevExpressSupport = true });`, you now need to do the following:
 
 To use Blue Blazor components, you need to register the required services. Add the following lines to your `Program.cs` file:
 ```csharp
