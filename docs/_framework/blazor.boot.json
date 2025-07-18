@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "BlueBlazor.Docs",
   "resources": {
-    "hash": "sha256-mb3xOAszHTE/cNqkji5/7ofGepEuzGk3B0sC8Q7xLqc=",
+    "hash": "sha256-wA9m1Bjwct00SpGmtQjyyPwZHB7HbsgIr6qRmQhpmoU=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-YyxJV6dv935qHoQAmjB+2qRjHeGpm4SyWxE0T/KvsIE="
     },
@@ -54,12 +54,12 @@
       "System.Text.RegularExpressions.wasm": "sha256-hGZleNEZV17Dz5kzEWFvNqnurwCDj1PZ9QMtVOHwaI0=",
       "System.Threading.wasm": "sha256-xnwJiITL8f1W3mPAR43dHOdw43GjLxKFUCcdDfC8E/0=",
       "System.Private.CoreLib.wasm": "sha256-LdUCu40C6IYduE5cstw1nJ/RhrxMRn/ily81X+QPfs0=",
-      "BlueBlazor.wasm": "sha256-O3OtDp+uWjy4CYOsOBVKvO7j8li6GGPF10oFR7IFzgs=",
-      "BlueBlazor.Docs.wasm": "sha256-UEEE+hIjHA6mufIZ80iDXsM9iJsS7jf8HfJPYD+zhhI="
+      "BlueBlazor.wasm": "sha256-8zGVOxpIuBEiu9eqzlk9cbbcvTarjzlYpA+eIntAWa8=",
+      "BlueBlazor.Docs.wasm": "sha256-iWvFrFkpKNAlak5QVHxhSy2cM9EYTtEL/SpSUdKccLM="
     },
     "satelliteResources": {
       "de": {
-        "BlueBlazor.resources.wasm": "sha256-CiFFVRakwMRjTQuIcxEkKziA7DzxmQKOQKnUVMVwJe8="
+        "BlueBlazor.resources.wasm": "sha256-m92di8t+4wsSIY66AeWYZUYbewFEYg7BVYW7s3rqrDw="
       }
     },
     "libraryInitializers": {
