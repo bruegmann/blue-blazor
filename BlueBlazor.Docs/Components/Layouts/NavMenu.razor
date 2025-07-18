@@ -31,7 +31,7 @@
                     {
                         foreach (var item in componentPageUrls.Where((kv) => kv.Key.ToLower().Contains("dialog")))
                         {
-                            <MenuItem Label="@item.Key" Href="@(item.Value + "/props")" IsActive="@isActive(item.Value + "/")">
+                            <MenuItem Label="@item.Key" Href="@(item.Value + "/")" IsActive="@isActive(item.Value + "/")">
                                 <Icon>
                                     @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
                                 </Icon>

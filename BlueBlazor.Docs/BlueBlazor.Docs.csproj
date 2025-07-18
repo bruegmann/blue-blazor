@@ -2,27 +2,30 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Remove="Pages\Components\placeholder" />
+		<None Remove="Pages\Components\placeholder" />
 	</ItemGroup>
 	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="wwwroot\css\docs-theme.css" />
+		<_ContentIncludedByDefault Remove="wwwroot\css\docs-theme.css" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Blazor.Bootstrap.Icons" Version="1.0.1" />
 		<PackageReference Include="Markdig" Version="0.40.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.11" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.11" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.11" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Pages\Components\" />
-	  <Folder Include="wwwroot\images\" />
-	  <Folder Include="wwwroot\data\" />
+		<Folder Include="Pages\Components\" />
+		<Folder Include="wwwroot\images\" />
+		<Folder Include="wwwroot\data\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\BlueBlazor\BlueBlazor.csproj" />
+		<ProjectReference Include="..\BlueBlazor\BlueBlazor.csproj" />
 	</ItemGroup>
 
 	<PropertyGroup>

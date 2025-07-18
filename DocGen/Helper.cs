@@ -163,7 +163,7 @@ public class Helper
             {
                 code = code.Replace("@", "@@").Replace("<", "&lt;").Replace(">", "&gt;").Trim();
 
-                examplesContent += $"<h2>{docsMeta.Title}</h2>\n" +
+                examplesContent += $"<h3 id='examples-{exampleName}'>{docsMeta.Title}</h3>\n" +
                     (docsMeta.Description != "" ? MarkdownToHtml(docsMeta.Description ?? "") : "");
 
                 examplesContent += "<div class=\"example\">\n" +

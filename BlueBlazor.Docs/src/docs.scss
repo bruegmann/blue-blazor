@@ -17,7 +17,8 @@ $color-mode-type: media-query;
     @extend .page-header;
 }
 
-.md-block h3 {
+.md-block h3,
+.docgen h3 {
     @extend .mt-4, .mb-3;
 }
 
@@ -28,6 +29,7 @@ $color-mode-type: media-query;
 .example {
     @extend .rounded-top-5, .border, .p-1;
     border-radius: calc(var(--bs-border-radius) + .25rem);
+    margin-block-end: 2rem;
 }
 
 .example-demo {

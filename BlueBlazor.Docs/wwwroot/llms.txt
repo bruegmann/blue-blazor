@@ -27,7 +27,7 @@ To make use of Blue Blazor, add the following to your `_Imports.razor` file:
 ### Register services
 
 > ⚠️ **Heads up!**
-> The recommended way to register services has changed. Instead of running `builder.Services.AddLocalization();` and `builder.Services.AddScoped<ILocalizationService, LocalizationService>();`, you now need to do the following:
+> The recommended way to register services has changed. Instead of running `builder.Services.AddLocalization();` and `builder.Services.AddScoped(sp => new BlueBlazor.Services.DialogService() { DevExpressSupport = true });`, you now need to do the following:
 
 To use Blue Blazor components, you need to register the required services. Add the following lines to your `Program.cs` file:
 ```csharp
@@ -1407,19 +1407,10 @@ Represents a text input component with customizable properties such as label, pl
 ### Search input group
 
 ```razor
-<div popovertarget="SearchInputGroup_Popover" class="blue-anchor blue-input-group input-group"
-     style="--blue-anchor-name: --anchor-SearchInputGroup_Popover;">
+<div class="blue-input-group input-group">
     <TextInput Label="Search" LabelHidden LabelClass="input-group-text">
         <AfterLabelContent><BiSearch aria-hidden="true" /></AfterLabelContent>
     </TextInput>
-</div>
-
-<div class="blue-anchored blue-menu-item-dropdown text-body blue-anchored-start"
-     id="SearchInputGroup_Popover" popover
-     style="--blue-menu-item-dropdown-bg: var(--bs-body-bg); --blue-anchor-name: --anchor-SearchInputGroup_Popover;">
-    <div class="list-group">
-        <a class="list-group-item list-group-item-action" href="#">Action</a>
-    </div>
 </div>
 ```
 ### Small label
