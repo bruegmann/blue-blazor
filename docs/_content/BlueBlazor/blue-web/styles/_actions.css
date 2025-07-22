@@ -19,3 +19,7 @@
 .BLUE-actions-collapse-menu {
     position: absolute;
 }
+
+.BLUE-actions-collapse-menu:popover-open {
+    display: var(--display);
+}

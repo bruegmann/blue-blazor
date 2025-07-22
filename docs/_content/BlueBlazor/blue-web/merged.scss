@@ -1,12 +1,12 @@
 /*!
- * Blue Web v1.16.0 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.16.1 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
 // Main color theme. E.g. used for background for body and sidebar.
 $theme: hsl(217deg 10% 94%) !default;
 $theme-dark: hsl(217deg 10% 8%) !default;
-$primary: hsl(217deg 91% 50%) !default;
+$primary: hsl(221, 97%, 53%) !default;
 $white: #fff !default;
 $gray-100: hsl(217deg 17% 98%) !default;
 $gray-200: hsl(217deg 16% 93%) !default;
@@ -3376,17 +3376,23 @@ $rfs-mq-property-height: if($rfs-mode == max-media-query, max-height, min-height
 @mixin box-shadow($shadow...) {
   @if $enable-shadows {
     $result: ();
+    $has-single-value: false;
+    $single-value: null;
 
     @each $value in $shadow {
       @if $value != null {
-        $result: append($result, $value, "comma");
-      }
-      @if $value == none and length($shadow) > 1 {
-        @warn "The keyword 'none' must be used as a single argument.";
+        @if $value == none or $value == initial or $value == inherit or $value == unset {
+          $has-single-value: true;
+          $single-value: $value;
+        } @else {
+          $result: append($result, $value, "comma");
+        }
       }
     }
 
-    @if (length($result) > 0) {
+    @if $has-single-value {
+      box-shadow: $single-value;
+    } @else if (length($result) > 0) {
       box-shadow: $result;
     }
   }
@@ -4167,7 +4173,7 @@ $sidebar-expanded-breakpoint: 1400px !default;
 
 @mixin bsBanner($file) {
   /*!
-   * Bootstrap #{$file} v5.3.6 (https://getbootstrap.com/)
+   * Bootstrap #{$file} v5.3.7 (https://getbootstrap.com/)
    * Copyright 2011-2025 The Bootstrap Authors
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    */
@@ -12232,6 +12238,10 @@ dialog.blue-modal:has(.offcanvas-start) {
 
 .BLUE-actions-collapse-menu {
     position: absolute;
+}
+
+.BLUE-actions-collapse-menu:popover-open {
+    display: var(--display);
 }
 
 .blue-anchor {

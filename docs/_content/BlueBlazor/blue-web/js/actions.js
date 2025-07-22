@@ -31,10 +31,17 @@ export function init(actionsElement) {
     }
   }
   updateActions();
-  const resizeObserver = new ResizeObserver(() => {
+  const callback = () => {
     requestAnimationFrame(updateActions);
-  });
+  };
+  const resizeObserver = new ResizeObserver(callback);
   resizeObserver.observe(actionsElement);
+  const mutationObserver = new MutationObserver(callback);
+  mutationObserver.observe(actionsElement, {
+    attributes: false,
+    childList: true,
+    subtree: true
+  });
   const outsideClickHandler = event => {
     if (!actionsElement) return;
     const openDetails = actionsElement.querySelectorAll("details[open]");
@@ -49,8 +56,10 @@ export function init(actionsElement) {
   return {
     updateActions,
     resizeObserver,
+    mutationObserver,
     destroy() {
       resizeObserver.disconnect();
+      mutationObserver.disconnect();
       document.removeEventListener("click", outsideClickHandler);
     }
   };
