@@ -23,9 +23,16 @@ public partial class ModalDialog : DialogBase
     [Parameter]
     public bool Scrollable { get; set; }
 
+    /// <summary>
+    /// Additional CSS class to be added.
+    /// </summary>
+    [Parameter]
+    public string? DialogClass { get; set; }
+
     protected override void OnParametersSet()
     {
         _dialogClass = new CssBuilder("modal-dialog")
+            .AddClass(DialogClass)
             .AddClass("modal-dialog-scrollable", Scrollable)
             .AddClass($"modal-{Size?.ToString().ToLower()}", Size != null)
             .Build();

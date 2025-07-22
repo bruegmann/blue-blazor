@@ -7,6 +7,21 @@
     expandEl.checked = !shrink
 
     expandEl.addEventListener("change", handleChange)
+
+
+
+    window.addEventListener("popstate", handleLocationChange)
+
+    const originalPushState = history.pushState
+    history.pushState = function (...args) {
+        originalPushState.apply(history, args)
+        handleLocationChange()
+    };
+
+    history.replaceState = function (...args) {
+        originalReplaceState.apply(history, args)
+        handleLocationChange()
+    }
 }
 
 function handleChange() {
@@ -16,4 +31,8 @@ function handleChange() {
     else {
         localStorage.setItem("side-layout-shrink", "true")
     }
+}
+
+function handleLocationChange() {
+    document.getElementById("layout-drawer").checked = false
 }

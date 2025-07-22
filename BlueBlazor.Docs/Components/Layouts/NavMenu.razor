@@ -18,9 +18,6 @@
         <li class="mb-3">
             <div class="blue-collapse-group" role="group">
                 <MenuItem Label="Dialogs" Href="topics/dialogs" IsActive="@isActive("topics/dialogs")">
-                    <AfterLabelContent>
-                        <span class="badge bg-info ms-1 mt-1">Update</span>
-                    </AfterLabelContent>
                     <Icon>
                         <BiWindowStack />
                     </Icon>
@@ -215,7 +212,7 @@ Icon = @<BiLayoutSidebarInset /> }
 Icon = @<BiArrowUpRightSquare /> }
 },
 {"DialogProvider", new() {
-Icon = @<BiSquare />, IsUpdate = true }
+Icon = @<BiSquare /> }
 },
 {"Actions", new() {
 Icon = @<BiMenuApp />, IsExperimental = true }
@@ -227,7 +224,7 @@ Icon = @<BiCardHeading /> }
 Icon = @<BiMenuDown /> }
 },
 {"TextInput", new() {
-Icon = @<BiInputCursor />, IsUpdate = true }
+Icon = @<BiInputCursor /> }
 } };
     RenderFragment defaultIcon = @<BiFileCode />;
 

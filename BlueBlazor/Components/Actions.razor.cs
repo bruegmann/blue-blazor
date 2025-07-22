@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlueBlazor.Shared;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace BlueBlazor.Components;
@@ -17,6 +18,15 @@ public partial class Actions : ComponentBase, IDisposable
     private ElementReference _element;
     private IJSObjectReference? _instance;
 
+    private string? CollapseMenuStyleValue => new StyleBuilder(CollapseMenuStyle)
+        .AddStyle("--blue-menu-item-dropdown-bg: var(--bs-body-bg)")
+        .Build();
+
+    private string? CollapseMenuClassValue => new CssBuilder(CollapseMenuClass)
+        .AddClass("BLUE-actions-collapse-menu blue-anchored blue-anchored-end blue-anchored-fallback")
+        .AddClass("blue-menu-item-dropdown text-body")
+        .Build();
+
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
@@ -28,6 +38,9 @@ public partial class Actions : ComponentBase, IDisposable
 
     [Parameter]
     public string? CollapseMenuClass { get; set; }
+
+    [Parameter]
+    public string? CollapseMenuStyle { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
