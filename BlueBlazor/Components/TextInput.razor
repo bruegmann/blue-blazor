@@ -1,11 +1,11 @@
+@namespace BlueBlazor.Components
 @using Microsoft.Extensions.Localization
 
 @if (Floating)
 {
     <div class="form-floating">
-        <input @attributes="AdditionalAttributes" type="@Type" class="@_inputClass"
-               id="@Id" placeholder="@_placeholder" @bind="@CurrentValue"
-               @bind:event="@GetBindEvent()" readonly="@ReadOnly" />
+        <input @attributes="AdditionalAttributes" type="@Type" class="@_inputClass" id="@Id" placeholder="@_placeholder"
+            @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" />
         <label for="@Id" class="@_labelClass">
             @if (LabelHidden)
             {
@@ -33,7 +33,6 @@ else
         @AfterLabelContent
     </label>
 
-    <input @attributes="AdditionalAttributes" type="@Type" class="@_inputClass"
-           id="@Id" placeholder="@_placeholder" @bind="@CurrentValue"
-           @bind:event="@GetBindEvent()" readonly="@ReadOnly" />
+    <input @attributes="AdditionalAttributes" type="@Type" class="@_inputClass" id="@Id" placeholder="@_placeholder"
+        @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" />
 }

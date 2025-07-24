@@ -1,13 +1,15 @@
+@namespace BlueBlazor.Components
 @if (isButton)
 {
-    <button @attributes="AdditionalAttributes" @onclick="OnClick" type="@ButtonType?.ToString().ToLower()" class="@Class" disabled="@Disabled">
+    <button @attributes="AdditionalAttributes" @onclick="OnClick" type="@ButtonType?.ToString().ToLower()" class="@Class"
+        disabled="@Disabled">
         @ChildContent
     </button>
 }
 else
 {
     <a @attributes="AdditionalAttributes" @onclick="OnClick" href="@Href" class="@Class" disabled="@Disabled"
-       target="@Target" rel="@(Target == "_blank" ? "noreferrer" : "")">
+        target="@Target" rel="@(Target == "_blank" ? "noreferrer" : "")">
         @ChildContent
     </a>
 

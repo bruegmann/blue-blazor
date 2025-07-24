@@ -1,4 +1,5 @@
 ﻿@using Microsoft.Extensions.Localization
+@namespace BlueBlazor.Components
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
 <div @ref="_element" class="BLUE-actions @Class" role="toolbar" aria-label="Toolbar with button groups">
@@ -12,9 +13,7 @@
             <span class="visually-hidden">@L["ToggleMenu"]</span>
         </button>
 
-        <div id="@_id" popover
-            class="@CollapseMenuClassValue"
-            style="@CollapseMenuStyleValue">
+        <div id="@_id" popover class="@CollapseMenuClassValue" style="@CollapseMenuStyleValue">
             @ChildContent
         </div>
     </div>

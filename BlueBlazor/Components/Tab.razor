@@ -1,4 +1,6 @@
-﻿<input @attributes="AdditionalAttributes" @onclick="OnClick" type="radio" name="@Name" role="tab" id="@_tabId"
+﻿@namespace BlueBlazor.Components
+
+<input @attributes="AdditionalAttributes" @onclick="OnClick" type="radio" name="@Name" role="tab" id="@_tabId"
     aria-label="@Label" aria-controls="@_tabPanelId" class="blue-tab nav-link @Class" checked="@Active" />
 <div role="tabpanel" id="@_tabPanelId" aria-labelledby="@_tabId" tabindex="0" class="blue-tab-content @ContentClass">
     @ChildContent

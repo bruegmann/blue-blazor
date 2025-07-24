@@ -1,4 +1,6 @@
-﻿<div role="tablist" class="blue-tabs nav nav-@(Underline ? "underline" : "tabs") @Class" style="@Style">
+﻿@namespace BlueBlazor.Components
+
+<div role="tablist" class="blue-tabs nav nav-@(Underline ? "underline" : "tabs") @Class" style="@Style">
     <CascadingValue Name="Tab_Name" Value="@Name">
         @ChildContent
     </CascadingValue>

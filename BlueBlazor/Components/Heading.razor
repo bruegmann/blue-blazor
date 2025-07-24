@@ -1,5 +1,7 @@
-﻿<div @attributes="AdditionalAttributes" role="heading" aria-level="@Level"
-     class="@($"h{Level} mt-4 mb-3 {(PageHeader ? "blue-page-header" : "")} {Class}")">
+﻿@namespace BlueBlazor.Components
+
+<div @attributes="AdditionalAttributes" role="heading" aria-level="@Level"
+    class="@($"h{Level} mt-4 mb-3 {(PageHeader ? "blue-page-header" : "")} {Class}")">
     @ChildContent
 </div>
 

@@ -1,4 +1,6 @@
-﻿<button type="button" popovertarget="@_id" class="blue-anchor blue-menu-item btn @HeaderClass"
+﻿@namespace BlueBlazor.Components
+
+<button type="button" popovertarget="@_id" class="blue-anchor blue-menu-item btn @HeaderClass"
     style="--blue-anchor-name: --anchor-@_id; @HeaderStyle">
     @if (Icon != null)
     {
@@ -23,7 +25,8 @@
 
     @AfterLabelContent
 </button>
-<div @ref="_element" class="blue-anchored blue-menu-item-dropdown @(Fallback ? "blue-anchored-fallback" : "") text-body blue-anchored-@(End ? "end" : "start") @DropdownClass"
+<div @ref="_element"
+    class="blue-anchored blue-menu-item-dropdown @(Fallback ? "blue-anchored-fallback" : "") text-body blue-anchored-@(End ? "end" : "start") @DropdownClass"
     id="@_id" popover
     style="--blue-menu-item-dropdown-bg: var(--bs-body-bg); --blue-anchor-name: --anchor-@_id; @DropdownStyle">
     @ChildContent

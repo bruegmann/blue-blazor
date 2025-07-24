@@ -1,3 +1,4 @@
+@namespace BlueBlazor.Components
 @inject IJSRuntime JSRuntime
 
 <div id="@Id" style="display: contents;"></div>
@@ -30,7 +31,8 @@
     {
         if (didInit)
         {
-            await JSRuntime.InvokeVoidAsync("blueBlazor.qrCodeGen.createSvg", Id, Value, Border, LightColor, DarkColor, Class ?? "");
+            await JSRuntime.InvokeVoidAsync("blueBlazor.qrCodeGen.createSvg", Id, Value, Border, LightColor, DarkColor, Class ??
+            "");
         }
     }
 
