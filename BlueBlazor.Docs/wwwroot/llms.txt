@@ -395,12 +395,6 @@ This is a alert section that can be used to display alerts like error, warning, 
 
 
 
-## Body
-Contains the content of the page.
-
-
-
-
 ## Button
 This is a button with some useful default attributes.
 
@@ -1210,10 +1204,6 @@ Uses `<dxbl-popup-root></dxbl-popup-root>` for compatibility with DevExpress Pop
 
 
 
-## Page
-
-
-
 ## PageScript
 Let's you load JavaScript (JS) in a Blazor Web App with static server-side rendering (static SSR)
 and enhanced navigation.
@@ -1233,16 +1223,6 @@ Make sure to embed the required JavaScript file "_content/BlueBlazor/js/qrCodeGe
 ```razor
 <QrCodeGen Value="Hello World!" Class="w-25 h-25" />
 ```
-
-
-
-## SidebarMenu
-
-
-
-## SidebarToggler
-Button to toggle sidebar state. Designed for internal use inside of `Layout`.
-
 
 
 
