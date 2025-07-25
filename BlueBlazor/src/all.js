@@ -4,4 +4,3 @@
  */
 
 import "./qrCodeGen.js"
-import "./totpInput.js"

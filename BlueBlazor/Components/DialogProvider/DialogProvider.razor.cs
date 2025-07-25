@@ -17,7 +17,7 @@ namespace BlueBlazor.Components;
 /// </summary>
 public partial class DialogProvider : ComponentBase, IDisposable
 {
-    private IJSObjectReference? Module;
+    private IJSObjectReference? _module;
 
     [Inject]
     protected IJSRuntime JSRuntime { get; set; } = default!;
@@ -44,7 +44,7 @@ public partial class DialogProvider : ComponentBase, IDisposable
         if (firstRender)
         {
             await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/blue-web/js/dialog.bundle.js");
-            Module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/DialogProvider/DialogProvider.razor.js");
+            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/DialogProvider/DialogProvider.razor.js");
         }
     }
 
@@ -53,19 +53,19 @@ public partial class DialogProvider : ComponentBase, IDisposable
         _dialogs.Add(dialogReference);
         StateHasChanged();
         await Task.Delay(1);
-        if (Module is not null && dialogReference.Element is not null)
+        if (_module is not null && dialogReference.Element is not null)
         {
-            await Module.InvokeVoidAsync("Initialize", dialogReference.Element, DotNetObjectReference.Create(this));
-            await Module.InvokeVoidAsync("Show", dialogReference.Element);
+            await _module.InvokeVoidAsync("Initialize", dialogReference.Element, DotNetObjectReference.Create(this));
+            await _module.InvokeVoidAsync("Show", dialogReference.Element);
         }
         return dialogReference;
     }
 
     private async Task CloseDialog(DialogReference dialogReference)
     {
-        if (Module is not null)
+        if (_module is not null)
         {
-            await Module.InvokeVoidAsync("Close", dialogReference.Element);
+            await _module.InvokeVoidAsync("Close", dialogReference.Element);
         }
 
         StateHasChanged();
