@@ -1,4 +1,6 @@
-﻿namespace BlueBlazor.Shared;
+﻿using System.ComponentModel;
+
+namespace BlueBlazor.Shared;
 
 public enum ButtonType
 {
@@ -58,4 +60,19 @@ public enum OffcanvasPlacement
     End,
     Top,
     Bottom
+}
+
+public enum QrCodeErrorCorrection
+{
+    [Description("L")]
+    L,
+
+    [Description("M")]
+    M,
+
+    [Description("Q")]
+    Q,
+
+    [Description("H")]
+    H
 }

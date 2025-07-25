@@ -1,0 +1,33 @@
+{
+    "private": true,
+    "name": "blueblazor.assets",
+    "source": "src/index.ts",
+    "main": "dist/BlueBlazor.lib.module.js",
+    "scripts": {
+        "sass:TuiEditor": "sass --load-path=. --style=compressed --quiet-deps ./src/TuiEditor.razor.scss:../BlueBlazor/Components/TuiEditor/TuiEditor.razor.css",
+        "sass:docs": "sass --load-path=. --style=compressed --quiet-deps ./src/docs.scss:../BlueBlazor.Docs/wwwroot/css/docs.css",
+        "sass": "npm run sass:TuiEditor && npm run sass:docs",
+        "build": "node ./esbuild.config.mjs && node copy.mjs && npm run sass",
+        "clean": "rimraf ./dist"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "devDependencies": {
+        "@types/node": "^24.0.14",
+        "@typescript-eslint/eslint-plugin": "^7.6.0",
+        "@typescript-eslint/parser": "^7.6.0",
+        "esbuild": "0.25.0",
+        "esbuild-plugin-inline-css": "^0.0.1",
+        "eslint": "8.57.0",
+        "nanoid": "^5.1.5",
+        "rimraf": "^5.0.5",
+        "sass-embedded": "^1.89.2",
+        "typescript": "^5.4.4"
+    },
+    "dependencies": {
+        "@awesome.me/webawesome": "^3.0.0-beta.3",
+        "blue-web": "^1.17.0"
+    }
+}

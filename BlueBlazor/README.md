@@ -101,21 +101,6 @@ Your project probably already has at least one page component. Change its conten
 
 ```
 
-### JavaScript (optional)
-
-Single components require JavaScript. Take a look at the individual component page. You can embed them like this:
-
-```html
-<script src="_content/BlueBlazor/js/qrCodeGen.bundle.js"></script>
-<script src="_content/BlueBlazor/js/totpInput.bundle.js"></script>
-```
-
-When you know, you will use all components, you can also embed them all together:
-
-```html
-<script src="_content/BlueBlazor/js/all.bundle.js"></script>
-```
-
 ### Next steps
 
 You now have a very basic app with Blue Blazor. To learn more, check out [the examples](https://github.com/bruegmann/blue-blazor/tree/master/examples) and the [component docs](https://bruegmann.github.io/blue-blazor/).
@@ -203,6 +188,14 @@ These rarely used components were removed:
 - `Body`
 - `Header`
 - `SidebarToggler`
+
+You no longer have to manually embed JavaScript files by Blue Blazor.
+
+```diff
+- <script src="_content/BlueBlazor/js/qrCodeGen.bundle.js"></script>
+- <script src="_content/BlueBlazor/js/totpInput.bundle.js"></script>
+- <script src="_content/BlueBlazor/js/all.bundle.js"></script>
+```
 
 ### From v3 to v4
 

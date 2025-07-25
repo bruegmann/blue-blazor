@@ -1,5 +1,9 @@
-const fs = require("fs").promises
-const path = require("path")
+import fs from "fs/promises"
+import path from "path"
+import { fileURLToPath } from "url"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 async function copyDirectory(source, destination) {
     try {
@@ -27,7 +31,12 @@ async function copyDirectory(source, destination) {
     }
 }
 
-const sourceDir = path.join(__dirname, "..", "node_modules", "blue-web", "dist")
-const destinationDir = path.join(__dirname, "..", "wwwroot", "blue-web")
+copyDirectory(
+    path.join(__dirname, "node_modules", "blue-web", "dist"),
+    path.join(__dirname, "dist", "blue-web")
+)
 
-copyDirectory(sourceDir, destinationDir)
+fs.copyFile(
+    path.join(__dirname, "../README.md"),
+    path.join(__dirname, "../BlueBlazor/README.md")
+)

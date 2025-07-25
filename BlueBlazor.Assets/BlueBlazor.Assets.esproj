@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.3134461">
+	<PropertyGroup>
+		<DebugAssetsDirectory>dist\</DebugAssetsDirectory>
+		<StaticWebAssetSourceId>BlueBlazor</StaticWebAssetSourceId>
+		<BuildCommand>npm run build</BuildCommand>
+		<CleanCommand>npm run clean</CleanCommand>
+	</PropertyGroup>
+</Project>

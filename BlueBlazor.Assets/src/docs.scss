@@ -1,0 +1,114 @@
+$color-mode-type: media-query;
+
+@import "node_modules/blue-web/dist/style";
+@import "node_modules/blue-web/dist/neu";
+
+.md-block {
+    display: contents;
+}
+
+.md-block h1,
+.md-block h2,
+.docgen h2 {
+    @extend .page-header;
+}
+
+.md-block h3,
+.docgen h3 {
+    @extend .mt-4, .mb-3;
+}
+
+.md-block blockquote {
+    @extend .alert, .alert-primary;
+}
+
+.example {
+    @extend .rounded-top-5, .border, .p-1;
+    border-radius: calc(var(--bs-border-radius) + 0.25rem);
+    margin-block-end: 2rem;
+}
+
+.example-demo {
+    @extend .p-3;
+}
+
+.example-iframe {
+    width: 100%;
+    overflow: auto;
+    resize: both;
+}
+
+.example-code {
+    @extend .border, .rounded, .bg-body-secondary;
+}
+
+.example-code summary {
+    padding: 0.7rem 1rem;
+}
+
+.example-code pre {
+    margin: 0;
+}
+
+pre {
+    @extend .rounded;
+}
+
+.docs-layout {
+    .router-page {
+        all: unset;
+    }
+
+    .blue-page {
+        padding-top: 3.5rem;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+}
+
+body:has(.docs-layout) {
+    overflow: initial;
+}
+
+.docs-nav {
+    @extend .navbar,
+        .navbar-expand,
+        .navbar-dark,
+        .bg-dark,
+        .shadow-lg,
+        .top-0,
+        .rounded-4,
+        .py-0,
+        .my-1,
+        .border,
+        .border-primary,
+        .d-flex,
+        .px-1,
+        .me-auto;
+
+    --bs-bg-opacity: 0.9;
+    --bs-border-opacity: 0.5;
+
+    backdrop-filter: blur(3px) saturate(125%);
+
+    .navbar-brand {
+        @extend .d-flex, .gap-2;
+    }
+
+    .navbar-nav {
+        @extend .flex-grow-1;
+    }
+
+    .nav-link {
+        position: relative;
+    }
+
+    .nav-link.active::after {
+        content: "•";
+        opacity: 0.5;
+        position: absolute;
+        bottom: -0.125rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

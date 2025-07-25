@@ -82,8 +82,12 @@
 		<None Include="logo.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
-	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	<!-- <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
 		<Exec Command="npm i" />
 		<Exec Command="npm run build" />
-	</Target>
+	</Target> -->
+
+	<ItemGroup>
+		<ProjectReference Include="..\BlueBlazor.Assets\BlueBlazor.Assets.esproj" PrivateAssets="All" />
+	</ItemGroup>
 </Project>
