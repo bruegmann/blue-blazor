@@ -1,0 +1,45 @@
+﻿@using BlueBlazor.Internals.InlineEditParts
+@using Microsoft.Extensions.Localization
+@namespace BlueBlazor.Components
+@inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
+
+<div style="margin-left: -.75rem">
+    <label for="@Id" class="text-primary-emphasis fw-medium" style="margin-left: .75rem">@Header @HeaderContent</label>
+    @if (ShowEdit)
+    {
+        <EditView OnConfirm="ToggleShowEdit" OnDismiss="ToggleShowEdit" ConfirmOnLoseFocus="@ConfirmOnLoseFocus"
+            PreventConfirmOnSubmit="@PreventConfirmOnSubmit" class="position-relative">
+            <CascadingValue Name="ControlId" Value="@Id">
+                <CascadingValue Name="AutoFocus" Value="true">
+                    @ChildContent
+                </CascadingValue>
+            </CascadingValue>
+
+            <div class="d-flex position-absolute mt-1 flex-shrink-0"
+                style="z-index: 4; inset-block-start: 100%; inset-inline-end: 0;" role="group">
+                <Button Label="Save" LabelHidden FilledPrimary ButtonType="ButtonType.Submit" OnClick="OnClickSubmitButton"
+                    Class="me-1 shadow">
+                    <IconBefore>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                            class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path
+                                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z" />
+                        </svg>
+                    </IconBefore>
+                </Button>
+            </div>
+        </EditView>
+    }
+    else
+    {
+        <ReadView OnEditRequested="EditRequested" aria-describedby="@Id" Disabled="@Disabled">
+            <div class="form-control-plaintext py-0" style="padding-left: .75rem; padding-right: .75rem">
+                @ReadText @ReadContent
+                @if (string.IsNullOrEmpty(ReadText) && ReadContent == null)
+                {
+                    <span class="text-secondary" role="status">@L["Edit"]</span>
+                }
+            </div>
+        </ReadView>
+    }
+</div>

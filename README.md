@@ -30,8 +30,18 @@ To make use of Blue Blazor, add the following to your `_Imports.razor` file:
 > The recommended way to register services has changed. Instead of running `builder.Services.AddLocalization();` and `builder.Services.AddScoped(sp => new BlueBlazor.Services.DialogService() { DevExpressSupport = true });`, you now need to do the following:
 
 To use Blue Blazor components, you need to register the required services. Add the following lines to your `Program.cs` file:
+
 ```csharp
 builder.Services.AddBlueBlazor();
+```
+
+If you use DevExpress components you can should enable the `DevExpressSupport` support to avoid problems when using dialogs:
+
+```csharp
+builder.Services.AddBlueBlazor(options =>
+{
+    options.DevExpressSupport = true;
+});
 ```
 
 ### Stylesheet
@@ -70,11 +80,9 @@ Put this to your `MainLayout.razor` file:
 ```razor
 <Layout>
     <SideContent>
-        <SidebarMenu>
-            <MenuItem Label="Home" Href="">
-                <Icon>🏠</Icon>
-            </MenuItem>
-        </SidebarMenu>
+        <MenuItem Label="Home" Href="">
+            <Icon>🏠</Icon>
+        </MenuItem>
     </SideContent>
     <PageContent>@Body</PageContent>
 </Layout>
@@ -188,15 +196,25 @@ That means, you can use all of [Blue Web's JavaScript functions](https://bruegma
 
 ## Breaking changes
 
+### From v4 to v5
+
+These rarely used components were removed:
+
+- `Body`
+- `Header`
+- `SidebarToggler`
+
 ### From v3 to v4
 
 Dialogs (Modal and Offcanvas) now use the new `DialogService` to open dialogs. Also these components were removed:
+
 - `Modal`
 - `Offcanvas`
 
 Instead, you can use the `DialogService` to open dialogs. With `<DialogProvider />` you define the place where the dialogs will be rendered.
 
 To open a dialog, you can use the new `DialogOpener` component together with `ModalDialog` or `OffcanvasDialog`:
+
 ```diff
 - <Modal TitleText="Modal Title">
 -     <ToggleContent><Button Label="Show Modal" /></ToggleContent>

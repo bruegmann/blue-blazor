@@ -4,7 +4,6 @@ using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using System.Text.Json;
 using DocGen.Models;
-using Microsoft.AspNetCore.Components.Rendering;
 
 public class Helper
 {
@@ -14,21 +13,26 @@ public class Helper
     public async Task GenerateComponentPages(string componentsPath, string storiesPath, string pagesPath, string dataPath,
         string componentNamespace, string assemblyName, string? xmlDocumentationPath = null)
     {
-        var components = Directory.GetFiles(componentsPath, "*.razor").Select(Path.GetFileNameWithoutExtension);
+        var components = Directory.GetFiles(componentsPath, "*.razor", SearchOption.AllDirectories)
+            .Select(path => new
+            {
+                Name = Path.GetFileNameWithoutExtension(path),
+                ParentDirectory = Path.GetFileName(Path.GetDirectoryName(path)!)
+            });
 
-        var componentPageUrls = new Dictionary<string, string>();
+        var componentPageUrls = new Dictionary<string, Dictionary<string, string>>();
 
         foreach (var component in components)
         {
-            var pagePath = Path.Combine(pagesPath, $"{component}.razor");
+            var pagePath = Path.Combine(pagesPath, $"{component.Name}.razor");
 
-            string readMeHtml = MarkdownToHtml($"# {component!}");
+            string readMeHtml = MarkdownToHtml($"# {PascalToReadable(component.Name)}");
             string parametersHtml = "";
 
-            Type? componentType = Type.GetType($"{componentNamespace}.{component}");
+            Type? componentType = Type.GetType($"{componentNamespace}.{component.Name}");
             if (componentType == null)
             {
-                componentType = Type.GetType($"{componentNamespace}.{component}, {assemblyName}");
+                componentType = Type.GetType($"{componentNamespace}.{component.Name}, {assemblyName}");
             }
             if (componentType != null && xmlDocumentationPath != null)
             {
@@ -39,23 +43,28 @@ public class Helper
                 parametersHtml = ComponentParameterInfoToHtml(parameters);
             }
 
-            string pageUrl = $"components/{PascalToKebabCase(component!)}";
-            componentPageUrls.Add(component!, pageUrl);
+            string pageUrl = $"components/{PascalToKebabCase(component.Name)}";
 
-            string storyPath = Path.Combine(storiesPath, component!);
+            string pagesSectionName = PascalToReadable(component.ParentDirectory);
+            string pagesComponentName = PascalToReadable(component.Name);
+
+            if (componentPageUrls.ContainsKey(pagesSectionName))
+            {
+                componentPageUrls[pagesSectionName].Add(pagesComponentName, pageUrl);
+            }
+            else
+            {
+                componentPageUrls.Add(pagesSectionName, new() { { pagesComponentName, pageUrl } });
+            }
+
+            string storyPath = Path.Combine(storiesPath, component.Name);
             string storyImport = "";
             string storyHtml = "";
             if (Directory.Exists(storyPath))
             {
-                storyImport = $"@using BlueBlazor.Docs.Stories.{component}\n";
+                storyImport = $"@using BlueBlazor.Docs.Stories.{component.Name}\n";
                 storyHtml = await GetStoryContent(storyPath, "html");
             }
-
-            //string content = $"@page \"/{pageUrl}\"\n" +
-            //    storyImport +
-            //    $"\n{readMeHtml}\n" +
-            //    $"\n{parametersHtml}\n" +
-            //    $"\n{storyHtml}\n";
 
             string razor = ApplyRazorTemplate($"@page \"/{pageUrl}/{{section?}}\"\n{storyImport}", readMeHtml, parametersHtml, storyHtml, pageUrl);
             await File.WriteAllTextAsync(pagePath, razor);
@@ -244,7 +253,7 @@ public class Helper
             {
                 return $"new {type.GetElementType()?.Name}[0]";
             }
-            // Hier kannst du weitere Logik hinzufügen, um Arrays zu formatieren
+            // Hier kannst du weitere Logik hinzufï¿½gen, um Arrays zu formatieren
         }
 
         // EventCallbacks oder andere generische Typen
@@ -261,12 +270,17 @@ public class Helper
             return $"{genericTypeDefinition.Name.Split('`')[0]}&lt;{genericArgs}&gt;";
         }
 
-        // Für alle anderen Fälle
+        // Fï¿½r alle anderen Fï¿½lle
         return value.ToString() ?? "unknown";
     }
 
     private string ComponentParameterInfoToHtml(IEnumerable<ComponentParameterInfo> parameter)
     {
+        if (parameter.Count() <= 0)
+        {
+            return "";
+        }
+
         string table = "<div class=\"table-responsive\"><table class=\"table table-bordered\">";
         table += "\n    <thead><tr><th>Name</th><th>Description</th><th>Type</th><th>Default</th></tr></thead>";
         table += "\n    <tbody>";
@@ -338,10 +352,10 @@ public class Helper
         if (string.IsNullOrEmpty(value))
             return value;
 
-        // Fügen Sie Leerzeichen vor Großbuchstaben ein
+        // Fï¿½gen Sie Leerzeichen vor Groï¿½buchstaben ein
         string result = Regex.Replace(value, "(?<!^)([A-Z])", " $1", RegexOptions.Compiled);
 
-        // Konvertieren Sie den ersten Buchstaben in Großbuchstaben und den Rest in Kleinbuchstaben
+        // Konvertieren Sie den ersten Buchstaben in Groï¿½buchstaben und den Rest in Kleinbuchstaben
         return char.ToUpper(result[0]) + result.Substring(1).ToLower();
     }
 

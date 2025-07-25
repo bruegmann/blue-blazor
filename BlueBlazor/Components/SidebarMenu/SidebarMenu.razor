@@ -1,0 +1,10 @@
+@namespace BlueBlazor.Components
+<div class="d-flex flex-column h-100 @SidebarClass" style="@SidebarStyle">
+    @TopContent
+
+    <div class="flex-grow-1 overflow-auto @MenuClass" style="@MenuStyle">
+        @ChildContent
+    </div>
+
+    @BottomContent
+</div>

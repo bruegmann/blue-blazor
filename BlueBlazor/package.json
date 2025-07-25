@@ -3,7 +3,7 @@
     "description": "Blue Blazor is an adaptation of [Blue Web](https://bruegmann.github.io/blue-web) for Blazor.",
     "main": "index.js",
     "scripts": {
-        "sass": "sass --load-path=. --style=compressed --quiet-deps ./sass/TuiEditor.razor.scss:./Components/TuiEditor.razor.css",
+        "sass": "sass --load-path=. --style=compressed --quiet-deps ./sass/TuiEditor.razor.scss:./Components/TuiEditor/TuiEditor.razor.css",
         "build": "npm run sass && webpack && node buildScripts/copyToWwwroot.js && node buildScripts/copyReadme.js"
     },
     "keywords": [],
