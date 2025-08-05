@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.16.1 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.17.1 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -12366,6 +12366,7 @@ dialog.blue-modal:has(.offcanvas-start) {
     --dxbl-toolbar-btn-border-radius: var(--bs-border-radius) !important;
     --dxbl-dropdown-border-radius: var(--bs-border-radius) !important;
     --dxbl-btn-border-radius: var(--bs-border-radius) !important;
+    --dxbl-context-menu-border-radius: var(--bs-border-radius) !important;
     --dxbl-btn-padding-x: 0.75rem !important;
     --dxbl-btn-padding-y: 0.375rem !important;
 }
@@ -12392,6 +12393,21 @@ body.modal-open .dxbl-popup-cell[style="z-index: 1050;"] {
     z-index: 1056 !important;
 }
 
+@if ($enable-button-pointers: false) {
+    .dxbl-context-menu.dxbl-context-menu-dropdown
+        > .dxbl-dropdown-body
+        ul
+        li:not(.dxbl-context-menu-separator)
+        > .dxbl-context-menu-item,
+    .dxbl-context-menu-submenu.dxbl-context-menu-dropdown
+        > .dxbl-dropdown-body
+        ul
+        li:not(.dxbl-context-menu-separator)
+        > .dxbl-context-menu-item {
+        cursor: default;
+    }
+}
+
 :root {
     --bs-font-sans-serif: Inter, #{$font-family-sans-serif};
     font-feature-settings:
@@ -12401,6 +12417,7 @@ body.modal-open .dxbl-popup-cell[style="z-index: 1050;"] {
         "cv07" 1,
         "tnum" 1,
         "zero" 1;
+    font-size: 14px;
 }
 @supports (font-variation-settings: normal) {
     :root {

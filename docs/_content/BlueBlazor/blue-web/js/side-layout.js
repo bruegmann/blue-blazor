@@ -17,7 +17,8 @@ export class SideLayout extends HTMLElement {
             <style>
                 :host {
                     --spacing: 0.25rem;
-                    --drawer-side-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+                    --drawer-side-shadow:
+                        rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
                         rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
                         rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
                     --toggler-size: calc(
@@ -167,4 +168,4 @@ export class SideLayout extends HTMLElement {
     }
   }
 }
-customElements.define("side-layout", SideLayout);
+customElements.define("bl-side-layout", SideLayout);

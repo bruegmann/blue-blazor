@@ -9,9 +9,9 @@
  * @cssprop --bs-border-radius-sm - The border radius for the read view.
  * @slot - The content to display in the read view.
  * @example
- * <read-view id="my-read-view" onEditRequested="setEditing(true)">
+ * <bl-read-view id="my-read-view" onEditRequested="setEditing(true)">
  *    <a href="#">bla</a> {value}
- * </read-view>
+ * </bl-read-view>
  * @example
  * document.getElementById("my-read-view").addEventListener("EditRequested", () => {
  *    setEditing(true)
