@@ -68,8 +68,4 @@ public partial class QrCodeGen
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
     public virtual IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
-
-
-    [CascadingParameter(Name = "Slot")]
-    public string? Slot { get; set; }
 }

@@ -39,12 +39,6 @@ public partial class Dropdown : IDisposable
     public string? DropdownStyle { get; set; }
 
     [Parameter]
-    public string? Class { get; set; }
-
-    [Parameter]
-    public string? Style { get; set; }
-
-    [Parameter]
     public RenderFragment? Icon { get; set; }
 
     /// <summary>

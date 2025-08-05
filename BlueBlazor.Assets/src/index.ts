@@ -30,6 +30,42 @@ interface WAEventType {
 var beforeStartCalled = false
 var afterStartedCalled = false
 
+export function afterWebStarted(blazor: any) {
+    if (!afterStartedCalled) {
+        afterStarted(blazor, "web")
+    }
+}
+
+export function beforeWebStart(options: any) {
+    if (!beforeStartCalled) {
+        beforeStart(options)
+    }
+}
+
+export function beforeWebAssemblyStart(options: any) {
+    if (!beforeStartCalled) {
+        beforeStart(options)
+    }
+}
+
+export function afterWebAssemblyStarted(blazor: any) {
+    if (!afterStartedCalled) {
+        afterStarted(blazor, "wasm")
+    }
+}
+
+export function beforeServerStart(options: any) {
+    if (!beforeStartCalled) {
+        beforeStart(options)
+    }
+}
+
+export function afterServerStarted(blazor: any) {
+    if (!afterStartedCalled) {
+        afterStarted(blazor, "server")
+    }
+}
+
 export function afterStarted(blazor: Blazor, mode: string) {
     if (typeof blazor.addEventListener === "function" && mode === "web") {
         customElements.define("page-script", PageScript)
@@ -39,7 +75,7 @@ export function afterStarted(blazor: Blazor, mode: string) {
     afterStartedCalled = true
 }
 
-export function beforeStart() {
+export function beforeStart(options: any) {
     //   customElements.define("fluent-design-theme", DesignTheme);
     //   customElements.define("split-panels", SplitPanels);
     beforeStartCalled = true
