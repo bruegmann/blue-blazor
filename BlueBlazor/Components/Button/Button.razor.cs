@@ -86,8 +86,23 @@ public partial class Button
     [Parameter]
     public Color Color { get; set; } = Shared.Color.Secondary;
 
+    /// <summary>
+    /// You can also use properties `Sm` or `Lg` as shortcuts to set the size.
+    /// </summary>
     [Parameter]
     public Size? Size { get; set; }
+
+    /// <summary>
+    /// Shortcut for `Size="BlueBlazor.Shared.Size.Sm"`
+    /// </summary>
+    [Parameter]
+    public bool Sm { get; set; }
+
+    /// <summary>
+    /// Shortcut for `Size="BlueBlazor.Shared.Size.Lg"`
+    /// </summary>
+    [Parameter]
+    public bool Lg { get; set; }
 
     [Parameter]
     public bool Disabled { get; set; } = false;
@@ -156,6 +171,8 @@ public partial class Button
             .AddClass(GetButtonVariantClass(Variant, Color), !_success)
             .AddClass("btn-success", _success)
             .AddClass($"btn-{Size?.ToString().ToLower()}", Size != null)
+            .AddClass("btn-sm", Sm)
+            .AddClass("btn-lg", Lg)
             .AddClass("icon-link", Busy || _busy || IconBefore != null || IconAfter != null)
             .Build()!;
     }
