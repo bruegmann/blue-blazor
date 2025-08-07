@@ -1,6 +1,7 @@
 import { onEnhancedLoad, PageScript } from "./PageScript"
 
 export * from "@awesome.me/webawesome/dist/components/qr-code/qr-code.js"
+export * from "@awesome.me/webawesome/dist/components/tooltip/tooltip.js"
 
 interface Blazor {
     registerCustomEventType: (
@@ -71,6 +72,20 @@ export function afterStarted(blazor: Blazor, mode: string) {
         customElements.define("page-script", PageScript)
         blazor.addEventListener("enhancedload", onEnhancedLoad)
     }
+
+    blazor.registerCustomEventType("washow", {
+        browserEventName: "wa-show",
+        createEventArgs: () => {
+            return null
+        }
+    })
+
+    blazor.registerCustomEventType("wahide", {
+        browserEventName: "wa-hide",
+        createEventArgs: () => {
+            return null
+        }
+    })
 
     afterStartedCalled = true
 }

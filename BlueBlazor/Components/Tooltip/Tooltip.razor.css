@@ -1,0 +1,6 @@
+wa-tooltip {
+  color: var(--bs-body-bg, white);
+  --wa-tooltip-background-color: var(--bs-emphasis-color, black);
+  --wa-tooltip-arrow-size: 0.375rem;
+  --wa-tooltip-border-radius: var(--bs-border-radius, 0.25rem);
+}

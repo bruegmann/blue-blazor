@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<PackageId>BlueBlazor</PackageId>
-		<Version>4.4.2.1</Version>
+		<Version>4.4.2.2</Version>
 
 		<Summary>Component library for Blazor.</Summary>
 		<PackageTags>blue blue-web blazor components bootstrap</PackageTags>
@@ -90,5 +90,9 @@
 	<ItemGroup>
 		<ProjectReference Include="..\BlueBlazor.Assets\BlueBlazor.Assets.esproj"
 			PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Components\Tooltip\" />
 	</ItemGroup>
 </Project>

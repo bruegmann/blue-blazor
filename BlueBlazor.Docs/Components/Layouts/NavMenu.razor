@@ -134,7 +134,7 @@
 
     async Task loadPagesData()
     {
-        var json = await Http.GetStringAsync("data/pages-data.json?v=5");
+        var json = await Http.GetStringAsync("data/pages-data.json?v=6");
         componentPageUrls = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(json);
     }
 
@@ -216,6 +216,12 @@ Icon = @<BiMenuDown /> }
 },
 {"Text input", new() {
 Icon = @<BiInputCursor /> }
+},
+{"Tooltip", new() {
+Icon = @<BiChatSquareText />, IsNew = true }
+},
+{"Create id", new() {
+Icon = @<BiBracesAsterisk />, IsNew = true }
 } };
 RenderFragment defaultIcon = @<BiFileCode />;
 

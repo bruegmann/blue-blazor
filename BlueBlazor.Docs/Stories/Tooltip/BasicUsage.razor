@@ -1,0 +1,15 @@
+<Tooltip For="my-button" @bind-Open="IsOpen">This is a tooltip</Tooltip>
+<Button Id="my-button">Hover Me</Button>
+
+@if (IsOpen)
+{
+    <div>Is open</div>
+}
+else
+{
+    <div>Is not open</div>
+}
+
+@code {
+    private bool IsOpen { get; set; } = false;
+}
