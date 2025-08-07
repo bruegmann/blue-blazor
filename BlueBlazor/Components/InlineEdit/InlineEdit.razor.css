@@ -1,0 +1,5 @@
+﻿@media not (prefers-reduced-motion: reduce) {
+    .inline-edit {
+        view-transition-name: var(--vtn);
+    }
+}
