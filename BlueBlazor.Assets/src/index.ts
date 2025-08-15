@@ -3,6 +3,8 @@ import { onEnhancedLoad, PageScript } from "./PageScript"
 export * from "@awesome.me/webawesome/dist/components/qr-code/qr-code.js"
 export * from "@awesome.me/webawesome/dist/components/tooltip/tooltip.js"
 
+import "../node_modules/bootstrap/js/dist/tab.js"
+
 interface Blazor {
     registerCustomEventType: (
         name: string,

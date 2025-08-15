@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<PackageId>BlueBlazor</PackageId>
-		<Version>4.5.0</Version>
+		<Version>4.5.1</Version>
 
 		<Summary>Component library for Blazor.</Summary>
 		<PackageTags>blue blue-web blazor components bootstrap</PackageTags>

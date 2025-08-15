@@ -1,7 +1,31 @@
 ﻿@namespace BlueBlazor.Components
 
-<div role="tablist" class="blue-tabs nav nav-@(Underline ? "underline" : "tabs") @Class" style="@Style">
-    <CascadingValue Name="Tab_Name" Value="@Name">
-        @ChildContent
-    </CascadingValue>
-</div>
+<CascadingValue Value="@(this)" IsFixed="true">
+    @ChildContent
+</CascadingValue>
+
+@if (_tabs?.Any() ?? false)
+{
+    <ul role="tablist" class="nav nav-@(Underline ? "underline" : "tabs") @Class" style="@Style">
+        @foreach (var t in _tabs)
+        {
+            <li class="nav-item" role="presentation">
+                <button @ref="@t.Element" class="nav-link @((_activeTab == t ? "active" : "")) @t.Class" id="@t.TabId"
+                    data-bs-toggle="tab" data-bs-target="#@t.TabPanelId" type="button" role="tab" aria-controls="@t.TabPanelId"
+                    aria-selected="@(_activeTab == t)">
+                    @t.Label
+                </button>
+            </li>
+        }
+    </ul>
+
+    <div class="tab-content @ContentClass">
+        @foreach (var t in _tabs)
+        {
+            <div class="tab-pane fade @((_activeTab == t ? "show active" : "")) @t.ContentClass" id="@t.TabPanelId"
+                role="tabpanel" aria-labelledby="@t.TabId" tabindex="0">
+                @t.ChildContent
+            </div>
+        }
+    </div>
+}

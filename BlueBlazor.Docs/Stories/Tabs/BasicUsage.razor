@@ -1,4 +1,4 @@
-﻿<Tabs>
+﻿<Tabs @bind-ActiveTabIndex="@ActiveTabIndex">
     <Tab Label="Tab 1" Active>
         Hello from Tab 1
     </Tab>
@@ -10,4 +10,24 @@
     <Tab Label="Tab 3">
         Hello from Tab 3
     </Tab>
+
+    @if (_showFourthTab)
+    {
+        <Tab Label="Tab 4">
+            Hello from Tab 4
+        </Tab>
+    }
 </Tabs>
+
+<p>ActiveTabIndex: @ActiveTabIndex</p>
+
+<div><Button Label="Change tab from outside" OnClick="() => { ActiveTabIndex = 2; }" /></div>
+
+<div>
+    <Button Label="Toggle fourth tab" OnClick="() => { _showFourthTab = !_showFourthTab; StateHasChanged(); }" />
+</div>
+
+@code {
+    private bool _showFourthTab = true;
+    private int ActiveTabIndex { get; set; } = 0;
+}
