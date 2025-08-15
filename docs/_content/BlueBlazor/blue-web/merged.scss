@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.17.1 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.17.2 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -11839,6 +11839,19 @@ body {
     @include make-grid-columns-cq();
 }
 
+// Customize style of Bootstrap's nav-underline
+.nav-underline {
+    .nav-link {
+        --#{$prefix}nav-link-color: var(--#{$prefix}list-group-action-color);
+    }
+
+    .nav-link.active,
+    .show > .nav-link {
+        font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-semibold);
+        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, $primary);
+    }
+}
+
 .blue-tabs {
     display: flex;
     flex-wrap: wrap;
@@ -11893,9 +11906,9 @@ input.blue-tab:checked + .blue-tab-content {
 .blue-tabs.nav-underline {
     row-gap: 0;
     .blue-tab:checked {
-        font-weight: var(--blue-tabs-underline-active-font-weight, 700);
+        font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-semibold);
         color: var(--bs-nav-underline-link-active-color);
-        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, currentcolor);
+        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, $primary);
     }
 }
 
@@ -12159,16 +12172,6 @@ dialog.blue-modal:has(.offcanvas-start) {
     &[open] > summary > .blue-collapse-header > .blue-collapse-chevron,
     &[open] > summary > .blue-collapse-chevron {
         --blue-collapse-chevron-rotate: 90deg;
-
-        // If chevron is on the end, rotate has to be -90deg
-        &:is(:last-child) {
-            --blue-collapse-chevron-rotate: -90deg;
-        }
-
-        &:is(:first-child) {
-            --blue-collapse-chevron-rotate: 90deg;
-        }
-
         transform: rotate(var(--blue-collapse-chevron-rotate));
     }
 
@@ -12369,15 +12372,66 @@ dialog.blue-modal:has(.offcanvas-start) {
     --dxbl-context-menu-border-radius: var(--bs-border-radius) !important;
     --dxbl-btn-padding-x: 0.75rem !important;
     --dxbl-btn-padding-y: 0.375rem !important;
+
+    --dxbl-btn-font-size: 1rem;
+    --dxbl-checkbox-font-size: 1rem;
+    --dxbl-calendar-font-size: 1rem;
+    --dxbl-listbox-font-size: 1rem;
+    --dxbl-list-box-font-size: 1rem;
+    --dxbl-list-box-item-drag-hint-font-size: 1rem;
+    --dxbl-color-palette-font-size: 1rem;
+    --dxbl-text-edit-font-size: 1rem;
+    --dxbl-edit-dropdown-font-size: 1rem;
+    --dxbl-pager-font-size: 1rem;
+    --dxbl-grid-font-size: 1rem;
+    --dxbl-grid-draggable-header-font-size: 1rem;
+    --dxbl-grid-row-drag-hint-font-size: 1rem;
+    --dxbl-flyout-font-size: 1rem;
+    --dxbl-popup-font-size: 1rem;
+    --dxbl-dropdown-font-size: 1rem;
+    --dxbl-window-font-size: 1rem;
+    --dxbl-group-font-size: 1rem;
+    --dxbl-fl-font-size: 1rem;
+    --dxbl-fl-group-font-size: 1rem;
+    --dxbl-fl-tab-group-font-size: 1rem;
+    --dxbl-fl-tab-group-content-font-size: 1rem;
+    --dxbl-toolbar-font-size: 1rem;
+    --dxbl-tabs-font-size: 1rem;
+    --dxbl-tabs-content-font-size: 1rem;
+    --dxbl-accordion-group-font-size: 1rem;
+    --dxbl-accordion-group-item-font-size: 1rem;
+    --dxbl-accordion-group-header-font-size: 1rem;
+    --dxbl-treeview-font-size: 1rem;
+    --dxbl-navigation-badge-font-size: 1rem;
+    --dxbl-radio-group-font-size: 1rem;
+    --dxbl-context-menu-font-size: 1rem;
+    --dxbl-menu-item-font-size: 1rem;
+    --dxbl-scheduler-font-size: 1rem;
+    --dxbl-toast-text-font-size: 1rem;
+    --dxbl-toast-header-font-size: 1rem;
+    --dxbl-drawer-panel-font-size: 1rem;
+    --dxbl-progress-bar-label-font-size: 1rem;
+    --dxbl-pivot-font-size: 1rem;
+    --dxbl-pivot-field-font-size: 1rem;
+    --dxbl-pivot-header-font-size: 1rem;
+    --dxbl-pivot-total-font-size: 1rem;
+    --dxbl-pivot-table-font-size: 1rem;
+    --dxbl-pivot-table-header-field-font-size: 1rem;
+    --dxbl-pivot-table-row-field-font-size: 1rem;
+    --dxbl-pivot-table-total-font-size: 1rem;
+    --dx-chatui-message-font-size: 1rem;
+    --dx-chatui-suggestion-item-title-font-size: 1rem;
+    --dx-chatui-attachment-list-item-font-size: 1rem;
+    --dx-chatui-suggestion-item-text-font-size: 1rem;
+    --dxbl-message-box-body-text-font-size: 1rem;
+    --dxbl-message-box-header-font-size: 1rem;
+    --dxbl-splitter-font-size: 1rem;
+    --dxbl-filter-builder-font-size: 1rem;
 }
 
 .dxbl-grid {
     --dxbl-grid-font-size: 1rem;
     border: none;
-}
-
-.dxbl-text-edit {
-    font-size: 1rem;
 }
 
 .dxbl-pager-page-edit {

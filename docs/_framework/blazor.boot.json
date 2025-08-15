@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "BlueBlazor.Docs",
   "resources": {
-    "hash": "sha256-GRHiyhD50bvg3c8HZl54lbQVsVu6gOlCZL+645N6f1U=",
+    "hash": "sha256-Y75pzfgvcmKaekzJyKBeWSB0OXRyLFqh5iLRLUdEVDM=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-O/NCYcAN9uPocD7ns7AzF/cqx7f5vL1PTJCQs0vEXyk="
     },
@@ -55,19 +55,19 @@
       "System.Text.RegularExpressions.wasm": "sha256-amyl1Zsuf+PHSXqju/cl50LQlTKfUNpDi6hcFh10yrM=",
       "System.Threading.wasm": "sha256-dhx/+lZDxyQqTWpCs/eqMUGZN612jZFtLYkQiN8S9kI=",
       "System.Private.CoreLib.wasm": "sha256-FFY8xRb0u0xrQIeAIpN00KdhjNYwJOsnaZAE7WFtB3I=",
-      "BlueBlazor.wasm": "sha256-v/5X+uWeahLaewWYM/TtahgKQ+WJuz34+j/cpcsbl20=",
-      "BlueBlazor.Docs.wasm": "sha256-UyzW+LblZYdUfhETWeEz/1xm7VsyZiMXDGY0q8Omfq8="
+      "BlueBlazor.wasm": "sha256-Q+9pWTgWbN/M5xwjEW1unEzwXScWbuXwgJz+e/nSt8g=",
+      "BlueBlazor.Docs.wasm": "sha256-nYBC16yT4THKMYiujyD9d4fiNy7LfcRS2I8qABFAibA="
     },
     "satelliteResources": {
       "de": {
-        "BlueBlazor.resources.wasm": "sha256-4zgUMlB5oTw4kgnaZ671vEuMFHZz+iFHnkfoMw7Od7A="
+        "BlueBlazor.resources.wasm": "sha256-+7RiGzdt/RZ7Z86E3XJ6rL8TKh+aVuevEkSkSTcUlp4="
       }
     },
     "libraryInitializers": {
-      "_content/BlueBlazor/BlueBlazor.lib.module.js": "sha256-IgSS+ptP8FyZs96PjLr+vPlGHtyYFm0xsnRWzlibnN4="
+      "_content/BlueBlazor/BlueBlazor.lib.module.js": "sha256-HRtdYi0ougcobyjggS4clNsvz3viAwFP1y8dllPNsOM="
     },
     "modulesAfterConfigLoaded": {
-      "../_content/BlueBlazor/BlueBlazor.lib.module.js": "sha256-IgSS+ptP8FyZs96PjLr+vPlGHtyYFm0xsnRWzlibnN4="
+      "../_content/BlueBlazor/BlueBlazor.lib.module.js": "sha256-HRtdYi0ougcobyjggS4clNsvz3viAwFP1y8dllPNsOM="
     }
   },
   "cacheBootResources": true,

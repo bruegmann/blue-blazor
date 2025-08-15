@@ -1,3 +1,16 @@
+// Customize style of Bootstrap's nav-underline
+.nav-underline {
+    .nav-link {
+        --#{$prefix}nav-link-color: var(--#{$prefix}list-group-action-color);
+    }
+
+    .nav-link.active,
+    .show > .nav-link {
+        font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-semibold);
+        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, $primary);
+    }
+}
+
 .blue-tabs {
     display: flex;
     flex-wrap: wrap;
@@ -52,8 +65,8 @@ input.blue-tab:checked + .blue-tab-content {
 .blue-tabs.nav-underline {
     row-gap: 0;
     .blue-tab:checked {
-        font-weight: var(--blue-tabs-underline-active-font-weight, 700);
+        font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-semibold);
         color: var(--bs-nav-underline-link-active-color);
-        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, currentcolor);
+        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, $primary);
     }
 }

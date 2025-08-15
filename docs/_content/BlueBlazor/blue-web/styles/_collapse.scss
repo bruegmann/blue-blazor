@@ -17,16 +17,6 @@
     &[open] > summary > .blue-collapse-header > .blue-collapse-chevron,
     &[open] > summary > .blue-collapse-chevron {
         --blue-collapse-chevron-rotate: 90deg;
-
-        // If chevron is on the end, rotate has to be -90deg
-        &:is(:last-child) {
-            --blue-collapse-chevron-rotate: -90deg;
-        }
-
-        &:is(:first-child) {
-            --blue-collapse-chevron-rotate: 90deg;
-        }
-
         transform: rotate(var(--blue-collapse-chevron-rotate));
     }
 
