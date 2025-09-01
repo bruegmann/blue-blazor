@@ -8,16 +8,15 @@
 
     expandEl.addEventListener("change", handleChange)
 
-
-
     window.addEventListener("popstate", handleLocationChange)
 
     const originalPushState = history.pushState
     history.pushState = function (...args) {
         originalPushState.apply(history, args)
         handleLocationChange()
-    };
+    }
 
+    const originalReplaceState = history.replaceState
     history.replaceState = function (...args) {
         originalReplaceState.apply(history, args)
         handleLocationChange()
