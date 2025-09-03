@@ -16,7 +16,8 @@ public enum Variant
     Soft,
     Plain,
     Outline,
-    Link
+    Link,
+    MenuItem
 }
 
 public enum Color

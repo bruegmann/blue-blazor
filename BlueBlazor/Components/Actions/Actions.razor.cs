@@ -27,6 +27,10 @@ public partial class Actions : ComponentBase, IDisposable
         .AddClass("blue-menu-item-dropdown text-body")
         .Build();
 
+    private string? CollapseClassValue => new CssBuilder(CollapseClass)
+        .AddClass("BLUE-actions-collapse")
+        .Build();
+
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
@@ -35,6 +39,12 @@ public partial class Actions : ComponentBase, IDisposable
 
     [Parameter]
     public string? MenuClass { get; set; }
+
+    [Parameter]
+    public string? CollapseClass { get; set; }
+
+    [Parameter]
+    public string? CollapseStyle { get; set; }
 
     [Parameter]
     public string? CollapseMenuClass { get; set; }

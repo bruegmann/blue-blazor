@@ -157,6 +157,8 @@ public partial class Button
                 return $"btn-outline-{color}";
             case Variant.Link:
                 return $"btn-link link-{color} link-offset-2";
+            case Variant.MenuItem:
+                return "blue-menu-item";
             case Variant.None:
                 return "";
             default:
