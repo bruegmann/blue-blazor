@@ -7,7 +7,7 @@
     .nav-link.active,
     .show > .nav-link {
         font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-semibold);
-        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, $primary);
+        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, var(--bs-primary));
     }
 }
 
@@ -67,6 +67,6 @@ input.blue-tab:checked + .blue-tab-content {
     .blue-tab:checked {
         font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-semibold);
         color: var(--bs-nav-underline-link-active-color);
-        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, $primary);
+        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, var(--bs-primary));
     }
 }
