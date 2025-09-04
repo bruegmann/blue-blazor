@@ -72,20 +72,31 @@ public class DialogService
 
     private string GetDialogOptionsJson(string? title = null, string? defaultValue = null, string? icon = null, bool? switchPrimaryBtn = null,
         string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null)
-        => System.Text.Json.JsonSerializer.Serialize(new
+        => System.Text.Json.JsonSerializer.Serialize(new DialogOptions
         {
-            title,
-            defaultValue,
-            icon,
-            switchPrimaryBtn,
-            acceptBtnText,
-            cancelBtnText,
-            inputType
+            Title = title,
+            DefaultValue = defaultValue,
+            Icon = icon,
+            SwitchPrimaryBtn = switchPrimaryBtn,
+            AcceptBtnText = acceptBtnText,
+            CancelBtnText = cancelBtnText,
+            InputType = inputType
         }, new System.Text.Json.JsonSerializerOptions
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         });
     #endregion
+}
+
+public class DialogOptions
+{
+    public string? Title { get; set; }
+    public string? DefaultValue { get; set; }
+    public string? Icon { get; set; }
+    public bool? SwitchPrimaryBtn { get; set; }
+    public string? AcceptBtnText { get; set; }
+    public string? CancelBtnText { get; set; }
+    public string? InputType { get; set; }
 }
 
 public class DialogReference
