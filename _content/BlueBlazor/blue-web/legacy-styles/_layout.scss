@@ -1,0 +1,211 @@
+.blue-layout {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    &.hasNoSidebarMenu {
+        .blue-page,
+        .blue-header {
+            padding-left: 0;
+        }
+
+        .blue-sidebar-toggler {
+            display: none;
+        }
+
+        .blue-page {
+            margin-left: 0;
+        }
+
+        .blue-header-extension {
+            left: 0;
+            padding-right: 0;
+        }
+    }
+
+    &.open {
+        @media screen and (max-width: $sidebar-expanded-breakpoint) {
+            .router-page.active {
+                .blue-page {
+                    filter: blur(3px) brightness(0.8);
+                }
+            }
+        }
+
+        @include openSidebarMenu();
+    }
+
+    &:not(.open) {
+        .blue-sidebar-visible-on-open,
+        .blue-sidebar-d-flex-on-open,
+        .blue-sidebar-d-block-on-open {
+            display: none !important;
+        }
+
+        .blue-sidebar-hidden-on-open {
+            animation: fade-in 1s;
+
+            @media (prefers-reduced-motion) {
+                animation-duration: 0s;
+            }
+        }
+    }
+
+    &:not(.expandSidebar):not(.open) .blue-sidebar {
+        .blue-sidebar-top,
+        .blue-menu,
+        .blue-sidebar-bottom {
+            @include blue-menu-item-dropdown-for-shrunk-sidebar();
+        }
+    }
+}
+
+.blue-sidebar-toggler {
+    position: fixed;
+    width: $normal-size;
+    height: $normal-size;
+    left: 0;
+    top: 0;
+    z-index: 5;
+}
+
+@include blue-sidebar(0);
+.blue-layout:not(.open) .blue-sidebar {
+    left: -$normal-size;
+}
+
+.blue-page {
+    margin-left: 0;
+}
+
+.blue-page {
+    margin-left: $normal-size;
+    animation: enabledBlueAppPage 0.5s;
+
+    @media (prefers-reduced-motion) {
+        animation-duration: 0s;
+    }
+
+    border-top-left-radius: var(--bs-border-radius, 0.5rem);
+    border-top-right-radius: var(--bs-border-radius, 0.5rem);
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-body-bg-rgb, 255, 255, 255), var(--bs-bg-opacity));
+
+    &::before,
+    &::after {
+        content: "";
+        display: table;
+    }
+}
+
+.blue-layout.disableHeaders {
+    .blue-page {
+        padding-top: $normal-size;
+    }
+}
+
+.blue-sidebar-toggler {
+    transition: transform 0.5s;
+
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
+}
+
+.blue-layout:not(.open).disableHeaders .blue-sidebar-toggler {
+    transform: translate(0.25rem, 0.25rem);
+    border-radius: $border-radius;
+    overflow: hidden;
+}
+
+@if $sidebar-shrink {
+    @media (min-width: $sidebar-shrink-breakpoint) {
+        @include blue-sidebar($normal-size);
+
+        .blue-layout:not(.open) .blue-sidebar {
+            left: 0;
+        }
+
+        .blue-page {
+            margin-left: $normal-size;
+        }
+
+        .blue-layout:not(.open).disableHeaders .blue-sidebar-toggler {
+            transform: translate(0, 0);
+        }
+    }
+}
+
+@media (min-width: $sidebar-expanded-breakpoint) {
+    .blue-layout.expandSidebar {
+        @include openSidebarMenu();
+
+        .blue-sidebar {
+            left: 0;
+            box-shadow: none !important;
+        }
+
+        .blue-page {
+            margin-left: $bla-sidebar-width;
+        }
+
+        .blue-sidebar-toggler {
+            display: none;
+        }
+
+        &.hideToggleExpandSidebar .blue-header {
+            left: 0;
+        }
+    }
+
+    .blue-layout .blue-header-title {
+        padding-left: $spacer;
+    }
+}
+
+.blue-open-menu {
+    position: absolute !important;
+    margin-top: 0 !important;
+    left: 0;
+    justify-content: center;
+
+    &,
+    &:hover,
+    &:focus {
+        color: var(--blue-sidebar-color);
+        background-color: var(--blue-sidebar-bg);
+        border-color: transparent;
+    }
+}
+
+.blue-sidebar {
+    overflow-y: auto;
+}
+
+.blue-sidebar-bottom {
+    width: auto;
+    background-color: var(--blue-sidebar-bg);
+    transition: box-shadow 0.2s;
+
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
+
+    &.has-shadow {
+        box-shadow: 0 -2rem 2rem rgba(black, 0.1);
+    }
+}
+
+.blue-page {
+    min-height: calc(100vh - #{$normal-size});
+    min-height: calc(100dvh - #{$normal-size});
+    margin-top: $normal-size;
+}
+
+.blue-layout.disableHeaders {
+    .blue-page {
+        margin-top: initial;
+        min-height: calc(100vh);
+        min-height: calc(100dvh);
+    }
+}

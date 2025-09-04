@@ -1,0 +1,29 @@
+.blue-input-group {
+    border: $input-border-width solid $input-border-color;
+    border-radius: $input-border-radius;
+    background-color: $input-bg;
+
+    &.focus,
+    &:has(input:focus) {
+        box-shadow: $input-btn-focus-box-shadow;
+        border-color: $input-focus-border-color;
+
+        .input-group-text {
+            color: #{var(--bs-primary-text-emphasis)};
+        }
+    }
+
+    .input-group-text {
+        border-color: transparent;
+        background-color: transparent;
+    }
+
+    .form-control {
+        border: none;
+        background-color: transparent !important;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
