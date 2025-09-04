@@ -1,0 +1,72 @@
+// Customize style of Bootstrap's nav-underline
+.nav-underline {
+    .nav-link {
+        --#{$prefix}nav-link-color: var(--#{$prefix}list-group-action-color);
+    }
+
+    .nav-link.active,
+    .show > .nav-link {
+        font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-semibold);
+        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, var(--bs-primary));
+    }
+}
+
+.blue-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.blue-tab {
+    // Unsetting to solve issues in Safari
+    width: unset;
+    height: unset;
+    border-radius: unset;
+
+    position: relative;
+    order: 0;
+    user-select: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+    @if ($enable-button-pointers) {
+        cursor: pointer;
+    }
+}
+
+.blue-tab::before {
+    content: attr(aria-label);
+}
+
+.blue-tab-content {
+    display: none;
+    order: 1;
+    width: 100%;
+}
+
+input.blue-tab:checked + .blue-tab-content {
+    display: block;
+}
+
+.blue-tabs.nav-tabs {
+    border-bottom: none;
+
+    .blue-tab-content {
+        border-top: var(--#{$prefix}nav-tabs-border-width) solid var(--#{$prefix}nav-tabs-border-color);
+    }
+
+    .blue-tab:checked {
+        color: var(--bs-nav-tabs-link-active-color);
+        background-color: var(--bs-nav-tabs-link-active-bg);
+        border-color: var(--bs-nav-tabs-link-active-border-color);
+    }
+}
+
+.blue-tabs.nav-underline {
+    row-gap: 0;
+    .blue-tab:checked {
+        font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-semibold);
+        color: var(--bs-nav-underline-link-active-color);
+        border-bottom-color: var(--blue-tabs-underline-active-border-bottom-color, var(--bs-primary));
+    }
+}

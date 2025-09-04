@@ -1,0 +1,6 @@
+// Sets `margin: 0` to last child.
+// Useful for creating a gap between items together with `mb-3`.
+// Inspired by Tailwind CSS class `last:m-0`.
+.m-last-0:last-child {
+    margin: 0 !important;
+}
