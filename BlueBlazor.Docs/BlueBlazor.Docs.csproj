@@ -35,6 +35,6 @@
 
 	<Target Name="PostPublishScript" AfterTargets="AfterPublish">
 		<Exec Command="cd buildScripts &amp;&amp; npm install" />
-		<Exec Command="node buildScripts/afterPublish.js" />
+		<Exec Command="cd buildScripts &amp;&amp; node afterPublish.js" />
 	</Target>
 </Project>
