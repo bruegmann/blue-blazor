@@ -5,7 +5,7 @@ namespace BlueBlazor.Components;
 /// <summary>
 /// A simple layout with header and main content area.
 /// </summary>
-public partial class SimpleLayout
+public partial class SimpleLayout : BlueComponentBase
 {
     [Parameter]
     public RenderFragment? HeaderContent { get; set; }

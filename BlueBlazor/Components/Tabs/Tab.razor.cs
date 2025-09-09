@@ -18,11 +18,17 @@ public partial class Tab : ComponentBase, IDisposable
     internal string TabPanelId = "Tab_Panel_" + Guid.NewGuid().ToString();
     internal ElementReference Element;
 
-    [Parameter, EditorRequired]
-    public required string Label { get; set; }
+    [Parameter]
+    public string? Label { get; set; }
+
+    [Parameter]
+    public RenderFragment? LabelContent { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string? ItemClass { get; set; }
 
     [Parameter]
     public string? Class { get; set; }

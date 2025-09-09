@@ -1,7 +1,13 @@
 ﻿@namespace BlueBlazor.Components
-@using BlueBlazor.Internals.LayoutParts
+@inherits BlueComponentBase
 
-<div class="vh-100 d-grid" style="grid-template-rows: var(--blue-menu-item-height) auto">
-    <LayoutHeader slot="header">@HeaderContent</LayoutHeader>
-    <LayoutMain NoPageBorder="@NoPageBorder" Class="overflow-auto">@PageContent</LayoutMain>
+<div class="@(new CssBuilder("blue-layout").AddClass(Class).Build())" style="@Style" @attributes="AdditionalAttributes">
+    <header class="blue-layout-header">
+        @HeaderContent
+    </header>
+    <main class="blue-layout-main">
+        <div class="@(new CssBuilder("blue-layout-body").AddClass("border-0", NoPageBorder).Build())">
+            @PageContent
+        </div>
+    </main>
 </div>

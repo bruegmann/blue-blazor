@@ -6,7 +6,7 @@ namespace BlueBlazor.Components;
 /// <summary>
 /// Generates a QR code. Uses Web Component [`wa-qr-code`](https://webawesome.com/docs/components/qr-code) by Web Awesome.
 /// </summary>
-public partial class QrCodeGen
+public partial class QrCodeGen : BlueComponentBase
 {
     /// <summary>
     /// Gets or sets the unique identifier.
@@ -14,18 +14,6 @@ public partial class QrCodeGen
     /// </summary>
     [Parameter]
     public string? Id { get; set; }
-
-    /// <summary>
-    /// Optional CSS class names. If given, these will be included in the class attribute of the component.
-    /// </summary>
-    [Parameter]
-    public virtual string? Class { get; set; } = null;
-
-    /// <summary>
-    /// Optional in-line styles. If given, these will be included in the style attribute of the component.
-    /// </summary>
-    [Parameter]
-    public virtual string? Style { get; set; } = null;
 
     /// <summary>
     /// The QR code's value.
@@ -62,10 +50,4 @@ public partial class QrCodeGen
     /// </summary>
     [Parameter]
     public QrCodeErrorCorrection ErrorCorrection { get; set; } = QrCodeErrorCorrection.H;
-
-    /// <summary>
-    /// Gets or sets a collection of additional attributes that will be applied to the created element.
-    /// </summary>
-    [Parameter(CaptureUnmatchedValues = true)]
-    public virtual IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 }

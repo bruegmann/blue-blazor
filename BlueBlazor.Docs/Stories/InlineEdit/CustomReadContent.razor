@@ -1,0 +1,12 @@
+﻿<InlineEdit Header="Wiki article slug" ReadIsEmpty="@string.IsNullOrEmpty(WikiSlug)">
+    <ReadContent>
+        <a href="https://en.wikipedia.org/wiki/@WikiSlug" target="_blank" rel="noreferrer">@WikiSlug</a>
+    </ReadContent>
+    <ChildContent>
+        <input type="text" class="form-control" @bind="@WikiSlug" autofocus />
+    </ChildContent>
+</InlineEdit>
+
+@code {
+    private string WikiSlug { get; set; } = "Elizabeth_of_Leiningen";
+}

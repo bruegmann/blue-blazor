@@ -8,7 +8,7 @@ namespace BlueBlazor.Components;
 /// Since 3.4.1 this component no longer uses the Web Component for simplification and 
 /// to avoid flickering while rendering.
 /// </summary>
-public partial class Layout
+public partial class Layout : BlueComponentBase
 {
     [Inject]
     private IJSRuntime JSRuntime { get; set; } = default!;

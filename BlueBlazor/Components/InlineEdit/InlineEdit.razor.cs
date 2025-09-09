@@ -15,7 +15,7 @@ namespace BlueBlazor.Components;
 /// * `"ControlId"` with value `@Id`.
 /// * `"AutoFocus"` with value `true`.
 /// </summary>
-public partial class InlineEdit
+public partial class InlineEdit : ComponentBase
 {
     private bool ShowEdit { get; set; }
 
@@ -36,6 +36,14 @@ public partial class InlineEdit
     /// </summary>
     [Parameter]
     public string? ReadText { get; set; }
+
+    /// <summary>
+    /// If you use `ReadContent`, with this parameter you can control when the value is empty.
+    /// If true, a placeholder will be shown.
+    /// When you use `ReadText`, this parameter is ignored and the placeholder will be shown when the text is null or empty.
+    /// </summary>
+    [Parameter]
+    public bool ReadIsEmpty { get; set; } = false;
 
     /// <summary>
     /// Optional, by default an unique ID will be generated.
@@ -70,8 +78,6 @@ public partial class InlineEdit
 
     protected override void OnParametersSet()
     {
-        base.OnParametersSet();
-
         if (EditMode == false)
         {
             ShowEdit = false;

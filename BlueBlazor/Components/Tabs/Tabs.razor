@@ -9,11 +9,12 @@
     <ul role="tablist" class="nav nav-@(Underline ? "underline" : "tabs") @Class" style="@Style">
         @foreach (var t in _tabs)
         {
-            <li class="nav-item" role="presentation">
-                <button @ref="@t.Element" class="nav-link @((_activeTab == t ? "active" : "")) @t.Class" id="@t.TabId"
-                    data-bs-toggle="tab" data-bs-target="#@t.TabPanelId" type="button" role="tab" aria-controls="@t.TabPanelId"
-                    aria-selected="@(_activeTab == t)">
+            <li class="@(new CssBuilder("nav-item").AddClass(t.ItemClass).Build())" role="presentation">
+                <button @ref="@t.Element" class="@(new CssBuilder("nav-link").AddClass("active", _activeTab == t).AddClass(t.Class).Build())" id="@t.TabId"
+                        data-bs-toggle="tab" data-bs-target="#@t.TabPanelId" type="button" role="tab" aria-controls="@t.TabPanelId"
+                        aria-selected="@(_activeTab == t)">
                     @t.Label
+                    @t.LabelContent
                 </button>
             </li>
         }
@@ -22,8 +23,8 @@
     <div class="tab-content @ContentClass">
         @foreach (var t in _tabs)
         {
-            <div class="tab-pane fade @((_activeTab == t ? "show active" : "")) @t.ContentClass" id="@t.TabPanelId"
-                role="tabpanel" aria-labelledby="@t.TabId" tabindex="0">
+            <div class="@(new CssBuilder("tab-pane fade").AddClass("show active", _activeTab == t).AddClass(t.ContentClass).Build())"
+                 id="@t.TabPanelId" role="tabpanel" aria-labelledby="@t.TabId" tabindex="0">
                 @t.ChildContent
             </div>
         }

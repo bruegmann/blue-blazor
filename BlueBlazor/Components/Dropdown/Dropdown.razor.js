@@ -1,3 +1,3 @@
 ﻿export function hidePopover(element) {
-    element.hidePopover()
+    if (element) element.hidePopover()
 }

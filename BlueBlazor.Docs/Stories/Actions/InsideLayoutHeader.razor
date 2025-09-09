@@ -1,0 +1,120 @@
+﻿<div style="@($"width: {Width}px")">
+    <div class="d-flex justify-content-between bg-primary-subtle border">
+        <div style="text-wrap: nowrap;"><strong>My big fat logo</strong></div>
+
+        <Actions Class="bg-primary text-white">
+            <Dropdown Label="Dropdown">
+                <MenuItem Label="Child 1">
+                    <Icon>🌍</Icon>
+                </MenuItem>
+
+                <MenuItem Label="Child 2">
+                    <Icon>🌑</Icon>
+                </MenuItem>
+
+                <MenuItem Label="Child 3">
+                    <Icon>☀️</Icon>
+                </MenuItem>
+
+                <MenuItem Label="Child 4">
+                    <Icon>🚀</Icon>
+                </MenuItem>
+
+                <MenuItem Label="Child 5">
+                    <Icon>🌌</Icon>
+                </MenuItem>
+            </Dropdown>
+
+            <button type="button" class="blue-menu-item btn">
+                <span class="blue-menu-item-icon" aria-hidden="true">🌍</span>
+                <span class="blue-menu-item-label">Child</span>
+            </button>
+            <button type="button" class="blue-menu-item btn">
+                <span class="blue-menu-item-icon" aria-hidden="true">🌑</span>
+                <span class="blue-menu-item-label">Child 2</span>
+            </button>
+            <button type="button" class="blue-menu-item btn">
+                <span class="blue-menu-item-icon" aria-hidden="true">☀️</span>
+                <span class="blue-menu-item-label">Child 3</span>
+            </button>
+            <button type="button" class="blue-menu-item btn">
+                <span class="blue-menu-item-icon" aria-hidden="true">🚀</span>
+                <span class="blue-menu-item-label">Child 4</span>
+            </button>
+            <button type="button" class="blue-menu-item btn">
+                <span class="blue-menu-item-icon" aria-hidden="true">🌌</span>
+                <span class="blue-menu-item-label">Child 5</span>
+            </button>
+        </Actions>
+    </div>
+
+    <hr />
+
+    <div class="bg-success-subtle border">
+        <Layout Class="h-auto">
+            <HeaderContent>
+                <div style="text-wrap: nowrap;"><strong>My big fat logo</strong></div>
+
+                <Actions Class="bg-primary text-white">
+                    <Dropdown Label="Dropdown">
+                        <MenuItem Label="Child 1">
+                            <Icon>🌍</Icon>
+                        </MenuItem>
+
+                        <MenuItem Label="Child 2">
+                            <Icon>🌑</Icon>
+                        </MenuItem>
+
+                        <MenuItem Label="Child 3">
+                            <Icon>☀️</Icon>
+                        </MenuItem>
+
+                        <MenuItem Label="Child 4">
+                            <Icon>🚀</Icon>
+                        </MenuItem>
+
+                        <MenuItem Label="Child 5">
+                            <Icon>🌌</Icon>
+                        </MenuItem>
+                    </Dropdown>
+
+                    <button type="button" class="blue-menu-item btn">
+                        <span class="blue-menu-item-icon" aria-hidden="true">🌍</span>
+                        <span class="blue-menu-item-label">Child</span>
+                    </button>
+                    <button type="button" class="blue-menu-item btn">
+                        <span class="blue-menu-item-icon" aria-hidden="true">🌑</span>
+                        <span class="blue-menu-item-label">Child 2</span>
+                    </button>
+                    <button type="button" class="blue-menu-item btn">
+                        <span class="blue-menu-item-icon" aria-hidden="true">☀️</span>
+                        <span class="blue-menu-item-label">Child 3</span>
+                    </button>
+                    <button type="button" class="blue-menu-item btn">
+                        <span class="blue-menu-item-icon" aria-hidden="true">🚀</span>
+                        <span class="blue-menu-item-label">Child 4</span>
+                    </button>
+                    <button type="button" class="blue-menu-item btn">
+                        <span class="blue-menu-item-icon" aria-hidden="true">🌌</span>
+                        <span class="blue-menu-item-label">Child 5</span>
+                    </button>
+                </Actions>
+            </HeaderContent>
+            <PageContent>
+                Hello World
+            </PageContent>
+        </Layout>
+
+
+    </div>
+</div>
+
+
+<label class="mt-3">
+    <span class="form-label">Change width</span>
+    <input type="range" class="form-range" min="100" max="1200" @bind="Width" @bind:event="oninput" /> @Width
+</label>
+
+@code {
+    private string Width { get; set; } = "392";
+}

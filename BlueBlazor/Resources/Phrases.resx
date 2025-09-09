@@ -138,4 +138,7 @@
   <data name="Successful" xml:space="preserve">
     <value>Successful</value>
   </data>
+  <data name="ToolbarWithButtonsAndButtonGroups" xml:space="preserve">
+    <value>Toolbar with buttons and button groups</value>
+  </data>
 </root>
