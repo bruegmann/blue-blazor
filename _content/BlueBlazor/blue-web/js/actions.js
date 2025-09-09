@@ -1,6 +1,7 @@
 export function init(actionsElement) {
   let menu = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
   let collapseMenu = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
+  const targetElement = actionsElement.parentElement || actionsElement;
   if (!menu) menu = actionsElement.querySelector(".BLUE-actions-menu");
   if (!collapseMenu) collapseMenu = actionsElement.querySelector(".BLUE-actions-collapse-menu");
   function updateActions() {
@@ -20,7 +21,7 @@ export function init(actionsElement) {
       item.style.display = "";
       collapseMenu.children[i].style.display = "none";
       collapseMenu.children[i].classList.remove("BLUE-actions-collapse-visible");
-      if (actionsElement.scrollWidth > actionsElement.clientWidth) {
+      if (targetElement.scrollWidth > targetElement.clientWidth) {
         ;
         item.style.display = "none";
         collapseMenu.children[i].style.display = "";
@@ -35,24 +36,13 @@ export function init(actionsElement) {
     requestAnimationFrame(updateActions);
   };
   const resizeObserver = new ResizeObserver(callback);
-  resizeObserver.observe(actionsElement);
+  resizeObserver.observe(targetElement);
   const mutationObserver = new MutationObserver(callback);
-  mutationObserver.observe(actionsElement, {
+  mutationObserver.observe(targetElement, {
     attributes: false,
     childList: true,
     subtree: true
   });
-  const outsideClickHandler = event => {
-    if (!actionsElement) return;
-    const openDetails = actionsElement.querySelectorAll("details[open]");
-    if (!openDetails || openDetails.length <= 0) return;
-    openDetails.forEach(details => {
-      if (!details.contains(event.target)) {
-        details.removeAttribute("open");
-      }
-    });
-  };
-  document.addEventListener("click", outsideClickHandler);
   return {
     updateActions,
     resizeObserver,
@@ -60,7 +50,6 @@ export function init(actionsElement) {
     destroy() {
       resizeObserver.disconnect();
       mutationObserver.disconnect();
-      document.removeEventListener("click", outsideClickHandler);
     }
   };
 }

@@ -23,11 +23,34 @@
     height: 100dvh;
     position: relative;
     display: grid;
-    grid-template-columns: 0 var(--toggler-size) calc(var(--side-width) - var(--toggler-size)) auto;
+
     grid-template-rows: var(--toggler-size) auto;
+    grid-template-areas: "header" "main";
+
+    color: var(--blue-sidebar-color);
+    background-color: var(--blue-sidebar-bg);
+
+    &:has(> .blue-layout-toggle) {
+        grid-template-columns: 0 0 var(--toggler-size) calc(var(--side-width) - var(--toggler-size)) 1fr;
+        grid-template-rows: var(--toggler-size) auto;
+        grid-template-areas:
+            "state .    toggle header header"
+            ".     side main   main   main";
+    }
+}
+
+@media (width >= 64rem) {
+    .blue-layout {
+        &:has(> .blue-layout-state-expand:checked) {
+            grid-template-areas:
+                "state .    toggle header header"
+                ".     side side   side   main";
+        }
+    }
 }
 
 .blue-layout-state {
+    grid-area: state;
     position: absolute;
     --size: 0;
     height: var(--size);
@@ -37,7 +60,7 @@
 }
 
 .blue-layout-toggle {
-    grid-column-start: 2;
+    grid-area: toggle;
     color: var(--blue-sidebar-color);
     background-color: var(--blue-sidebar-bg);
 }
@@ -62,11 +85,17 @@
 }
 
 .blue-layout-header {
-    grid-column-start: 3;
-    grid-column-end: 5;
+    grid-area: header;
+
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: var(--blue-layout-header-z-index, 4);
+    --blue-menu-item-dropdown-bg: var(--blue-sidebar-bg);
 }
 
 .blue-layout-side {
+    grid-area: side;
     overflow: auto;
 }
 
@@ -88,23 +117,23 @@
     }
 }
 
-@media (width >= 64rem) {
-    .blue-layout-state-expand:checked ~ .blue-layout-side {
-        grid-column-start: 2;
-        grid-column-end: 4;
-    }
-}
-
 .blue-layout-main {
     overflow: auto;
-    grid-column-start: 2;
-    grid-column-end: 5;
+    grid-area: main;
+    // grid-column-start: 2;
 }
 
-@media (width >= 64rem) {
-    .blue-layout-state-expand:checked ~ .blue-layout-main {
-        grid-column-start: 4;
-    }
+.blue-layout-body {
+    --spacing: 0.25rem;
+    width: calc(100% - var(--spacing) * 2);
+    height: calc(100% - var(--spacing));
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity, 1));
+    box-shadow: var(--bs-box-shadow-sm);
+    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+    border-radius: var(--bs-border-radius-lg);
 }
 
 .blue-layout-overlay {
