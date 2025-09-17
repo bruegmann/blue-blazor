@@ -3,3 +3,16 @@
         view-transition-name: var(--vtn);
     }
 }
+
+.inline-edit {
+    position: relative;
+    margin-left: -.75rem;
+}
+
+.inline-edit:has(.inline-edit-submit) {
+    z-index: 1;
+}
+
+    .inline-edit:has(.inline-edit-submit):has(:focus) {
+        z-index: 2;
+    }

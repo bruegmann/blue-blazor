@@ -1,9 +1,10 @@
 ﻿@using BlueBlazor.Internals.InlineEditParts
 @using Microsoft.Extensions.Localization
 @namespace BlueBlazor.Components
+@inherits BlueComponentBase
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
-<div class="inline-edit" style="margin-left: -.75rem; --vtn: inline-edit-@Id">
+<div class="@ClassValue" style="@StyleValue">
     <label for="@Id" class="text-primary-emphasis fw-medium" style="margin-left: .75rem">@Header @HeaderContent</label>
     @if (ShowEdit)
     {
@@ -15,7 +16,7 @@
                 </CascadingValue>
             </CascadingValue>
 
-            <div class="d-flex position-absolute mt-1 flex-shrink-0"
+            <div class="inline-edit-submit d-flex position-absolute mt-1 flex-shrink-0"
                 style="z-index: 4; inset-block-start: 100%; inset-inline-end: 0;" role="group">
                 <Button Label="Save" LabelHidden FilledPrimary ButtonType="ButtonType.Submit" OnClick="OnClickSubmitButton"
                     Class="me-1 shadow">

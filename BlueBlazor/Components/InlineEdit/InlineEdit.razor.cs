@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlueBlazor.Shared;
+using Microsoft.AspNetCore.Components;
 using System.Reflection.Metadata;
 
 namespace BlueBlazor.Components;
@@ -15,9 +16,13 @@ namespace BlueBlazor.Components;
 /// * `"ControlId"` with value `@Id`.
 /// * `"AutoFocus"` with value `true`.
 /// </summary>
-public partial class InlineEdit : ComponentBase
+public partial class InlineEdit : BlueComponentBase
 {
     private bool ShowEdit { get; set; }
+
+    private string? ClassValue => new CssBuilder("inline-edit").AddClass(Class).Build();
+
+    private string? StyleValue => new StyleBuilder($"--vtn: inline-edit-{Id}").AddStyle(Style).Build();
 
     /// <summary>
     /// Content for edit mode.
