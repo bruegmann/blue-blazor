@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+<InlineEdit>
+    <HeaderContent></HeaderContent>
+    <ReadContent>
+        <label>
+            <input type="checkbox" checked="@IsChecked" class="form-check-input" readonly /> Your checkbox
+        </label>
+    </ReadContent>
+    <ChildContent>
+        <label style="padding-left: .75rem">
+            <InputCheckbox @bind-Value="IsChecked" class="form-check-input" /> Your checkbox
+        </label>
+    </ChildContent>
+</InlineEdit>
+
+@code {
+    private bool IsChecked { get; set; } = false;
+}
