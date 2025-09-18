@@ -172,6 +172,6 @@ jobs:
                       --api-key "$NUGET_API_KEY" \
                       --source https://api.nuget.org/v3/index.json \
                       --skip-duplicate \
-                      --no-symbols true;
+                      --no-symbols || { echo "Fehler beim Push $file"; exit 1; };
                   done
                   echo "NuGet Push abgeschlossen."
