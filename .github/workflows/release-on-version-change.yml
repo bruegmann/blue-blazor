@@ -3,8 +3,6 @@ name: Release on Version Change
 on:
     push:
         branches: [master]
-        paths:
-            - "BlueBlazor/BlueBlazor.csproj"
 
 permissions:
     contents: write
@@ -20,6 +18,19 @@ jobs:
               uses: actions/checkout@v4
               with:
                   fetch-depth: 0
+
+            - name: Detect force release flag (RUN_RELEASE_NOW)
+              id: force
+              run: |
+                  msg="${{ github.event.head_commit.message }}"
+                  echo "Commit message: $msg"
+                  if echo "$msg" | grep -q "RUN_RELEASE_NOW"; then
+                    echo "force=true" >> $GITHUB_OUTPUT
+                    echo "Force release aktiviert durch Commit-Nachricht."
+                  else
+                    echo "force=false" >> $GITHUB_OUTPUT
+                    echo "Kein Force-Flag gefunden."
+                  fi
 
             - name: Extract current version from csproj
               id: current
@@ -40,15 +51,24 @@ jobs:
                   echo "prev_version=$prev_version" >> $GITHUB_OUTPUT
                   echo "Previous version: $prev_version"
 
-            - name: Compare versions
+            - name: Compare versions / apply force
               id: compare
               run: |
-                  if [ "${{ steps.current.outputs.version }}" = "${{ steps.previous.outputs.prev_version }}" ]; then
-                    echo "changed=false" >> $GITHUB_OUTPUT
-                    echo "Version unchanged - skipping release."; exit 0
+                  curr="${{ steps.current.outputs.version }}"
+                  prev="${{ steps.previous.outputs.prev_version }}"
+                  force="${{ steps.force.outputs.force }}"
+                  if [ "$curr" = "$prev" ]; then
+                    if [ "$force" = "true" ]; then
+                      echo "Version unverändert ($curr), aber Force aktiv: Release wird trotzdem erstellt."
+                      echo "changed=true" >> $GITHUB_OUTPUT
+                    else
+                      echo "Version unverändert ($curr) und kein Force-Flag. Überspringe Release-Erstellung."
+                      echo "changed=false" >> $GITHUB_OUTPUT
+                      exit 0
+                    fi
                   else
+                    echo "Version geändert: $prev -> $curr"
                     echo "changed=true" >> $GITHUB_OUTPUT
-                    echo "Version changed: ${{ steps.previous.outputs.prev_version }} -> ${{ steps.current.outputs.version }}"
                   fi
 
             - name: Set tag name
