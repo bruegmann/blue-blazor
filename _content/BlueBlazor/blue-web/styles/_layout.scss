@@ -97,6 +97,8 @@
 .blue-layout-side {
     grid-area: side;
     overflow: auto;
+    background: inherit;
+    overflow-y: auto;
 }
 
 @media (width < 64rem) {
@@ -120,7 +122,6 @@
 .blue-layout-main {
     overflow: auto;
     grid-area: main;
-    // grid-column-start: 2;
 }
 
 .blue-layout-body {
@@ -131,6 +132,7 @@
     margin-right: auto;
     overflow: auto;
     background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity, 1));
+    color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity, 1));
     box-shadow: var(--bs-box-shadow-sm);
     border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
     border-radius: var(--bs-border-radius-lg);

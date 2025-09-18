@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.17.5 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.17.6 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -3892,8 +3892,6 @@ $sidebar-expanded-breakpoint: 1400px !default;
             @extend .rounded;
             @extend .shadow;
             @extend .blue-menu-item-dropdown-from-start;
-            @extend .blue-sidebar-state;
-            @extend .open;
 
             position: absolute;
             top: 0;
@@ -12145,6 +12143,8 @@ dialog.blue-modal:has(.offcanvas-start) {
 .blue-layout-side {
     grid-area: side;
     overflow: auto;
+    background: inherit;
+    overflow-y: auto;
 }
 
 @media (width < 64rem) {
@@ -12168,7 +12168,6 @@ dialog.blue-modal:has(.offcanvas-start) {
 .blue-layout-main {
     overflow: auto;
     grid-area: main;
-    // grid-column-start: 2;
 }
 
 .blue-layout-body {
@@ -12179,6 +12178,7 @@ dialog.blue-modal:has(.offcanvas-start) {
     margin-right: auto;
     overflow: auto;
     background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity, 1));
+    color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity, 1));
     box-shadow: var(--bs-box-shadow-sm);
     border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
     border-radius: var(--bs-border-radius-lg);
