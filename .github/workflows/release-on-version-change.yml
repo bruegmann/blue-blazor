@@ -135,3 +135,23 @@ jobs:
                   name: nupkg
                   path: artifacts/*.nupkg
                   if-no-files-found: warn
+
+            - name: Publish to NuGet
+              if: steps.compare.outputs.changed == 'true'
+              env:
+                  NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+              run: |
+                  if [ -z "$NUGET_API_KEY" ]; then
+                    echo "NUGET_API_KEY secret ist nicht gesetzt. Überspringe Veröffentlichung.";
+                    exit 0;
+                  fi
+                  echo "Veröffentliche Pakete nach NuGet..."
+                  for file in artifacts/*.nupkg; do
+                    echo "Push $file";
+                    dotnet nuget push "$file" \
+                      --api-key "$NUGET_API_KEY" \
+                      --source https://api.nuget.org/v3/index.json \
+                      --skip-duplicate \
+                      --no-symbols true;
+                  done
+                  echo "NuGet Push abgeschlossen."
