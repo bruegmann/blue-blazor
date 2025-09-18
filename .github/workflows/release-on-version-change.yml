@@ -148,13 +148,13 @@ jobs:
               if: steps.compare.outputs.changed == 'true'
               run: dotnet pack BlueBlazor/BlueBlazor.csproj -c Release -o ./artifacts --no-build
 
-            - name: Upload package artifact
-              if: steps.compare.outputs.changed == 'true'
-              uses: actions/upload-artifact@v4
-              with:
-                  name: nupkg
-                  path: artifacts/*.nupkg
-                  if-no-files-found: warn
+            # - name: Upload package artifact (optional, removed)
+            #   if: steps.compare.outputs.changed == 'true'
+            #   uses: actions/upload-artifact@v4
+            #   with:
+            #       name: nupkg
+            #       path: artifacts/*.nupkg
+            #       if-no-files-found: warn
 
             - name: Publish to NuGet
               if: steps.compare.outputs.changed == 'true'
