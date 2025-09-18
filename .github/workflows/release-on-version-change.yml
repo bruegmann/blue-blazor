@@ -103,7 +103,7 @@ jobs:
                         per_page: 1
                       });
                       let previousTag = releases.length ? releases[0].tag_name : null;
-                      let body = `# Release ${tag}\n`;
+                      let body = ``;
                       if(previousTag){
                         body += `\nChanges since ${previousTag}:\n`;
                         const compare = await github.rest.repos.compareCommits({
