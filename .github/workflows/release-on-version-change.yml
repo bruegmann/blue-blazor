@@ -1,0 +1,137 @@
+name: Release on Version Change
+
+on:
+    push:
+        branches: [master]
+        paths:
+            - "BlueBlazor/BlueBlazor.csproj"
+
+permissions:
+    contents: write
+    packages: write
+
+jobs:
+    detect-version-and-release:
+        name: Detect version change and release
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Extract current version from csproj
+              id: current
+              run: |
+                  version=$(grep -oP '(?<=<Version>)[^<]+' BlueBlazor/BlueBlazor.csproj | head -n1)
+                  echo "version=$version" >> $GITHUB_OUTPUT
+                  echo "Current version: $version"
+
+            - name: Get previous commit version
+              id: previous
+              run: |
+                  # Find previous version from prior commit of the csproj (if exists)
+                  if git rev-parse HEAD^ >/dev/null 2>&1; then
+                    prev_version=$(git show HEAD^:BlueBlazor/BlueBlazor.csproj 2>/dev/null | grep -oP '(?<=<Version>)[^<]+' | head -n1 || echo '')
+                  else
+                    prev_version=""
+                  fi
+                  echo "prev_version=$prev_version" >> $GITHUB_OUTPUT
+                  echo "Previous version: $prev_version"
+
+            - name: Compare versions
+              id: compare
+              run: |
+                  if [ "${{ steps.current.outputs.version }}" = "${{ steps.previous.outputs.prev_version }}" ]; then
+                    echo "changed=false" >> $GITHUB_OUTPUT
+                    echo "Version unchanged - skipping release."; exit 0
+                  else
+                    echo "changed=true" >> $GITHUB_OUTPUT
+                    echo "Version changed: ${{ steps.previous.outputs.prev_version }} -> ${{ steps.current.outputs.version }}"
+                  fi
+
+            - name: Set tag name
+              if: steps.compare.outputs.changed == 'true'
+              id: tag
+              run: |
+                  tag="v${{ steps.current.outputs.version }}"
+                  echo "tag=$tag" >> $GITHUB_OUTPUT
+                  echo "Tag: $tag"
+
+            - name: Create Git tag (if not exists)
+              if: steps.compare.outputs.changed == 'true'
+              run: |
+                  tag="${{ steps.tag.outputs.tag }}"
+                  if git rev-parse "$tag" >/dev/null 2>&1; then
+                    echo "Tag $tag already exists."
+                  else
+                    git tag "$tag"
+                    git push origin "$tag"
+                  fi
+
+            - name: Generate Release Notes
+              if: steps.compare.outputs.changed == 'true'
+              id: notes
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const tag = process.env.TAG = '${{ steps.tag.outputs.tag }}';
+                      const { data: releases } = await github.rest.repos.listReleases({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        per_page: 1
+                      });
+                      let previousTag = releases.length ? releases[0].tag_name : null;
+                      let body = `# Release ${tag}\n`;
+                      if(previousTag){
+                        body += `\nChanges since ${previousTag}:\n`;
+                        const compare = await github.rest.repos.compareCommits({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          base: previousTag,
+                          head: tag
+                        });
+                        for (const commit of compare.data.commits) {
+                          body += `- ${commit.sha.substring(0,7)} ${commit.commit.message.split('\n')[0]}\n`;
+                        }
+                      } else {
+                        body += '\nInitial release notes generation.\n';
+                      }
+                      core.setOutput('body', body);
+
+            - name: Create GitHub Release
+              if: steps.compare.outputs.changed == 'true'
+              uses: softprops/action-gh-release@v2
+              with:
+                  tag_name: ${{ steps.tag.outputs.tag }}
+                  name: Release ${{ steps.current.outputs.version }}
+                  body: ${{ steps.notes.outputs.body }}
+                  generate_release_notes: true
+
+            - name: Setup .NET
+              if: steps.compare.outputs.changed == 'true'
+              uses: actions/setup-dotnet@v4
+              with:
+                  dotnet-version: "9.0.x"
+                  dotnet-quality: "ga"
+
+            - name: Restore
+              if: steps.compare.outputs.changed == 'true'
+              run: dotnet restore BlueBlazor.sln
+
+            - name: Build (Release)
+              if: steps.compare.outputs.changed == 'true'
+              run: dotnet build BlueBlazor/BlueBlazor.csproj -c Release --no-restore
+
+            - name: Pack
+              if: steps.compare.outputs.changed == 'true'
+              run: dotnet pack BlueBlazor/BlueBlazor.csproj -c Release -o ./artifacts --no-build
+
+            - name: Upload package artifact
+              if: steps.compare.outputs.changed == 'true'
+              uses: actions/upload-artifact@v4
+              with:
+                  name: nupkg
+                  path: artifacts/*.nupkg
+                  if-no-files-found: warn
