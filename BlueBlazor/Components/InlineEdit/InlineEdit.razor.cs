@@ -72,6 +72,12 @@ public partial class InlineEdit : BlueComponentBase
     [Parameter]
     public bool PreventConfirmOnSubmit { get; set; }
 
+    /// <summary>
+    /// Adds spacing for edit view. You might want to do this when your child content is something else but a `.form-control`.
+    /// </summary>
+    [Parameter]
+    public bool SpacingForEdit { get; set; }
+
     [CascadingParameter(Name = "Disabled")]
     protected bool Disabled { get; set; } = false;
 

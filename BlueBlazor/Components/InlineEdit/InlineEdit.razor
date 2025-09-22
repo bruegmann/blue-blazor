@@ -12,7 +12,8 @@
     @if (ShowEdit)
     {
         <EditView OnConfirm="ToggleShowEdit" OnDismiss="ToggleShowEdit" ConfirmOnLoseFocus="@ConfirmOnLoseFocus"
-                  PreventConfirmOnSubmit="@PreventConfirmOnSubmit" class="position-relative">
+                  PreventConfirmOnSubmit="@PreventConfirmOnSubmit" class="position-relative" 
+                  style="@(SpacingForEdit ? "padding-left: .75rem" : null)">
             <CascadingValue Name="ControlId" Value="@Id">
                 <CascadingValue Name="AutoFocus" Value="true">
                     @ChildContent

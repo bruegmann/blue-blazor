@@ -1,0 +1,25 @@
+﻿<InlineEdit SpacingForEdit>
+    <ReadContent>
+        <label class="form-check">
+            <input type="checkbox" class="form-check-input" checked="@IsChecked" readonly /> Check this
+        </label>
+    </ReadContent>
+    <ChildContent>
+        <label class="form-check">
+            <input type="checkbox" class="form-check-input" @bind="@IsChecked" /> Check this
+        </label>
+    </ChildContent>
+</InlineEdit>
+
+@if (IsChecked)
+{
+    <span>Is checked</span>
+}
+else
+{
+    <span>Is not checked</span>
+}
+
+@code {
+    private bool IsChecked { get; set; } = false;
+}
