@@ -1,0 +1,16 @@
+﻿<InlineEdit SpacingForEdit>
+    <label>
+        <input type="checkbox" checked="@IsChecked" readonly />
+        Akzeptieren?
+    </label>
+</InlineEdit>
+
+@code {
+    private bool IsChecked { get; set; } = false;
+
+    private bool EditMode { get; set; }
+    private void HandleEditModeChanged(bool editMode)
+    {
+        EditMode = editMode;
+    }
+}

@@ -41,7 +41,7 @@
                 @ReadText @ReadContent
                 @if ((string.IsNullOrEmpty(ReadText) && ReadContent == null) || ReadIsEmpty)
                 {
-                    <span class="text-secondary" role="status">@L["Edit"]</span>
+                    @ChildContent
                 }
             </div>
         </ReadView>
