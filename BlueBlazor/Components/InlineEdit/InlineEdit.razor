@@ -16,7 +16,7 @@
                   style="@(SpacingForEdit ? "padding-left: .75rem" : null)">
             <CascadingValue Name="ControlId" Value="@IdValue">
                 <CascadingValue Name="AutoFocus" Value="true">
-                    @ChildContent
+                    @ChildContent @SharedContent
                 </CascadingValue>
             </CascadingValue>
 
@@ -38,10 +38,10 @@
     {
         <ReadView OnEditRequested="EditRequested" aria-describedby="@IdValue" Disabled="@Disabled">
             <div class="form-control-plaintext py-0" style="padding-left: .75rem; padding-right: .75rem">
-                @ReadText @ReadContent
-                @if ((string.IsNullOrEmpty(ReadText) && ReadContent == null) || ReadIsEmpty)
+                @ReadText @ReadContent @SharedContent
+                @if ((string.IsNullOrEmpty(ReadText) && ReadContent == null && SharedContent == null) || ReadIsEmpty)
                 {
-                    @ChildContent
+                    <span class="text-secondary" role="status">@L["Edit"]</span>
                 }
             </div>
         </ReadView>

@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+<InlineEdit SpacingForEdit>
+    <SharedContent>
+        <label>
+            <InputCheckbox @bind-Value="IsChecked" class="form-check-input" />
+            Accept?
+        </label>
+    </SharedContent>
+</InlineEdit>
+
+
+@code {
+    private bool IsChecked { get; set; } = false;
+}
