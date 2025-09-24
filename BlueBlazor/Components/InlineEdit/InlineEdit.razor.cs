@@ -20,9 +20,11 @@ public partial class InlineEdit : BlueComponentBase
 {
     private bool ShowEdit { get; set; }
 
+    private string IdValue => Id ?? ControlId ?? "InlineEdit-" + Guid.NewGuid().ToString();
+
     private string? ClassValue => new CssBuilder("inline-edit").AddClass(Class).Build();
 
-    private string? StyleValue => new StyleBuilder($"--vtn: inline-edit-{Id}").AddStyle(Style).Build();
+    private string? StyleValue => new StyleBuilder($"--vtn: inline-edit-{IdValue}").AddStyle(Style).Build();
 
     /// <summary>
     /// Content for edit mode.
@@ -54,7 +56,7 @@ public partial class InlineEdit : BlueComponentBase
     /// Optional, by default an unique ID will be generated.
     /// </summary>
     [Parameter]
-    public string Id { get; set; } = "InlineEdit-" + Guid.NewGuid().ToString();
+    public string? Id { get; set; }
 
     [Parameter]
     public string? Header { get; set; }
@@ -86,6 +88,9 @@ public partial class InlineEdit : BlueComponentBase
 
     [CascadingParameter(Name = "EditModeChanged")]
     protected EventCallback<bool> EditModeChanged { get; set; }
+
+    [CascadingParameter(Name = "ControlId")]
+    protected string? ControlId { get; set; }
 
     protected override void OnParametersSet()
     {

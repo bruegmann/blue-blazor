@@ -7,14 +7,14 @@
 <div class="@ClassValue" style="@StyleValue">
     @if (!string.IsNullOrEmpty(Header) || HeaderContent is not null)
     {
-        <label for="@Id" class="text-primary-emphasis fw-medium" style="margin-left: .75rem">@Header @HeaderContent</label>
+        <label for="@IdValue" class="text-primary-emphasis fw-medium" style="margin-left: .75rem">@Header @HeaderContent</label>
     }
     @if (ShowEdit)
     {
         <EditView OnConfirm="ToggleShowEdit" OnDismiss="ToggleShowEdit" ConfirmOnLoseFocus="@ConfirmOnLoseFocus"
                   PreventConfirmOnSubmit="@PreventConfirmOnSubmit" class="position-relative" 
                   style="@(SpacingForEdit ? "padding-left: .75rem" : null)">
-            <CascadingValue Name="ControlId" Value="@Id">
+            <CascadingValue Name="ControlId" Value="@IdValue">
                 <CascadingValue Name="AutoFocus" Value="true">
                     @ChildContent
                 </CascadingValue>
@@ -36,7 +36,7 @@
     }
     else
     {
-        <ReadView OnEditRequested="EditRequested" aria-describedby="@Id" Disabled="@Disabled">
+        <ReadView OnEditRequested="EditRequested" aria-describedby="@IdValue" Disabled="@Disabled">
             <div class="form-control-plaintext py-0" style="padding-left: .75rem; padding-right: .75rem">
                 @ReadText @ReadContent
                 @if ((string.IsNullOrEmpty(ReadText) && ReadContent == null) || ReadIsEmpty)
