@@ -6,6 +6,13 @@
 
     .nav-link:hover,
     .nav-link:focus {
+        &::after {
+            @include blue-menu-item-indicator();
+            @include blue-menu-item-indicator-horizontal();
+            opacity: 0.25;
+        }
+
+        position: relative;
         border-bottom-color: transparent;
     }
 
@@ -15,12 +22,13 @@
         &::after {
             @include blue-menu-item-indicator();
             @include blue-menu-item-indicator-horizontal();
+            opacity: 1;
         }
 
         position: relative;
         font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-base);
         border-bottom-color: transparent;
-        color: var(--bs-nav-underline-link-active-color);
+        color: currentColor;
     }
 }
 

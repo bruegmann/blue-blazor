@@ -21,7 +21,7 @@ export class SelectList extends HTMLElement {
     this.attachShadow({
       mode: "open"
     });
-    this.shadowRoot.innerHTML = `<slot style="border-radius: inherit"></slot>`;
+    this.shadowRoot.innerHTML = "<slot style=\"border-radius: inherit\"></slot>";
     this.activeIndex = -1;
     this.items = [];
     this.inputElement = null;
@@ -53,7 +53,7 @@ export class SelectList extends HTMLElement {
     this.items = Array.from(this.children);
     this.items.forEach((el, i) => {
       if (!el.hasAttribute("id")) {
-        el.setAttribute("id", `${this.id}-option-${i}`);
+        el.setAttribute("id", "".concat(this.id, "-option-").concat(i));
       }
       el.setAttribute("data-blue-select-list-index", i.toString());
       el.setAttribute("aria-selected", "false");
@@ -74,7 +74,7 @@ export class SelectList extends HTMLElement {
       this.updateActiveItem();
     } else if (e.key === "Enter" && this.activeIndex >= 0) {
       const item = this.items[this.activeIndex];
-      item?.click();
+      item === null || item === void 0 || item.click();
     }
   }
   updateActiveItem() {

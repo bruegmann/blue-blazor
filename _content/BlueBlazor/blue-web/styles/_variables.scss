@@ -56,9 +56,9 @@ $sidebar-deep-bg: darken($sidebar-bg, 4%) !default;
 $sidebar-color: color-contrast($sidebar-bg, $gray-900) !default;
 $sidebar-color-dark: color-contrast($sidebar-bg-dark, $gray-900) !default;
 
-// Color of indicator for active sidebar item.
-$sidebar-indicator-color: #{var(--bs-primary)} !default;
-$sidebar-indicator-color-dark: #{var(--bs-primary-text-emphasis)} !default;
+// Color of indicator for active menu item in sidebar.
+$sidebar-indicator-color: $primary !default;
+$sidebar-indicator-color-dark: $white !default;
 
 // Background of search control in sidebar.
 $sidebar-search-bg: $input-bg !default;

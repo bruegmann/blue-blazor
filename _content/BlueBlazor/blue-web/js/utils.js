@@ -50,9 +50,9 @@ export function setAlertMessage(message) {
   if (alertElement) {
     alertElement.style.display = "block";
     alertElement.classList.add("alert-" + (alertClassName === "loading" ? "info" : alertClassName));
-    alertElement.querySelector(".alert-body").innerHTML = `<h2>` + message + `</h2>`;
+    alertElement.querySelector(".alert-body").innerHTML = "<h2>" + message + "</h2>";
     if (detailText) {
-      alertElement.querySelector(".alert-body").innerHTML += `<span>` + detailText + `</span>`;
+      alertElement.querySelector(".alert-body").innerHTML += "<span>" + detailText + "</span>";
     }
     const btnCloseElement = alertElement.querySelector(".btn-close");
     if (close) {
@@ -97,7 +97,7 @@ export function fetchData(input, init) {
   }).catch(reason => {
     if (reason.text) {
       reason.text().then(errorMessage => {
-        setAlertMessage(`${reason.status} - ${reason.statusText || httpStatusCodes[reason.status] || "Error"}`, "danger", true, showErrorDetail ? errorMessage.toString().replace(/(<style[\w\W]+style>)/g, "").replace(/<[^>]+>/g, "") : undefined);
+        setAlertMessage("".concat(reason.status, " - ").concat(reason.statusText || httpStatusCodes[reason.status] || "Error"), "danger", true, showErrorDetail ? errorMessage.toString().replace(/(<style[\w\W]+style>)/g, "").replace(/<[^>]+>/g, "") : undefined);
         if (onError) {
           onError(errorMessage, reason);
         }

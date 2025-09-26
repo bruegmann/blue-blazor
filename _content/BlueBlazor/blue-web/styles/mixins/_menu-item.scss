@@ -1,3 +1,21 @@
+@mixin blue-menu-item-background() {
+    content: "";
+    position: absolute;
+    top: 0.125rem;
+    right: 0.125rem;
+    bottom: 0.125rem;
+    left: 0.125rem;
+    background-color: currentColor;
+    border-radius: $border-radius;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.2s;
+
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
+}
+
 @mixin blue-menu-item-indicator() {
     content: "";
     position: absolute;

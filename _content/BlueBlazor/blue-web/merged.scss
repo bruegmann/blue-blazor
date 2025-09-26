@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.17.6 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.17.7 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -3708,9 +3708,9 @@ $sidebar-deep-bg: darken($sidebar-bg, 4%) !default;
 $sidebar-color: color-contrast($sidebar-bg, $gray-900) !default;
 $sidebar-color-dark: color-contrast($sidebar-bg-dark, $gray-900) !default;
 
-// Color of indicator for active sidebar item.
-$sidebar-indicator-color: #{var(--bs-primary)} !default;
-$sidebar-indicator-color-dark: #{var(--bs-primary-text-emphasis)} !default;
+// Color of indicator for active menu item in sidebar.
+$sidebar-indicator-color: $primary !default;
+$sidebar-indicator-color-dark: $white !default;
 
 // Background of search control in sidebar.
 $sidebar-search-bg: $input-bg !default;
@@ -3794,6 +3794,24 @@ $sidebar-expanded-breakpoint: 1400px !default;
         rgba(var(--blue-header-bg-rgb, var(--bs-theme-rgb)), var(--blue-shimmering, $shimmering))
     );
     backdrop-filter: blur(3px) saturate(125%);
+}
+
+@mixin blue-menu-item-background() {
+    content: "";
+    position: absolute;
+    top: 0.125rem;
+    right: 0.125rem;
+    bottom: 0.125rem;
+    left: 0.125rem;
+    background-color: currentColor;
+    border-radius: $border-radius;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.2s;
+
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
 }
 
 @mixin blue-menu-item-indicator() {
@@ -11192,21 +11210,7 @@ body {
     @include slide-transition();
 
     &::before {
-        content: "";
-        position: absolute;
-        top: 0.125rem;
-        right: 0.125rem;
-        bottom: 0.125rem;
-        left: 0.125rem;
-        background-color: currentColor;
-        border-radius: $border-radius;
-        transform: scale(0.9);
-        opacity: 0;
-        transition: all 0.2s;
-
-        @media (prefers-reduced-motion) {
-            transition: none;
-        }
+        @include blue-menu-item-background();
     }
 
     &[draggable] {
@@ -11852,6 +11856,13 @@ body {
 
     .nav-link:hover,
     .nav-link:focus {
+        &::after {
+            @include blue-menu-item-indicator();
+            @include blue-menu-item-indicator-horizontal();
+            opacity: 0.25;
+        }
+
+        position: relative;
         border-bottom-color: transparent;
     }
 
@@ -11861,12 +11872,13 @@ body {
         &::after {
             @include blue-menu-item-indicator();
             @include blue-menu-item-indicator-horizontal();
+            opacity: 1;
         }
 
         position: relative;
         font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-base);
         border-bottom-color: transparent;
-        color: var(--bs-nav-underline-link-active-color);
+        color: currentColor;
     }
 }
 
@@ -12066,6 +12078,9 @@ dialog.blue-modal:has(.offcanvas-start) {
     --side-width: var(--blue-sidebar-width);
     --toggler-size: var(--blue-menu-item-height);
 
+    --blue-menu-item-indicator-bg: #{color-contrast($sidebar-bg, $sidebar-indicator-color)};
+    --bs-link-hover-color: #{color-contrast($sidebar-bg, $link-hover-color)};
+
     height: 100dvh;
     position: relative;
     display: grid;
@@ -12082,6 +12097,13 @@ dialog.blue-modal:has(.offcanvas-start) {
         grid-template-areas:
             "state .    toggle header header"
             ".     side main   main   main";
+    }
+}
+
+@include color-mode(dark, false) {
+    .blue-layout {
+        --blue-menu-item-indicator-bg: #{$sidebar-indicator-color-dark};
+        --bs-link-hover-color: #{color-contrast($sidebar-bg, $link-hover-color-dark)};
     }
 }
 
@@ -12144,7 +12166,6 @@ dialog.blue-modal:has(.offcanvas-start) {
     grid-area: side;
     overflow: auto;
     background: inherit;
-    overflow-y: auto;
 }
 
 @media (width < 64rem) {
@@ -12172,6 +12193,9 @@ dialog.blue-modal:has(.offcanvas-start) {
 
 .blue-layout-body {
     --spacing: 0.25rem;
+    --blue-menu-item-indicator-bg: #{$sidebar-indicator-color};
+    --bs-link-hover-color: #{$link-hover-color};
+
     width: calc(100% - var(--spacing) * 2);
     height: calc(100% - var(--spacing));
     margin-left: auto;
@@ -12182,6 +12206,13 @@ dialog.blue-modal:has(.offcanvas-start) {
     box-shadow: var(--bs-box-shadow-sm);
     border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
     border-radius: var(--bs-border-radius-lg);
+}
+
+@include color-mode(dark, false) {
+    .blue-layout-body {
+        --blue-menu-item-indicator-bg: #{$sidebar-indicator-color-dark};
+        --bs-link-hover-color: #{$link-hover-color-dark};
+    }
 }
 
 .blue-layout-overlay {
