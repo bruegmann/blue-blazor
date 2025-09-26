@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<PackageId>BlueBlazor</PackageId>
-		<Version>4.5.6</Version>
+		<Version>4.5.7</Version>
 
 		<Summary>Component library for Blazor.</Summary>
 		<PackageTags>blue blue-web blazor components bootstrap</PackageTags>
@@ -88,8 +88,7 @@
 	</Target> -->
 
 	<ItemGroup>
-		<ProjectReference Include="..\BlueBlazor.Assets\BlueBlazor.Assets.esproj"
-			PrivateAssets="All" />
+		<ProjectReference Include="..\BlueBlazor.Assets\BlueBlazor.Assets.esproj" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>

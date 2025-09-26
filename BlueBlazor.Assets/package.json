@@ -28,6 +28,6 @@
     },
     "dependencies": {
         "@awesome.me/webawesome": "^3.0.0-beta.4",
-        "blue-web": "^1.17.6"
+        "blue-web": "^1.17.7"
     }
 }
