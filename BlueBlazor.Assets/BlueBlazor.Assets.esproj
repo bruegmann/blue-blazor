@@ -5,4 +5,8 @@
 		<BuildCommand>npm run build</BuildCommand>
 		<CleanCommand>npm run clean</CleanCommand>
 	</PropertyGroup>
+
+    <Target Name="EnsureNodeModules" BeforeTargets="Build">
+        <Exec Command="npm install" Condition="!Exists('$(MSBuildThisFileDirectory)\node_modules')" />
+    </Target>
 </Project>
