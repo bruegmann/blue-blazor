@@ -21,10 +21,11 @@ jobs:
 
             - name: Detect force release flag (RUN_RELEASE_NOW)
               id: force
+              env:
+                  COMMIT_MSG: ${{ github.event.head_commit.message }}
               run: |
-                  msg="${{ github.event.head_commit.message }}"
-                  echo "Commit message: $msg"
-                  if echo "$msg" | grep -q "RUN_RELEASE_NOW"; then
+                  echo "Commit message: $COMMIT_MSG"
+                  if echo "$COMMIT_MSG" | grep -q "RUN_RELEASE_NOW"; then
                     echo "force=true" >> $GITHUB_OUTPUT
                     echo "Force release aktiviert durch Commit-Nachricht."
                   else
