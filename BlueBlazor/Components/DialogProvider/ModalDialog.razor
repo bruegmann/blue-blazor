@@ -7,7 +7,7 @@
 
 <div class="@_dialogClass" style="transition: max-width .2s">
     <div class="modal-content">
-        <div class="modal-header">
+        <div class="@(new CssBuilder("modal-header").AddClass(HeaderClass).Build())">
             <h1 class="modal-title fs-5" id="@(Id + "-label")">@TitleText @TitleContent</h1>
             <form method="dialog" style="display: contents">
                 <button type="submit" class="btn-close" aria-label="@L["Close"]"></button>

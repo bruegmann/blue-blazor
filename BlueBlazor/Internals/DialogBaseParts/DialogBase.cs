@@ -7,6 +7,12 @@ public class DialogBase : ComponentBase
     [Parameter]
     public string? Id { get; set; } = "DialogBase-" + Guid.NewGuid().ToString();
 
+    /// <summary>
+    /// Additional CSS class to be added to the header.
+    /// </summary>
+    [Parameter]
+    public string? HeaderClass { get; set; }
+
     [Parameter]
     public RenderFragment? BodyContent { get; set; }
 

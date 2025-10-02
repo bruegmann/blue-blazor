@@ -6,7 +6,7 @@
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
 <div class="@_offcanvasClass">
-    <div class="offcanvas-header">
+    <div class="@(new CssBuilder("offcanvas-header").AddClass(HeaderClass).Build())">
         <h1 class="offcanvas-title fs-5" id="@(Id + "-label")">@TitleText @TitleContent</h1>
         <form method="dialog" style="display: contents">
             <button type="submit" class="btn-close" aria-label="@L["Close"]"></button>
