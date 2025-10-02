@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.17.7 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.17.8 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -12338,8 +12338,19 @@ dialog.blue-modal:has(.offcanvas-start) {
     anchor-name: var(--blue-anchor-name, --anchor-1);
 }
 
+@position-try --blue-anchored-below {
+    top: anchor(var(--blue-anchor-name, --anchor-1) bottom);
+    bottom: unset;
+}
+
+@position-try --blue-anchored-above {
+    bottom: anchor(var(--blue-anchor-name, --anchor-1) top);
+    top: unset;
+}
+
 .blue-anchored {
     top: anchor(var(--blue-anchor-name, --anchor-1) bottom);
+    position-try: --blue-anchored-below, --blue-anchored-above;
 }
 
 .blue-anchored-start {

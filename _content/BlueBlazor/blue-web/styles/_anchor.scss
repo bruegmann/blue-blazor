@@ -2,8 +2,19 @@
     anchor-name: var(--blue-anchor-name, --anchor-1);
 }
 
+@position-try --blue-anchored-below {
+    top: anchor(var(--blue-anchor-name, --anchor-1) bottom);
+    bottom: unset;
+}
+
+@position-try --blue-anchored-above {
+    bottom: anchor(var(--blue-anchor-name, --anchor-1) top);
+    top: unset;
+}
+
 .blue-anchored {
     top: anchor(var(--blue-anchor-name, --anchor-1) bottom);
+    position-try: --blue-anchored-below, --blue-anchored-above;
 }
 
 .blue-anchored-start {
