@@ -29,6 +29,12 @@ public partial class ModalDialog : DialogBase
     [Parameter]
     public string? DialogClass { get; set; }
 
+    /// <summary>
+    /// Additional CSS class to `.modal-content`.
+    /// </summary>
+    [Parameter]
+    public string? ContentClass { get; set; }
+
     protected override void OnParametersSet()
     {
         _dialogClass = new CssBuilder("modal-dialog")
