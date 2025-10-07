@@ -6,7 +6,7 @@ namespace BlueBlazor.Components;
 /// <summary>
 /// Represents a text input component with customizable properties such as label, placeholder, value, and styling.
 /// </summary>
-public partial class TextInput
+public partial class TextInput : ComponentBase
 {
     private string? _labelClass;
     private string? _inputClass;
