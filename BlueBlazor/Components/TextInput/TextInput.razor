@@ -5,34 +5,26 @@
 {
     <div class="form-floating">
         <input @attributes="AdditionalAttributes" type="@Type" class="@_inputClass" id="@Id" placeholder="@_placeholder"
-            @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" />
-        <label for="@Id" class="@_labelClass">
-            @if (LabelHidden)
-            {
-                <span class="visually-hidden">@Label</span>
-            }
-            else
-            {
+               @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" aria-label="@AriaLabel" />
+        @if (!LabelHidden)
+        {
+            <label for="@Id" class="@_labelClass">
                 @Label
-            }
-            @AfterLabelContent
-        </label>
+                @AfterLabelContent
+            </label>
+        }
     </div>
 }
 else
 {
-    <label for="@Id" class="@_labelClass">
-        @if (LabelHidden)
-        {
-            <span class="visually-hidden">@Label</span>
-        }
-        else
-        {
+    @if (!LabelHidden)
+    {
+        <label for="@Id" class="@_labelClass">
             @Label
-        }
-        @AfterLabelContent
-    </label>
+            @AfterLabelContent
+        </label>
+    }
 
     <input @attributes="AdditionalAttributes" type="@Type" class="@_inputClass" id="@Id" placeholder="@_placeholder"
-        @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" />
+           @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" aria-label="@AriaLabel" />
 }

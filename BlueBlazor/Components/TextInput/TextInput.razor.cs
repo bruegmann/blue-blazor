@@ -30,6 +30,8 @@ public partial class TextInput : ComponentBase
         }
     }
 
+    private string? AriaLabel => LabelHidden ? Label : null;
+
     [Parameter]
     public string Id { get; set; } = Guid.NewGuid().ToString();
 
