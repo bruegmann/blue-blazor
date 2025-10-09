@@ -33,5 +33,7 @@ function handleChange() {
 }
 
 function handleLocationChange() {
-    document.getElementById("layout-drawer").checked = false
+    const drawerEl = document.getElementById("layout-drawer")
+    if (drawerEl)
+        drawerEl.checked = false
 }
