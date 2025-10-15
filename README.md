@@ -52,7 +52,7 @@ You can use the stylesheet of Blue Web by adding the following line to the head 
 <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
 ```
 
-In .NET 9 you can do it like this:
+In .NET 9 or higher you can do it like this:
 
 ```razor
 <link rel="stylesheet" href="@Assets["_content/BlueBlazor/blue-web/style.min.css"]">
@@ -67,10 +67,24 @@ Blue Blazor ships the required files. You can embed them like this:
 <link rel="stylesheet" href="_content/BlueBlazor/inter/web/inter.css">
 ```
 
-In .NET 9 you can do it like this:
+In .NET 9 or higher you can do it like this:
 
 ```razor
 <link rel="stylesheet" href="@Assets["_content/BlueBlazor/inter/web/inter.css"]">
+```
+
+### Dynamic color mode
+
+To support dynamic color modes (light/dark) using JavaScript you need to add the following script:
+
+```razor
+<script src="_content/BlueBlazor/blue-web/js/color-mode.js" type="module"></script>
+```
+
+In .NET 9 or higher you can do it like this:
+
+```razor
+<script src="@Assets["_content/BlueBlazor/blue-web/js/color-mode.js"]" type="module"></script>
 ```
 
 ### Add layout
@@ -107,7 +121,7 @@ You now have a very basic app with Blue Blazor. To learn more, check out [the ex
 
 ## Theming
 
-You can use [Themify](https://github.com/bruegmann/themify) to create custom themes. Enable **"Export only CSS variables"** for your theme and put the exported CSS to your project.
+You can use the [Theme Generator on Blue Web](https://bruegmann.github.io/blue-web) to create custom themes. Then add the exported CSS to your project.
 It needs to be embedded after the Blue Blazor stylesheet:
 
 ```html
