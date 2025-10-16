@@ -9,7 +9,7 @@ $color-mode-type: media-query;
 
 .md-block h1,
 .md-block h2,
-.docgen h2 {
+.docgen > h2 {
     @extend .page-header;
 }
 

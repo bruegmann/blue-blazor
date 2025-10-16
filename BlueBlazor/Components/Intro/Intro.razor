@@ -4,7 +4,10 @@
     <div class="sign-in-container mx-1">
         <div class="bg-body rounded-3 shadow-lg px-4 py-5">
             <div class="text-center">
-                <img style="max-width: @LogoMaxWidth;" src="@Logo" alt="@LogoAlt" />
+                @if (Logo != null)
+                {
+                    <img style="max-width: @LogoMaxWidth;" src="@Logo" alt="@LogoAlt" />
+                }
                 <h1 class="h2 mt-4 mb-3">@Title</h1>
             </div>
 
@@ -18,7 +21,7 @@
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
-    public string Logo { get; set; } = "";
+    public string? Logo { get; set; }
 
     [Parameter]
     public string LogoAlt { get; set; } = "Logo";
