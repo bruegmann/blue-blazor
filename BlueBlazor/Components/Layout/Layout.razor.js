@@ -26,14 +26,12 @@
 function handleChange() {
     if (localStorage.getItem("side-layout-shrink")) {
         localStorage.removeItem("side-layout-shrink")
-    }
-    else {
+    } else {
         localStorage.setItem("side-layout-shrink", "true")
     }
 }
 
 function handleLocationChange() {
     const drawerEl = document.getElementById("layout-drawer")
-    if (drawerEl)
-        drawerEl.checked = false
+    if (drawerEl) drawerEl.checked = false
 }
