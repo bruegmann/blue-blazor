@@ -1,0 +1,19 @@
+﻿@namespace BlueBlazor.Components
+
+@if (Parent == null)
+{
+    <details class="fg-details w-100" open="@(IsExpanded)">
+        <summary role="@(Heading != null ? "heading" : null)" aria-level="@Heading" class="@HeaderClassValue">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" aria-hidden="true" class="bi bi-chevron-right fg-chevron fs-6 opacity-50" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+            </svg>
+
+            @Header
+            @if (!string.IsNullOrEmpty(Id))
+            {
+                <small class="text-secondary ms-1">(@Id)</small>
+            }
+        </summary>
+        @ChildContent
+    </details>
+}

@@ -1,0 +1,18 @@
+﻿@namespace BlueBlazor.Components
+@inherits BlueComponentBase
+
+<CascadingValue Value="@(this)" IsFixed="true">
+    @ChildContent
+</CascadingValue>
+
+<div class="@(new CssBuilder("vstack gap-3").AddClass(Class).Build())" style="@Style" @attributes="@AdditionalAttributes">
+    @foreach (var fieldGroup in SortedFieldGroups)
+    {
+        <FieldGroup Header="@fieldGroup.Header" 
+            IsExpanded="fieldGroup.IsExpanded" 
+            HeaderClass="@fieldGroup.HeaderClass" 
+            Id="@fieldGroup.Id">
+            @fieldGroup.ChildContent
+        </FieldGroup>
+    }
+</div>

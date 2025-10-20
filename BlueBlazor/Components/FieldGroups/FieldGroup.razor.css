@@ -1,0 +1,45 @@
+﻿.fg-details {
+    interpolate-size: allow-keywords;
+}
+
+    .fg-details:has(summary:focus) {
+        overflow: hidden;
+    }
+
+    .fg-details summary {
+        list-style: none;
+    }
+
+        .fg-details summary::-webkit-details-marker {
+            display: none;
+        }
+
+    .fg-details ::deep .fg-chevron {
+        transition: transform 0.2s;
+    }
+
+@media (prefers-reduced-motion) {
+    .fg-details ::deep .fg-chevron {
+        transition: none;
+    }
+}
+
+.fg-details[open] ::deep > summary > .fg-chevron {
+    transform: rotate(90deg);
+}
+
+.fg-details::details-content {
+    block-size: 0;
+    transition: block-size 0.2s, content-visibility 0.2s;
+    transition-behavior: allow-discrete;
+}
+
+@media (prefers-reduced-motion) {
+    .fg-details::details-content {
+        transition: none;
+    }
+}
+
+.fg-details[open]::details-content {
+    block-size: auto;
+}
