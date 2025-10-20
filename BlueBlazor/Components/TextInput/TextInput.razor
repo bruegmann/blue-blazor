@@ -4,11 +4,19 @@
 @if (Floating)
 {
     <div class="form-floating">
-        <input @attributes="AdditionalAttributes" type="@Type" class="@_inputClass" id="@Id" placeholder="@_placeholder"
-               @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" aria-label="@AriaLabel" />
+        @if (Textarea)
+        {
+            <textarea @attributes="AdditionalAttributes" class="@InputClassValue" style="@InputStyle" id="@Id" placeholder="@_placeholder"
+                      @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" aria-label="@AriaLabel"></textarea>
+        }
+        else
+        {
+            <input @attributes="AdditionalAttributes" type="@Type" class="@InputClassValue" style="@InputStyle" id="@Id" placeholder="@_placeholder"
+                   @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" aria-label="@AriaLabel" />
+        }
         @if (!LabelHidden)
         {
-            <label for="@Id" class="@_labelClass">
+            <label for="@Id" class="@LabelClassValue" style="@LabelStyle">
                 @Label
                 @AfterLabelContent
             </label>
@@ -19,12 +27,20 @@ else
 {
     @if (!LabelHidden)
     {
-        <label for="@Id" class="@_labelClass">
+        <label for="@Id" class="@LabelClassValue" style="@LabelStyle">
             @Label
             @AfterLabelContent
         </label>
     }
 
-    <input @attributes="AdditionalAttributes" type="@Type" class="@_inputClass" id="@Id" placeholder="@_placeholder"
-           @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" aria-label="@AriaLabel" />
+    @if (Textarea)
+    {
+        <textarea @attributes="AdditionalAttributes" class="@InputClassValue" style="@InputStyle" id="@Id" placeholder="@_placeholder"
+                  @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" aria-label="@AriaLabel"></textarea>
+    }
+    else
+    {
+        <input @attributes="AdditionalAttributes" type="@Type" class="@InputClassValue" style="@InputStyle" id="@Id" placeholder="@_placeholder"
+               @bind="@CurrentValue" @bind:event="@GetBindEvent()" readonly="@ReadOnly" aria-label="@AriaLabel" />
+    }
 }

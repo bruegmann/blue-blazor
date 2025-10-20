@@ -8,9 +8,15 @@ namespace BlueBlazor.Components;
 /// </summary>
 public partial class TextInput : ComponentBase
 {
-    private string? _labelClass;
-    private string? _inputClass;
     private string? _placeholder;
+
+    private string? LabelClassValue => new CssBuilder().AddClass(LabelClass)
+            .AddClass("form-label", FormLabel)
+            .AddClass("my-0 lh-1 fw-bold small", SmallLabel).Build();
+
+    private string? InputClassValue => new CssBuilder().AddClass(InputClass)
+            .AddClass("form-control", !ReadOnly)
+            .AddClass("form-control-plaintext", ReadOnly).Build();
 
     private string GetBindEvent()
     {
@@ -81,7 +87,16 @@ public partial class TextInput : ComponentBase
     public string LabelClass { get; set; } = "";
 
     [Parameter]
+    public string? LabelStyle { get; set; }
+
+    [Parameter]
     public string InputClass { get; set; } = "";
+
+    [Parameter]
+    public string? InputStyle { get; set; }
+
+    [Parameter]
+    public bool Textarea { get; set; } = false;
 
     [Parameter(CaptureUnmatchedValues = true)]
     public IDictionary<string, object>? AdditionalAttributes { get; set; }
@@ -89,12 +104,6 @@ public partial class TextInput : ComponentBase
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        _labelClass = new CssBuilder().AddClass(LabelClass)
-            .AddClass("form-label", FormLabel)
-            .AddClass("my-0 lh-1 fw-bold small", SmallLabel).Build();
-        _inputClass = new CssBuilder().AddClass(InputClass)
-            .AddClass("form-control", !ReadOnly)
-            .AddClass("form-control-plaintext", ReadOnly).Build();
 
         _placeholder = Placeholder;
 
