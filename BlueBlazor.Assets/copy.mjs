@@ -1,3 +1,4 @@
+import loader from "@monaco-editor/loader"
 import fs from "fs/promises"
 import path from "path"
 import { fileURLToPath } from "url"
@@ -34,6 +35,10 @@ async function copyDirectory(source, destination) {
 copyDirectory(
     path.join(__dirname, "node_modules", "blue-web", "dist"),
     path.join(__dirname, "dist", "blue-web")
+)
+copyDirectory(
+    path.join(__dirname, "node_modules", "monaco-editor", "min"),
+    path.join(__dirname, "dist", "monaco-editor", "min")
 )
 
 fs.copyFile(
