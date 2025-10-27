@@ -75,6 +75,9 @@ public partial class Dropdown : IDisposable
     public bool IsActive { get; set; } = false;
 
     [Parameter]
+    public string? HeaderId { get; set; }
+
+    [Parameter]
     public string? HeaderClass { get; set; }
 
     [Parameter]
