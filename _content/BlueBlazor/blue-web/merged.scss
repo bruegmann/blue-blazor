@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.17.8 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.19.0 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -10844,24 +10844,6 @@ body {
 
 body {
     background: var(--blue-app-bg, #{$app-bg});
-
-    .blue-wrapper {
-        position: fixed;
-        width: 100%;
-        width: 100%;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 1;
-        display: none;
-    }
-
-    &.open {
-        .blue-wrapper {
-            display: block;
-        }
-    }
 }
 
 // Idee für Effekt von http://www.w3schools.com/howto/howto_css_animate_buttons.asp
@@ -10876,39 +10858,17 @@ body {
             color 0.15s,
             box-shadow 0.3s,
             opacity 0.3s;
+        position: relative;
 
         @media (prefers-reduced-motion) {
             transition: none;
         }
-
-        position: relative;
 
         &:hover,
         &:active,
         &:focus {
             z-index: 1;
         }
-    }
-}
-
-.page-link {
-    &:hover,
-    &:focus {
-        text-decoration: none;
-    }
-}
-
-.blue-wrapper {
-    z-index: 3 !important;
-
-    &.active {
-        display: block;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .blue-header-extension .blue-header-title-labels:not(.keep) {
-        display: none;
     }
 }
 
@@ -10931,22 +10891,17 @@ body {
     }
 }
 
-.w-bla-sidebar-width {
-    width: $bla-sidebar-width;
-}
-
 .blue-header-title.sidebar {
     width: $bla-sidebar-width;
     padding-left: calc(#{$normal-size} + #{$spacer});
     transform: translateX(-100%);
     transition: transform 0.4s;
+    background: var(--blue-sidebar-bg);
+    color: $sidebar-color;
 
     @media (prefers-reduced-motion) {
         transition: none;
     }
-
-    background: var(--blue-sidebar-bg);
-    color: $sidebar-color;
 }
 
 .blue-scroll-shadow {
@@ -10995,25 +10950,31 @@ body {
             animation-duration: 0s;
         }
 
-        transform: scale(10, 10);
-        opacity: 0;
-        transition: transform 0.5s, opacity 1s;
+        & {
+            transform: scale(10, 10);
+            opacity: 0;
+            transition:
+                transform 0.5s,
+                opacity 1s;
+        }
 
         @media (prefers-reduced-motion) {
             transition: none;
         }
     }
 
-    transform: translate3d(0, 0, 0);
-    overflow: hidden;
-    white-space: pre-wrap;
+    & {
+        transform: translate3d(0, 0, 0);
+        overflow: hidden;
+        white-space: pre-wrap;
 
-    bottom: 2.5rem + 4rem + 0.938rem;
-    left: 1rem;
-    right: 1rem;
+        bottom: 2.5rem + 4rem + 0.938rem;
+        left: 1rem;
+        right: 1rem;
 
-    max-height: calc(100vh - 15rem);
-    max-height: calc(100dvh - 15rem);
+        max-height: calc(100vh - 15rem);
+        max-height: calc(100dvh - 15rem);
+    }
 
     .alert-body {
         max-height: calc(100vh - 16rem);
@@ -11116,9 +11077,11 @@ body {
         transition: none !important;
     }
 
-    border: none;
-    box-shadow: none;
-    background-image: none;
+    & {
+        border: none;
+        box-shadow: none;
+        background-image: none;
+    }
 
     &:focus {
         box-shadow: none;
@@ -11157,12 +11120,11 @@ body {
 .blue-menu-item-dropdown {
     margin-left: 1rem;
     animation: blue-menu-item-dropdown 0.15s;
+    position: relative;
 
     @media (prefers-reduced-motion) {
         animation-duration: 0s;
     }
-
-    position: relative;
 
     &::before {
         content: "";
@@ -11187,15 +11149,6 @@ body {
         border-radius: calc(#{$border-radius} + 0.1rem);
         box-shadow: $box-shadow;
     }
-}
-
-.blue-menu-item-dropdown-caret.blue-caret {
-    display: none;
-    position: absolute;
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    align-items: center;
 }
 
 .blue-menu-item {
@@ -11264,51 +11217,6 @@ body {
 .blue-menu-item-dropdown > .blue-menu-item-wrapper > .blue-menu-item,
 .blue-menu-item-dropdown > .blue-menu-item {
     width: 100%;
-}
-
-.blue-header {
-    @include header-bg();
-    color: var(--blue-header-color);
-}
-
-.blue-header {
-    height: $normal-size;
-    position: fixed;
-    top: 0;
-    left: $normal-size;
-    right: 0;
-    z-index: 4;
-
-    .navbar-nav {
-        margin: 0;
-
-        > li {
-            float: left;
-
-            > a {
-                background-color: transparent;
-                color: var(--blue-header-color);
-                padding: $bla-header-nav-padding;
-
-                &:hover,
-                &:focus {
-                    background-color: $bla-button-bg-hover;
-                }
-            }
-        }
-    }
-
-    .navbar-left {
-        float: left !important;
-    }
-
-    .navbar-right {
-        float: right !important;
-    }
-
-    .blue-search {
-        width: 16rem;
-    }
 }
 
 .blue-header-title {
@@ -11409,64 +11317,8 @@ body {
         margin-right: 0.5rem;
     }
 
-    .blue-menu-item-label,
-    .blue-menu-item-dropdown-caret.blue-caret {
+    .blue-menu-item-label {
         display: initial;
-    }
-}
-
-.blue-caret {
-    /* treat like a font icon */
-    font-family: "blueicon" !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    font-size: 1.15em;
-    position: relative;
-    top: 0.063rem;
-    display: inline-block;
-    /* END treat like a font icon */
-
-    --caret-size: 0.5em;
-    --caret-strength: 0.09em;
-
-    width: 1em;
-
-    &::before {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: var(--caret-size);
-        height: var(--caret-size);
-        background: transparent;
-        box-shadow: var(--caret-strength) var(--caret-strength) 0 currentColor;
-        transform: rotate(-45deg) translate(-50%, -50%);
-        margin-top: calc((var(--caret-size) + var(--caret-strength)) * -1);
-        transition: all 0.2s;
-
-        @media (prefers-reduced-motion) {
-            transition: none;
-        }
-    }
-
-    &.blue-caret-mirrored {
-        &::before {
-            transform: rotate(135deg) translate(-50%, -50%);
-        }
-    }
-
-    &.blue-caret-open {
-        &::before {
-            transform: rotate(45deg) translate(-50%, -50%);
-        }
     }
 }
 

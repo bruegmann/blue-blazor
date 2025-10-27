@@ -9,24 +9,6 @@ body {
 
 body {
     background: var(--blue-app-bg, #{$app-bg});
-
-    .blue-wrapper {
-        position: fixed;
-        width: 100%;
-        width: 100%;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 1;
-        display: none;
-    }
-
-    &.open {
-        .blue-wrapper {
-            display: block;
-        }
-    }
 }
 
 // Idee für Effekt von http://www.w3schools.com/howto/howto_css_animate_buttons.asp
@@ -41,39 +23,17 @@ body {
             color 0.15s,
             box-shadow 0.3s,
             opacity 0.3s;
+        position: relative;
 
         @media (prefers-reduced-motion) {
             transition: none;
         }
-
-        position: relative;
 
         &:hover,
         &:active,
         &:focus {
             z-index: 1;
         }
-    }
-}
-
-.page-link {
-    &:hover,
-    &:focus {
-        text-decoration: none;
-    }
-}
-
-.blue-wrapper {
-    z-index: 3 !important;
-
-    &.active {
-        display: block;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .blue-header-extension .blue-header-title-labels:not(.keep) {
-        display: none;
     }
 }
 
@@ -96,22 +56,17 @@ body {
     }
 }
 
-.w-bla-sidebar-width {
-    width: $bla-sidebar-width;
-}
-
 .blue-header-title.sidebar {
     width: $bla-sidebar-width;
     padding-left: calc(#{$normal-size} + #{$spacer});
     transform: translateX(-100%);
     transition: transform 0.4s;
+    background: var(--blue-sidebar-bg);
+    color: $sidebar-color;
 
     @media (prefers-reduced-motion) {
         transition: none;
     }
-
-    background: var(--blue-sidebar-bg);
-    color: $sidebar-color;
 }
 
 .blue-scroll-shadow {

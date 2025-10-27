@@ -62,7 +62,6 @@ export class SelectList extends HTMLElement {
     });
   }
   onKeyDown(e) {
-    console.log("select-list onKeyDown");
     if (!this.items.length) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();

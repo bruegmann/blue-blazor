@@ -33,25 +33,31 @@
             animation-duration: 0s;
         }
 
-        transform: scale(10, 10);
-        opacity: 0;
-        transition: transform 0.5s, opacity 1s;
+        & {
+            transform: scale(10, 10);
+            opacity: 0;
+            transition:
+                transform 0.5s,
+                opacity 1s;
+        }
 
         @media (prefers-reduced-motion) {
             transition: none;
         }
     }
 
-    transform: translate3d(0, 0, 0);
-    overflow: hidden;
-    white-space: pre-wrap;
+    & {
+        transform: translate3d(0, 0, 0);
+        overflow: hidden;
+        white-space: pre-wrap;
 
-    bottom: 2.5rem + 4rem + 0.938rem;
-    left: 1rem;
-    right: 1rem;
+        bottom: 2.5rem + 4rem + 0.938rem;
+        left: 1rem;
+        right: 1rem;
 
-    max-height: calc(100vh - 15rem);
-    max-height: calc(100dvh - 15rem);
+        max-height: calc(100vh - 15rem);
+        max-height: calc(100dvh - 15rem);
+    }
 
     .alert-body {
         max-height: calc(100vh - 16rem);
