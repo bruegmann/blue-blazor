@@ -1,0 +1,12 @@
+﻿<Button>
+    <span aria-hidden="true">🔔</span> Notifications
+    <span class="badge bg-primary-subtle text-primary-emphasis">
+        <Odometer Value="_count" />
+    </span>
+</Button>
+
+<Button Label="Increment" OnClick="() => _count++" />
+
+@code {
+    private int _count = 0;
+}

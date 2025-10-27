@@ -32,11 +32,11 @@ async function copyDirectory(source, destination) {
 }
 
 copyDirectory(
-    path.join(__dirname, "node_modules", "blue-web", "dist"),
-    path.join(__dirname, "dist", "blue-web")
+    path.join(__dirname, "../node_modules", "blue-web", "dist"),
+    path.join(__dirname, "../dist", "blue-web")
 )
 
 fs.copyFile(
-    path.join(__dirname, "../README.md"),
-    path.join(__dirname, "../BlueBlazor/README.md")
+    path.join(__dirname, "../../README.md"),
+    path.join(__dirname, "../../BlueBlazor/README.md")
 )

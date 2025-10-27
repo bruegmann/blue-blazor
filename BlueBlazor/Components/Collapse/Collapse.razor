@@ -1,5 +1,7 @@
 ﻿@namespace BlueBlazor.Components
-<details class="blue-collapse @Class" style="@Style" draggable="@Draggable">
+@inherits BlueComponentBase
+
+<details @ref="_detailsRef" class="blue-collapse @Class" style="@Style" draggable="@Draggable" open="@Open" @attributes="AdditionalAttributes">
     <summary class="blue-collapse-header blue-menu-item btn @HeaderClass" style="@HeaderStyle">
         @if (HideChevronIcon != true && ChevronIconBefore)
         {

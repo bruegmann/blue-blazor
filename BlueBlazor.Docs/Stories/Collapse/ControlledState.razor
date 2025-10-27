@@ -1,0 +1,18 @@
+﻿<Collapse @bind-Open="Open" Label="Controlled collapse">
+    Hello world!
+</Collapse>
+
+<Button OnClick="() => { Open = !Open; }">
+    @if (Open)
+    {
+        <span>Close</span>
+    }
+    else
+    {
+        <span>Open</span>
+    }
+</Button>
+
+@code {
+    private bool Open { get; set; } = false;
+}

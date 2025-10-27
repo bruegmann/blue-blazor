@@ -3,7 +3,7 @@ using Microsoft.JSInterop;
 
 namespace BlueBlazor.Internals.InlineEditParts;
 
-public partial class ReadView
+public partial class ReadView : ComponentBase
 {
     [Inject]
     private IJSRuntime JSRuntime { get; set; } = default!;

@@ -32,10 +32,10 @@
                                 <IconForActive>
                                     @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
                                                             (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
-                    </IconForActive>
+                                </IconForActive>
 
                                 <AfterLabelContent>
-                        @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
                                     {
                                         <span class="badge bg-primary ms-1 mt-1">New</span>
                                     }
@@ -62,10 +62,10 @@
                                 <IconForActive>
                                     @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
                                                             (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
-                    </IconForActive>
+                                </IconForActive>
 
                                 <AfterLabelContent>
-                        @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
                                     {
                                         <span class="badge bg-primary ms-1 mt-1">New</span>
                                     }
@@ -134,7 +134,7 @@
 
     async Task loadPagesData()
     {
-        var json = await Http.GetStringAsync("data/pages-data.json?v=6");
+        var json = await Http.GetStringAsync("data/pages-data.json?v=7");
         componentPageUrls = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(json);
     }
 
@@ -209,7 +209,7 @@ Icon = @<BiSquare /> }
 Icon = @<BiMenuApp />, IsExperimental = true }
 },
 {"Collapse", new() {
-Icon = @<BiCardHeading /> }
+Icon = @<BiCardHeading />, IsUpdate = true }
 },
 {"Dropdown", new() {
 Icon = @<BiMenuDown /> }
@@ -228,15 +228,18 @@ Icon = @<BiListOl />, IsNew = true }
 },
 {"Field group", new() {
 Icon = @<BiCardHeading />, IsNew = true }
+},
+{"Odometer", new() {
+Icon = @<Bi9Square />, IsNew = true }
 } };
-RenderFragment defaultIcon = @<BiFileCode />;
+        RenderFragment defaultIcon = @<BiFileCode />;
 
 class ComponentIcon
-    {
-        public RenderFragment Icon { get; set; } = @<BiFileCode />;
-        public RenderFragment? IconForActive { get; set; }
-        public bool IsNew { get; set; } = false;
-        public bool IsUpdate { get; set; } = false;
-        public bool IsExperimental { get; set; } = false;
-    }
+{
+public RenderFragment Icon { get; set; } = @<BiFileCode />;
+public RenderFragment? IconForActive { get; set; }
+public bool IsNew { get; set; } = false;
+public bool IsUpdate { get; set; } = false;
+public bool IsExperimental { get; set; } = false;
+}
 }
