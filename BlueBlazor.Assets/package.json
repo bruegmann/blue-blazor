@@ -7,7 +7,7 @@
         "sass:TuiEditor": "sass --load-path=. --style=compressed --quiet-deps ./src/TuiEditor.razor.scss:../BlueBlazor/Components/TuiEditor/TuiEditor.razor.css",
         "sass:docs": "sass --load-path=. --style=compressed --quiet-deps ./src/docs.scss:../BlueBlazor.Docs/wwwroot/css/docs.css",
         "sass": "npm run sass:TuiEditor && npm run sass:docs",
-        "build": "node ./esbuild.config.mjs && node copy.mjs && npm run sass",
+        "build": "node ./esbuild.config.mjs && node scripts/copy.mjs && npm run sass",
         "clean": "rimraf ./dist"
     },
     "keywords": [],
@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "@awesome.me/webawesome": "^3.0.0-beta.4",
-        "blue-web": "^1.17.8",
+        "blue-web": "^1.19.0",
         "monaco-editor": "^0.54.0"
     }
 }

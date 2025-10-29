@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace BlueBlazor.Services;
@@ -83,7 +84,8 @@ public class DialogService
             InputType = inputType
         }, new System.Text.Json.JsonSerializerOptions
         {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         });
     #endregion
 }

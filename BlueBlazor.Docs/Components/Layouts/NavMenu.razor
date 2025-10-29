@@ -6,12 +6,12 @@
 <ul class="list-unstyled d-flex flex-column">
     <li>
         <MenuItem Label="Home" Href="" IsActive="@isActive("", true)">
-            <Icon>
-                <BiHouse />
-            </Icon>
-            <IconForActive>
-                <BiHouseFill />
-            </IconForActive>
+        <Icon>
+            <BiHouse />
+        </Icon>
+        <IconForActive>
+            <BiHouseFill />
+        </IconForActive>
         </MenuItem>
     </li>
 
@@ -26,28 +26,28 @@
                     {
                         <li>
                             <MenuItem Label="@item.Key" Href="@(item.Value + "/")" IsActive="@isActive(item.Value + "/")">
-                                <Icon>
-                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
-                                </Icon>
-                                <IconForActive>
-                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
-                                                            (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
-                    </IconForActive>
+                            <Icon>
+                                @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
+                            </Icon>
+                            <IconForActive>
+                                @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
+                                                    (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
+                            </IconForActive>
 
-                                <AfterLabelContent>
-                        @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
-                                    {
-                                        <span class="badge bg-primary ms-1 mt-1">New</span>
-                                    }
-                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
-                                    {
-                                        <span class="badge bg-info ms-1 mt-1">Update</span>
-                                    }
-                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
-                                    {
-                                        <span class="badge bg-warning ms-1 mt-1">Experimental</span>
-                                    }
-                                </AfterLabelContent>
+                            <AfterLabelContent>
+                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
+                                {
+                                    <span class="badge bg-primary ms-1 mt-1">New</span>
+                                }
+                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
+                                {
+                                    <span class="badge bg-info ms-1 mt-1">Update</span>
+                                }
+                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
+                                {
+                                    <span class="badge bg-warning ms-1 mt-1">Experimental</span>
+                                }
+                            </AfterLabelContent>
                             </MenuItem>
                         </li>
                     }
@@ -56,28 +56,28 @@
                     {
                         <li class="ms-3 border-start">
                             <MenuItem Label="@item.Key" Href="@(item.Value + "/")" IsActive="@isActive(item.Value + "/")">
-                                <Icon>
-                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
-                                </Icon>
-                                <IconForActive>
-                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
-                                                            (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
-                    </IconForActive>
+                            <Icon>
+                                @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
+                            </Icon>
+                            <IconForActive>
+                                @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
+                                                    (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
+                            </IconForActive>
 
-                                <AfterLabelContent>
-                        @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
-                                    {
-                                        <span class="badge bg-primary ms-1 mt-1">New</span>
-                                    }
-                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
-                                    {
-                                        <span class="badge bg-info ms-1 mt-1">Update</span>
-                                    }
-                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
-                                    {
-                                        <span class="badge bg-warning ms-1 mt-1">Experimental</span>
-                                    }
-                                </AfterLabelContent>
+                            <AfterLabelContent>
+                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
+                                {
+                                    <span class="badge bg-primary ms-1 mt-1">New</span>
+                                }
+                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
+                                {
+                                    <span class="badge bg-info ms-1 mt-1">Update</span>
+                                }
+                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
+                                {
+                                    <span class="badge bg-warning ms-1 mt-1">Experimental</span>
+                                }
+                            </AfterLabelContent>
                             </MenuItem>
                         </li>
                     }
@@ -91,9 +91,9 @@
         <ul class="list-unstyled">
             <li>
                 <MenuItem Href="llms.txt" Label="llms.txt">
-                    <Icon>
-                        <BiBodyText />
-                    </Icon>
+                <Icon>
+                    <BiBodyText />
+                </Icon>
                 </MenuItem>
             </li>
         </ul>
@@ -134,7 +134,7 @@
 
     async Task loadPagesData()
     {
-        var json = await Http.GetStringAsync("data/pages-data.json?v=8");
+        var json = await Http.GetStringAsync("data/pages-data.json?v=7");
         componentPageUrls = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(json);
     }
 
@@ -209,7 +209,7 @@ Icon = @<BiSquare /> }
 Icon = @<BiMenuApp />, IsExperimental = true }
 },
 {"Collapse", new() {
-Icon = @<BiCardHeading /> }
+Icon = @<BiCardHeading />, IsUpdate = true }
 },
 {"Dropdown", new() {
 Icon = @<BiMenuDown /> }
@@ -228,6 +228,9 @@ Icon = @<BiListOl />, IsNew = true }
 },
 {"Field group", new() {
 Icon = @<BiCardHeading />, IsNew = true }
+},
+{"Odometer", new() {
+Icon = @<Bi9Square />, IsNew = true }
 } };
 RenderFragment defaultIcon = @<BiFileCode />;
 
