@@ -36,8 +36,8 @@ copyDirectory(
     path.join(__dirname, "../dist", "blue-web")
 )
 copyDirectory(
-    path.join(__dirname, "node_modules", "monaco-editor", "min"),
-    path.join(__dirname, "dist", "monaco-editor", "min")
+    path.join(__dirname, "../node_modules", "monaco-editor", "min"),
+    path.join(__dirname, "../dist", "monaco-editor", "min")
 )
 
 fs.copyFile(
