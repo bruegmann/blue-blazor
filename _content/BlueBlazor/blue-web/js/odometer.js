@@ -3,7 +3,7 @@ function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" 
 function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 class Odometer extends HTMLElement {
   static get observedAttributes() {
-    return ["value"];
+    return ["value", "max"];
   }
   constructor() {
     super();
@@ -26,27 +26,42 @@ class Odometer extends HTMLElement {
     const wrapper = document.createElement("span");
     wrapper.classList.add("numbers");
     wrapper.setAttribute("aria-hidden", "true");
-    for (let i = 0; i <= 9; i++) {
-      const s = document.createElement("span");
-      s.textContent = String(i);
-      wrapper.appendChild(s);
-    }
-    const plus = document.createElement("span");
-    plus.textContent = "9+";
-    wrapper.appendChild(plus);
     this.shadowRoot.append(style, wrapper);
     this.wrapper = wrapper;
+    this.rebuildNumbers();
+  }
+  rebuildNumbers() {
+    this.wrapper.innerHTML = "";
+    const max = this.max;
+    for (let i = 0; i <= max; i++) {
+      const s = document.createElement("span");
+      s.textContent = String(i);
+      this.wrapper.appendChild(s);
+    }
+    const plus = document.createElement("span");
+    plus.textContent = "".concat(max, "+");
+    this.wrapper.appendChild(plus);
+
+    // Aktuellen Wert neu anwenden
+    if (this._initialized) {
+      this.updateValue(this.value);
+    }
   }
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "value" && newValue !== oldValue && this._initialized) {
-      this.updateValue(parseInt(newValue !== null && newValue !== void 0 ? newValue : "0", 10));
+    if (newValue !== oldValue && this._initialized) {
+      if (name === "value") {
+        this.updateValue(parseInt(newValue !== null && newValue !== void 0 ? newValue : "0", 10));
+      } else if (name === "max") {
+        this.rebuildNumbers();
+      }
     }
   }
   updateValue(value) {
-    const index = value > 9 ? 10 : Math.max(0, value);
+    const max = this.max;
+    const index = value > max ? max + 1 : Math.max(0, value);
     const height = this.wrapper.getBoundingClientRect().height || 16;
     this.wrapper.style.transform = "translateY(-".concat(index * height, "px)");
-    const displayValue = value > 9 ? "9+" : "".concat(value);
+    const displayValue = value > max ? "".concat(max, "+") : "".concat(value);
     this.setAttribute("aria-label", displayValue);
   }
   set value(value) {
@@ -55,11 +70,24 @@ class Odometer extends HTMLElement {
       this.setAttribute("value", String(value));
       if (this._initialized) {
         this.updateValue(value);
+        this.dispatchEvent(new CustomEvent("change", {
+          detail: {
+            value
+          },
+          bubbles: true,
+          composed: true
+        }));
       }
     }
   }
   get value() {
     return parseInt(this.getAttribute("value") || "0", 10) || 0;
+  }
+  set max(value) {
+    this.setAttribute("max", String(value));
+  }
+  get max() {
+    return parseInt(this.getAttribute("max") || "9", 10) || 9;
   }
 }
 if (!customElements.get("bl-odometer")) {
