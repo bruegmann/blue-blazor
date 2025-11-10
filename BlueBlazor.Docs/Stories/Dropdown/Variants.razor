@@ -1,0 +1,87 @@
+﻿@{
+    /*docs {
+    "description": "You can customize the dropdown button using `Variant`, `Color` and `Size`. To have full control, set `Variant` to `Variant.None` and use the `HeaderClass` property."
+    } */
+}
+@using BlueBlazor.Shared
+
+<Dropdown Label="Default">
+    <MenuItem Label="First element">
+        <Icon>☀️</Icon>
+    </MenuItem>
+    <MenuItem Label="Second element">
+        <Icon>🚀</Icon>
+    </MenuItem>
+</Dropdown>
+
+<Dropdown Label="Filled Primary" Variant="Variant.Filled" Color="Color.Primary">
+    <MenuItem Label="First element">
+        <Icon>☀️</Icon>
+    </MenuItem>
+    <MenuItem Label="Second element">
+        <Icon>🚀</Icon>
+    </MenuItem>
+</Dropdown>
+
+<Dropdown Label="Outline Danger" Variant="Variant.Outline" Color="Color.Danger">
+    <MenuItem Label="First element">
+        <Icon>☀️</Icon>
+    </MenuItem>
+    <MenuItem Label="Second element">
+        <Icon>🚀</Icon>
+    </MenuItem>
+</Dropdown>
+
+<Dropdown Label="Plain Success" Variant="Variant.Plain" Color="Color.Success">
+    <MenuItem Label="First element">
+        <Icon>☀️</Icon>
+    </MenuItem>
+    <MenuItem Label="Second element">
+        <Icon>🚀</Icon>
+    </MenuItem>
+</Dropdown>
+
+<Dropdown Label="Link" Variant="Variant.Link">
+    <MenuItem Label="First element">
+        <Icon>☀️</Icon>
+    </MenuItem>
+    <MenuItem Label="Second element">
+        <Icon>🚀</Icon>
+    </MenuItem>
+</Dropdown>
+
+<Dropdown Label="Link Warning" Variant="Variant.Link" Color="Color.Warning">
+    <MenuItem Label="First element">
+        <Icon>☀️</Icon>
+    </MenuItem>
+    <MenuItem Label="Second element">
+        <Icon>🚀</Icon>
+    </MenuItem>
+</Dropdown>
+
+<Dropdown Label="Large" Size="Size.Lg" Variant="Variant.Filled" Color="Color.Primary">
+    <MenuItem Label="First element">
+        <Icon>☀️</Icon>
+    </MenuItem>
+    <MenuItem Label="Second element">
+        <Icon>🚀</Icon>
+    </MenuItem>
+</Dropdown>
+
+<Dropdown Label="Small" Sm Variant="Variant.Filled" Color="Color.Primary">
+    <MenuItem Label="First element">
+        <Icon>☀️</Icon>
+    </MenuItem>
+    <MenuItem Label="Second element">
+        <Icon>🚀</Icon>
+    </MenuItem>
+</Dropdown>
+
+<Dropdown Label="Custom" Variant="Variant.None" HeaderClass="bg-body-secondary">
+    <MenuItem Label="First element">
+        <Icon>☀️</Icon>
+    </MenuItem>
+    <MenuItem Label="Second element">
+        <Icon>🚀</Icon>
+    </MenuItem>
+</Dropdown>
