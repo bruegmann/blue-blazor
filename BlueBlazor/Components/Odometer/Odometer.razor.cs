@@ -11,4 +11,7 @@ public partial class Odometer : BlueComponentBase
 {
     [Parameter]
     public int Value { get; set; }
+
+    [Parameter]
+    public int Max { get; set; } = 9;
 }
