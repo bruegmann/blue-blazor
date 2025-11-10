@@ -6,13 +6,13 @@
     if (!window.require) {
         await new Promise((resolve) => {
             const script = document.createElement("script")
-            script.src = "/_content/BlueBlazor/monaco-editor/min/vs/loader.js"
+            script.src = "./_content/BlueBlazor/monaco-editor/min/vs/loader.js"
             script.onload = resolve
             document.body.appendChild(script)
         })
     }
     window.require.config({
-        paths: { vs: "/_content/BlueBlazor/monaco-editor/min/vs" }
+        paths: { vs: "./_content/BlueBlazor/monaco-editor/min/vs" }
     })
 
     window.require(["vs/editor/editor.main"], () => {
