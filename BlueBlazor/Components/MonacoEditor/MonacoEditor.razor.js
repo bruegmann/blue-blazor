@@ -11,11 +11,17 @@
             document.body.appendChild(script)
         })
     }
+    const lang = document.documentElement.getAttribute("lang") || "en"
     window.require.config({
-        paths: { vs: "./_content/BlueBlazor/monaco-editor/min/vs" }
+        paths: { vs: "./_content/BlueBlazor/monaco-editor/min/vs" },
+        "vs/nls": {
+            availableLanguages: {
+                "*": lang
+            }
+        }
     })
 
-    window.require(["vs/editor/editor.main"], () => {
+    window.require(["./vs/editor/editor.main"], () => {
         resolve(window.monaco)
     })
 })
@@ -31,6 +37,10 @@ export async function Initialize(
     readonly = false
 ) {
     await MonacoProm
+    console.log("init")
+    if (monaco.editor.setLocale) {
+        monaco.editor.setLocale("de")
+    }
     const editor = monaco.editor.create(element, {
         value: initialValue,
         language,
