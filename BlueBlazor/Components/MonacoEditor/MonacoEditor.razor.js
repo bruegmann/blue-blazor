@@ -1,33 +1,33 @@
-﻿const MonacoProm = new Promise(async (resolve) => {
+﻿const MonacoProm = new Promise((resolve) => {
     if (window.monaco) {
         resolve(window.monaco)
         return
     }
-    if (!window.require) {
-        await new Promise((resolve, reject) => {
-            const script = document.createElement("script")
-            script.src = "./_content/BlueBlazor/monaco-editor/min/vs/loader.js"
-            script.onload = resolve
-            script.onerror = (e) => {
-                console.error("Failed to load Monaco Editor loader script.")
-                reject(e)
+    const afterLoader = () => {
+        const lang = document.documentElement.getAttribute("lang") || "en"
+        window.require.config({
+            paths: { vs: "./_content/BlueBlazor/monaco-editor/min/vs" },
+            "vs/nls": {
+                availableLanguages: {
+                    "*": lang
+                }
             }
-            document.body.appendChild(script)
+        })
+
+        window.require(["./vs/editor/editor.main"], () => {
+            resolve(window.monaco)
         })
     }
-    const lang = document.documentElement.getAttribute("lang") || "en"
-    window.require.config({
-        paths: { vs: "./_content/BlueBlazor/monaco-editor/min/vs" },
-        "vs/nls": {
-            availableLanguages: {
-                "*": lang
-            }
-        }
-    })
-
-    window.require(["./vs/editor/editor.main"], () => {
-        resolve(window.monaco)
-    })
+    if (!window.require) {
+        new Promise((resolveLoader) => {
+            const script = document.createElement("script")
+            script.src = "./_content/BlueBlazor/monaco-editor/min/vs/loader.js"
+            script.onload = resolveLoader
+            document.body.appendChild(script)
+        }).then(afterLoader)
+    } else {
+        afterLoader()
+    }
 })
 const monacoCollection = {}
 
@@ -41,7 +41,6 @@ export async function Initialize(
     readonly = false
 ) {
     await MonacoProm
-    console.log("init")
     if (monaco.editor.setLocale) {
         monaco.editor.setLocale("de")
     }
