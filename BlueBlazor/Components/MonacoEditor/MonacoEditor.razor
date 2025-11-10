@@ -2,6 +2,6 @@
 @inherits BlueComponentBase
 
 
-<div style="height: @Height">
+<div class="@Class" style="@(new StyleBuilder(Style).AddStyle("height", Height).Build())" @ref="@_element" @attributes="@AdditionalAttributes" />
     <div class="h-100" @ref="@_element" @attributes="@AdditionalAttributes" />
 </div>
