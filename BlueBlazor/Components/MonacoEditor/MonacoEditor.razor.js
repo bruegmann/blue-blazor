@@ -4,10 +4,14 @@
         return
     }
     if (!window.require) {
-        await new Promise((resolve) => {
+        await new Promise((resolve, reject) => {
             const script = document.createElement("script")
             script.src = "./_content/BlueBlazor/monaco-editor/min/vs/loader.js"
             script.onload = resolve
+            script.onerror = (e) => {
+                console.error("Failed to load Monaco Editor loader script.")
+                reject(e)
+            }
             document.body.appendChild(script)
         })
     }

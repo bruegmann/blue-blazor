@@ -7,11 +7,12 @@ namespace BlueBlazor.Components;
 /// A Blazor component wrapper for the Monaco Editor (the code editor that powers VS Code).
 /// Provides two-way binding, language selection, and integration with JavaScript for advanced editing features.
 /// </summary>
-public partial class MonacoEditor : BlueComponentBase, IDisposable
+public partial class MonacoEditor : BlueComponentBase, IAsyncDisposable
 {
     private ElementReference _element;
     private IJSObjectReference? _module;
-    private string _id = Guid.NewGuid().ToString();
+    DotNetObjectReference<MonacoEditor>? _dotNetRef;
+    private readonly string _id = Guid.NewGuid().ToString();
 
     [Inject]
     private IJSRuntime JSRuntime { get; set; } = default!;
@@ -50,15 +51,7 @@ public partial class MonacoEditor : BlueComponentBase, IDisposable
     /// </summary>
     [Parameter]
     public string Height { get; set; } = "200px";
-
-
-    /// <summary>
-    /// Event triggered when the user presses Ctrl+Enter (or Cmd+Enter on Mac) inside the editor.
-    /// Useful for "apply" or "submit" actions.
-    /// </summary>
-    [Parameter]
-    public EventCallback OnApply { get; set; }
-
+  
     protected override void OnInitialized()
     {
         _value = Value;
@@ -94,7 +87,8 @@ public partial class MonacoEditor : BlueComponentBase, IDisposable
     {
         if (_module is not null)
         {
-            await _module.InvokeVoidAsync("Initialize", _id, element, DotNetObjectReference.Create(this), Value, Language, Theme, ReadOnly);
+            _dotNetRef = DotNetObjectReference.Create(this);
+            await _module.InvokeVoidAsync("Initialize", _id, element, _dotNetRef, Value, Language, Theme, ReadOnly);
         }
     }
 
@@ -110,23 +104,14 @@ public partial class MonacoEditor : BlueComponentBase, IDisposable
     }
 
     /// <summary>
-    /// Called from JS when the user presses Ctrl+Enter (or Cmd+Enter).
-    /// Triggers the OnApply event.
-    /// </summary>
-    [JSInvokable]
-    public async Task InvokeApply()
-    {
-        await OnApply.InvokeAsync();
-    }
-
-    /// <summary>
     /// Cleans up the Monaco Editor instance via JS interop.
     /// </summary>
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
         if (_module is not null)
         {
-            _module.InvokeVoidAsync("Destroy", _id);
+            await _module.InvokeVoidAsync("Destroy", _id);
+            _dotNetRef?.Dispose();
         }
     }
 }
