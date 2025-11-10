@@ -41,7 +41,6 @@ export async function Initialize(
     readonly = false
 ) {
     await MonacoProm
-    console.log("init")
     if (monaco.editor.setLocale) {
         monaco.editor.setLocale("de")
     }
