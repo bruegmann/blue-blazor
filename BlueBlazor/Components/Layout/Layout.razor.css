@@ -1,24 +1,22 @@
 @media (pointer: fine) and (hover: hover) {
-    /* Scrollbar für die Sidebar standardmäßig ausblenden */
     .blue-layout-side {
         overflow-y: auto;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
     }
 
-        /* Chrome, Safari und Opera */
         .blue-layout-side::-webkit-scrollbar {
             width: 0;
             display: none;
         }
 
-        /* Scrollbar beim Hover anzeigen */
         .blue-layout-side:hover {
-            scrollbar-width: thin; /* Firefox */
-            -ms-overflow-style: auto; /* IE and Edge */
+            scrollbar-width: thin;
+            -ms-overflow-style: auto;
+            mask-image: none;
         }
 
-            /* Chrome, Safari und Opera - beim Hover */
             .blue-layout-side:hover::-webkit-scrollbar {
                 width: 8px;
                 display: block;
