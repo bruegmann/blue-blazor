@@ -1,17 +1,12 @@
-﻿@using System.Text.Json
-@inject HttpClient Http
-@inject NavigationManager NavigationManager
-
-
-<ul class="list-unstyled d-flex flex-column">
+﻿<ul class="list-unstyled d-flex flex-column">
     <li>
-        <MenuItem Label="Home" Href="" IsActive="@isActive("", true)">
-        <Icon>
-            <BiHouse />
-        </Icon>
-        <IconForActive>
-            <BiHouseFill />
-        </IconForActive>
+        <MenuItem Label="Home" Href="" IsActive="@IsActive("", true)">
+            <Icon>
+                <BiHouse />
+            </Icon>
+            <IconForActive>
+                <BiHouseFill />
+            </IconForActive>
         </MenuItem>
     </li>
 
@@ -25,29 +20,29 @@
                     @foreach (var item in group.Value.Where(i => i.Key == group.Key))
                     {
                         <li>
-                            <MenuItem Label="@item.Key" Href="@(item.Value + "/")" IsActive="@isActive(item.Value + "/")">
-                            <Icon>
-                                @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
-                            </Icon>
-                            <IconForActive>
-                                @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
-                                                    (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
-                            </IconForActive>
+                            <MenuItem Label="@item.Key" Href="@(item.Value + "/")" IsActive="@IsActive(item.Value + "/")">
+                                <Icon>
+                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
+                                </Icon>
+                                <IconForActive>
+                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
+                                                            (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
+                                </IconForActive>
 
-                            <AfterLabelContent>
-                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
-                                {
-                                    <span class="badge bg-primary ms-1 mt-1">New</span>
-                                }
-                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
-                                {
-                                    <span class="badge bg-info ms-1 mt-1">Update</span>
-                                }
-                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
-                                {
-                                    <span class="badge bg-warning ms-1 mt-1">Experimental</span>
-                                }
-                            </AfterLabelContent>
+                                <AfterLabelContent>
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
+                                    {
+                                        <span class="badge bg-primary ms-1 mt-1">New</span>
+                                    }
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
+                                    {
+                                        <span class="badge bg-info ms-1 mt-1">Update</span>
+                                    }
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
+                                    {
+                                        <span class="badge bg-warning ms-1 mt-1">Experimental</span>
+                                    }
+                                </AfterLabelContent>
                             </MenuItem>
                         </li>
                     }
@@ -55,29 +50,29 @@
                     @foreach (var item in group.Value.Where(i => i.Key != group.Key))
                     {
                         <li class="ms-3 border-start">
-                            <MenuItem Label="@item.Key" Href="@(item.Value + "/")" IsActive="@isActive(item.Value + "/")">
-                            <Icon>
-                                @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
-                            </Icon>
-                            <IconForActive>
-                                @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
-                                                    (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
-                            </IconForActive>
+                            <MenuItem Label="@item.Key" Href="@(item.Value + "/")" IsActive="@IsActive(item.Value + "/")">
+                                <Icon>
+                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
+                                </Icon>
+                                <IconForActive>
+                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
+                                                            (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
+                                </IconForActive>
 
-                            <AfterLabelContent>
-                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
-                                {
-                                    <span class="badge bg-primary ms-1 mt-1">New</span>
-                                }
-                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
-                                {
-                                    <span class="badge bg-info ms-1 mt-1">Update</span>
-                                }
-                                @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
-                                {
-                                    <span class="badge bg-warning ms-1 mt-1">Experimental</span>
-                                }
-                            </AfterLabelContent>
+                                <AfterLabelContent>
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
+                                    {
+                                        <span class="badge bg-primary ms-1 mt-1">New</span>
+                                    }
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
+                                    {
+                                        <span class="badge bg-info ms-1 mt-1">Update</span>
+                                    }
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
+                                    {
+                                        <span class="badge bg-warning ms-1 mt-1">Experimental</span>
+                                    }
+                                </AfterLabelContent>
                             </MenuItem>
                         </li>
                     }
@@ -91,158 +86,67 @@
         <ul class="list-unstyled">
             <li>
                 <MenuItem Href="llms.txt" Label="llms.txt">
-                <Icon>
-                    <BiBodyText />
-                </Icon>
+                    <Icon>
+                        <BiBodyText />
+                    </Icon>
                 </MenuItem>
             </li>
         </ul>
     </li>
 </ul>
 
-
-
 @code {
-    public void Dispose()
-    {
-        NavigationManager.LocationChanged -= handleLocationChanged;
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        NavigationManager.LocationChanged += handleLocationChanged;
-        await loadPagesData();
-    }
-
-    void handleLocationChanged(object? sender, LocationChangedEventArgs e)
-    {
-        StateHasChanged();
-    }
-
-    bool isActive(string href, bool exact = false)
-    {
-        Uri uri = NavigationManager.ToAbsoluteUri(href);
-        string uriString = uri.ToString();
-
-        if (exact ? (NavigationManager.Uri == uriString) : (NavigationManager.Uri.StartsWith(uriString)))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    async Task loadPagesData()
-    {
-        var json = await Http.GetStringAsync("data/pages-data.json?v=7");
-        componentPageUrls = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(json);
-    }
-
-    Dictionary<string, Dictionary<string, string>>? componentPageUrls;
     Dictionary<string, ComponentIcon> componentIcons = new()
-{
-{"Action menu", new() {
-Icon = @<BiMenuButtonWide />,
-IconForActive = @<BiMenuButtonWideFill />}
-},
-{"Alert section", new() {
-Icon = @<BiExclamationDiamond />,
-IconForActive = @<BiExclamationDiamondFill />}
-},
-{"Button", new() {
-Icon = @<BiPlayBtn />,
-IconForActive = @<BiPlayBtnFill />}
-},
-{"Button or a", new() {
-Icon = @<BiLink45deg />}
-},
-{"Chevron", new() {
-Icon = @<BiChevronRight />}
-},
-{"Heading", new() {
-Icon = @<BiTypeH1 />}
-},
-{"Intro", new() {
-Icon = @<BiPostcard />,
-IconForActive = @<BiPostcardFill />, IsUpdate = true}
-},
-{"Layout", new() {
-Icon = @<BiLayoutTextWindowReverse />}
-},
-{"Qr code gen", new() {
-Icon = @<BiQrCode />}
-},
-{"Menu item", new() {
-Icon = @<BiApp />
-} },
-{"Totp input", new() {
-Icon = @<BiInputCursorText />}
-},
-{"Tab", new() {
-Icon = @<BiSegmentedNav />}
-},
-{"Tabs", new() {
-Icon = @<BiSegmentedNav />}
-},
-{"Simple layout", new() {
-Icon = @<BiWindow /> }
-},
-{"Inline edit", new() {
-Icon = @<BiCursorText /> }
-},
-{"Tui editor", new() {
-Icon = @<BiPencilSquare /> }
-},
-{"Modal dialog", new() {
-Icon = @<BiWindowStack />}
-},
-{"Monaco editor", new() {
-Icon = @<BiFileCode />, IsNew = true}
-},
-{"Offcanvas dialog", new() {
-Icon = @<BiWindowStack />  }
-},
-{"Dialog opener", new() {
-Icon = @<BiArrowUpRightSquare /> }
-},
-{"Dialog provider", new() {
-Icon = @<BiSquare /> }
-},
-{"Actions", new() {
-Icon = @<BiMenuApp />, IsExperimental = true }
-},
-{"Collapse", new() {
-Icon = @<BiCardHeading />, IsUpdate = true }
-},
-{"Dropdown", new() {
-Icon = @<BiMenuDown /> }
-},
-{"Text input", new() {
-Icon = @<BiInputCursor />, IsUpdate = true }
-},
-{"Tooltip", new() {
-Icon = @<BiChatSquareText /> }
-},
-{"Create id", new() {
-Icon = @<BiBracesAsterisk /> }
-},
-{"Field groups", new() {
-Icon = @<BiListOl />, IsNew = true }
-},
-{"Field group", new() {
-Icon = @<BiCardHeading />, IsNew = true }
-},
-{"Odometer", new() {
-Icon = @<Bi9Square />, IsNew = true }
-} };
-RenderFragment defaultIcon = @<BiFileCode />;
+    {
+        {"Action menu", new(@<BiMenuButtonWide />, @<BiMenuButtonWideFill />)},
+        {"Alert section", new(@<BiExclamationDiamond />, @<BiExclamationDiamondFill />)},
+        {"Button", new(@<BiPlayBtn />, @<BiPlayBtnFill />)},
+        {"Button or a", new(@<BiLink45deg />)},
+        {"Chevron", new(@<BiChevronRight />)},
+        {"Heading", new(@<BiTypeH1 />)},
+        {"Intro", new(@<BiPostcard />, @<BiPostcardFill />)},
+        {"Layout", new(@<BiLayoutTextWindowReverse />)},
+        {"Qr code gen", new(@<BiQrCode />)},
+        {"Menu item", new(@<BiApp />)},
+        {"Totp input", new(@<BiInputCursorText />)},
+        {"Tab", new(@<BiSegmentedNav />)},
+        {"Tabs", new(@<BiSegmentedNav />)},
+        {"Simple layout", new(@<BiWindow />)},
+        {"Inline edit", new(@<BiCursorText />)},
+        {"Tui editor", new(@<BiPencilSquare />)},
+        {"Modal dialog", new(@<BiWindowStack />)},
+        {"Monaco editor", new(@<BiFileCode />, isNew: true)},
+        {"Offcanvas dialog", new(@<BiWindowStack />)},
+        {"Dialog opener", new(@<BiArrowUpRightSquare />)},
+        {"Dialog provider", new(@<BiSquare />)},
+        {"Actions", new(@<BiMenuApp />, isExperimental: true)},
+        {"Collapse", new(@<BiCardHeading />)},
+        {"Dropdown", new(@<BiMenuDown />)},
+        {"Text input", new(@<BiInputCursor />)},
+        {"Tooltip", new(@<BiChatSquareText />)},
+        {"Create id", new(@<BiBracesAsterisk />)},
+        {"Field groups", new(@<BiListOl />)},
+        {"Field group", new(@<BiCardHeading />)},
+        {"Odometer", new(@<Bi9Square />) { IsNew = true }}
+    };
+    RenderFragment defaultIcon = @<BiFileCode />;
 
-class ComponentIcon
+    class ComponentIcon
     {
         public RenderFragment Icon { get; set; } = @<BiFileCode />;
         public RenderFragment? IconForActive { get; set; }
         public bool IsNew { get; set; } = false;
         public bool IsUpdate { get; set; } = false;
         public bool IsExperimental { get; set; } = false;
+
+        public ComponentIcon(RenderFragment? icon = null, RenderFragment? iconForActive = null,
+            bool isNew = false, bool isUpdate = false, bool isExperimental = false)
+        {
+            if (icon != null) Icon = icon;
+            IconForActive = iconForActive;
+            IsNew = isNew;
+            IsUpdate = isUpdate;
+            IsExperimental = isExperimental;
+        }
     }
 }
