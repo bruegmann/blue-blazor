@@ -14,7 +14,7 @@ const folder = path.resolve(
     "..",
     "bin",
     "Release",
-    "net8.0",
+    "net10.0",
     "browser-wasm",
     "publish",
     "wwwroot"
