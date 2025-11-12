@@ -30,6 +30,7 @@
 
 	<PropertyGroup>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1701;1702;8669;1591;1816</NoWarn>
 	</PropertyGroup>
 
 	<Target Name="PostPublishScript" AfterTargets="AfterPublish">
