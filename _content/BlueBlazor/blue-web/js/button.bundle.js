@@ -1,1 +1,0 @@
-(()=>{"use strict";window.blueWeb=window.blueWeb||{},window.blueWeb.button={enhance:function(i){var e;void 0===i&&(i=null===(e=document.currentScript)||void 0===e?void 0:e.parentNode),i&&i.classList.contains("icon-link")&&i.querySelectorAll("svg").forEach((i=>{i.setAttribute("aria-hidden","true"),i.classList.contains("bi")||i.classList.add("bi")}))}}})();
