@@ -134,7 +134,7 @@ jobs:
               if: steps.compare.outputs.changed == 'true'
               uses: actions/setup-dotnet@v4
               with:
-                  dotnet-version: "9.0.x"
+                  dotnet-version: "10.0.x"
                   dotnet-quality: "ga"
 
             - name: Restore
@@ -176,4 +176,3 @@ jobs:
                       --no-symbols || { echo "Fehler beim Push $file"; exit 1; };
                   done
                   echo "NuGet Push abgeschlossen."
-
