@@ -141,4 +141,7 @@
   <data name="ToolbarWithButtonsAndButtonGroups" xml:space="preserve">
     <value>Toolbar with buttons and button groups</value>
   </data>
+  <data name="ToggleDetails" xml:space="preserve">
+    <value>Toggle details</value>
+  </data>
 </root>

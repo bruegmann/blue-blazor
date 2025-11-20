@@ -1,9 +1,10 @@
 ﻿@using Microsoft.Extensions.Localization
 @namespace BlueBlazor.Components
+@inherits BlueComponentBase
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
 <ButtonOrA @attributes="AdditionalAttributes" Disabled="@(Busy || _busy || Disabled)" ButtonType="@ButtonType"
-    OnClick="@HandleClick" Href="@Href" Target="@Target" Class="@_className" aria-label="@(LabelHidden ? Label : null)">
+           OnClick="@HandleClick" Href="@Href" Target="@Target" Class="@ClassValue" Style="@Style" PopoverTarget="@PopoverTarget" aria-label="@(LabelHidden ? Label : null)">
     @if (Busy || _busy)
     {
         <span class="spinner-border spinner-border-sm bi me-1" aria-hidden="true"></span>

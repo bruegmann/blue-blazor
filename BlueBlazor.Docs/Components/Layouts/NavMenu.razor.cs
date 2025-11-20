@@ -43,7 +43,7 @@ public partial class NavMenu : ComponentBase
 
     private async Task LoadPagesData()
     {
-        var json = await Http.GetStringAsync("data/pages-data.json?v=7");
+        var json = await Http.GetStringAsync("data/pages-data.json?v=8");
         componentPageUrls = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(json);
     }
 
