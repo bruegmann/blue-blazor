@@ -31,7 +31,9 @@
         }
         @if (!string.IsNullOrWhiteSpace(Label) && !LabelHidden)
         {
-            @L[Label]
+            <span class="text-truncate">
+                @L[Label]
+            </span>
         }
         @ChildContent
         @if (IconAfter != null)

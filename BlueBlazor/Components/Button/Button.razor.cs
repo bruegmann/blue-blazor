@@ -10,7 +10,6 @@ namespace BlueBlazor.Components;
 public partial class Button : BlueComponentBase
 {
     private bool _busy = false;
-    private string _className = "";
     private bool _success
     {
         get => Success;
@@ -113,6 +112,9 @@ public partial class Button : BlueComponentBase
     [Parameter]
     public EventCallback<bool> SuccessChanged { get; set; }
 
+    [Parameter]
+    public bool Active { get; set; } = false;
+
     protected override void OnParametersSet()
     {
         if (FilledPrimary)
@@ -169,5 +171,6 @@ public partial class Button : BlueComponentBase
             .AddClass("btn-sm", Sm)
             .AddClass("btn-lg", Lg)
             .AddClass("icon-link", Busy || _busy || IconBefore != null || IconAfter != null)
+            .AddClass("active", Active)
             .Build();
 }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlueBlazor.Components;
 
-public partial class MenuItemPopover : BlueComponentBase
+public partial class Popover : BlueComponentBase
 {
     private string? ClassValue => new CssBuilder("blue-anchored blue-anchored-fallback border rounded-4 shadow").AddClass(Class).Build();
 

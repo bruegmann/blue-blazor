@@ -1,0 +1,82 @@
+@namespace BlueBlazor.Components
+
+<div class="blue-menu-item-wrapper @(_id)">
+    <Button @attributes="AdditionalAttributes" draggable="@Draggable" OnClick="@HandleClick" Href="@Href"
+        Target="@Target" Busy="@Busy" Class="@_className" Disabled="@Disabled" Variant="Variant.None">
+        @if (Draggable && !HideDraggableIcon)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
+                className="bi bi-grip-vertical opacity-50" aria-hidden="true" viewBox="0 0 8 16">
+                <path
+                    d="M3.376 1.876c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1">
+                </path>
+            </svg>
+        }
+
+        @if (Icon != null)
+        {
+            <span class="blue-menu-item-icon @IconClass @(IconForActive != null ? "hasIconForActive" : "")"
+                aria-hidden="true">
+                @Icon
+            </span>
+        }
+
+        @if (IconForActive != null && IsActive)
+        {
+            <span class="blue-menu-item-icon iconForActive @IconClass" aria-hidden="true">
+                @IconForActive
+            </span>
+        }
+
+        @if (Label != null)
+        {
+            <span class="blue-menu-item-label text-truncate @LabelClass">
+                @Label
+            </span>
+        }
+
+        @AfterLabelContent
+
+        @if (HideChevronIcon != true && DropdownContent != null)
+        {
+            <Chevron Open="@_showDropdown" Mirrored="true"
+                Class="blue-menu-item-dropdown-toggle blue-menu-item-chevron ms-auto" PathClass="blue-sidebar-exception" />
+        }
+    </Button>
+
+    @if (_showDropdown)
+    {
+        @if (SupportOutside)
+        {
+            <Outside OnClickOutside="HandleClickOutside" IgnoreClasses="@(OutsideIgnoreClasses ?? new List<string> { _id })">
+                <div class="blue-menu-item-dropdown @DropdownClass" style="@DropdownStyle">
+                    @DropdownContent
+                    <script>
+                        (() => {
+                            const el = document.currentScript.parentNode
+                            if (el && el.getBoundingClientRect) {
+                                const rect = el.getBoundingClientRect()
+                                el.style.setProperty("--offset-top", rect.top + "px")
+                            }
+                        })()
+                    </script>
+                </div>
+            </Outside>
+        }
+        else
+        {
+            <div class="blue-menu-item-dropdown @DropdownClass" style="@DropdownStyle">
+                @DropdownContent
+                <script>
+                        (() => {
+                            const el = document.currentScript.parentNode
+                            if (el && el.getBoundingClientRect) {
+                                const rect = el.getBoundingClientRect()
+                                el.style.setProperty("--offset-top", rect.top + "px")
+                            }
+                        })()
+                </script>
+            </div>
+        }
+    }
+</div>
