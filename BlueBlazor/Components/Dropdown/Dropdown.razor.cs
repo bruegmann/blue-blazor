@@ -5,6 +5,8 @@ using Microsoft.JSInterop;
 namespace BlueBlazor.Components;
 
 /// <summary>
+/// @deprecated Use Popover component instead in combination with Button or MenuItem or another element.
+/// 
 /// A combination of [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API), [Anchor Positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning) and styles of Menu Item.
 /// In some browsers, Anchor Positioning doesn't work yet. If you want to support them, you need to implement a polyfill or fallback styles.
 /// </summary>

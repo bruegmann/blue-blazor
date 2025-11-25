@@ -1,3 +1,4 @@
+﻿using BlueBlazor.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -12,87 +13,49 @@ public partial class Collapse : BlueComponentBase, IAsyncDisposable
     private IJSObjectReference? _module;
     private DotNetObjectReference<Collapse>? _dotNetRef;
 
+    private bool HasVisualContent => IconBefore != null || IconAfter != null || (!string.IsNullOrEmpty(Label) && !LabelHidden) || SummaryContent != null;
+
+    private string? ClassValue => new CssBuilder("blue-collapse").AddClass(Class).Build();
+
+    private string? SummaryClassValue => new CssBuilder("d-flex btn blue-collapse-header blue-menu-item icon-link")
+        .AddClass("active", Active)
+        .AddClass("blue-btn-square", Square || !HasVisualContent).Build();
+
+    private string? IconClassValue => new CssBuilder("blue-collapse-chevron")
+        .AddClass("ms-auto", HasVisualContent).Build();
+
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
-    public bool Draggable { get; set; } = false;
-
-    /// <summary>
-    /// Extends class name of the dropdown menu.
-    /// </summary>
-    [Parameter]
-    public string? DropdownClass { get; set; }
-
-    /// <summary>
-    /// Extends style of the dropdown menu.
-    /// </summary>
-    [Parameter]
-    public string? DropdownStyle { get; set; }
+    public RenderFragment? IconBefore { get; set; }
 
     [Parameter]
-    public bool HideDraggableIcon { get; set; } = false;
-
-    /// <summary>
-    /// Hides chevron icon for dropdown.
-    /// </summary>
-    [Parameter]
-    public bool HideChevronIcon { get; set; } = false;
-
-    /// <summary>
-    /// By default, the chevron icon comes after the label and points to the left when closed.
-    /// Set this property and it will come before the label and point to the right when closed.
-    /// </summary>
-    [Parameter]
-    public bool ChevronIconBefore { get; set; } = false;
+    public RenderFragment? IconAfter { get; set; }
 
     [Parameter]
-    public RenderFragment? Icon { get; set; }
+    public RenderFragment? SummaryContent { get; set; }
 
-    /// <summary>
-    /// Alternative icon component when the MenuItem is active.
-    /// </summary>
-    [Parameter]
-    public RenderFragment? IconForActive { get; set; }
-
-    /// <summary>
-    /// Addition to class name of icon wrapper element.
-    /// </summary>
-    [Parameter]
-    public string? IconClass { get; set; }
-
-    /// <summary>
-    /// Label of the link.
-    /// </summary>
     [Parameter]
     public string? Label { get; set; }
 
     [Parameter]
-    public RenderFragment? AfterLabelContent { get; set; }
-
-    /// <summary>
-    /// Addition to class name of label wrapper element.
-    /// </summary>
-    [Parameter]
-    public string? LabelClass { get; set; }
-
-    /// <summary>
-    /// Should be set as active.
-    /// </summary>
-    [Parameter]
-    public bool IsActive { get; set; } = false;
+    public bool LabelHidden { get; set; }
 
     [Parameter]
-    public string? HeaderClass { get; set; }
+    public bool Active { get; set; } = false;
 
     [Parameter]
-    public string? HeaderStyle { get; set; }
+    public bool Square { get; set; } = false;
 
     [Parameter]
     public bool Open { get; set; }
 
     [Parameter]
     public EventCallback<bool> OpenChanged { get; set; }
+
+    [Parameter]
+    public bool ResetChildClass { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

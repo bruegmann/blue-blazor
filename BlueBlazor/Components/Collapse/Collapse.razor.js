@@ -1,9 +1,11 @@
-﻿const listeners = new WeakMap()
+const listeners = new WeakMap()
 
 export function init(detailsElement, dotNetRef) {
     const handler = (event) => {
         dotNetRef.invokeMethodAsync("OnToggle", event.target.open)
     }
+
+    if (!detailsElement) return
 
     detailsElement.addEventListener("toggle", handler)
     listeners.set(detailsElement, handler)

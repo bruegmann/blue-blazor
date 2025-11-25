@@ -1,7 +1,25 @@
 ﻿@namespace BlueBlazor.Components
 @inherits Button
 
-<Button Class="@ClassValue" Style="@Style" IconBefore="IconBefore" IconAfter="IconAfter" OnClick="OnClick" Href="@Href"
+<Button Class="@ClassValue" Style="@Style" IconAfter="IconAfter" OnClick="OnClick" Href="@Href"
         Target="@Target" Busy="Busy" Label="@Label" LabelHidden="@LabelHidden" ButtonType="ButtonType"
         Variant="Variant.MenuItem" Size="Size" Sm="Sm" Lg="Lg" Disabled="@Disabled" PopoverTarget="@PopoverTarget"
-        Success="Success" SuccessChanged="SuccessChanged" ChildContent="ChildContent" @attributes="AdditionalAttributes" />
+        Success="Success" SuccessChanged="SuccessChanged" ChildContent="ChildContent" Active="Active" Square="Square" @attributes="AdditionalAttributes">
+    <IconBefore>
+        @if (IconBefore != null)
+        {
+            @IconBefore
+        }
+        else if (Icon != null || IconForCurrent != null)
+        {
+            @if (Icon != null)
+            {
+                <span class="@(IconForCurrent != null ? "blue-menu-item-current-hidden" : null)" style="display: contents">@Icon</span>
+            }
+            @if (IconForCurrent != null)
+            {
+                <span class="blue-menu-item-default-hidden" style="display: contents">@IconForCurrent</span>
+            }
+        }
+    </IconBefore>
+</Button>

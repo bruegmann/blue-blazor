@@ -115,6 +115,9 @@ public partial class Button : BlueComponentBase
     [Parameter]
     public bool Active { get; set; } = false;
 
+    [Parameter]
+    public bool Square { get; set; } = false;
+
     protected override void OnParametersSet()
     {
         if (FilledPrimary)
@@ -172,5 +175,6 @@ public partial class Button : BlueComponentBase
             .AddClass("btn-lg", Lg)
             .AddClass("icon-link", Busy || _busy || IconBefore != null || IconAfter != null)
             .AddClass("active", Active)
+            .AddClass("blue-btn-square", Square)
             .Build();
 }

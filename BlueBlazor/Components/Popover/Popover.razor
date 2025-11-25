@@ -1,7 +1,7 @@
 ﻿@namespace BlueBlazor.Components
 @inherits BlueComponentBase
 
-<div id="@Id" popover class="@ClassValue" style="@Style" @attributes="AdditionalAttributes">
+<div @ref="_element" id="@Id" popover class="@ClassValue" style="@Style" @attributes="AdditionalAttributes">
     <div class="vstack">
         @ChildContent
     </div>
