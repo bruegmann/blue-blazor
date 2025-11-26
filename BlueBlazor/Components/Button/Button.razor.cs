@@ -115,6 +115,10 @@ public partial class Button : BlueComponentBase
     [Parameter]
     public bool Active { get; set; } = false;
 
+    /// <summary>
+    /// Button's width and height should be equal. Useful, if you want your body only to have one symbol.
+    /// When your body only has an icon and hidden label, this will be set automatically.
+    /// </summary>
     [Parameter]
     public bool Square { get; set; } = false;
 
