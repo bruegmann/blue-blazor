@@ -1,6 +1,8 @@
+using BlueBlazor.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
+using System.Security.Claims;
 
 namespace BlueBlazor.Components;
 
@@ -21,6 +23,7 @@ public partial class Dropdown : IDisposable
     private ElementReference _element;
     private IJSObjectReference? _module;
     private string _id = $"Dropdown_{Guid.NewGuid()}";
+    private string _headerClass = "";
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
@@ -70,6 +73,30 @@ public partial class Dropdown : IDisposable
     [Parameter]
     public string? LabelClass { get; set; }
 
+    [Parameter]
+    public Variant Variant { get; set; } = Variant.MenuItem;
+
+    [Parameter]
+    public Color Color { get; set; } = Shared.Color.Secondary;
+
+    /// <summary>
+    /// You can also use properties `Sm` or `Lg` as shortcuts to set the size.
+    /// </summary>
+    [Parameter]
+    public Size? Size { get; set; }
+
+    /// <summary>
+    /// Shortcut for `Size="BlueBlazor.Shared.Size.Sm"`
+    /// </summary>
+    [Parameter]
+    public bool Sm { get; set; }
+
+    /// <summary>
+    /// Shortcut for `Size="BlueBlazor.Shared.Size.Lg"`
+    /// </summary>
+    [Parameter]
+    public bool Lg { get; set; }
+
     /// <summary>
     /// Should be set as active.
     /// </summary>
@@ -116,6 +143,45 @@ public partial class Dropdown : IDisposable
         }
         await _module.InvokeVoidAsync("hidePopover", _element);
     }
+
+    protected override void OnParametersSet()
+    {
+        buildClass();
+    }
+
+    private string GetHeaderVariantClass(Variant variant, Color buttonColor)
+    {
+        string color = buttonColor.ToString().ToLower();
+        
+        switch (variant)
+        {
+            case Variant.Soft:
+                return $"blue-btn-soft-{color}";
+            case Variant.Plain:
+                return $"blue-btn-plain-{color}";
+            case Variant.Outline:
+                return $"btn-outline-{color}";
+            case Variant.Link:
+                return $"btn-link link-{color} link-offset-2";
+            case Variant.MenuItem:
+                return "blue-menu-item";
+            case Variant.None:
+                return "";
+            default:
+                return $"btn-{color}";
+        }
+    }
+
+    private void buildClass()
+    {
+        _headerClass = new CssBuilder(HeaderClass)
+            .AddClass(GetHeaderVariantClass(Variant, Color), Variant != Variant.None)
+            .AddClass($"btn-{Size?.ToString().ToLower()}", Size != null)
+            .AddClass("btn-sm", Sm)
+            .AddClass("btn-lg", Lg)
+            .Build()!;
+    }
+
 
     public void Dispose()
     {
