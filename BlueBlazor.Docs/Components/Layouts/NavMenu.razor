@@ -1,12 +1,9 @@
 ﻿<ul class="list-unstyled d-flex flex-column">
     <li>
-        <MenuItem Label="Home" Href="" IsActive="@IsActive("", true)">
-            <Icon>
+        <MenuItem Label="Home" Href="" Current="@IsActive("", true)">
+            <IconBefore>
                 <BiHouse />
-            </Icon>
-            <IconForActive>
-                <BiHouseFill />
-            </IconForActive>
+            </IconBefore>
         </MenuItem>
     </li>
 
@@ -20,16 +17,12 @@
                     @foreach (var item in group.Value.Where(i => i.Key == group.Key))
                     {
                         <li>
-                            <MenuItem Label="@item.Key" Href="@(item.Value + "/")" IsActive="@IsActive(item.Value + "/")">
-                                <Icon>
+                            <MenuItem Label="@item.Key" Href="@(item.Value + "/")" Current="@IsActive(item.Value + "/")">
+                                <IconBefore>
                                     @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
-                                </Icon>
-                                <IconForActive>
-                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
-                                                            (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
-                                </IconForActive>
+                                </IconBefore>
 
-                                <AfterLabelContent>
+                                <ChildContent>
                                     @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
                                     {
                                         <span class="badge bg-primary ms-1 mt-1">New</span>
@@ -42,24 +35,24 @@
                                     {
                                         <span class="badge bg-warning ms-1 mt-1">Experimental</span>
                                     }
-                                </AfterLabelContent>
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsDeprecated == true)
+                                    {
+                                        <span class="badge bg-danger ms-1 mt-1">Deprecated</span>
+                                    }
+                                </ChildContent>
                             </MenuItem>
                         </li>
                     }
 
                     @foreach (var item in group.Value.Where(i => i.Key != group.Key))
                     {
-                        <li class="ms-3 border-start">
-                            <MenuItem Label="@item.Key" Href="@(item.Value + "/")" IsActive="@IsActive(item.Value + "/")">
-                                <Icon>
+                        <li class="blue-collapse-indent border-start">
+                            <MenuItem Label="@item.Key" Href="@(item.Value + "/")" Current="@IsActive(item.Value + "/")">
+                                <IconBefore>
                                     @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
-                                </Icon>
-                                <IconForActive>
-                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IconForActive ??
-                                                            (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon))
-                                </IconForActive>
+                                </IconBefore>
 
-                                <AfterLabelContent>
+                                <ChildContent>
                                     @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
                                     {
                                         <span class="badge bg-primary ms-1 mt-1">New</span>
@@ -72,7 +65,11 @@
                                     {
                                         <span class="badge bg-warning ms-1 mt-1">Experimental</span>
                                     }
-                                </AfterLabelContent>
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsDeprecated == true)
+                                    {
+                                        <span class="badge bg-danger ms-1 mt-1">Deprecated</span>
+                                    }
+                                </ChildContent>
                             </MenuItem>
                         </li>
                     }
@@ -86,9 +83,9 @@
         <ul class="list-unstyled">
             <li>
                 <MenuItem Href="llms.txt" Label="llms.txt">
-                    <Icon>
+                    <IconBefore>
                         <BiBodyText />
-                    </Icon>
+                    </IconBefore>
                 </MenuItem>
             </li>
         </ul>
@@ -107,7 +104,8 @@
         {"Intro", new(@<BiPostcard />, @<BiPostcardFill />)},
         {"Layout", new(@<BiLayoutTextWindowReverse />)},
         {"Qr code gen", new(@<BiQrCode />)},
-        {"Menu item", new(@<BiApp />)},
+        {"Menu item", new(@<BiApp />, isNew: true)},
+        {"Popover", new(@<BiMenuDown />, isNew: true)},
         {"Totp input", new(@<BiInputCursorText />)},
         {"Tab", new(@<BiSegmentedNav />)},
         {"Tabs", new(@<BiSegmentedNav />)},
@@ -120,14 +118,14 @@
         {"Dialog opener", new(@<BiArrowUpRightSquare />)},
         {"Dialog provider", new(@<BiSquare />)},
         {"Actions", new(@<BiMenuApp />, isExperimental: true)},
-        {"Collapse", new(@<BiCardHeading />)},
-        {"Dropdown", new(@<BiMenuDown />)},
+        {"Collapse", new(@<BiCardHeading />, isUpdate: true)},
+        {"Dropdown", new(@<BiMenuDown />, isDeprecated: true)},
         {"Text input", new(@<BiInputCursor />)},
         {"Tooltip", new(@<BiChatSquareText />)},
         {"Create id", new(@<BiBracesAsterisk />)},
         {"Field groups", new(@<BiListOl />)},
         {"Field group", new(@<BiCardHeading />)},
-        {"Odometer", new(@<Bi9Square />) { IsNew = true }}
+        {"Odometer", new(@<Bi9Square />)}
     };
     RenderFragment defaultIcon = @<BiFileCode />;
 
@@ -138,15 +136,17 @@
         public bool IsNew { get; set; } = false;
         public bool IsUpdate { get; set; } = false;
         public bool IsExperimental { get; set; } = false;
+        public bool IsDeprecated { get; set; } = false;
 
         public ComponentIcon(RenderFragment? icon = null, RenderFragment? iconForActive = null,
-            bool isNew = false, bool isUpdate = false, bool isExperimental = false)
+            bool isNew = false, bool isUpdate = false, bool isExperimental = false, bool isDeprecated = false)
         {
             if (icon != null) Icon = icon;
             IconForActive = iconForActive;
             IsNew = isNew;
             IsUpdate = isUpdate;
             IsExperimental = isExperimental;
+            IsDeprecated = isDeprecated;
         }
     }
 }

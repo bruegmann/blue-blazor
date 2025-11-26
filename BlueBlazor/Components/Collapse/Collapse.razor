@@ -1,62 +1,41 @@
-﻿@namespace BlueBlazor.Components
+﻿@using Microsoft.Extensions.Localization
+@namespace BlueBlazor.Components
 @inherits BlueComponentBase
+@inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
-<details @ref="_detailsRef" class="blue-collapse @Class" style="@Style" draggable="@Draggable" open="@Open" @attributes="AdditionalAttributes">
-    <summary class="blue-collapse-header blue-menu-item btn @HeaderClass" style="@HeaderStyle">
-        @if (HideChevronIcon != true && ChevronIconBefore)
+<details @ref="_detailsRef" class="@ClassValue" style="@Style" open="@Open" @attributes="AdditionalAttributes">
+    <summary class="@SummaryClassValue">
+        @if (IconBefore != null)
         {
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                 class="blue-menu-item-dropdown-toggle blue-collapse-chevron blue-menu-item-chevron" aria-hidden="true"
-                 style=" display: inline-block; vertical-align: -0.125em; transition: transform 0.2s;" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                      d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-            </svg>
-        }
-
-        @if (Draggable && !HideDraggableIcon)
-        {
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                 className="bi bi-grip-vertical opacity-50" aria-hidden="true" viewBox="0 0 8 16">
-                <path d="M3.376 1.876c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m-3 3c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1m3 0c0 .55-.45 1-1 1-.549 0-1-.45-1-1 0-.549.451-1 1-1 .55 0 1 .451 1 1">
-                </path>
-            </svg>
-        }
-
-        @if (Icon != null)
-        {
-            <span class="blue-menu-item-icon @IconClass @(IconForActive != null ? "hasIconForActive" : "")"
-                  aria-hidden="true">
-                @Icon
+            <span class="blue-btn-icon-wrapper" aria-hidden="true">
+                @IconBefore
             </span>
         }
 
-        @if (IconForActive != null && IsActive)
+        @if (LabelHidden)
         {
-            <span class="blue-menu-item-icon iconForActive @IconClass" aria-hidden="true">
-                @IconForActive
+            <span class="visually-hidden">@Label</span>
+        }
+        else
+        {
+            @Label
+        }
+
+        @SummaryContent
+
+        @if (IconAfter != null)
+        {
+            <span class="blue-btn-icon-wrapper" aria-hidden="true">
+                @IconAfter
             </span>
         }
 
-        @if (Label != null)
-        {
-            <span class="blue-menu-item-label text-truncate @LabelClass">
-                @Label
-            </span>
-        }
-
-        @AfterLabelContent
-
-        @if (HideChevronIcon != true && !ChevronIconBefore)
-        {
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                 class="blue-menu-item-dropdown-toggle blue-collapse-chevron blue-menu-item-chevron ms-auto"
-                 aria-hidden="true" style="display: inline-block; vertical-align: -0.125em; transition: transform 0.2s;"
-                 viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
-            </svg>
-        }
+        <div class="blue-btn-icon-wrapper" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="@IconClassValue" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"></path></svg>
+        </div>
     </summary>
-    <div class="@DropdownClass" style="@DropdownStyle">
+
+    <div class="@(!ResetChildClass ? "blue-collapse-indent vstack border-start" : null)">
         @ChildContent
     </div>
 </details>

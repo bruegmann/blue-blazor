@@ -1,0 +1,14 @@
+﻿<div class="vstack">
+    <MenuItem Label="Item 1" Current="@(_currentItem == "item-1")" OnClick="@(() => { _currentItem = "item-1"; })">
+        <Icon><BiBrightnessHigh /></Icon>
+        <IconForCurrent><BiBrightnessHighFill /></IconForCurrent>
+    </MenuItem>
+
+    <MenuItem Label="Item 2" Current="@(_currentItem == "item-2")" OnClick="@(() => { _currentItem = "item-2"; })">
+        <Icon><BiBrightnessHigh /></Icon>
+    </MenuItem>
+</div>
+
+@code {
+    private string _currentItem = "item-1";
+}

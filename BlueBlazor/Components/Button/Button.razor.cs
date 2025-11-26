@@ -7,10 +7,9 @@ namespace BlueBlazor.Components;
 /// <summary>
 /// This is a button with some useful default attributes.
 /// </summary>
-public partial class Button
+public partial class Button : BlueComponentBase
 {
     private bool _busy = false;
-    private string _className = "";
     private bool _success
     {
         get => Success;
@@ -19,9 +18,6 @@ public partial class Button
             SuccessChanged.InvokeAsync(value);
         }
     }
-
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IDictionary<string, object>? AdditionalAttributes { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
@@ -51,9 +47,6 @@ public partial class Button
     /// </summary>
     [Parameter]
     public string? Target { get; set; }
-
-    [Parameter]
-    public string Class { get; set; } = "";
 
     /// <summary>
     /// Let the button appear busy.
@@ -107,6 +100,9 @@ public partial class Button
     [Parameter]
     public bool Disabled { get; set; } = false;
 
+    [Parameter]
+    public string? PopoverTarget { get; set; }
+
     /// <summary>
     /// Button will be displayed as successful for 3 seconds.
     /// </summary>
@@ -116,13 +112,22 @@ public partial class Button
     [Parameter]
     public EventCallback<bool> SuccessChanged { get; set; }
 
+    [Parameter]
+    public bool Active { get; set; } = false;
+
+    /// <summary>
+    /// Button's width and height should be equal. Useful, if you want your body only to have one symbol.
+    /// When your body only has an icon and hidden label, this will be set automatically.
+    /// </summary>
+    [Parameter]
+    public bool Square { get; set; } = false;
+
     protected override void OnParametersSet()
     {
         if (FilledPrimary)
         {
             Variant = Variant.Filled; Color = Color.Primary;
         }
-        buildClass();
     }
 
     protected override async Task OnParametersSetAsync()
@@ -131,7 +136,6 @@ public partial class Button
         {
             await Task.Delay(3000);
             _success = false;
-            buildClass();
             StateHasChanged();
         }
     }
@@ -166,9 +170,7 @@ public partial class Button
         }
     }
 
-    private void buildClass()
-    {
-        _className = new CssBuilder(Class)
+    private string? ClassValue => new CssBuilder(Class)
             .AddClass("btn", Variant != Variant.None)
             .AddClass(GetButtonVariantClass(Variant, Color), !_success)
             .AddClass("btn-success", _success)
@@ -176,6 +178,7 @@ public partial class Button
             .AddClass("btn-sm", Sm)
             .AddClass("btn-lg", Lg)
             .AddClass("icon-link", Busy || _busy || IconBefore != null || IconAfter != null)
-            .Build()!;
-    }
+            .AddClass("active", Active)
+            .AddClass("blue-btn-square", Square)
+            .Build();
 }

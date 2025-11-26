@@ -7,14 +7,15 @@
         @ChildContent
     </div>
 
-    <div class="@CollapseClassValue" style="--blue-anchor-name: --action-@_id;@CollapseStyle">
-        <button type="button" popovertarget="@_id" class="blue-anchor blue-menu-item btn px-3">
-            <span class="blue-menu-item-icon" aria-hidden="true">&#8942;</span>
-            <span class="visually-hidden">@L["ToggleMenu"]</span>
-        </button>
+    <div class="@CollapseClassValue" style="@CollapseStyle">
+        <CreateId>
+            <MenuItem PopoverTarget="@context" Square Label="@L["ToggleMenu"]" LabelHidden>
+                <IconBefore>&#8942;</IconBefore>
+            </MenuItem>
 
-        <div id="@_id" popover class="@CollapseMenuClassValue" style="@CollapseMenuStyleValue">
-            @ChildContent
-        </div>
+            <div id="@context" popover class="blue-anchored blue-anchored-fallback border rounded-4 shadow BLUE-actions-collapse-menu">
+                @ChildContent
+            </div>
+        </CreateId>
     </div>
 </div>
