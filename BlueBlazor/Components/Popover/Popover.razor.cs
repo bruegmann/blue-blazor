@@ -31,7 +31,14 @@ public partial class Popover : BlueComponentBase
 
     private async void OnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        await HidePopover();
+        try
+        {
+            await HidePopover();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Exception in OnLocationChanged: {ex}");
+        }
     }
 
     private async Task HidePopover()
