@@ -41,6 +41,11 @@ public partial class Popover : BlueComponentBase
             _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
                 "./_content/BlueBlazor/Components/Popover/Popover.razor.js");
         }
+        if (_module is null)
+        {
+            // Could not load JS module, so cannot hide popover
+            return;
+        }
         await _module.InvokeVoidAsync("hidePopover", _element);
     }
 
