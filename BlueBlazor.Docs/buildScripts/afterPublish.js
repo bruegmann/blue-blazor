@@ -22,7 +22,7 @@ const folder = path.resolve(
 
 changeBase("index.html")
 
-ghpages.publish(folder, { nojekyll: true }, (err) => {
+ghpages.publish(folder, { nojekyll: true, add: true, git: "git" }, (err) => {
     if (err) {
         console.log("gh-pages failed.")
         console.error(err)
