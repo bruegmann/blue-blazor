@@ -23,7 +23,7 @@
     bottom: 0.625rem;
     left: 0.125rem;
     right: initial;
-    width: 0.25rem;
+    width: 3px;
     height: auto;
     background-color: var(--blue-menu-item-indicator-bg);
     border-radius: 1rem;
@@ -37,10 +37,10 @@
 @mixin blue-menu-item-indicator-horizontal() {
     top: initial;
     bottom: 0.125rem;
-    left: 0.625rem;
-    right: 0.625rem;
-    width: auto;
-    height: 0.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2em;
+    height: 3px;
     animation: blue-menu-item-indicator-in-from-below 0.2s ease-in-out;
 
     @media (prefers-reduced-motion) {

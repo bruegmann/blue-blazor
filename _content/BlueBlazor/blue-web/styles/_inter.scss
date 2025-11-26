@@ -1,12 +1,7 @@
 :root {
     --bs-font-sans-serif: Inter, #{$font-family-sans-serif};
-    font-feature-settings:
-        "liga" 1,
-        "calt" 1,
-        "cv05" 1,
-        "cv07" 1,
-        "tnum" 1,
-        "zero" 1;
+    --blue-font-feature-settings: "liga" 1, "calt" 1, "cv05" 1, "cv07" 1, "tnum" 1, "zero" 1;
+    font-feature-settings: var(--blue-font-feature-settings);
     font-size: 14px;
 }
 @supports (font-variation-settings: normal) {

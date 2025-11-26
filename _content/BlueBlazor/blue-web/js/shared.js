@@ -6,7 +6,9 @@ const phrases = {
   "Toggle menu": ["Toggle menu", "Menü umschalten"],
   "Close all": ["Close all", "Alle schließen"],
   Error: ["Error", "Fehler"],
-  Information: ["Information", "Information"]
+  Information: ["Information", "Information"],
+  Loading: ["Loading", "Laden"],
+  Successful: ["Successful", "Erfolgreich"]
 };
 export function getPhrase(keyword) {
   let countryCode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;

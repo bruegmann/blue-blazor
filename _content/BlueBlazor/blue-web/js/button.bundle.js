@@ -1,0 +1,1 @@
+(()=>{"use strict";class t extends HTMLElement{constructor(){super(),this.attachShadow({mode:"open"})}connectedCallback(){this.shadowRoot.innerHTML='<button part="base" type="button">Hello world</button>'}}customElements.get("bl-button")||customElements.define("bl-button",t)})();

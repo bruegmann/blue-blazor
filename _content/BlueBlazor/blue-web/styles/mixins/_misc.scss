@@ -1,16 +1,3 @@
-@mixin slide-transition() {
-    $slide-transition: width 0.5s;
-    transition: $slide-transition;
-
-    @media (prefers-reduced-motion) {
-        transition: none;
-    }
-
-    @media (prefers-reduced-motion) {
-        transition: none;
-    }
-}
-
 @mixin header-bg() {
     background-image: linear-gradient(
         var(--blue-header-bg, $header-bg),

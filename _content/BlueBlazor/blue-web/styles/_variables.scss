@@ -90,6 +90,8 @@ $sidebar-shrink-breakpoint: 600px !default;
 // Breakpoint for sidebar fully expanded
 $sidebar-expanded-breakpoint: 1400px !default;
 
+$corner-shape: #{round} !default;
+
 :root {
     --blue-app-bg: #{$app-bg};
 
@@ -107,6 +109,8 @@ $sidebar-expanded-breakpoint: 1400px !default;
     --blue-action-link-bg-color: var(--blue-theme);
     --blue-menu-item-indicator-bg: #{$sidebar-indicator-color};
     --blue-menu-item-height: #{$normal-size};
+
+    --blue-corner-shape: #{$corner-shape};
 }
 
 @include color-mode(dark, true) {

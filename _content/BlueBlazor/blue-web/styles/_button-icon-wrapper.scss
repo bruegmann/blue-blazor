@@ -22,3 +22,7 @@
         }
     }
 }
+
+.blue-btn-square {
+    padding: calc(var(--bs-btn-padding-y) + #{$icon-link-underline-offset});
+}

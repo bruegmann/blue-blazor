@@ -1,36 +1,25 @@
-.blue-anchor {
-    anchor-name: var(--blue-anchor-name, --anchor-1);
-}
-
-@position-try --blue-anchored-below {
-    top: anchor(var(--blue-anchor-name, --anchor-1) bottom);
-    bottom: unset;
-}
-
-@position-try --blue-anchored-above {
-    bottom: anchor(var(--blue-anchor-name, --anchor-1) top);
-    top: unset;
-}
-
 .blue-anchored {
-    top: anchor(var(--blue-anchor-name, --anchor-1) bottom);
-    position-try: --blue-anchored-below, --blue-anchored-above;
+    position-try: flip-inline;
+    position-area: bottom span-right;
+    position: fixed;
+
+    // Normalize popover
+    &[popover] {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
 }
 
 .blue-anchored-start {
-    left: anchor(var(--blue-anchor-name, --anchor-1) left);
+    position-area: bottom span-right;
 }
 
 .blue-anchored-end {
-    left: anchor(var(--blue-anchor-name, --anchor-1) right);
-    translate: -100%;
+    position-area: bottom span-left;
 }
 
 @supports not (anchor-name: --anchor-1) {
-    .blue-anchored-end {
-        translate: none;
-    }
-
     .blue-anchored-fallback {
         left: 50%;
         top: 50%;

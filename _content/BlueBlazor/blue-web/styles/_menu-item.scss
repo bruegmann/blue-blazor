@@ -1,41 +1,19 @@
-@keyframes blue-menu-item-indicator-in-from-side {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(1);
-    }
-}
-
-@keyframes blue-menu-item-indicator-in-from-below {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(1);
-    }
-}
-
 .blue-menu-item {
+    display: inline-flex;
+    align-items: center;
     transition:
         width 0.5s,
         background-color 0.3s,
         color 0.15s,
         box-shadow 0.3s,
         opacity 0.3s !important;
+    color: inherit;
+    border-color: transparent;
+    --bs-btn-active-border-color: transparent;
+    --bs-btn-disabled-border-color: transparent;
 
     @media (prefers-reduced-motion) {
         transition: none !important;
-    }
-
-    & {
-        border: none;
-        box-shadow: none;
-        background-image: none;
-    }
-
-    &:focus {
-        box-shadow: none;
     }
 
     &:focus-visible {
@@ -43,38 +21,6 @@
         &.active {
             box-shadow: inset 0 0 0 0.25rem color-mix(in srgb, currentColor 15%, transparent);
         }
-    }
-}
-
-.blue-menu-item-icon {
-    display: inline-block;
-
-    & > * {
-        display: block;
-        width: 1.5rem;
-    }
-}
-
-.blue-menu-item-icon.iconForActive {
-    display: none;
-}
-
-.blue-menu-item.active {
-    .blue-menu-item-icon.hasIconForActive {
-        display: none;
-    }
-    .blue-menu-item-icon.iconForActive {
-        display: inline-block;
-    }
-}
-
-.blue-menu-item-dropdown {
-    margin-left: 1rem;
-    animation: blue-menu-item-dropdown 0.15s;
-    position: relative;
-
-    @media (prefers-reduced-motion) {
-        animation-duration: 0s;
     }
 
     &::before {
@@ -84,88 +30,226 @@
         right: 0.125rem;
         bottom: 0.125rem;
         left: 0.125rem;
+        background-color: currentColor;
         border-radius: $border-radius;
-        box-shadow: $box-shadow;
-        border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
-        background-color: var(--blue-menu-item-dropdown-bg);
-    }
+        transform: scale(0.9);
+        opacity: 0;
+        transition: all 0.2s;
 
-    &[popover] {
-        position: fixed;
-        margin: 0;
-        padding: 0;
-        z-index: 1000;
-        border: none;
-        background: transparent;
-        border-radius: calc(#{$border-radius} + 0.1rem);
-        box-shadow: $box-shadow;
-    }
-}
-
-.blue-menu-item {
-    color: inherit;
-    width: auto;
-    height: $normal-size;
-    font-size: $bla-btn-font-size;
-    display: flex;
-    align-items: center;
-    border-color: transparent;
-    --bs-btn-padding-x: 0.437rem;
-    @include slide-transition();
-
-    &::before {
-        @include blue-menu-item-background();
-    }
-
-    &[draggable] {
-        cursor: grab;
-
-        &:active {
-            box-shadow: inset 0 0 0.25rem;
+        @media (prefers-reduced-motion) {
+            transition: none;
         }
     }
 
     &:hover,
     &:active,
-    &.highlighted,
+    &.active,
     &:has(+ :popover-open) {
-        color: inherit;
-        border-color: transparent;
-
         &::before {
             transform: scale(1);
             opacity: 0.25;
         }
     }
 
-    &.highlighted,
+    &.active,
     &:has(+ :popover-open) {
         &::before {
             opacity: 0.16;
         }
     }
 
-    &:hover,
-    &:active {
-        &::before {
-            opacity: 0.25;
+    &.current {
+        position: relative;
+        &::after {
+            @include blue-menu-item-indicator();
         }
     }
+}
 
-    &.active::after {
-        @include blue-menu-item-indicator();
-    }
-
-    & > * + .blue-menu-item-label {
-        margin-left: 0.5rem;
+.blue-horizontal {
+    .blue-menu-item.current::after {
+        @include blue-menu-item-indicator-horizontal();
     }
 }
 
-.blue-menu-item-wrapper {
-    display: contents;
+.blue-menu-item-current-hidden {
+    &:is(:where(.blue-menu-item):is(.current) *) {
+        display: none !important;
+    }
+}
+.blue-menu-item-default-hidden {
+    &:is(:where(.blue-menu-item):is(:not(.current)) *) {
+        display: none !important;
+    }
 }
 
-.blue-menu-item-dropdown > .blue-menu-item-wrapper > .blue-menu-item,
-.blue-menu-item-dropdown > .blue-menu-item {
-    width: 100%;
-}
+// @keyframes blue-menu-item-indicator-in-from-side {
+//     from {
+//         transform: translateX(-100%);
+//     }
+//     to {
+//         transform: translateX(1);
+//     }
+// }
+
+// @keyframes blue-menu-item-indicator-in-from-below {
+//     from {
+//         transform: translateY(100%);
+//     }
+//     to {
+//         transform: translateY(1);
+//     }
+// }
+
+// .blue-menu-item {
+//     transition:
+//         width 0.5s,
+//         background-color 0.3s,
+//         color 0.15s,
+//         box-shadow 0.3s,
+//         opacity 0.3s !important;
+
+//     @media (prefers-reduced-motion) {
+//         transition: none !important;
+//     }
+
+//     & {
+//         border: none;
+//         box-shadow: none;
+//         background-image: none;
+//     }
+
+//     &:focus {
+//         box-shadow: none;
+//     }
+
+//     &:focus-visible {
+//         &,
+//         &.active {
+//             box-shadow: inset 0 0 0 0.25rem color-mix(in srgb, currentColor 15%, transparent);
+//         }
+//     }
+// }
+
+// .blue-menu-item-icon {
+//     display: inline-block;
+
+//     & > * {
+//         display: block;
+//         width: 1.5rem;
+//     }
+// }
+
+// .blue-menu-item-icon.iconForActive {
+//     display: none;
+// }
+
+// .blue-menu-item.active {
+//     .blue-menu-item-icon.hasIconForActive {
+//         display: none;
+//     }
+//     .blue-menu-item-icon.iconForActive {
+//         display: inline-block;
+//     }
+// }
+
+// .blue-menu-item-dropdown {
+//     margin-left: 1rem;
+//     animation: blue-menu-item-dropdown 0.15s;
+//     position: relative;
+
+//     @media (prefers-reduced-motion) {
+//         animation-duration: 0s;
+//     }
+
+//     &::before {
+//         content: "";
+//         position: absolute;
+//         top: 0.125rem;
+//         right: 0.125rem;
+//         bottom: 0.125rem;
+//         left: 0.125rem;
+//         border-radius: $border-radius;
+//         box-shadow: $box-shadow;
+//         border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+//         background-color: var(--blue-menu-item-dropdown-bg);
+//     }
+
+//     &[popover] {
+//         position: fixed;
+//         margin: 0;
+//         padding: 0;
+//         z-index: 1000;
+//         border: none;
+//         background: transparent;
+//         border-radius: calc(#{$border-radius} + 0.1rem);
+//         box-shadow: $box-shadow;
+//     }
+// }
+
+// .blue-menu-item {
+//     color: inherit;
+//     width: auto;
+//     height: $normal-size;
+//     font-size: $bla-btn-font-size;
+//     display: flex;
+//     align-items: center;
+//     border-color: transparent;
+//     --bs-btn-padding-x: 0.437rem;
+
+//     &::before {
+//         @include blue-menu-item-background();
+//     }
+
+//     &[draggable] {
+//         cursor: grab;
+
+//         &:active {
+//             box-shadow: inset 0 0 0.25rem;
+//         }
+//     }
+
+//     &:hover,
+//     &:active,
+//     &.highlighted,
+//     &:has(+ :popover-open) {
+//         color: inherit;
+//         border-color: transparent;
+
+//         &::before {
+//             transform: scale(1);
+//             opacity: 0.25;
+//         }
+//     }
+
+//     &.highlighted,
+//     &:has(+ :popover-open) {
+//         &::before {
+//             opacity: 0.16;
+//         }
+//     }
+
+//     &:hover,
+//     &:active {
+//         &::before {
+//             opacity: 0.25;
+//         }
+//     }
+
+//     &.active::after {
+//         @include blue-menu-item-indicator();
+//     }
+
+//     & > * + .blue-menu-item-label {
+//         margin-left: 0.5rem;
+//     }
+// }
+
+// .blue-menu-item-wrapper {
+//     display: contents;
+// }
+
+// .blue-menu-item-dropdown > .blue-menu-item-wrapper > .blue-menu-item,
+// .blue-menu-item-dropdown > .blue-menu-item {
+//     width: 100%;
+// }
