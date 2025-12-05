@@ -15,7 +15,6 @@ public partial class Combobox : BlueComponentBase
     [Inject]
     private IJSRuntime JSRuntime { get; set; } = default!;
 
-    //private string _value = "";
     private string? _description;
 
     private ElementReference? _inputRef;
