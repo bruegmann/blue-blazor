@@ -1,0 +1,19 @@
+﻿<Combobox @bind-Value="SelectedValue" @bind-Description="SelectedDescription">
+    <ComboboxOption Value="apple" Description="Apfel" />
+    <ComboboxOption Value="banana" Description="Banane" />
+    <ComboboxOption Value="cherry" Description="Kirsche" />
+    <ComboboxOption Value="kiwi" Description="Kiwi" />
+    <ComboboxOption Value="this-has-no-description" />
+</Combobox>
+
+<div class="mt-2">
+    Selected value: <strong>@SelectedValue</strong>, selected description: <strong>@SelectedDescription</strong>
+</div>
+
+<Button Label="Change to 'kiwi' with description 'Kiwi' from outside" Variant="Variant.Outline" Sm
+        OnClick="@(() => { SelectedValue = "kiwi"; SelectedDescription = "Kiwi"; })" />
+
+@code {
+    private string SelectedValue { get; set; } = "apple";
+    private string SelectedDescription { get; set; } = "Apple";
+}

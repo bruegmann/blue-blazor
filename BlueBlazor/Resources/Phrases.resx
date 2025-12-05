@@ -144,4 +144,19 @@
   <data name="ToggleDetails" xml:space="preserve">
     <value>Toggle details</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="NothingSelected" xml:space="preserve">
+    <value>Nothing selected</value>
+  </data>
+  <data name="NoItemsFound" xml:space="preserve">
+    <value>No items found.</value>
+  </data>
 </root>

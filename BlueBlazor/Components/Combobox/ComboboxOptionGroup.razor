@@ -1,0 +1,9 @@
+﻿@namespace BlueBlazor.Components
+@inherits BlueComponentBase
+
+<div role="group" aria-label="@Label" class="@ClassValue" style="@Style" @attributes="AdditionalAttributes">
+    <div class="list-group-item fw-medium small text-primary-emphasis" style="border: 0">
+        @Label
+    </div>
+    @ChildContent
+</div>

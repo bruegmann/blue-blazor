@@ -1,0 +1,19 @@
+﻿<Combobox @bind-Value="SelectedValue">
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Date" />
+    <ComboboxOption Value="Elderberry" />
+    <ComboboxOption Value="Fig" />
+    <ComboboxOption Value="Grape" />
+    <ComboboxOption Value="Honeydew" />
+</Combobox>
+
+<div class="mt-2">Selected: @SelectedValue</div>
+
+<Button Label="Change to 'Grape' from outside" Variant="Variant.Outline" Sm
+        OnClick="@(() => { SelectedValue = "Grape"; })" />
+
+@code {
+    private string? SelectedValue { get; set; } = "Banana";
+}

@@ -209,6 +209,24 @@ You no longer have to manually embed JavaScript files by Blue Blazor.
 - <script src="_content/BlueBlazor/js/all.bundle.js"></script>
 ```
 
+Menu Item changes:
+
+* Removed Props
+  * DropdownContent - Use `Collapse` or combination with `Popover`
+  * IconClass
+  * LabelClass
+  * Draggable - You can still add `draggable` attribute, but the styling has been removed.
+  * HideDraggableIcon
+  * HideChevronIcon
+  * ShowDropdown
+  * ShdowDropdownChanged
+  * SupportOutside
+  * OutsideIgnoreClasses
+* Renamed Props
+  * IconForActive -> IconForCurrent
+  * IsActive -> Current
+  * Highlighted -> Active
+
 ### From v3 to v4
 
 Dialogs (Modal and Offcanvas) now use the new `DialogService` to open dialogs. Also these components were removed:

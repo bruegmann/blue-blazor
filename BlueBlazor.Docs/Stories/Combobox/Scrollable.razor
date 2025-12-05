@@ -1,0 +1,46 @@
+﻿<Combobox @bind-Value="SelectedValue">
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Apricot" />
+    <ComboboxOption Value="Avocado" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Blackberry" />
+    <ComboboxOption Value="Blueberry" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Coconut" />
+    <ComboboxOption Value="Cranberry" />
+    <ComboboxOption Value="Date" />
+    <ComboboxOption Value="Dragonfruit" />
+    <ComboboxOption Value="Elderberry" />
+    <ComboboxOption Value="Fig" />
+    <ComboboxOption Value="Grape" />
+    <ComboboxOption Value="Grapefruit" />
+    <ComboboxOption Value="Guava" />
+    <ComboboxOption Value="Honeydew" />
+    <ComboboxOption Value="Jackfruit" />
+    <ComboboxOption Value="Kiwi" />
+    <ComboboxOption Value="Lemon" />
+    <ComboboxOption Value="Lime" />
+    <ComboboxOption Value="Lychee" />
+    <ComboboxOption Value="Mango" />
+    <ComboboxOption Value="Nectarine" />
+    <ComboboxOption Value="Orange" />
+    <ComboboxOption Value="Papaya" />
+    <ComboboxOption Value="Passionfruit" />
+    <ComboboxOption Value="Peach" />
+    <ComboboxOption Value="Pear" />
+    <ComboboxOption Value="Pineapple" />
+    <ComboboxOption Value="Plum" />
+    <ComboboxOption Value="Pomegranate" />
+    <ComboboxOption Value="Quince" />
+    <ComboboxOption Value="Raspberry" />
+    <ComboboxOption Value="Strawberry" />
+    <ComboboxOption Value="Tangerine" />
+    <ComboboxOption Value="Watermelon" />
+</Combobox>
+
+<Button Label="Change to 'Raspberry' from outside" Variant="Variant.Outline" Sm
+        OnClick="@(() => { SelectedValue = "Raspberry"; })" />
+
+@code {
+    private string? SelectedValue { get; set; } = "";
+}

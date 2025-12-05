@@ -16,7 +16,10 @@ public partial class Popover : BlueComponentBase
     private ElementReference _element;
     private IJSObjectReference? _module;
 
-    private string? ClassValue => new CssBuilder("blue-anchored blue-anchored-fallback border rounded-4 shadow").AddClass(Class).Build();
+    private string? ClassValue => new CssBuilder("blue-anchored blue-anchored-fallback border shadow text-body bg-body mt-1")
+        .AddClass("blue-anchored-end", End)
+        .AddClass(RoundingClass)
+        .AddClass(Class).Build();
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
@@ -24,9 +27,27 @@ public partial class Popover : BlueComponentBase
     [Parameter, EditorRequired]
     public string Id { get; set; }
 
+    [Parameter]
+    public bool End { get; set; }
+
+    [Parameter]
+    public string RoundingClass { get; set; } = "rounded-4";
+
+    [Parameter]
+    public EventCallback<PopoverToggleEventArgs> OnToggle { get; set; }
+
     protected override void OnInitialized()
     {
         NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
+                "./_content/BlueBlazor/Components/Popover/Popover.razor.js");
+        }
     }
 
     private async void OnLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -41,19 +62,25 @@ public partial class Popover : BlueComponentBase
         }
     }
 
-    private async Task HidePopover()
+    public async Task HidePopover()
     {
-        if (_module is null)
+        if (_module != null)
         {
-            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
-                "./_content/BlueBlazor/Components/Popover/Popover.razor.js");
+            await _module.InvokeVoidAsync("hidePopover", _element);
         }
-        if (_module is null)
+    }
+
+    public async Task ShowPopover()
+    {
+        if (_module != null)
         {
-            // Could not load JS module, so cannot hide popover
-            return;
+            await _module.InvokeVoidAsync("showPopover", _element);
         }
-        await _module.InvokeVoidAsync("hidePopover", _element);
+    }
+
+    private async Task HandlePopoverToggle(PopoverToggleEventArgs e)
+    {
+        await OnToggle.InvokeAsync(e);
     }
 
     public void Dispose()
