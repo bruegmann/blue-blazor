@@ -3,8 +3,10 @@ import { onEnhancedLoad, PageScript } from "./PageScript"
 export * from "@awesome.me/webawesome/dist/components/qr-code/qr-code.js"
 export * from "@awesome.me/webawesome/dist/components/tooltip/tooltip.js"
 export * from "blue-web/dist/js/odometer.js"
+export * from "blue-web/dist/js/select-list.js"
 
 import "../node_modules/bootstrap/js/dist/tab.js"
+import { BlSelectEvent } from "blue-web/dist/js/select-list.js"
 
 interface Blazor {
     registerCustomEventType: (
@@ -21,7 +23,7 @@ interface Blazor {
 
 interface CustomEventTypeOptions {
     browserEventName: string
-    createEventArgs: (event: WAEventType) => any
+    createEventArgs: (event: any) => any
 }
 
 interface WAEventType {
@@ -87,6 +89,26 @@ export function afterStarted(blazor: Blazor, mode: string) {
         browserEventName: "wa-hide",
         createEventArgs: () => {
             return null
+        }
+    })
+
+    blazor.registerCustomEventType("blselect", {
+        browserEventName: "bl-select",
+        createEventArgs: ({ index, item }: BlSelectEvent) => {
+            return {
+                index,
+                value: item.dataset.value || item.innerText || "",
+                description: item.dataset.description || null
+            }
+        }
+    })
+
+    blazor.registerCustomEventType("popovertoggle", {
+        browserEventName: "toggle",
+        createEventArgs: ({ newState }: ToggleEvent) => {
+            return {
+                newState: newState === "open" ? 1 : 0
+            }
         }
     })
 

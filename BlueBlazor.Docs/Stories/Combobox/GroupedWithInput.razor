@@ -1,0 +1,14 @@
+﻿<div class="input-group">
+    <TextInput Label="Your value" LabelHidden @bind-Value="SelectedValue" />
+
+    <Combobox @bind-Value="SelectedValue" Class="rounded-end" PopoverEnd LabelHidden>
+        <ComboboxOption Value="Apple" />
+        <ComboboxOption Value="Banana" />
+        <ComboboxOption Value="Cherry" />
+        <ComboboxOption Value="Date" />
+    </Combobox>
+</div>
+
+@code {
+    private string? SelectedValue { get; set; } = "Banana";
+}

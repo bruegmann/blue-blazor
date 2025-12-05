@@ -1,0 +1,55 @@
+﻿@namespace BlueBlazor.Components
+@inherits BlueComponentBase
+
+<CreateId Context="popoverId">
+    <Button Label="@Label" LabelHidden="LabelHidden" PopoverTarget="@popoverId" Variant="Variant" Color="Color"
+            Class="@Class" Style="@Style" id="@Id"
+            aria-haspopup="listbox" @attributes="AdditionalAttributes">
+        <IconAfter>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-down ms-auto" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+            </svg>
+        </IconAfter>
+        <ChildContent>
+            <span class="visually-hidden">
+                @if (!string.IsNullOrEmpty(CurrentDisplay))
+                {
+                    <text>@L["Selected"]: @CurrentDisplay</text>
+                }
+                else
+                {
+                    @L["NothingSelected"]
+                }
+            </span>
+        </ChildContent>
+    </Button>
+
+    <Popover @ref="_popoverRef" Id="@popoverId" End="PopoverEnd" RoundingClass="rounded-bottom-4"
+             Style="border-radius: calc(var(--bs-border-radius-xl) + .5rem)" OnToggle="HandlePopoverToggle">
+        <CreateId Context="inputId">
+            <div class="m-1">
+                <div class="blue-input-group input-group rounded-pill">
+                    <label for="@inputId" class="input-group-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" aria-hidden="true">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                        <span class="visually-hidden">@L["Search"]</span>
+                    </label>
+                    <input @ref="_inputRef" type="search" class="form-control" id="@inputId" placeholder="@($"{L["Search"]}...")" autocomplete="off"
+                           @bind="_comboboxContext.Search" @bind:event="oninput" aria-autocomplete="list" />
+                </div>
+            </div>
+            <CreateId Context="listboxId">
+                <bl-select-list @ref="_blSelectListRef" id="@listboxId" for="@inputId"
+                                class="@SelectListClassValue"
+                                style="@($"--message: '{L["NoItemsFound"]}'; max-height: {SelectListMaxHeight}; --blue-scrollspy-marker-group-padding-inline: .25rem; --blue-scrollspy-marker-group-gap: .25rem;")"
+                                active-class="@SelectListActiveClassValue"
+                                @onblselect="HandleBlSelect">
+                    <CascadingValue Value="@_comboboxContext">
+                        @ChildContent
+                    </CascadingValue>
+                </bl-select-list>
+            </CreateId>
+        </CreateId>
+    </Popover>
+</CreateId>
