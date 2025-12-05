@@ -32,9 +32,11 @@
                 (var(--#{$prefix}nav-link-font-size) * var(--#{$prefix}body-line-height))
         );
         margin-bottom: 0.25rem;
+        padding-inline: var(--blue-scrollspy-marker-group-padding-inline);
+        gap: var(--blue-scrollspy-marker-group-gap);
     }
 
-    & > section {
+    & > :is(section, .blue-scrollspy-group) {
         &::scroll-marker {
             content: attr(aria-label);
 

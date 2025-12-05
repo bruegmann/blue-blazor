@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.20.0 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.21.0 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -48,6 +48,7 @@ $focus-ring-color: #{rgba(var(--bs-primary-rgb), 25%)} !default;
 $input-focus-border-color: #{rgba(var(--bs-primary-rgb), 50%)} !default;
 
 $enable-button-pointers: false !default;
+$focus-ring-width: 0.125rem !default;
 
 
 // Bootstrap functions
@@ -10906,6 +10907,20 @@ body {
     margin: 0 !important;
 }
 
+// Shows empty message if the element has no children.
+// Can be used for lists and such.
+// For localization you should override CSS variable `--message` dynamically.
+.blue-empty-message {
+    --message: "No items found.";
+    &:empty::before {
+        content: var(--message);
+        color: var(--bs-secondary-color);
+        display: flex;
+        padding: 1rem;
+        justify-content: center;
+    }
+}
+
 .blue-loading {
     background-color: $primary;
 }
@@ -12097,6 +12112,12 @@ dialog.blue-modal:has(.offcanvas-start) {
     grid-area: side;
     overflow: auto;
     background: inherit;
+    scrollbar-color: transparent transparent;
+
+    &:hover,
+    &:focus-within {
+        scrollbar-color: color-mix(in srgb, currentColor 50%, transparent) transparent;
+    }
 }
 
 @media (width < 64rem) {
@@ -12132,6 +12153,7 @@ dialog.blue-modal:has(.offcanvas-start) {
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
+    scrollbar-color: color-mix(in srgb, currentColor 50%, transparent) transparent;
     background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity, 1));
     color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity, 1));
     box-shadow: var(--bs-box-shadow-sm);
@@ -12307,6 +12329,12 @@ dialog.blue-modal:has(.offcanvas-start) {
     }
 }
 
+.btn:has(+ :popover-open):not(:focus-visible):not(.blue-menu-item) {
+    --bs-focus-ring-color: rgba(var(--bs-secondary-rgb), 0.25);
+    box-shadow: var(--bs-focus-ring-x, 0) var(--bs-focus-ring-y, 0) var(--bs-focus-ring-blur, 0)
+        var(--bs-focus-ring-width) var(--bs-focus-ring-color);
+}
+
 .blue-scrollspy {
     --#{$prefix}nav-link-padding-x: #{$nav-link-padding-x * 0.5};
     --#{$prefix}nav-link-padding-y: #{$nav-link-padding-y * 0.5};
@@ -12341,9 +12369,11 @@ dialog.blue-modal:has(.offcanvas-start) {
                 (var(--#{$prefix}nav-link-font-size) * var(--#{$prefix}body-line-height))
         );
         margin-bottom: 0.25rem;
+        padding-inline: var(--blue-scrollspy-marker-group-padding-inline);
+        gap: var(--blue-scrollspy-marker-group-gap);
     }
 
-    & > section {
+    & > :is(section, .blue-scrollspy-group) {
         &::scroll-marker {
             content: attr(aria-label);
 

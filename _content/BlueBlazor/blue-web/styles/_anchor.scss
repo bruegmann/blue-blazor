@@ -34,3 +34,9 @@
         }
     }
 }
+
+.btn:has(+ :popover-open):not(:focus-visible):not(.blue-menu-item) {
+    --bs-focus-ring-color: rgba(var(--bs-secondary-rgb), 0.25);
+    box-shadow: var(--bs-focus-ring-x, 0) var(--bs-focus-ring-y, 0) var(--bs-focus-ring-blur, 0)
+        var(--bs-focus-ring-width) var(--bs-focus-ring-color);
+}

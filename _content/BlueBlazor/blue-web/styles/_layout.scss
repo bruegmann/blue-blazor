@@ -108,6 +108,12 @@
     grid-area: side;
     overflow: auto;
     background: inherit;
+    scrollbar-color: transparent transparent;
+
+    &:hover,
+    &:focus-within {
+        scrollbar-color: color-mix(in srgb, currentColor 50%, transparent) transparent;
+    }
 }
 
 @media (width < 64rem) {
@@ -143,6 +149,7 @@
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
+    scrollbar-color: color-mix(in srgb, currentColor 50%, transparent) transparent;
     background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity, 1));
     color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity, 1));
     box-shadow: var(--bs-box-shadow-sm);
