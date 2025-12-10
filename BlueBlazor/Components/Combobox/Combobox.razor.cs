@@ -99,7 +99,7 @@ public partial class Combobox : BlueComponentBase
         
         if (EditView != null && ConfirmOnLoseFocus)
         {
-            await EditView.OnConfirm.InvokeAsync();
+            await EditView.ConfirmManually();
         }
         
         _popoverRef?.HidePopover();
