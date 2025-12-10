@@ -1,1 +1,3 @@
-﻿<form @ref="_formElement" @attributes="AdditionalAttributes">@ChildContent</form>
+﻿<CascadingValue Value="this" Name="EditView">
+    <form @ref="_formElement" @attributes="AdditionalAttributes">@ChildContent</form>
+</CascadingValue>

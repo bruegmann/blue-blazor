@@ -3,12 +3,26 @@
         <InlineEdit Header="Your name" ReadText="@YourName" ConfirmOnLoseFocus>
             <input type="text" class="form-control" @bind="@YourName" autofocus />
         </InlineEdit>
+
+        <InlineEdit Header="Favorite fruit" ReadText="@FavoriteFruit" ConfirmOnLoseFocus class="mt-3">
+            <Combobox @bind-Value="FavoriteFruit">
+                <ComboboxOption Value="Apple" />
+                <ComboboxOption Value="Banana" />
+                <ComboboxOption Value="Cherry" />
+                <ComboboxOption Value="Date" />
+                <ComboboxOption Value="Elderberry" />
+                <ComboboxOption Value="Fig" />
+                <ComboboxOption Value="Grape" />
+                <ComboboxOption Value="Honeydew" />
+            </Combobox>
+        </InlineEdit>
     </CascadingValue>
 </CascadingValue>
 
 
 @code {
     private string YourName { get; set; } = "John";
+    private string FavoriteFruit { get; set; } = "Banana";
     private bool EditMode { get; set; }
     private void HandleEditModeChanged(bool editMode)
     {

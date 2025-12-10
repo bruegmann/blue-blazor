@@ -1,4 +1,5 @@
 ﻿using BlueBlazor.Extensions;
+using BlueBlazor.Internals.InlineEditParts;
 using BlueBlazor.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
@@ -69,6 +70,12 @@ public partial class Combobox : BlueComponentBase
     [Parameter]
     public string? SelectListMaxHeight { get; set; } = "400px";
 
+    [CascadingParameter(Name = "EditView")]
+    protected EditView? EditView { get; set; }
+
+    [CascadingParameter(Name = "ConfirmOnLoseFocus")]
+    protected bool ConfirmOnLoseFocus { get; set; }
+
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -89,6 +96,12 @@ public partial class Combobox : BlueComponentBase
         _description = e.Description;
         await ValueChanged.InvokeAsync(_comboboxContext.Selected);
         await DescriptionChanged.InvokeAsync(_description);
+        
+        if (EditView != null && ConfirmOnLoseFocus)
+        {
+            await EditView.OnConfirm.InvokeAsync();
+        }
+        
         _popoverRef?.HidePopover();
     }
 
