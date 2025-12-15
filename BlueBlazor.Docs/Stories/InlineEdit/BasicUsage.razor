@@ -1,8 +1,10 @@
 ﻿<CascadingValue Name="EditMode" Value="EditMode">
     <CascadingValue Name="EditModeChanged" Value="EditModeChanged">
-        <InlineEdit Header="Your name" ReadText="@YourName">
-            <input type="text" class="form-control" @bind="@YourName" autofocus />
-        </InlineEdit>
+        <CreateId Context="id">
+            <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
+                <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
+            </InlineEdit>
+        </CreateId>
     </CascadingValue>
 </CascadingValue>
 

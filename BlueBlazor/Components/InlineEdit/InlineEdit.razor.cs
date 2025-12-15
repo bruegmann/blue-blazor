@@ -18,9 +18,10 @@ namespace BlueBlazor.Components;
 /// </summary>
 public partial class InlineEdit : BlueComponentBase
 {
-    private bool ShowEdit { get; set; }
+    public bool ShowEdit { get; set; }
 
-    private string IdValue => Id ?? ControlId ?? "InlineEdit-" + Guid.NewGuid().ToString();
+    private string _generatedId = "InlineEdit-" + Guid.NewGuid().ToString();
+    private string IdValue => Id ?? ControlId ?? _generatedId;
 
     private string? ClassValue => new CssBuilder("inline-edit").AddClass(Class).Build();
 

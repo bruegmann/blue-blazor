@@ -1,0 +1,12 @@
+﻿<InlineEdit @ref="_inlineEditRef" Header="Start editing">
+    <Button Label="Cancel editing" OnClick="CancelEditing" />
+</InlineEdit>
+
+@code {
+    private InlineEdit? _inlineEditRef;
+
+    private void CancelEditing()
+    {
+        _inlineEditRef?.ShowEdit = false;
+    }
+}
