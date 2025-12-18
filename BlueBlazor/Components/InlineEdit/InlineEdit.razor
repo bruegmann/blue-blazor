@@ -14,9 +14,11 @@
         <EditView OnConfirm="ToggleShowEdit" OnDismiss="ToggleShowEdit" ConfirmOnLoseFocus="@ConfirmOnLoseFocus"
                   PreventConfirmOnSubmit="@PreventConfirmOnSubmit" class="position-relative" 
                   style="@(SpacingForEdit ? "padding-left: .75rem" : null)">
-            <CascadingValue Name="ControlId" Value="@IdValue">
-                <CascadingValue Name="AutoFocus" Value="true">
-                    @ChildContent @SharedContent
+            <CascadingValue Name="ConfirmOnLoseFocus" Value="@ConfirmOnLoseFocus">
+                <CascadingValue Name="ControlId" Value="@IdValue">
+                    <CascadingValue Name="AutoFocus" Value="true">
+                        @ChildContent @SharedContent
+                    </CascadingValue>
                 </CascadingValue>
             </CascadingValue>
 

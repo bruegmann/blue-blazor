@@ -10,6 +10,7 @@ public partial class EditView
 
     private ElementReference _formElement;
     private IJSObjectReference? _module;
+    private bool _isManuallyConfirming = false;
 
     [Parameter]
     public EventCallback OnConfirm { get; set; }
@@ -53,6 +54,22 @@ public partial class EditView
         }
     }
 
+    public async Task ConfirmManually()
+    {
+        _isManuallyConfirming = true;
+        await OnConfirm.InvokeAsync();
+        
+        await Task.Delay(500);
+        
+        _isManuallyConfirming = false;
+    }
+
+    [JSInvokable]
+    public async Task InvokeConfirmManually()
+    {
+        await ConfirmManually();
+    }
+
     [JSInvokable]
     public async Task InvokeConfirm()
     {
@@ -68,6 +85,10 @@ public partial class EditView
     [JSInvokable]
     public async Task InvokeLoseFocus()
     {
+        if (_isManuallyConfirming)
+        {
+            return;
+        }
         await OnLoseFocus.InvokeAsync();
         if (ConfirmOnLoseFocus)
         {
