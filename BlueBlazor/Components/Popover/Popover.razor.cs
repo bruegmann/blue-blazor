@@ -1,4 +1,5 @@
-﻿using BlueBlazor.Shared;
+﻿using System.Diagnostics.CodeAnalysis;
+using BlueBlazor.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
@@ -25,7 +26,7 @@ public partial class Popover : BlueComponentBase
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter, EditorRequired]
-    public string Id { get; set; }
+    public required string Id { get; set; }
 
     [Parameter]
     public bool End { get; set; }
@@ -35,6 +36,11 @@ public partial class Popover : BlueComponentBase
 
     [Parameter]
     public EventCallback<PopoverToggleEventArgs> OnToggle { get; set; }
+
+    [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(PopoverToggleEventArgs))]
+    public Popover()
+    {
+    }
 
     protected override void OnInitialized()
     {

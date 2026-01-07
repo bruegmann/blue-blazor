@@ -1,4 +1,5 @@
-﻿using BlueBlazor.Extensions;
+﻿using System.Diagnostics.CodeAnalysis;
+using BlueBlazor.Extensions;
 using BlueBlazor.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
@@ -68,6 +69,11 @@ public partial class Combobox : BlueComponentBase
 
     [Parameter]
     public string? SelectListMaxHeight { get; set; } = "400px";
+
+    [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(BlSelectEventArgs))]
+    public Combobox()
+    {
+    }
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
