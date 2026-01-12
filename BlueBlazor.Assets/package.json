@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "@awesome.me/webawesome": "^3.0.0-beta.4",
-        "blue-web": "^1.21.0",
+        "blue-web": "file:../../blue-web/blue-web-1.21.1006.tgz",
         "monaco-editor": "^0.54.0"
     }
 }

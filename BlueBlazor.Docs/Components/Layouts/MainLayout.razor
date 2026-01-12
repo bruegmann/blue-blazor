@@ -6,21 +6,33 @@
         <HeaderTitle AppTitle="Blue Blazor"
                      Logo="images/blue.svg" LogoAlt="Blue Logo" />
 
-        <nav class="docs-nav">
-            <div class="navbar-nav">
-                <a href="https://bruegmann.github.io/blue-web" class="nav-link">
-                    Web
+        <button type="button"
+                class="btn blue-menu-item icon-link d-flex blue-btn-square me-auto"
+                popovertarget="docsNavPopover">
+            <span class="visually-hidden">Navigate to a Blue library</span><span class="blue-btn-icon-wrapper"
+                                                                                 aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"></path>
+                </svg>
+            </span>
+        </button>
+        <div id="docsNavPopover"
+             popover=""
+             class="blue-anchored blue-anchored-fallback border rounded-4 shadow">
+            <div class="vstack">
+                <a class="btn blue-menu-item icon-link d-flex"
+                   href="https://bruegmann.github.io/blue-web">
+                    <span class="blue-btn-icon-wrapper" aria-hidden="true"></span><span class="text-truncate">Blue Web</span>
                 </a>
-                <a href="https://bruegmann.github.io/blue-react" class="nav-link">
-                    React
+                <a class="btn blue-menu-item icon-link d-flex" href="https://bruegmann.github.io/blue-react">
+                    <span class="blue-btn-icon-wrapper" aria-hidden="true"></span><span class="text-truncate">Blue React</span>
                 </a>
-                <a href="https://bruegmann.github.io/blue-blazor"
-                   class="nav-link active"
-                   aria-current="page">
-                    Blazor
+                <a class="btn blue-menu-item icon-link d-flex current" href="https://bruegmann.github.io/blue-blazor" aria-current="page">
+                    <span class="blue-btn-icon-wrapper" aria-hidden="true"></span><span class="text-truncate">Blue Blazor</span>
                 </a>
             </div>
-        </nav>
+        </div>
 
         <MenuItem Label="Code on GitHub" Href="https://github.com/bruegmann/blue-blazor" Target="_blank">
             <IconBefore><BiCodeSquare /></IconBefore>
