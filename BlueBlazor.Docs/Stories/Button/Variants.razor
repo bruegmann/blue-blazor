@@ -5,17 +5,61 @@
 }
 @using BlueBlazor.Shared
 
-<Button Label="Default" />
-<Button Label="Filled Primary" Variant="Variant.Outline" Color="Color.Danger" Size="Size.Lg" />
-<Button Label="Outline Danger" Variant="Variant.Filled" Color="Color.Danger" />
-<Button Label="Plain Success" Variant="Variant.Plain" Color="Color.Success" />
-<Button Label="Link" Variant="Variant.Link" />
-<Button Label="Link Warning" Variant="Variant.Link" Color="Color.Warning" />
-<Button Label="MenuItem" Variant="Variant.MenuItem" />
-
-<Button Label="Large" Size="Size.Lg" />
-<Button Label="Small" Sm />
-
-<Button Label="Custom" Variant="Variant.None" Class="bg-body-tertiary rounded-5" />
-
-<Button Label="Filled primary shortcut" FilledPrimary />
+<div class="vstack gap-2">
+    <div class="hstack gap-2">
+        <Button Label="Default is plain and secondary" />
+        <Button Label="Make button look like menu item"
+                Variant="Variant.MenuItem" />
+        <Button Label="Make button look like a link" Variant="Variant.Link" />
+    </div>
+    <div class="hstack gap-2">
+        <Button Label="Primary" Color="Color.Primary" />
+        <Button Label="Secondary" />
+        <Button Label="Success" Color="Color.Success" />
+        <Button Label="Danger" Color="Color.Danger" />
+        <Button Label="Warning" Color="Color.Warning" />
+        <Button Label="Info" Color="Color.Info" />
+        <Button Label="Light" Color="Color.Light" />
+        <Button Label="Dark" Color="Color.Dark" />
+    </div>
+    <div class="hstack gap-2">
+        <Button Label="Primary" Color="Color.Primary" Variant="Variant.Plain" />
+        <Button Label="Secondary" Variant="Variant.Plain" />
+        <Button Label="Success" Color="Color.Success" Variant="Variant.Plain" />
+        <Button Label="Danger" Color="Color.Danger" Variant="Variant.Plain" />
+        <Button Label="Warning" Color="Color.Warning" Variant="Variant.Plain" />
+        <Button Label="Info" Color="Color.Info" Variant="Variant.Plain" />
+        <Button Label="Light" Color="Color.Light" Variant="Variant.Plain" />
+        <Button Label="Dark" Color="Color.Dark" Variant="Variant.Plain" />
+    </div>
+    <div class="hstack gap-2">
+        <Button Label="Primary" Color="Color.Primary" Variant="Variant.Filled" />
+        <Button Label="Secondary" Variant="Variant.Filled" />
+        <Button Label="Success" Color="Color.Success" Variant="Variant.Filled" />
+        <Button Label="Danger" Color="Color.Danger" Variant="Variant.Filled" />
+        <Button Label="Warning" Color="Color.Warning" Variant="Variant.Filled" />
+        <Button Label="Info" Color="Color.Info" Variant="Variant.Filled" />
+        <Button Label="Light" Color="Color.Light" Variant="Variant.Filled" />
+        <Button Label="Dark" Color="Color.Dark" Variant="Variant.Filled" />
+    </div>
+    <div class="hstack gap-2">
+        <Button Label="Primary" Color="Color.Primary" Variant="Variant.Outline" />
+        <Button Label="Secondary" Variant="Variant.Outline" />
+        <Button Label="Success" Color="Color.Success" Variant="Variant.Outline" />
+        <Button Label="Danger" Color="Color.Danger" Variant="Variant.Outline" />
+        <Button Label="Warning" Color="Color.Warning" Variant="Variant.Outline" />
+        <Button Label="Info" Color="Color.Info" Variant="Variant.Outline" />
+        <Button Label="Light" Color="Color.Light" Variant="Variant.Outline" />
+        <Button Label="Dark" Color="Color.Dark" Variant="Variant.Outline" />
+    </div>
+    <div class="hstack gap-2">
+        <Button Label="Primary" Color="Color.Primary" Variant="Variant.Link" />
+        <Button Label="Secondary" Variant="Variant.Link" />
+        <Button Label="Success" Color="Color.Success" Variant="Variant.Link" />
+        <Button Label="Danger" Color="Color.Danger" Variant="Variant.Link" />
+        <Button Label="Warning" Color="Color.Warning" Variant="Variant.Link" />
+        <Button Label="Info" Color="Color.Info" Variant="Variant.Link" />
+        <Button Label="Light" Color="Color.Light" Variant="Variant.Link" />
+        <Button Label="Dark" Color="Color.Dark" Variant="Variant.Link" />
+    </div>
+</div>
