@@ -70,6 +70,11 @@
             $text-color: color-contrast($value);
         }
 
+        // More contrast for secondary plain button
+        @if $color == "secondary" {
+            $text-color: shade-color($value, 60%);
+        }
+
         @include button-variant(
             transparent,
             transparent,
@@ -94,6 +99,11 @@
         .blue-btn-plain-#{$color} {
             @if $color == "dark" {
                 $text-color: color-contrast($value);
+            }
+
+            // More contrast for secondary plain button
+            @if $color == "secondary" {
+                $text-color: tint-color($value, 60%);
             }
 
             @include button-variant(

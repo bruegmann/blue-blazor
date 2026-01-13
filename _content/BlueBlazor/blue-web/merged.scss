@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.21.0 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.21.1 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -3758,6 +3758,7 @@ $corner-shape: #{round} !default;
     --blue-sidebar-bg: #{$sidebar-bg};
     --blue-header-bg: #{$header-bg};
 
+    --blue-header-height: 3.429rem;
     --blue-header-color: #{$header-color};
     --blue-action-link-bg-color: var(--blue-theme);
     --blue-menu-item-indicator-bg: #{$sidebar-indicator-color};
@@ -10728,12 +10729,11 @@ textarea {
 
 
 
-// Custom added utilities for Blue Web
+// Enable responsive for position
 $utilities: map-merge(
     $utilities,
     (
-        "position":
-            map-merge(
+        "position": map-merge(
                 map-get($utilities, "position"),
                 (
                     responsive: true
@@ -10864,37 +10864,18 @@ body {
     }
 }
 
-.sign-in-screen {
-    padding-top: $normal-size;
+// .blue-header-title.sidebar {
+//     width: $bla-sidebar-width;
+//     padding-left: calc(#{$normal-size} + #{$spacer});
+//     transform: translateX(-100%);
+//     transition: transform 0.4s;
+//     background: var(--blue-sidebar-bg);
+//     color: $sidebar-color;
 
-    .sign-in-container {
-        animation: enabledBlueAppPage 0.5s;
-
-        @media (prefers-reduced-motion) {
-            animation-duration: 0s;
-        }
-    }
-
-    @media screen and (min-width: 768px) {
-        .sign-in-container {
-            padding: var(--blue-sign-in-container-md-padding, 0 calc(50% - 18rem));
-            width: var(--blue-sign-in-container-md-width, auto);
-        }
-    }
-}
-
-.blue-header-title.sidebar {
-    width: $bla-sidebar-width;
-    padding-left: calc(#{$normal-size} + #{$spacer});
-    transform: translateX(-100%);
-    transition: transform 0.4s;
-    background: var(--blue-sidebar-bg);
-    color: $sidebar-color;
-
-    @media (prefers-reduced-motion) {
-        transition: none;
-    }
-}
+//     @media (prefers-reduced-motion) {
+//         transition: none;
+//     }
+// }
 
 .blue-scroll-shadow {
     @include scroll-shadow(var(--bs-body-bg));
@@ -11079,14 +11060,16 @@ body {
     }
 
     &::before {
+        --visual-padding: 0.125rem;
+
         content: "";
         position: absolute;
-        top: 0.125rem;
-        right: 0.125rem;
-        bottom: 0.125rem;
-        left: 0.125rem;
+        top: var(--visual-padding);
+        right: var(--visual-padding);
+        bottom: var(--visual-padding);
+        left: var(--visual-padding);
         background-color: currentColor;
-        border-radius: $border-radius;
+        border-radius: var(--bs-btn-border-radius);
         transform: scale(0.9);
         opacity: 0;
         transition: all 0.2s;
@@ -11137,177 +11120,6 @@ body {
         display: none !important;
     }
 }
-
-// @keyframes blue-menu-item-indicator-in-from-side {
-//     from {
-//         transform: translateX(-100%);
-//     }
-//     to {
-//         transform: translateX(1);
-//     }
-// }
-
-// @keyframes blue-menu-item-indicator-in-from-below {
-//     from {
-//         transform: translateY(100%);
-//     }
-//     to {
-//         transform: translateY(1);
-//     }
-// }
-
-// .blue-menu-item {
-//     transition:
-//         width 0.5s,
-//         background-color 0.3s,
-//         color 0.15s,
-//         box-shadow 0.3s,
-//         opacity 0.3s !important;
-
-//     @media (prefers-reduced-motion) {
-//         transition: none !important;
-//     }
-
-//     & {
-//         border: none;
-//         box-shadow: none;
-//         background-image: none;
-//     }
-
-//     &:focus {
-//         box-shadow: none;
-//     }
-
-//     &:focus-visible {
-//         &,
-//         &.active {
-//             box-shadow: inset 0 0 0 0.25rem color-mix(in srgb, currentColor 15%, transparent);
-//         }
-//     }
-// }
-
-// .blue-menu-item-icon {
-//     display: inline-block;
-
-//     & > * {
-//         display: block;
-//         width: 1.5rem;
-//     }
-// }
-
-// .blue-menu-item-icon.iconForActive {
-//     display: none;
-// }
-
-// .blue-menu-item.active {
-//     .blue-menu-item-icon.hasIconForActive {
-//         display: none;
-//     }
-//     .blue-menu-item-icon.iconForActive {
-//         display: inline-block;
-//     }
-// }
-
-// .blue-menu-item-dropdown {
-//     margin-left: 1rem;
-//     animation: blue-menu-item-dropdown 0.15s;
-//     position: relative;
-
-//     @media (prefers-reduced-motion) {
-//         animation-duration: 0s;
-//     }
-
-//     &::before {
-//         content: "";
-//         position: absolute;
-//         top: 0.125rem;
-//         right: 0.125rem;
-//         bottom: 0.125rem;
-//         left: 0.125rem;
-//         border-radius: $border-radius;
-//         box-shadow: $box-shadow;
-//         border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
-//         background-color: var(--blue-menu-item-dropdown-bg);
-//     }
-
-//     &[popover] {
-//         position: fixed;
-//         margin: 0;
-//         padding: 0;
-//         z-index: 1000;
-//         border: none;
-//         background: transparent;
-//         border-radius: calc(#{$border-radius} + 0.1rem);
-//         box-shadow: $box-shadow;
-//     }
-// }
-
-// .blue-menu-item {
-//     color: inherit;
-//     width: auto;
-//     height: $normal-size;
-//     font-size: $bla-btn-font-size;
-//     display: flex;
-//     align-items: center;
-//     border-color: transparent;
-//     --bs-btn-padding-x: 0.437rem;
-
-//     &::before {
-//         @include blue-menu-item-background();
-//     }
-
-//     &[draggable] {
-//         cursor: grab;
-
-//         &:active {
-//             box-shadow: inset 0 0 0.25rem;
-//         }
-//     }
-
-//     &:hover,
-//     &:active,
-//     &.highlighted,
-//     &:has(+ :popover-open) {
-//         color: inherit;
-//         border-color: transparent;
-
-//         &::before {
-//             transform: scale(1);
-//             opacity: 0.25;
-//         }
-//     }
-
-//     &.highlighted,
-//     &:has(+ :popover-open) {
-//         &::before {
-//             opacity: 0.16;
-//         }
-//     }
-
-//     &:hover,
-//     &:active {
-//         &::before {
-//             opacity: 0.25;
-//         }
-//     }
-
-//     &.active::after {
-//         @include blue-menu-item-indicator();
-//     }
-
-//     & > * + .blue-menu-item-label {
-//         margin-left: 0.5rem;
-//     }
-// }
-
-// .blue-menu-item-wrapper {
-//     display: contents;
-// }
-
-// .blue-menu-item-dropdown > .blue-menu-item-wrapper > .blue-menu-item,
-// .blue-menu-item-dropdown > .blue-menu-item {
-//     width: 100%;
-// }
 
 .blue-header-title {
     a {
@@ -11360,7 +11172,7 @@ body {
             var(--bs-btn-padding-x, 0.75rem) + var(--bs-btn-border-width, 1px)
     );
 
-    max-height: $normal-size;
+    max-height: var(--blue-header-height);
     overflow: hidden;
 
     .blue-actions-menu {
@@ -11702,6 +11514,11 @@ body {
             $text-color: color-contrast($value);
         }
 
+        // More contrast for secondary plain button
+        @if $color == "secondary" {
+            $text-color: shade-color($value, 60%);
+        }
+
         @include button-variant(
             transparent,
             transparent,
@@ -11726,6 +11543,11 @@ body {
         .blue-btn-plain-#{$color} {
             @if $color == "dark" {
                 $text-color: color-contrast($value);
+            }
+
+            // More contrast for secondary plain button
+            @if $color == "secondary" {
+                $text-color: tint-color($value, 60%);
             }
 
             @include button-variant(
@@ -12012,17 +11834,13 @@ dialog.blue-modal:has(.offcanvas-start) {
     --drawer-side-shadow:
         rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
         rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-    --toggler-size: calc(
-        var(--bs-btn-border-width, 1px) + var(--bs-btn-padding-y, 0.375rem) +
-            (var(--bs-btn-font-size, 1rem) * var(--bs-btn-line-height, 1.5)) + var(--bs-btn-padding-y, 0.375rem) +
-            var(--bs-btn-border-width, 1px)
-    );
     --side-width: 18rem;
     --base-z-index: 0;
 
     --base-z-index: 500;
     --side-width: var(--blue-sidebar-width);
-    --toggler-size: var(--blue-menu-item-height);
+    --toggler-width: 2.714rem;
+    --toggler-height: var(--blue-header-height);
 
     --blue-menu-item-indicator-bg: #{color-contrast($sidebar-bg, $sidebar-indicator-color)};
     --bs-link-hover-color: #{color-contrast($sidebar-bg, $link-hover-color)};
@@ -12031,15 +11849,15 @@ dialog.blue-modal:has(.offcanvas-start) {
     position: relative;
     display: grid;
 
-    grid-template-rows: var(--toggler-size) auto;
+    grid-template-rows: var(--toggler-height) auto;
     grid-template-areas: "header" "main";
 
     color: var(--blue-sidebar-color);
     background-color: var(--blue-sidebar-bg);
 
     &:has(> .blue-layout-toggle) {
-        grid-template-columns: 0 0 var(--toggler-size) calc(var(--side-width) - var(--toggler-size)) 1fr;
-        grid-template-rows: var(--toggler-size) auto;
+        grid-template-columns: 0 0 var(--toggler-width) calc(var(--side-width) - var(--toggler-width)) 1fr;
+        grid-template-rows: var(--toggler-height) auto;
         grid-template-areas:
             "state .    toggle header header"
             ".     side main   main   main";
@@ -12103,6 +11921,7 @@ dialog.blue-modal:has(.offcanvas-start) {
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: relative;
     z-index: var(--blue-layout-header-z-index, 4);
     --blue-menu-item-dropdown-bg: var(--blue-sidebar-bg);
@@ -12364,6 +12183,10 @@ dialog.blue-modal:has(.offcanvas-start) {
 
     &::scroll-marker-group {
         display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
         min-height: calc(
             (var(--#{$prefix}nav-link-padding-y) + var(--#{$prefix}nav-tabs-border-width)) * 2 +
                 (var(--#{$prefix}nav-link-font-size) * var(--#{$prefix}body-line-height))
@@ -12376,6 +12199,7 @@ dialog.blue-modal:has(.offcanvas-start) {
     & > :is(section, .blue-scrollspy-group) {
         &::scroll-marker {
             content: attr(aria-label);
+            white-space: nowrap;
 
             font-size: var(--#{$prefix}nav-link-font-size);
             box-sizing: border-box;
@@ -12409,6 +12233,29 @@ dialog.blue-modal:has(.offcanvas-start) {
     }
 }
 
+.sign-in-screen {
+    padding-top: var(--blue-header-height);
+
+    &:last-child {
+        padding-bottom: var(--blue-header-height);
+    }
+
+    .sign-in-container {
+        animation: enabledBlueAppPage 0.5s;
+
+        @media (prefers-reduced-motion) {
+            animation-duration: 0s;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .sign-in-container {
+            padding: var(--blue-sign-in-container-md-padding, 0 calc(50% - 18rem));
+            width: var(--blue-sign-in-container-md-width, auto);
+        }
+    }
+}
+
 
 /* Make DevExpress components look more like Bootstrap/Blue */
 [class^="dxbl-"] {
@@ -12416,7 +12263,7 @@ dialog.blue-modal:has(.offcanvas-start) {
     --dxbl-text-edit-padding-x: 0.75rem !important;
     --dxbl-text-edit-padding-y: 0.375rem !important;
     --dxbl-text-edit-line-height: 1.5 !important;
-    --dxbl-text-edit-focus-shadow-spread: 0.25rem !important;
+    --dxbl-text-edit-focus-shadow-spread: #{$focus-ring-width} !important;
     --dxbl-listbox-border-radius: var(--bs-border-radius) !important;
     --dxbl-toolbar-font-size: var(--bs-body-font-size) !important;
     --dxbl-toolbar-btn-border-radius: var(--bs-border-radius) !important;

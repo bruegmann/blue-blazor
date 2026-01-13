@@ -4,3 +4,27 @@
 .hide-if-last-child:last-child[b-16uajrdse3] {
     display: none;
 }
+/* /Stories/Odometer/StyleBasedOnChange.razor.rz.scp.css */
+.scope[b-0fu8ik0t4n] {
+    transition: background-color 0.3s, color 0.4s;
+}
+
+    .scope:has([data-change="up"])[b-0fu8ik0t4n] {
+        background-color: var(--bs-success-bg-subtle) !important;
+        color: var(--bs-success-text-emphasis) !important;
+        border-color: var(--bs-success-bg-subtle) !important;
+    }
+
+    .scope:has([data-change="down"])[b-0fu8ik0t4n] {
+        background-color: var(--bs-danger-bg-subtle) !important;
+        color: var(--bs-danger-text-emphasis) !important;
+        border-color: var(--bs-danger-bg-subtle) !important;
+    }
+
+    .scope[b-0fu8ik0t4n]  bl-odometer[data-change="up"]::after {
+        content: "↑";
+    }
+
+    .scope[b-0fu8ik0t4n]  bl-odometer[data-change="down"]::after {
+        content: "↓";
+    }

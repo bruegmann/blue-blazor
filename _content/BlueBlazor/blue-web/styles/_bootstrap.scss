@@ -46,12 +46,11 @@
 // Helpers
 @import "node_modules/bootstrap/scss/helpers";
 
-// Custom added utilities for Blue Web
+// Enable responsive for position
 $utilities: map-merge(
     $utilities,
     (
-        "position":
-            map-merge(
+        "position": map-merge(
                 map-get($utilities, "position"),
                 (
                     responsive: true

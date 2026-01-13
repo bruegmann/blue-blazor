@@ -4,7 +4,7 @@
             var(--bs-btn-padding-x, 0.75rem) + var(--bs-btn-border-width, 1px)
     );
 
-    max-height: $normal-size;
+    max-height: var(--blue-header-height);
     overflow: hidden;
 
     .blue-actions-menu {

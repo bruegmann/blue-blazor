@@ -27,6 +27,10 @@
 
     &::scroll-marker-group {
         display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
         min-height: calc(
             (var(--#{$prefix}nav-link-padding-y) + var(--#{$prefix}nav-tabs-border-width)) * 2 +
                 (var(--#{$prefix}nav-link-font-size) * var(--#{$prefix}body-line-height))
@@ -39,6 +43,7 @@
     & > :is(section, .blue-scrollspy-group) {
         &::scroll-marker {
             content: attr(aria-label);
+            white-space: nowrap;
 
             font-size: var(--#{$prefix}nav-link-font-size);
             box-sizing: border-box;

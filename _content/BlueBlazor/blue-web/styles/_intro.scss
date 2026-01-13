@@ -1,0 +1,22 @@
+.sign-in-screen {
+    padding-top: var(--blue-header-height);
+
+    &:last-child {
+        padding-bottom: var(--blue-header-height);
+    }
+
+    .sign-in-container {
+        animation: enabledBlueAppPage 0.5s;
+
+        @media (prefers-reduced-motion) {
+            animation-duration: 0s;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .sign-in-container {
+            padding: var(--blue-sign-in-container-md-padding, 0 calc(50% - 18rem));
+            width: var(--blue-sign-in-container-md-width, auto);
+        }
+    }
+}
