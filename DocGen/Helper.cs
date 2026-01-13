@@ -183,10 +183,21 @@ public class Helper
                     $"Open in full window</a>" :
                     $"<{exampleName} />")}</div>\n\n" +
                     $"    <details class=\"example-code\">\n" +
-                    $"        <summary>Code</summary>\n" +
+                    $"        <summary>{Path.GetFileName(example)}</summary>\n" +
                     $"        <pre><code class=\"language-razor\">{code}</code></pre>\n" +
-                    $"    </details>\n" +
-                    "</div>";
+                    $"    </details>\n";
+
+                string cssFile = example + ".css";
+                if (File.Exists(cssFile))
+                {
+                    var cssCode = await File.ReadAllTextAsync(cssFile);
+                    examplesContent += $"    <details class=\"example-code mt-1\">\n" +
+                        $"        <summary>{Path.GetFileName(cssFile)}</summary>\n" +
+                        $"        <pre><code class=\"language-css\">{cssCode}</code></pre>\n" +
+                        $"    </details>\n";
+                }
+
+                examplesContent += "</div>";
             }
             else if (format == "markdown")
             {

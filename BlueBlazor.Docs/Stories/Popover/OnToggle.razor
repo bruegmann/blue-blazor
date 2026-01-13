@@ -1,0 +1,25 @@
+<div class="hstack gap-3">
+    <CreateId>
+        <MenuItem Label="Open popover" PopoverTarget="@context">
+        <IconAfter>
+            <BiChevronDown />
+        </IconAfter>
+        </MenuItem>
+
+        <Popover Id="@context" OnToggle="HandleToggle">
+            <MenuItem Label="Sub item 1" />
+            <MenuItem Label="Sub longer item 2" />
+        </Popover>
+    </CreateId>
+
+    New state: @(_newState?.ToString())
+</div>
+
+@code {
+    private PopoverState? _newState;
+
+    private void HandleToggle(PopoverToggleEventArgs args)
+    {
+        _newState = args.NewState;
+    }
+}

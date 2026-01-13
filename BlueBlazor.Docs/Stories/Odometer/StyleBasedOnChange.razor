@@ -1,0 +1,10 @@
+﻿<span class="scope badge rounded-pill bg-body-tertiary text-body border">
+    <Odometer Value="_count" />
+</span>
+
+<Button Label="Increment" OnClick="() => _count++" />
+<Button Label="Decrement" OnClick="() => _count--" />
+
+@code {
+    private int _count = 0;
+}

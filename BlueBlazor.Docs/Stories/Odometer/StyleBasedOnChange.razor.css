@@ -1,0 +1,23 @@
+﻿.scope {
+    transition: background-color 0.3s, color 0.4s;
+}
+
+    .scope:has([data-change="up"]) {
+        background-color: var(--bs-success-bg-subtle) !important;
+        color: var(--bs-success-text-emphasis) !important;
+        border-color: var(--bs-success-bg-subtle) !important;
+    }
+
+    .scope:has([data-change="down"]) {
+        background-color: var(--bs-danger-bg-subtle) !important;
+        color: var(--bs-danger-text-emphasis) !important;
+        border-color: var(--bs-danger-bg-subtle) !important;
+    }
+
+    .scope ::deep bl-odometer[data-change="up"]::after {
+        content: "↑";
+    }
+
+    .scope ::deep bl-odometer[data-change="down"]::after {
+        content: "↓";
+    }
