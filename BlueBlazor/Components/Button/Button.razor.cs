@@ -77,7 +77,7 @@ public partial class Button : BlueComponentBase
     public Variant Variant { get; set; } = Shared.Variant.Soft;
 
     [Parameter]
-    public Color Color { get; set; } = Shared.Color.Secondary;
+    public Color? Color { get; set; }
 
     /// <summary>
     /// You can also use properties `Sm` or `Lg` as shortcuts to set the size.
@@ -126,7 +126,8 @@ public partial class Button : BlueComponentBase
     {
         if (FilledPrimary)
         {
-            Variant = Variant.Filled; Color = Color.Primary;
+            Variant = Variant.Filled;
+            Color = Shared.Color.Primary;
         }
     }
 
@@ -147,9 +148,9 @@ public partial class Button : BlueComponentBase
         _busy = false;
     }
 
-    private string GetButtonVariantClass(Variant variant, Color buttonColor)
+    private string GetButtonVariantClass(Variant variant, Color? buttonColor)
     {
-        string color = buttonColor.ToString().ToLower();
+        string color = (buttonColor ?? Shared.Color.Secondary).ToString().ToLower();
 
         switch (variant)
         {
@@ -160,7 +161,7 @@ public partial class Button : BlueComponentBase
             case Variant.Outline:
                 return $"btn-outline-{color}";
             case Variant.Link:
-                return $"btn-link link-{color} link-offset-2";
+                return $"btn-link{(buttonColor != null ? $" link-{color}" : "")}";
             case Variant.MenuItem:
                 return "blue-menu-item";
             case Variant.None:
