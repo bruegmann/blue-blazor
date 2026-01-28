@@ -14,7 +14,8 @@ $color-mode-type: media-query;
 }
 
 .md-block h3,
-.docgen h3 {
+.docgen > h3,
+.docgen > * > h3 {
     @extend .mt-4, .mb-3;
 }
 

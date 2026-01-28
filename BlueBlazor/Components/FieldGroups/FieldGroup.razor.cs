@@ -1,5 +1,6 @@
 ﻿using BlueBlazor.Shared;
 using Microsoft.AspNetCore.Components;
+using System.Reflection.Emit;
 
 namespace BlueBlazor.Components;
 
@@ -7,8 +8,11 @@ public partial class FieldGroup : ComponentBase, IDisposable
 {
     private string? HeaderClassValue => new CssBuilder("page-header w-100 mb-2 mt-0")
         .AddClass($"h{Heading}", Heading != null)
+        .AddClass("h2", Heading == null)
         .AddClass(HeaderClass)
         .Build();
+
+    private int HeadingLevelValue => Heading ?? RegionCascadingValues?.Level ?? 2;
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
@@ -26,10 +30,13 @@ public partial class FieldGroup : ComponentBase, IDisposable
     public string? Id { get; set; }
 
     [Parameter]
-    public int? Heading { get; set; } = 2;
+    public int? Heading { get; set; }
 
     [CascadingParameter]
     internal FieldGroups? Parent { get; set; } = default!;
+
+    [CascadingParameter]
+    private RegionCascadingValues? RegionCascadingValues { get; set; }
 
     protected override void OnInitialized()
     {
