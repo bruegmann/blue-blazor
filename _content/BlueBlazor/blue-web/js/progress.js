@@ -33,9 +33,9 @@ window.blueWeb.progress = _objectSpread(_objectSpread({}, window.blueWeb.progres
     var interval = setInterval(function () {
       var _progressEl;
       // Simuliere einen natürlichen Anstieg
-      var increment = Math.random() * 5; // Zufälliger Anstieg zwischen 0 und 5
+      var increment = Math.random() * (window.blueWeb.progress.progress < 90 ? 5 : 0.1); // Zufälliger Anstieg zwischen 0 und 5
       window.blueWeb.progress.progress += increment;
-      window.blueWeb.progress.progress = Math.min(window.blueWeb.progress.progress, 100); // Fortschritt darf nicht über 100% gehen
+      window.blueWeb.progress.progress = Math.min(window.blueWeb.progress.progress, 99); // Fortschritt darf nicht über 100% gehen
 
       // Aktualisiere die Progressbar
       progressBar.style.width = window.blueWeb.progress.progress + "%";
