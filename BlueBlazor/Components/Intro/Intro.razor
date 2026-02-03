@@ -1,14 +1,15 @@
 @namespace BlueBlazor.Components
 
-<div class="sign-in-screen">
-    <div class="sign-in-container mx-1">
+<div class="blue-intro">
+    <div class="blue-intro-container mx-1">
         <div class="bg-body rounded-3 shadow-lg px-4 py-5">
             <div class="text-center">
                 @if (Logo != null)
                 {
-                    <img style="max-width: @LogoMaxWidth;" src="@Logo" alt="@LogoAlt" />
+                    <img class="blue-intro-image" style="max-width: @LogoMaxWidth;" src="@Logo" alt="@LogoAlt" />
                 }
-                <h1 class="h2 mt-4 mb-3">@Title</h1>
+                @LogoContent?.Invoke(this)
+                <Heading Class="h2 mt-4 mb-3">@Title</Heading>
             </div>
 
             @ChildContent
@@ -25,6 +26,9 @@
 
     [Parameter]
     public string LogoAlt { get; set; } = "Logo";
+
+    [Parameter]
+    public RenderFragment<Intro>? LogoContent { get; set; }
 
     [Parameter]
     public string Title { get; set; } = "";

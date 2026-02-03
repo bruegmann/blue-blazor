@@ -1,25 +1,24 @@
 ﻿@namespace BlueBlazor.Components
+@inherits BlueComponentBase
 
-<div
-    class="blue-header-title d-inline-flex gap-2 fw-medium align-items-center @(!NoSpacing ? "px-3 py-2" : "") @Class @(Sidebar ? "sidebar" : "")">
+<div class="@ClassValue" style="@Style" @attributes="AdditionalAttributes">
     @if (Logo != null)
     {
         <a href="@Href">
             <img src="@Logo" alt="@LogoAlt" class="blue-header-title-image" />
         </a>
     }
+    @LogoContent?.Invoke(this)
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0">
-            @if (!string.IsNullOrEmpty(AppTitle))
-            {
-                <li class="breadcrumb-item">
-                    <a href="@Href">@AppTitle</a>
-                </li>
-            }
+    @if (!string.IsNullOrEmpty(AppTitle))
+    {
+        <a href="@Href">@AppTitle</a>
+    }
 
-            @if (Breadcrumb != null)
-            {
+    @if (Breadcrumb != null)
+    {
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
                 @foreach (var item in Breadcrumb)
                 {
                     <li class="breadcrumb-item @((item == Breadcrumb.LastOrDefault() ? "active" : ""))"
@@ -38,9 +37,9 @@
                         }
                     </li>
                 }
-            }
-        </ol>
-    </nav>
+            </ol>
+        </nav>
+    }
 
     @ChildContent
 </div>

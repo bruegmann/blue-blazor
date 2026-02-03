@@ -1,12 +1,18 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlueBlazor.Shared;
+using Microsoft.AspNetCore.Components;
 
 namespace BlueBlazor.Components;
 
 /// <summary>
 /// Let's you set a logo and/or a breadcrumb.
 /// </summary>
-public partial class HeaderTitle
+public partial class HeaderTitle : BlueComponentBase
 {
+    private string? ClassValue => new CssBuilder("blue-header-title d-inline-flex gap-2 fw-medium align-items-center")
+        .AddClass("px-3 py-2", !NoSpacing)
+        .AddClass("sidebar", Sidebar)
+        .AddClass(Class).Build();
+
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
@@ -17,13 +23,13 @@ public partial class HeaderTitle
     public string LogoAlt { get; set; } = "Logo";
 
     [Parameter]
+    public RenderFragment<HeaderTitle>? LogoContent { get; set; }
+
+    [Parameter]
     public bool KeepAppTitle { get; set; } = false;
 
     [Parameter]
     public string? AppTitle { get; set; }
-
-    [Parameter]
-    public string Class { get; set; } = "";
 
     /// <summary>
     /// Removes default spacing (padding).
