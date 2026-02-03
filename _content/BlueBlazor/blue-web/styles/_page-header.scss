@@ -9,6 +9,6 @@
 }
 
 .blue-header-title-image {
-    width: var(--blue-header-title-image-width, var(--blue-header-title-image-size, 2rem));
+    width: var(--blue-header-title-image-width, var(--blue-header-title-image-size, auto));
     height: var(--blue-header-title-image-height, var(--blue-header-title-image-size, 2rem));
 }

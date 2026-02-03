@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.21.9 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.21.10 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -11132,7 +11132,7 @@ body {
 }
 
 .blue-header-title-image {
-    width: var(--blue-header-title-image-width, var(--blue-header-title-image-size, 2rem));
+    width: var(--blue-header-title-image-width, var(--blue-header-title-image-size, auto));
     height: var(--blue-header-title-image-height, var(--blue-header-title-image-size, 2rem));
 }
 
@@ -12233,6 +12233,7 @@ dialog.blue-modal:has(.offcanvas-start) {
     }
 }
 
+.blue-intro,
 .sign-in-screen {
     padding-top: var(--blue-header-height);
 
@@ -12240,6 +12241,7 @@ dialog.blue-modal:has(.offcanvas-start) {
         padding-bottom: var(--blue-header-height);
     }
 
+    .blue-intro-container,
     .sign-in-container {
         animation: enabledBlueAppPage 0.5s;
 
@@ -12249,11 +12251,17 @@ dialog.blue-modal:has(.offcanvas-start) {
     }
 
     @media screen and (min-width: 768px) {
+        .blue-intro-container,
         .sign-in-container {
             padding: var(--blue-sign-in-container-md-padding, 0 calc(50% - 18rem));
             width: var(--blue-sign-in-container-md-width, auto);
         }
     }
+}
+
+.blue-intro-image {
+    max-width: 100%;
+    max-height: 100px;
 }
 
 
