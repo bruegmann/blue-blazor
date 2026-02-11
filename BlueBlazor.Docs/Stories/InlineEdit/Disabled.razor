@@ -1,9 +1,4 @@
-﻿<CascadingValue Name="Disabled" Value="true">
-    <InlineEdit Header="Your name" ReadText="@YourName">
-        <input type="text" class="form-control" @bind="@YourName" autofocus />
-    </InlineEdit>
-</CascadingValue>
-
+﻿<InlineEdit Header="Your name" ReadText="@YourName" EditDisabled />
 
 @code {
     private string YourName { get; set; } = "John";

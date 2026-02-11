@@ -36,7 +36,7 @@
     }
     else
     {
-        <ReadView OnEditRequested="EditRequested" id="@IdValue" Disabled="@Disabled">
+        <ReadView OnEditRequested="EditRequested" id="@IdValue" Disabled="EditDisabled || Disabled">
             <div class="form-control-plaintext py-0" style="padding-left: .75rem; padding-right: .75rem">
                 @ReadText @ReadContent @SharedContent
                 @if ((string.IsNullOrEmpty(ReadText) && ReadContent == null && SharedContent == null) || ReadIsEmpty)

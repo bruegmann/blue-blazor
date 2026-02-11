@@ -87,6 +87,9 @@ public partial class InlineEdit : BlueComponentBase
     [Parameter]
     public bool SpacingForEdit { get; set; }
 
+    [Parameter]
+    public bool EditDisabled { get; set; }
+
     [CascadingParameter(Name = "Disabled")]
     protected bool Disabled { get; set; } = false;
 
