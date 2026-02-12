@@ -4,7 +4,7 @@ using Microsoft.JSInterop;
 namespace BlueBlazor.Components;
 
 /// <summary>
-/// Wrapper for [Toast UI Editor](https://github.com/nhn/tui.editor/tree/master) for Blazor.
+/// Wrapper for <see href="https://github.com/nhn/tui.editor/tree/master">Toast UI Editor</see> for Blazor.
 /// Allows to edit markdown in a WYSIWYG editor.
 /// 
 /// The editor JavaScript class is preconfigured for our own needs.

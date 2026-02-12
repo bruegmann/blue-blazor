@@ -27,6 +27,9 @@ public partial class InlineEdit : BlueComponentBase
 
     private string? StyleValue => new StyleBuilder($"--vtn: inline-edit-{IdValue}").AddStyle(Style).Build();
 
+    private string? HeaderClassValue => new CssBuilder("text-primary-emphasis fw-medium")
+        .AddClass("visually-hidden", HeaderHidden).Build();
+
     /// <summary>
     /// Content for edit mode.
     /// </summary>
@@ -70,6 +73,9 @@ public partial class InlineEdit : BlueComponentBase
 
     [Parameter]
     public RenderFragment? HeaderContent { get; set; }
+
+    [Parameter]
+    public bool HeaderHidden { get; set; }
 
     [Parameter]
     public bool ConfirmOnLoseFocus { get; set; }

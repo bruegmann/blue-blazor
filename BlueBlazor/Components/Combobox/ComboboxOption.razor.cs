@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 namespace BlueBlazor.Components;
 
 /// <summary>
-/// Always use together with `Combobox`.
+/// Always use together with <see cref="Combobox"/>.
 /// </summary>
 public partial class ComboboxOption : BlueComponentBase
 {

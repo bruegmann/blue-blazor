@@ -7,7 +7,7 @@
 <div class="@ClassValue" style="@StyleValue">
     @if (!string.IsNullOrEmpty(Header) || HeaderContent is not null)
     {
-        <label for="@IdValue" class="text-primary-emphasis fw-medium" style="margin-left: .75rem">@Header @HeaderContent</label>
+        <label for="@IdValue" class="@HeaderClassValue" style="margin-left: .75rem">@Header @HeaderContent</label>
     }
     @if (ShowEdit)
     {
@@ -41,7 +41,7 @@
                 @ReadText @ReadContent @SharedContent
                 @if ((string.IsNullOrEmpty(ReadText) && ReadContent == null && SharedContent == null) || ReadIsEmpty)
                 {
-                    <span class="text-secondary" role="status">@L["Edit"]</span>
+                    <span class="text-secondary" role="status">@L["NoValue"]</span>
                 }
             </div>
         </ReadView>

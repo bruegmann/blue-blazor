@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 namespace BlueBlazor.Components;
 
 /// <summary>
-/// Always use together with `Tabs`.
+/// Always use together with <see cref="Tabs"/>.
 /// </summary>
 public partial class Tab : ComponentBase, IDisposable
 {

@@ -3,8 +3,8 @@
 namespace BlueBlazor.Components;
 
 /// <summary>
-/// Marks a new section. Use it together with `Heading`.
-/// `Region` will automatically increase the heading level, so you don't have to set it yourself.
+/// Marks a new section. Use it together with <see cref="Heading"/>.
+/// Region will automatically increase the heading level, so you don't have to set it yourself.
 /// </summary>
 public partial class Region : ComponentBase
 {

@@ -300,7 +300,7 @@ public class Helper
         foreach (var param in parameter)
         {
             table += "\n        <tr>";
-            table += $"<td><code>{param.Name}</code>";
+            table += $"<td id=\"props-{PascalToKebabCase(param.Name!)}\"><code>{param.Name}</code>";
             if (param.CascadingParameter)
             {
                 table += $"<br/>(Cascading Parameter)";
@@ -325,7 +325,14 @@ public class Helper
 
         var memberName = $"T:{classType.FullName}";
         var memberNode = memberNodes.FirstOrDefault(node => node.Attribute("name")?.Value == memberName);
-        var comment = memberNode?.Element("summary")?.Value ?? string.Empty;
+
+        if (memberNode?.Element("summary") == null)
+        {
+            return string.Empty;
+        }
+
+        var summaryElement = memberNode.Element("summary")!;
+        var comment = ProcessXmlDocumentation(summaryElement);
 
         // Jede Zeile trimmen
         var trimmedComment = string.Join("\n", comment.Split('\n').Select(line => line.Trim()));
@@ -337,7 +344,78 @@ public class Helper
     {
         var memberName = $"P:{prop.DeclaringType?.FullName}.{prop.Name}";
         var memberNode = memberNodes.FirstOrDefault(node => node.Attribute("name")?.Value == memberName);
-        return memberNode?.Element("summary")?.Value.Trim() ?? string.Empty;
+
+        if (memberNode?.Element("summary") == null)
+        {
+            return string.Empty;
+        }
+
+        var summaryElement = memberNode.Element("summary")!;
+        return ProcessXmlDocumentation(summaryElement).Trim();
+    }
+
+    private string ProcessXmlDocumentation(XElement element)
+    {
+        var result = "";
+
+        foreach (var node in element.Nodes())
+        {
+            if (node is XText textNode)
+            {
+                result += textNode.Value;
+            }
+            else if (node is XElement childElement)
+            {
+                if (childElement.Name == "see")
+                {
+                    var href = childElement.Attribute("href")?.Value;
+                    var cref = childElement.Attribute("cref")?.Value;
+                    var text = childElement.Value;
+
+                    if (!string.IsNullOrEmpty(href))
+                    {
+                        // <see href="url">text</see> -> [text](url)
+                        result += $"[{text}]({href})";
+                    }
+                    else if (!string.IsNullOrEmpty(cref))
+                    {
+                        // <see cref="Type"/> -> Type
+                        string cleaned = cref.Contains(":") ? cref.Split(':')[1] : cref;
+
+                        if (cleaned.StartsWith("BlueBlazor.Components."))
+                        {
+                            var splitted = cleaned.Split('.');
+                            var componentName = splitted[2];
+
+                            if (splitted.Length > 3)
+                            {
+                                var propName = splitted[3];
+                                result += $"[{propName}](components/{PascalToKebabCase(componentName)}#props-{PascalToKebabCase(propName)})";
+                            }
+                            else
+                            {
+                                result += $"[{componentName}](components/{PascalToKebabCase(componentName)})";
+                            }
+                        }
+                        else
+                        {
+                            result += cleaned;
+                        }
+                    }
+                    else
+                    {
+                        result += text;
+                    }
+                }
+                else
+                {
+                    // Andere XML-Elemente rekursiv verarbeiten
+                    result += ProcessXmlDocumentation(childElement);
+                }
+            }
+        }
+
+        return result;
     }
 
     private string MarkdownToHtml(string markdown)

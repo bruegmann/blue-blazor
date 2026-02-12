@@ -3,7 +3,7 @@
 namespace BlueBlazor.Components;
 
 /// <summary>
-/// Implementation of Bootstrap Tabs. Use together with `Tab`.
+/// Implementation of Bootstrap Tabs. Use together with <see cref="Tab"/>.
 /// </summary>
 public partial class Tabs : ComponentBase
 {
@@ -14,7 +14,7 @@ public partial class Tabs : ComponentBase
     public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
-    /// Will be passed down to `Tab` children as identifier. Default is `"TabList-" + Guid.NewGuid().ToString()`.
+    /// Will be passed down to <see cref="Tab"/> children as identifier. Default is `"TabList-" + Guid.NewGuid().ToString()`.
     /// </summary>
     [Parameter]
     public string? Name { get; set; } = "TabList-" + Guid.NewGuid().ToString();

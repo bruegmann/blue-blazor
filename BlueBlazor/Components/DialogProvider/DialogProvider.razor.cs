@@ -5,8 +5,8 @@ using Microsoft.JSInterop;
 namespace BlueBlazor.Components;
 
 /// <summary>
-/// Contains and manages dialogs coming from the `DialogService`.
-/// `DialogService` has to be registered inside your `Program.cs` like this:
+/// Contains and manages dialogs coming from the <see cref="DialogService"/>.
+/// <see cref="DialogService"/> has to be registered inside your `Program.cs` like this:
 /// 
 /// ```csharp
 /// builder.Services.AddBlueBlazor();

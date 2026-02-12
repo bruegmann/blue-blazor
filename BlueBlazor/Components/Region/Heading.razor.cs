@@ -5,7 +5,7 @@ namespace BlueBlazor.Components;
 
 /// <summary>
 /// Helper component to render a heading element (`&lt;h1&gt;`-`&lt;h6&gt;`).
-/// Add some top and bottom margin by setting `Spacing` property.
+/// Add some top and bottom margin by setting <see cref="Spacing"/> property.
 /// </summary>
 public partial class Heading : BlueComponentBase
 {
