@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+<label>
+    <InputCheckbox @bind-Value="ReadOnly" class="form-check-input" /> Read only
+</label>
+
+<MonacoEditor Language="sql" Height="400px" Value="SELECT HELLO FROM WORLD" ReadOnly="ReadOnly" />
+
+@code {
+    private bool ReadOnly { get; set; } = true;
+}

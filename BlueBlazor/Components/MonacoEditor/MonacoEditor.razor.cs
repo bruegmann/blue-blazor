@@ -43,6 +43,7 @@ public partial class MonacoEditor : BlueComponentBase, IAsyncDisposable
     [Parameter]
     public string? Theme { get; set; }
 
+    private bool _readOnly = false;
     [Parameter]
     public bool ReadOnly { get; set; } = false;
 
@@ -51,10 +52,11 @@ public partial class MonacoEditor : BlueComponentBase, IAsyncDisposable
     /// </summary>
     [Parameter]
     public string Height { get; set; } = "200px";
-  
+
     protected override void OnInitialized()
     {
         _value = Value;
+        _readOnly = ReadOnly;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -76,6 +78,15 @@ public partial class MonacoEditor : BlueComponentBase, IAsyncDisposable
             if (_module is not null)
             {
                 await _module.InvokeVoidAsync("SetValue", _id, Value);
+            }
+        }
+
+        if (_readOnly != ReadOnly)
+        {
+            _readOnly = ReadOnly;
+            if (_module is not null)
+            {
+                await _module.InvokeVoidAsync("SetReadOnly", _id, ReadOnly);
             }
         }
     }
