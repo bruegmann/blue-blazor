@@ -65,6 +65,13 @@ export function SetValue(id, value) {
     }
 }
 
+export function SetReadOnly(id, readOnly) {
+    const editor = monacoCollection[id]
+    if (editor) {
+        editor.updateOptions({ readOnly })
+    }
+}
+
 export function Destroy(id) {
     const editor = monacoCollection[id]
     if (editor && editor.dispose) {

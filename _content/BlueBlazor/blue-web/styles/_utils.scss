@@ -18,3 +18,10 @@
         justify-content: center;
     }
 }
+
+// Fixing border radius clipping.
+// We automatically add it to Bootstrap's `.card`.
+.blue-contain-paint,
+.card {
+    contain: paint;
+}
