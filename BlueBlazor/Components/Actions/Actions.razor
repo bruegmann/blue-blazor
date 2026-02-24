@@ -2,8 +2,8 @@
 @namespace BlueBlazor.Components
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
-<div @ref="_element" class="BLUE-actions @Class" role="toolbar" aria-label="@L["ToolbarWithButtonsAndButtonGroups"]">
-    <div class="BLUE-actions-menu @MenuClass">
+<div @ref="_element" class="blue-actions @Class" role="toolbar" aria-label="@L["ToolbarWithButtonsAndButtonGroups"]">
+    <div class="blue-actions-menu @MenuClass">
         @ChildContent
     </div>
 
@@ -13,7 +13,8 @@
                 <IconBefore>&#8942;</IconBefore>
             </MenuItem>
 
-            <div id="@context" popover class="blue-anchored blue-anchored-fallback border rounded-4 shadow BLUE-actions-collapse-menu">
+            <div id="@context" popover
+                 class="blue-anchored blue-anchored-fallback border rounded-4 shadow blue-actions-collapse-menu">
                 @ChildContent
             </div>
         </CreateId>

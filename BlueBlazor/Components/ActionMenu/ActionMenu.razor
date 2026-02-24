@@ -2,11 +2,11 @@
 @inject IJSRuntime JSRuntime
 
 <Outside OnClickOutside="disableActionsToggledIn">
-    <div class="blue-actions @Class @Break.ToString()?.ToLower() @(actionsToggledIn ? "open" : "")">
-        <div class="blue-actions-menu d-flex">
+    <div class="blue-legacy-actions @Class @Break.ToString()?.ToLower() @(actionsToggledIn ? "open" : "")">
+        <div class="blue-legacy-actions-menu d-flex">
             @if (!actionsToggledIn && !HideToggleAction)
             {
-                <MenuItem class="blue-actions-menu-toggle w-100 blue-outside-exception" OnClick="toggleActions"
+                <MenuItem class="blue-legacy-actions-menu-toggle w-100 blue-outside-exception" OnClick="toggleActions"
                     aria-label="Toggle menu">
                 <Icon>
                     @if (ToggleIcon != null)

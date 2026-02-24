@@ -23,12 +23,12 @@ public partial class Actions : ComponentBase, IDisposable
         .Build();
 
     private string? CollapseMenuClassValue => new CssBuilder(CollapseMenuClass)
-        .AddClass("BLUE-actions-collapse-menu blue-anchored blue-anchored-end blue-anchored-fallback")
+        .AddClass("blue-actions-collapse-menu blue-anchored blue-anchored-end blue-anchored-fallback")
         .AddClass("blue-menu-item-dropdown text-body")
         .Build();
 
     private string? CollapseClassValue => new CssBuilder(CollapseClass)
-        .AddClass("BLUE-actions-collapse")
+        .AddClass("blue-actions-collapse")
         .Build();
 
     [Parameter]
