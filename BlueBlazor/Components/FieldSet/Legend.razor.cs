@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlueBlazor.Shared;
+using Microsoft.AspNetCore.Components;
 namespace BlueBlazor.Components;
 
 /// <summary>
@@ -7,6 +8,10 @@ namespace BlueBlazor.Components;
 /// </summary>
 public partial class Legend : BlueComponentBase
 {
+    private string? ClassValue => new CssBuilder("blue-label")
+        .AddClass(Class)
+        .Build();
+
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 }

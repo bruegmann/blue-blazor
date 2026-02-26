@@ -4,8 +4,9 @@
     <InputCheckbox @bind-Value="ReadOnly" class="form-check-input" /> Read only
 </label>
 
-<MonacoEditor Language="sql" Height="400px" Value="SELECT HELLO FROM WORLD" ReadOnly="ReadOnly" />
+<MonacoEditor Language="xml" @bind-Value="MyCode" ReadOnly="ReadOnly" />
 
 @code {
     private bool ReadOnly { get; set; } = true;
+    private string MyCode { get; set; } = "<IDataDocuments>Test</IDataDocuments>";
 }

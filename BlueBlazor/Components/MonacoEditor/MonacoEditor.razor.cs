@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlueBlazor.Extensions;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace BlueBlazor.Components;
@@ -10,6 +11,7 @@ namespace BlueBlazor.Components;
 public partial class MonacoEditor : BlueComponentBase, IAsyncDisposable
 {
     private ElementReference _element;
+    private ElementReference _pre;
     private IJSObjectReference? _module;
     DotNetObjectReference<MonacoEditor>? _dotNetRef;
     private readonly string _id = Guid.NewGuid().ToString();
@@ -44,6 +46,9 @@ public partial class MonacoEditor : BlueComponentBase, IAsyncDisposable
     public string? Theme { get; set; }
 
     private bool _readOnly = false;
+    /// <summary>
+    /// Only the highlighted code without editor will be displayed.
+    /// </summary>
     [Parameter]
     public bool ReadOnly { get; set; } = false;
 
@@ -52,6 +57,15 @@ public partial class MonacoEditor : BlueComponentBase, IAsyncDisposable
     /// </summary>
     [Parameter]
     public string Height { get; set; } = "200px";
+
+    /// <summary>
+    /// A minimap next to scrollbar will be visible.
+    /// </summary>
+    [Parameter]
+    public bool MinimapEnabled { get; set; }
+
+    [Parameter]
+    public MonacoEditorLineNumbers LineNumbers { get; set; }
 
     protected override void OnInitialized()
     {
@@ -65,7 +79,7 @@ public partial class MonacoEditor : BlueComponentBase, IAsyncDisposable
         {
             // Load the Monaco Editor JavaScript module and initialize the editor instance.
             _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/MonacoEditor/MonacoEditor.razor.js");
-            await Initialize(_element);
+            await Initialize();
         }
     }
 
@@ -86,7 +100,8 @@ public partial class MonacoEditor : BlueComponentBase, IAsyncDisposable
             _readOnly = ReadOnly;
             if (_module is not null)
             {
-                await _module.InvokeVoidAsync("SetReadOnly", _id, ReadOnly);
+                await _module.InvokeVoidAsync("Destroy", _id);
+                await Initialize();
             }
         }
     }
@@ -94,12 +109,12 @@ public partial class MonacoEditor : BlueComponentBase, IAsyncDisposable
     /// <summary>
     /// Initializes the Monaco Editor instance via JS interop.
     /// </summary>
-    public async Task Initialize(ElementReference element)
+    public async Task Initialize()
     {
         if (_module is not null)
         {
             _dotNetRef = DotNetObjectReference.Create(this);
-            await _module.InvokeVoidAsync("Initialize", _id, element, _dotNetRef, Value, Language, Theme, ReadOnly);
+            await _module.InvokeVoidAsync("Initialize", _id, _element, _dotNetRef, Value, Language, Theme, ReadOnly, MinimapEnabled, LineNumbers.ToAttributeValue(), _pre);
         }
     }
 
@@ -125,4 +140,12 @@ public partial class MonacoEditor : BlueComponentBase, IAsyncDisposable
             _dotNetRef?.Dispose();
         }
     }
+}
+
+public enum MonacoEditorLineNumbers
+{
+    Off,
+    On,
+    Relative,
+    Interval
 }

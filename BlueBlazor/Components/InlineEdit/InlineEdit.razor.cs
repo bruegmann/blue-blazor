@@ -27,7 +27,7 @@ public partial class InlineEdit : BlueComponentBase
 
     private string? StyleValue => new StyleBuilder($"--vtn: inline-edit-{IdValue}").AddStyle(Style).Build();
 
-    private string? HeaderClassValue => new CssBuilder("text-primary-emphasis fw-medium")
+    private string? HeaderClassValue => new CssBuilder("blue-label")
         .AddClass("visually-hidden", HeaderHidden).Build();
 
     /// <summary>

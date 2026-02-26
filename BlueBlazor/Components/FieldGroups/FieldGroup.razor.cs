@@ -6,7 +6,7 @@ namespace BlueBlazor.Components;
 
 public partial class FieldGroup : ComponentBase, IDisposable
 {
-    private string? HeaderClassValue => new CssBuilder("page-header w-100 mb-2 mt-0")
+    private string? HeaderClassValue => new CssBuilder("page-header w-100 mt-0")
         .AddClass($"h{Heading}", Heading != null)
         .AddClass("h2", Heading == null)
         .AddClass(HeaderClass)

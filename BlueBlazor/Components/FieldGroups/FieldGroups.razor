@@ -6,7 +6,7 @@
         @ChildContent
     </CascadingValue>
 
-    <div class="@(new CssBuilder("vstack gap-3").AddClass(Class).Build())" style="@Style" @attributes="@AdditionalAttributes">
+    <div class="@(new CssBuilder("vstack gap-5").AddClass(Class).Build())" style="@Style" @attributes="@AdditionalAttributes">
         @foreach (var fieldGroup in SortedFieldGroups)
         {
             <FieldGroup Header="@fieldGroup.Header" 
