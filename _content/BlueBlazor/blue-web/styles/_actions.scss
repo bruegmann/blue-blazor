@@ -1,37 +1,37 @@
-.BLUE-actions {
+.blue-actions {
     display: flex;
     white-space: nowrap;
     // overflow-x: auto;
     // overflow-y: visible;
 }
 
-.BLUE-actions-menu {
+.blue-actions-menu {
     display: flex;
     max-width: 100%;
 }
 
-.BLUE-actions-collapse {
+.blue-actions-collapse {
     position: relative;
 }
 
-.BLUE-actions-collapse:not(:has(.BLUE-actions-collapse-visible)) {
+.blue-actions-collapse:not(:has(.blue-actions-collapse-visible)) {
     display: none;
 }
 
-.BLUE-actions-collapse-menu {
+.blue-actions-collapse-menu {
     position: absolute;
 }
 
-.BLUE-actions-collapse-menu:popover-open {
+.blue-actions-collapse-menu:popover-open {
     display: var(--display);
 }
 
 // Compatibility with MenuItems having dropdowns
-.BLUE-actions-menu > .blue-menu-item-wrapper:has(> .blue-menu-item-dropdown) {
+.blue-actions-menu > .blue-menu-item-wrapper:has(> .blue-menu-item-dropdown) {
     display: block;
     position: relative;
 }
 
-.BLUE-actions-menu > .blue-menu-item-wrapper > .blue-menu-item-dropdown {
+.blue-actions-menu > .blue-menu-item-wrapper > .blue-menu-item-dropdown {
     position: absolute;
 }

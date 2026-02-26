@@ -2,9 +2,30 @@
 // Unfortunately his class was removed in Bootstrap 5, so it's now part of Blue Web CSS.
 .blue-page-header,
 .page-header {
-    padding-bottom: 0.563rem;
-    margin: 2.5rem 0 1.25rem;
-    border-bottom: 0.25rem solid var(--blue-page-header-border-color, $table-border-color);
+    padding-bottom: 0.5rem;
+    margin: 2rem 0 1rem;
+    border-bottom: 3px solid var(--bs-border-color, $table-border-color);
+
+    &:is(h1, .h1) {
+        border-width: 4px;
+    }
+    &:is(h2, .h2) {
+        border-width: 3px;
+    }
+    &:is(h3, .h3) {
+        border-width: 2px;
+    }
+    &:is(h4, .h4, h5, .h5, h6, .h6) {
+        border-width: 1px;
+    }
+}
+
+// Styling for a form control label.
+.blue-label {
+    color: var(--bs-primary-text-emphasis);
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 0;
 }
 
 // Vertically alignment, especially for Bootstrap Icons.

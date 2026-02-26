@@ -38,37 +38,42 @@ export async function Initialize(
     initialValue,
     language,
     Theme = "vs-dark",
-    readonly = false
+    readonly = false,
+    minimapEnabled = false,
+    lineNumbers = "off",
+    pre = null
 ) {
     await MonacoProm
     if (monaco.editor.setLocale) {
         monaco.editor.setLocale("de")
     }
-    const editor = monaco.editor.create(element, {
-        value: initialValue,
-        language,
-        automaticLayout: true,
-        theme: Theme,
-        readOnly: readonly
-    })
-    editor.onDidChangeModelContent(() => {
-        dotNetHelper.invokeMethodAsync("InvokeChange", editor.getValue())
-    })
 
-    monacoCollection[id] = editor
+    if (readonly && pre != null) {
+        monaco.editor.colorizeElement(pre);
+    }
+    else {
+        const editor = monaco.editor.create(element, {
+            value: initialValue,
+            language,
+            automaticLayout: true,
+            theme: Theme,
+            lineNumbers,
+            minimap: {
+                enabled: minimapEnabled
+            }
+        })
+        editor.onDidChangeModelContent(() => {
+            dotNetHelper.invokeMethodAsync("InvokeChange", editor.getValue())
+        })
+
+        monacoCollection[id] = editor
+    }
 }
 
 export function SetValue(id, value) {
     const editor = monacoCollection[id]
     if (editor) {
         editor.setValue(value)
-    }
-}
-
-export function SetReadOnly(id, readOnly) {
-    const editor = monacoCollection[id]
-    if (editor) {
-        editor.updateOptions({ readOnly })
     }
 }
 

@@ -1,4 +1,4 @@
-.blue-actions {
+.blue-legacy-actions {
     --max-width: calc(
         var(--bs-btn-border-width, 1px) + var(--bs-btn-padding-x, 0.75rem) + var(--bs-btn-font-size, 1rem) +
             var(--bs-btn-padding-x, 0.75rem) + var(--bs-btn-border-width, 1px)
@@ -7,7 +7,7 @@
     max-height: var(--blue-header-height);
     overflow: hidden;
 
-    .blue-actions-menu {
+    .blue-legacy-actions-menu {
         max-width: var(--max-width);
         & > .blue-menu-item-wrapper {
             display: block;

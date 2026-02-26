@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.22.0 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.24.0 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -3930,7 +3930,7 @@ $corner-shape: #{round} !default;
     max-height: initial;
     overflow: initial;
 
-    .blue-actions-menu {
+    .blue-legacy-actions-menu {
         max-width: initial;
     }
 }
@@ -3955,11 +3955,11 @@ $corner-shape: #{round} !default;
 
             @include show-action-menu-again();
 
-            .blue-actions-menu-item:not(.blue-actions-menu-toggle) {
+            .blue-legacy-actions-menu-item:not(.blue-legacy-actions-menu-toggle) {
                 display: flex;
             }
 
-            .blue-actions-menu {
+            .blue-legacy-actions-menu {
                 flex-direction: column;
                 .blue-menu-item-dropdown {
                     --blue-sidebar-bg: #{darken($theme, 34%)};
@@ -3967,7 +3967,7 @@ $corner-shape: #{round} !default;
             }
         }
 
-        .blue-actions-menu-item:not(.blue-actions-menu-toggle) {
+        .blue-legacy-actions-menu-item:not(.blue-legacy-actions-menu-toggle) {
             display: none;
         }
     }
@@ -3975,16 +3975,16 @@ $corner-shape: #{round} !default;
     @media (min-width: $breakpoint) {
         @include show-action-menu-again();
 
-        .blue-actions-menu .blue-actions-label {
+        .blue-legacy-actions-menu .blue-legacy-actions-label {
             display: inline;
         }
 
-        .blue-actions-menu-toggle {
+        .blue-legacy-actions-menu-toggle {
             display: none;
         }
 
-        .blue-actions-menu > .blue-menu-item-wrapper > .blue-menu-item-dropdown,
-        .blue-actions-menu > .blue-menu-item-wrapper > * > .blue-menu-item-dropdown {
+        .blue-legacy-actions-menu > .blue-menu-item-wrapper > .blue-menu-item-dropdown,
+        .blue-legacy-actions-menu > .blue-menu-item-wrapper > * > .blue-menu-item-dropdown {
             position: absolute;
             right: 0;
         }
@@ -10813,9 +10813,30 @@ $utilities: map-merge(
 // Unfortunately his class was removed in Bootstrap 5, so it's now part of Blue Web CSS.
 .blue-page-header,
 .page-header {
-    padding-bottom: 0.563rem;
-    margin: 2.5rem 0 1.25rem;
-    border-bottom: 0.25rem solid var(--blue-page-header-border-color, $table-border-color);
+    padding-bottom: 0.5rem;
+    margin: 2rem 0 1rem;
+    border-bottom: 3px solid var(--bs-border-color, $table-border-color);
+
+    &:is(h1, .h1) {
+        border-width: 4px;
+    }
+    &:is(h2, .h2) {
+        border-width: 3px;
+    }
+    &:is(h3, .h3) {
+        border-width: 2px;
+    }
+    &:is(h4, .h4, h5, .h5, h6, .h6) {
+        border-width: 1px;
+    }
+}
+
+// Styling for a form control label.
+.blue-label {
+    color: var(--bs-primary-text-emphasis);
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 0;
 }
 
 // Vertically alignment, especially for Bootstrap Icons.
@@ -11173,7 +11194,7 @@ body {
     }
 }
 
-.blue-actions {
+.blue-legacy-actions {
     --max-width: calc(
         var(--bs-btn-border-width, 1px) + var(--bs-btn-padding-x, 0.75rem) + var(--bs-btn-font-size, 1rem) +
             var(--bs-btn-padding-x, 0.75rem) + var(--bs-btn-border-width, 1px)
@@ -11182,7 +11203,7 @@ body {
     max-height: var(--blue-header-height);
     overflow: hidden;
 
-    .blue-actions-menu {
+    .blue-legacy-actions-menu {
         max-width: var(--max-width);
         & > .blue-menu-item-wrapper {
             display: block;
@@ -12080,41 +12101,41 @@ dialog.blue-modal:has(.offcanvas-start) {
     }
 }
 
-.BLUE-actions {
+.blue-actions {
     display: flex;
     white-space: nowrap;
     // overflow-x: auto;
     // overflow-y: visible;
 }
 
-.BLUE-actions-menu {
+.blue-actions-menu {
     display: flex;
     max-width: 100%;
 }
 
-.BLUE-actions-collapse {
+.blue-actions-collapse {
     position: relative;
 }
 
-.BLUE-actions-collapse:not(:has(.BLUE-actions-collapse-visible)) {
+.blue-actions-collapse:not(:has(.blue-actions-collapse-visible)) {
     display: none;
 }
 
-.BLUE-actions-collapse-menu {
+.blue-actions-collapse-menu {
     position: absolute;
 }
 
-.BLUE-actions-collapse-menu:popover-open {
+.blue-actions-collapse-menu:popover-open {
     display: var(--display);
 }
 
 // Compatibility with MenuItems having dropdowns
-.BLUE-actions-menu > .blue-menu-item-wrapper:has(> .blue-menu-item-dropdown) {
+.blue-actions-menu > .blue-menu-item-wrapper:has(> .blue-menu-item-dropdown) {
     display: block;
     position: relative;
 }
 
-.BLUE-actions-menu > .blue-menu-item-wrapper > .blue-menu-item-dropdown {
+.blue-actions-menu > .blue-menu-item-wrapper > .blue-menu-item-dropdown {
     position: absolute;
 }
 

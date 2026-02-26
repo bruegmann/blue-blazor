@@ -2,8 +2,8 @@ export function init(actionsElement) {
   let menu = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
   let collapseMenu = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
   const targetElement = actionsElement.parentElement || actionsElement;
-  if (!menu) menu = actionsElement.querySelector(".BLUE-actions-menu");
-  if (!collapseMenu) collapseMenu = actionsElement.querySelector(".BLUE-actions-collapse-menu");
+  if (!menu) menu = actionsElement.querySelector(".blue-actions-menu");
+  if (!collapseMenu) collapseMenu = actionsElement.querySelector(".blue-actions-collapse-menu");
   function updateActions() {
     // reset
     for (const item of menu.children) {
@@ -13,19 +13,19 @@ export function init(actionsElement) {
     for (const item of collapseMenu.children) {
       ;
       item.style.display = "";
-      item.classList.add("BLUE-actions-collapse-visible");
+      item.classList.add("blue-actions-collapse-visible");
     }
     let i = 0;
     for (const item of menu.children) {
       ;
       item.style.display = "";
       collapseMenu.children[i].style.display = "none";
-      collapseMenu.children[i].classList.remove("BLUE-actions-collapse-visible");
+      collapseMenu.children[i].classList.remove("blue-actions-collapse-visible");
       if (targetElement.scrollWidth > targetElement.clientWidth) {
         ;
         item.style.display = "none";
         collapseMenu.children[i].style.display = "";
-        collapseMenu.children[i].classList.add("BLUE-actions-collapse-visible");
+        collapseMenu.children[i].classList.add("blue-actions-collapse-visible");
         break;
       }
       i++;
