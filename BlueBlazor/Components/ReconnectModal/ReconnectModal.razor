@@ -1,0 +1,41 @@
+﻿@namespace BlueBlazor.Components
+@inherits BlueComponentBase
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
+
+<script type="module" src="./_content/BlueBlazor/Components/ReconnectModal/ReconnectModal.razor.js"></script>
+
+<dialog id="components-reconnect-modal" data-nosnippet
+        class="@(new CssBuilder("text-bg-body p-5 rounded-5 shadow-lg").AddClass(Class).Build())" style="@Style" @attributes="AdditionalAttributes">
+    <div class="d-flex flex-column align-items-center gap-3">
+        <div class="components-rejoining-animation" aria-hidden="true">
+            <div></div>
+            <div></div>
+        </div>
+        <p class="components-reconnect-first-attempt-visible m-0 text-center">
+            @L["RejoiningTheServer"]
+        </p>
+        <p class="components-reconnect-repeated-attempt-visible m-0 text-center">
+            @L["FailedToRejoin"] @L["TryingAgainIn"] <span id="components-seconds-to-next-attempt"></span> @L["Seconds"]
+        </p>
+        <p class="components-reconnect-failed-visible m-0 text-center">
+            @L["FailedToRejoin"]<br />@L["PleaseRetryOrReloadThePage"]
+        </p>
+        <div class="components-reconnect-failed-visible">
+            <Button FilledPrimary id="components-reconnect-button">
+                @L["Retry"]
+            </Button>
+        </div>
+        <p class="components-pause-visible m-0 text-center">
+            @L["TheSessionHasBeenPausedByTheServer"]
+        </p>
+        <p class="components-resume-failed-visible m-0 text-center">
+            @L["FailedToResumeTheSession"]<br />@L["PleaseRetryOrReloadThePage"]
+        </p>
+        <div class="components-pause-visible components-resume-failed-visible">
+            <Button FilledPrimary id="components-resume-button">
+                @L["Resume"]
+            </Button>
+        </div>
+    </div>
+</dialog>

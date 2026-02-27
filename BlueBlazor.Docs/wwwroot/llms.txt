@@ -42,32 +42,24 @@ builder.Services.AddBlueBlazor(options =>
 });
 ```
 
-### Stylesheet
+### Remove `ReconnectModal` component from your project (.NET 10)
 
-You can use the stylesheet of Blue Web by adding the following line to the head of your HTML:
+Your project probably has a `ReconnectModal` component coming from the Blazor project template.
+Remove it, because Blue Blazor already has a component with the same name and with the same functionality.
+
+### Stylesheets
+
+Embed [Blue Web](https://bruegmann.github.io/blue-web) styling and the [Inter font](https://bruegmann.github.io/blue-web/v1/typography) by adding the following lines to the head of your HTML:
 
 ```html
 <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
-```
-
-In .NET 9 or higher you can do it like this:
-
-```razor
-<link rel="stylesheet" href="@Assets["_content/BlueBlazor/blue-web/style.min.css"]">
-```
-
-### Font family
-
-As mentioned in [Blue Web docs](https://bruegmann.github.io/blue-web/v1/typography), [Inter](https://rsms.me/inter/) ([licensed under SIL](https://github.com/rsms/inter/blob/master/LICENSE.txt)) with some default font settings is preconfigured.
-Blue Blazor ships the required files. You can embed them like this:
-
-```razor
 <link rel="stylesheet" href="_content/BlueBlazor/inter/web/inter.css">
 ```
 
 In .NET 9 or higher you can do it like this:
 
 ```razor
+<link rel="stylesheet" href="@Assets["_content/BlueBlazor/blue-web/style.min.css"]">
 <link rel="stylesheet" href="@Assets["_content/BlueBlazor/inter/web/inter.css"]">
 ```
 

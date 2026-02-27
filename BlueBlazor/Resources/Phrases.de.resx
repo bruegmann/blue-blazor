@@ -159,4 +159,31 @@
   <data name="NoItemsFound" xml:space="preserve">
     <value>Keine Einträge gefunden.</value>
   </data>
+  <data name="RejoiningTheServer" xml:space="preserve">
+    <value>Wiederverbindung mit dem Server…</value>
+  </data>
+  <data name="TryingAgainIn" xml:space="preserve">
+    <value>Neuer Versuch in</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>Sekunden.</value>
+  </data>
+  <data name="FailedToRejoin" xml:space="preserve">
+    <value>Wiederverbinden fehlgeschlagen.</value>
+  </data>
+  <data name="PleaseRetryOrReloadThePage" xml:space="preserve">
+    <value>Bitte erneut versuchen oder die Seite neuladen.</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Erneut versuchen</value>
+  </data>
+  <data name="TheSessionHasBeenPausedByTheServer" xml:space="preserve">
+    <value>Die Sitzung wurde vom Server pausiert.</value>
+  </data>
+  <data name="FailedToResumeTheSession" xml:space="preserve">
+    <value>Fortsetzen der Sitzung fehlgeschlagen.</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Fortsetzen</value>
+  </data>
 </root>

@@ -159,4 +159,31 @@
   <data name="NoItemsFound" xml:space="preserve">
     <value>No items found.</value>
   </data>
+  <data name="RejoiningTheServer" xml:space="preserve">
+    <value>Rejoining the server…</value>
+  </data>
+  <data name="TryingAgainIn" xml:space="preserve">
+    <value>Trying again in</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>seconds.</value>
+  </data>
+  <data name="FailedToRejoin" xml:space="preserve">
+    <value>Failed to rejoin.</value>
+  </data>
+  <data name="PleaseRetryOrReloadThePage" xml:space="preserve">
+    <value>Please retry or reload the page.</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="TheSessionHasBeenPausedByTheServer" xml:space="preserve">
+    <value>The session has been paused by the server.</value>
+  </data>
+  <data name="FailedToResumeTheSession" xml:space="preserve">
+    <value>Failed to resume the session.</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Resume</value>
+  </data>
 </root>
