@@ -31,6 +31,12 @@ public partial class TotpInput
     [Parameter]
     public bool AutoFocus { get; set; } = false;
 
+    [Parameter]
+    public int Length { get; set; } = 6;
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
     [JSInvokable]
     public void OnChangeValue(string value)
     {

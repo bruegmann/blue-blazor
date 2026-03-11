@@ -1,0 +1,25 @@
+﻿<Combobox Multiple @bind-SelectedItems="SelectedItems">
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Date" />
+    <ComboboxOption Value="Elderberry" />
+    <ComboboxOption Value="Fig" />
+    <ComboboxOption Value="Grape" />
+    <ComboboxOption Value="Honeydew" />
+</Combobox>
+
+<div class="mt-2">Selected: 
+    <ul>
+        @foreach (var selected in SelectedItems)
+        {
+            <li>@selected.Value</li>
+        }
+    </ul>
+</div>
+
+<Button Variant="Variant.Outline" Sm OnClick="@(() => { SelectedItems.Add(new() { Value = "Grape" }); })">Add 'Grape' from outside</Button>
+
+@code {
+    private List<ComboboxSelectedItem> SelectedItems { get; set; } = [new() { Value = "Banana" }];
+}

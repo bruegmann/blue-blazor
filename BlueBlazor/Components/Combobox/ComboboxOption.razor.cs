@@ -11,7 +11,7 @@ public partial class ComboboxOption : BlueComponentBase
     private string? ClassValue => new CssBuilder("list-group-item list-group-item-action d-flex align-items-baseline").AddClass(Class).Build();
     private string? StyleValue => new StyleBuilder("border: 0").AddStyle(Style).Build();
     private bool IsInSearch => Value.Contains(ComboboxContext?.Search.ToLower() ?? "", StringComparison.CurrentCultureIgnoreCase) || (Description?.ToLower().Contains(ComboboxContext?.Search.ToLower() ?? "", StringComparison.CurrentCultureIgnoreCase) ?? false);
-    private bool IsSelected => ComboboxContext?.Selected == Value;
+    private bool IsSelected => ComboboxContext?.GetSelected(Value) != null || false;
 
     [Parameter, EditorRequired]
     public string Value { get; set; } = "";

@@ -1,20 +1,44 @@
 ﻿@using Microsoft.AspNetCore.Components.Rendering
 @inject NavigationManager NavigationManager
 
-<div class="docgen container pb-3">
-    @ChildContent
+<div class="@(new CssBuilder("docgen pb-3").AddClass("container-fluid", SideContent != null).AddClass("container", SideContent == null).Build())">
+    <div class="row">
+        <div class="@(new CssBuilder().AddClass("col-md-9", SideContent != null).AddClass("col-12", SideContent == null).Build())">
+            @ChildContent
 
-    <div style="display: contents">
-        <h2 id="examples" class="hide-if-last-child">Examples</h2>
-        @ExamplesContent
+            @if (SideContent != null)
+            {
+                <div class="d-md-none card mb-3">
+                    <div class="card-body">
+                        <h2 class="card-title h5">On this page</h2>
+                        @SideContent
+                    </div>
+                </div>
+            }
+
+            <div style="display: contents">
+                <h2 id="examples" class="hide-if-last-child">Examples</h2>
+                @ExamplesContent
+            </div>
+
+            <div style="display: contents">
+                <h2 id="props" class="hide-if-last-child">Props</h2>
+                @PropsContent
+            </div>
+
+            <Footer />
+        </div>
+
+        @if (SideContent != null)
+        {
+            <div class="col-md-3">
+                <div class="sticky-top pt-4">
+                    <h2 class="page-header h5">On this page</h2>
+                    @SideContent
+                </div>
+            </div>
+        }
     </div>
-
-    <div style="display: contents">
-        <h2 id="props" class="hide-if-last-child">Props</h2>
-        @PropsContent
-    </div>
-
-    <Footer />
 </div>
 
 <script src="lib/prism.js"></script>
@@ -25,6 +49,9 @@
 
     [Parameter]
     public string? Section { get; set; }
+
+    [Parameter]
+    public RenderFragment? SideContent { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }

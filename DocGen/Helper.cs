@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using System.Text.Json;
 using DocGen.Models;
+using DocGen;
 
 public class Helper
 {
@@ -60,13 +61,27 @@ public class Helper
             string storyPath = Path.Combine(storiesPath, component.Name);
             string storyImport = "";
             string storyHtml = "";
+            string sideContent = "";
+            sideContent += "<nav class='docs-toc'><ul>";
             if (Directory.Exists(storyPath))
             {
                 storyImport = $"@using BlueBlazor.Docs.Stories.{component.Name}\n";
-                storyHtml = await GetStoryContent(storyPath, "html");
-            }
+                var storyContent = await GetStoryContent(storyPath, "html");
 
-            string razor = ApplyRazorTemplate($"@page \"/{pageUrl}/{{section?}}\"\n{storyImport}", readMeHtml, parametersHtml, storyHtml, pageUrl);
+                sideContent += $"<li><a href='{pageUrl}#examples'>Examples</a>";
+                sideContent += "<ul>";
+                foreach (var section in storyContent.Sections)
+                {
+                    sideContent += $"<li><a href='{pageUrl}#{section.Key}'>{section.Value}</a></li>";
+                }
+                sideContent += "</ul></li>";
+
+                storyHtml += storyContent.Content;
+            }
+            sideContent += $"<li><a href='{pageUrl}#props'>Props</a></li>";
+            sideContent += "</ul></nav>";
+
+            string razor = ApplyRazorTemplate($"@page \"/{pageUrl}/{{section?}}\"\n{storyImport}", readMeHtml, parametersHtml, storyHtml, pageUrl, sideContent);
             await File.WriteAllTextAsync(pagePath, razor);
         }
 
@@ -108,7 +123,7 @@ public class Helper
             string storyPath = Path.Combine(storiesPath, component!);
             if (Directory.Exists(storyPath))
             {
-                componentMarkdown += await GetStoryContent(storyPath, "markdown");
+                componentMarkdown += (await GetStoryContent(storyPath, "markdown")).Content;
             }
 
             markdown += $"\n\n{componentMarkdown}\n";
@@ -119,20 +134,24 @@ public class Helper
 
 
 
-    private string ApplyRazorTemplate(string imports = "", string content = "", string props = "", string examples = "", string pageUrl = "")
+    private string ApplyRazorTemplate(string imports = "", string content = "", string props = "", string examples = "", string pageUrl = "", string sideContent = "")
     {
         return RazorTemplate.Replace("{imports}", imports)
                 .Replace("{content}", content)
                 .Replace("{props}", props)
                 .Replace("{examples}", examples)
-                .Replace("{pageUrl}", pageUrl);
+                .Replace("{pageUrl}", pageUrl)
+                .Replace("<SideContent></SideContent>", $"<SideContent>{sideContent}</SideContent>");
     }
 
-    private async Task<string> GetStoryContent(string storyPath, string format = "html")
+    private async Task<StoryContent> GetStoryContent(string storyPath, string format = "html")
     {
+        var storyContent = new StoryContent();
+
         string docsRegex = "@\\{\\s*\\/\\*docs([\\s\\S]*?)\\*\\/\\s*\\}";
         var examples = Directory.GetFiles(storyPath, "*.razor");
-        string examplesContent = "";
+
+        List<string> examplesLinkList = [];
 
         foreach (var example in examples)
         {
@@ -168,14 +187,16 @@ public class Helper
                 catch { }
             }
 
+            storyContent.Sections.Add($"examples-{exampleName}", $"{docsMeta.Title}");
+
             if (format == "html")
             {
                 code = code.Replace("@", "@@").Replace("<", "&lt;").Replace(">", "&gt;").Trim();
 
-                examplesContent += $"<h3 id='examples-{exampleName}'>{docsMeta.Title}</h3>\n" +
+                storyContent.Content += $"<h3 id='examples-{exampleName}'>{docsMeta.Title}</h3>\n" +
                     (docsMeta.Description != "" ? MarkdownToHtml(docsMeta.Description ?? "") : "");
 
-                examplesContent += "<div class=\"example\">\n" +
+                storyContent.Content += "<div class=\"example\">\n" +
                     "<h4 class=\"visually-hidden\">Live demo</h4>" +
                     $"    <div class=\"example-demo\">{(docsMeta.IframeUrl != null ?
                     $"<iframe class=\"example-iframe\" src=\"{docsMeta.IframeUrl}\"></iframe>" +
@@ -192,22 +213,22 @@ public class Helper
                 if (File.Exists(cssFile))
                 {
                     var cssCode = await File.ReadAllTextAsync(cssFile);
-                    examplesContent += $"    <div class=\"example-code mt-1\">\n" +
+                    storyContent.Content += $"    <div class=\"example-code mt-1\">\n" +
                         $"        <h4 class=\"small mb-0 px-3 py-2\">{Path.GetFileName(cssFile)}</h4>\n" +
                         $"        <pre><code class=\"language-css\">{cssCode}</code></pre>\n" +
                         $"    </div>\n";
                 }
 
-                examplesContent += "</div>";
+                storyContent.Content += "</div>";
             }
             else if (format == "markdown")
             {
-                examplesContent += $"### {docsMeta.Title}\n" + docsMeta.Description + "\n";
-                examplesContent += $"```razor\n{code}\n```\n";
+                storyContent.Content += $"### {docsMeta.Title}\n" + docsMeta.Description + "\n";
+                storyContent.Content += $"```razor\n{code}\n```\n";
             }
         }
 
-        return examplesContent;
+        return storyContent;
     }
 
     private IEnumerable<ComponentParameterInfo> GetComponentParameters(Type componentType, string xmlDocumentationPath)

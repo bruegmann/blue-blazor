@@ -2,8 +2,8 @@
 @inherits BlueComponentBase
 
 <CreateId Context="popoverId">
-    <Button Label="@Label" LabelHidden="LabelHidden" PopoverTarget="@popoverId" Variant="Variant" Color="Color"
-            Class="@Class" Style="@Style" id="@Id"
+    <Button LabelHidden="LabelHidden" PopoverTarget="@(PopoverId ?? popoverId)" Variant="Variant" Color="Color"
+            Class="@Class" Style="@Style" id="@Id" OnClick="OnClick"
             aria-haspopup="listbox" @attributes="AdditionalAttributes">
         <IconAfter>
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-down ms-auto" viewBox="0 0 16 16">
@@ -11,20 +11,29 @@
             </svg>
         </IconAfter>
         <ChildContent>
-            <span class="visually-hidden">
-                @if (!string.IsNullOrEmpty(CurrentDisplay))
-                {
-                    <text>@L["Selected"]: @CurrentDisplay</text>
-                }
-                else
-                {
-                    @L["NothingSelected"]
-                }
-            </span>
+            @if (CustomButtonContent == null)
+            {
+                <span class="@(new CssBuilder().AddClass("visually-hidden", LabelHidden).Build())">
+                    @if (_comboboxContext.SelectedItems.Count <= 0)
+                    {
+                        <text>@L["Select"]...</text>
+                        <span class="visually-hidden">@L["NothingSelected"]</span>
+                    }
+                    else
+                    {
+                        <span class="visually-hidden">@L["Selected"]: </span>
+                        @(string.Join(", ", _comboboxContext.SelectedItems.Select(selected => !string.IsNullOrEmpty(selected.Description) ? selected.Description : selected.Value)))
+                    }
+                </span>
+            }
+            else
+            {
+                @CustomButtonContent.Invoke(_comboboxContext)
+            }
         </ChildContent>
     </Button>
 
-    <Popover @ref="_popoverRef" Id="@popoverId" End="PopoverEnd" RoundingClass="rounded-bottom-4"
+    <Popover @ref="_popoverRef" Id="@(PopoverId ?? popoverId)" End="PopoverEnd" RoundingClass="rounded-bottom-4"
              Style="border-radius: calc(var(--bs-border-radius-xl) + .5rem)" OnToggle="HandlePopoverToggle">
         <CreateId Context="inputId">
             <div class="m-1">
@@ -51,5 +60,10 @@
                 </bl-select-list>
             </CreateId>
         </CreateId>
+
+        @if (Multiple)
+        {
+            <Button FilledPrimary OnClick="Confirm">@L["Confirm"]</Button>
+        }
     </Popover>
 </CreateId>

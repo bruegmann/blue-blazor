@@ -70,3 +70,24 @@ pre {
 body:has(.docs-layout) {
     overflow: initial;
 }
+
+.docs-toc {
+    margin-left: -2rem;
+
+    ul {
+        list-style: none;
+    }
+
+    a {
+        display: block;
+        padding: .125rem 0 .125rem .75rem;
+        color: inherit;
+        border-left: .125rem solid transparent;
+        text-decoration: none;
+
+        &:hover {
+            color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+    }
+}

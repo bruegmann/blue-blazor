@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+<CreateId Context="id">
+    <InputCheckbox @bind-Value="IsDisabled" class="form-check-input" id="@id" />
+    <label class="form-check-label" for="@id">Disabled</label>
+</CreateId>
+
+<TotpInput Disabled="IsDisabled" />
+
+
+@code {
+    private bool IsDisabled { get; set; } = true;
+}
