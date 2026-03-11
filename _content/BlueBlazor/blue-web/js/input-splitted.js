@@ -13,6 +13,7 @@ var _refArray = /*#__PURE__*/new WeakMap();
 var _lightDom2 = /*#__PURE__*/new WeakMap();
 var _value2 = /*#__PURE__*/new WeakMap();
 var _length2 = /*#__PURE__*/new WeakMap();
+var _disabled2 = /*#__PURE__*/new WeakMap();
 var _controlClass = /*#__PURE__*/new WeakMap();
 var _control1Id = /*#__PURE__*/new WeakMap();
 var _styling = /*#__PURE__*/new WeakMap();
@@ -75,6 +76,16 @@ export class InputSplitted extends HTMLElement {
     }
     _classPrivateFieldSet(_refArray, this, [..._classPrivateFieldGet(_refArray, this)]);
   }
+  get disabled() {
+    return _classPrivateFieldGet(_disabled2, this);
+  }
+  set disabled(_disabled) {
+    _classPrivateFieldSet(_disabled2, this, _disabled);
+    const inputs = this.lightDom ? this.querySelectorAll("input") : this.shadowRoot.querySelectorAll("input");
+    for (const input of inputs) {
+      input.disabled = _disabled;
+    }
+  }
   get controlClass() {
     return _classPrivateFieldGet(_controlClass, this);
   }
@@ -102,6 +113,7 @@ export class InputSplitted extends HTMLElement {
     _classPrivateFieldInitSpec(this, _lightDom2, false);
     _classPrivateFieldInitSpec(this, _value2, "");
     _classPrivateFieldInitSpec(this, _length2, 0);
+    _classPrivateFieldInitSpec(this, _disabled2, false);
     _classPrivateFieldInitSpec(this, _controlClass, "");
     _classPrivateFieldInitSpec(this, _control1Id, "");
     _classPrivateFieldInitSpec(this, _styling, /* html */"<style>\n    input {\n        display: var(--blue-input-splitted-display, revert);\n        background-color: var(--blue-input-splitted-background-color, revert);\n        border: var(--blue-input-splitted-border, revert);\n        border-radius: var(--blue-input-splitted-border-radius, revert);\n        box-shadow: var(--blue-input-splitted-box-shadow, revert);\n        color: var(--blue-input-splitted-color, revert);\n        margin: var(--blue-input-splitted-margin, revert);\n        padding: var(--blue-input-splitted-padding, revert);\n        text-align: var(--blue-input-splitted-text-align, revert);\n        width: var(--blue-input-splitted-width, revert);\n    }\n</style>");
@@ -111,6 +123,7 @@ export class InputSplitted extends HTMLElement {
   connectedCallback() {
     this.didInit = true;
     this.lightDom = this.getAttribute("light-dom") !== null;
+    this.disabled = this.getAttribute("disabled") !== null;
     _assertClassBrand(_InputSplitted_brand, this, _initDom).call(this);
     this.value = this.getAttribute("value") || this.value;
     this.length = getLength(this);
@@ -138,6 +151,7 @@ function _addInput(i) {
   }
   input.maxLength = 1;
   input.value = _classPrivateFieldGet(_valueArray, this)[i] || "";
+  input.disabled = this.disabled;
   input.addEventListener("input", _ref => {
     let {
       target
@@ -214,10 +228,13 @@ function _observe() {
       if (m.attributeName === "light-dom") {
         this.lightDom = this.getAttribute("light-dom") !== null;
       }
+      if (m.attributeName === "disabled") {
+        this.disabled = this.getAttribute("disabled") !== null;
+      }
     });
   }));
   _classPrivateFieldGet(_observer, this).observe(this, {
-    attributeFilter: ["value", "length", "control-class", "control-1-id", "light-dom"],
+    attributeFilter: ["value", "length", "control-class", "control-1-id", "light-dom", "disabled"],
     attributeOldValue: true,
     childList: true,
     subtree: true

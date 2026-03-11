@@ -53,14 +53,14 @@ Embed [Blue Web](https://bruegmann.github.io/blue-web) styling and the [Inter fo
 
 ```html
 <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
-<link rel="stylesheet" href="_content/BlueBlazor/inter/web/inter.css">
+<link rel="stylesheet" href="_content/BlueBlazor/inter/web/inter.css" />
 ```
 
 In .NET 9 or higher you can do it like this:
 
 ```razor
-<link rel="stylesheet" href="@Assets["_content/BlueBlazor/blue-web/style.min.css"]">
-<link rel="stylesheet" href="@Assets["_content/BlueBlazor/inter/web/inter.css"]">
+<link rel="stylesheet" href="@Assets["_content/BlueBlazor/blue-web/style.min.css"]" />
+<link rel="stylesheet" href="@Assets["_content/BlueBlazor/inter/web/inter.css"]" />
 ```
 
 ### Dynamic color mode

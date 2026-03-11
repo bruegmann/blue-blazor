@@ -6,6 +6,8 @@ export declare class InputSplitted extends HTMLElement {
     set value(_value: string);
     get length(): number;
     set length(_length: number);
+    get disabled(): boolean;
+    set disabled(_disabled: boolean);
     get controlClass(): string;
     set controlClass(value: string);
     get control1Id(): string;
