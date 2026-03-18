@@ -1,3 +1,4 @@
+using BlueBlazor.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -6,7 +7,7 @@ namespace BlueBlazor.Components;
 /// <summary>
 /// This uses `InputSplitted` from [Blue Web](https://bruegmann.github.io/blue-web/v1/js/Input%20Splitted).
 /// </summary>
-public partial class TotpInput
+public partial class TotpInput : BlueComponentBase
 {
     [Inject]
     protected IJSRuntime JSRuntime { get; set; } = default!;
@@ -15,6 +16,11 @@ public partial class TotpInput
     private DotNetObjectReference<TotpInput>? _objRef;
     private IJSObjectReference? _module;
 
+    private string? LabelClassValue => new CssBuilder(LabelClass)
+        .AddClass("form-label", FormLabel)
+        .AddClass("visually-hidden", LabelHidden).Build();
+
+    private string? ClassValue => new CssBuilder("d-flex gap-1").AddClass(Class).Build();
 
     [Parameter]
     public string Value { get; set; } = "";
@@ -24,6 +30,18 @@ public partial class TotpInput
 
     [Parameter]
     public string Label { get; set; } = "";
+
+    [Parameter]
+    public string? LabelClass { get; set; }
+
+    [Parameter]
+    public bool LabelHidden { get; set; } = false;
+
+    /// <summary>
+    /// Adds `.form-label` to the label.
+    /// </summary>
+    [Parameter]
+    public bool FormLabel { get; set; } = false;
 
     [Parameter]
     public string Id { get; set; } = Guid.NewGuid().ToString();
