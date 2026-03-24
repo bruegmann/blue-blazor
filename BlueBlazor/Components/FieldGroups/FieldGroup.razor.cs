@@ -1,12 +1,14 @@
 ﻿using BlueBlazor.Shared;
 using Microsoft.AspNetCore.Components;
-using System.Reflection.Emit;
 
 namespace BlueBlazor.Components;
 
-public partial class FieldGroup : ComponentBase, IDisposable
+public partial class FieldGroup : BlueComponentBase, IDisposable
 {
-    private string? HeaderClassValue => new CssBuilder("page-header w-100 mt-0")
+    private string? ClassValue => new CssBuilder("blue-collapse").AddClass(Class).Build();
+
+    private string? HeaderClassValue => new CssBuilder("blue-collapse-header d-flex align-items-center gap-1")
+        .AddClass("blue-page-header w-100 mt-0", PageHeader)
         .AddClass($"h{Heading}", Heading != null)
         .AddClass("h2", Heading == null)
         .AddClass(HeaderClass)
@@ -31,6 +33,9 @@ public partial class FieldGroup : ComponentBase, IDisposable
 
     [Parameter]
     public int? Heading { get; set; }
+
+    [Parameter]
+    public bool PageHeader { get; set; } = true;
 
     [CascadingParameter]
     internal FieldGroups? Parent { get; set; } = default!;
