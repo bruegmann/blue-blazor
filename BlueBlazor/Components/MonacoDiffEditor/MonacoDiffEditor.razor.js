@@ -35,8 +35,8 @@ const diffEditorCollection = {}
 export async function Initialize(id, element, dotNetHelper, originalValue, modifiedValue, readOnly, renderSideBySide, ignoreTrimWhitespace, renderOverviewRuler) {
     await MonacoProm
 
-    var originalModel = monaco.editor.createModel(originalValue, "text/plain");
-    var modifiedModel = monaco.editor.createModel(modifiedValue, "text/plain");
+    var originalModel = monaco.editor.createModel(originalValue, "plaintext");
+    var modifiedModel = monaco.editor.createModel(modifiedValue, "plaintext");
 
     var diffEditor = monaco.editor.createDiffEditor(element, {
         enableSplitViewResizing: false,
