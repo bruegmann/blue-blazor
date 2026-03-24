@@ -35,45 +35,45 @@ const diffEditorCollection = {}
 export async function Initialize(id, element, dotNetHelper, originalValue, modifiedValue, readOnly, renderSideBySide, ignoreTrimWhitespace, renderOverviewRuler) {
     await MonacoProm
 
-    var originalModel = monaco.editor.createModel(originalValue, "plaintext");
-    var modifiedModel = monaco.editor.createModel(modifiedValue, "plaintext");
+    const originalModel = monaco.editor.createModel(originalValue, "plaintext")
+    const modifiedModel = monaco.editor.createModel(modifiedValue, "plaintext")
 
-    var diffEditor = monaco.editor.createDiffEditor(element, {
+    const diffEditor = monaco.editor.createDiffEditor(element, {
         enableSplitViewResizing: false,
         automaticLayout: true,
         renderSideBySide: renderSideBySide,
         ignoreTrimWhitespace: ignoreTrimWhitespace,
         renderOverviewRuler: renderOverviewRuler,
         readOnly: readOnly
-    });
+    })
 
     diffEditor.setModel({
         original: originalModel,
         modified: modifiedModel,
-    });
+    })
 
     if (!readOnly) {
         modifiedModel.onDidChangeContent(() => {
-            dotNetHelper.invokeMethodAsync("InvokeChange", modifiedModel.getValue());
-        });
+            dotNetHelper.invokeMethodAsync("InvokeChange", modifiedModel.getValue())
+        })
     }
 
-    diffEditorCollection[id] = { diffEditor, originalModel, modifiedModel };
+    diffEditorCollection[id] = { diffEditor, originalModel, modifiedModel }
 }
 
 export function SetModifiedValue(id, value) {
-    const item = diffEditorCollection[id];
+    const item = diffEditorCollection[id]
     if (item?.modifiedModel) {
-        item.modifiedModel.setValue(value);
+        item.modifiedModel.setValue(value)
     }
 }
 
 export function Destroy(id) {
-    const item = diffEditorCollection[id];
+    const item = diffEditorCollection[id]
     if (item) {
-        item.diffEditor?.dispose();
-        item.originalModel?.dispose();
-        item.modifiedModel?.dispose();
-        delete diffEditorCollection[id];
+        item.diffEditor?.dispose()
+        item.originalModel?.dispose()
+        item.modifiedModel?.dispose()
+        delete diffEditorCollection[id]
     }
 }
