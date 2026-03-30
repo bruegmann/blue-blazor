@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.24.2 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.25.3 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -10924,9 +10924,7 @@ body {
 }
 
 // Fixing border radius clipping.
-// We automatically add it to Bootstrap's `.card`.
-.blue-contain-paint,
-.card {
+.blue-contain-paint {
     contain: paint;
 }
 

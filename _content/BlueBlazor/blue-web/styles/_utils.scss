@@ -20,8 +20,6 @@
 }
 
 // Fixing border radius clipping.
-// We automatically add it to Bootstrap's `.card`.
-.blue-contain-paint,
-.card {
+.blue-contain-paint {
     contain: paint;
 }
