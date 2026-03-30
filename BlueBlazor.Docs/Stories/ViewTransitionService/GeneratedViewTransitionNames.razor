@@ -1,0 +1,57 @@
+﻿@using BlueBlazor.Services
+@inject ViewTransitionService ViewTransitionService
+
+@if (Position == "left")
+{
+    <Button OnClick="MoveToRight">Move to right</Button>
+}
+else
+{
+    <Button OnClick="MoveToLeft">Move to left</Button>
+}
+
+<CreateId Context="prefix">
+    <div class="row mt-3">
+        <div class="col-6">
+            @if (Position == "left")
+            {
+                <div style="@($"view-transition-name: {prefix}_item")">
+                    @Item
+                </div>
+            }
+        </div>
+
+        <div class="col-6 text-end">
+            @if (Position == "right")
+            {
+                <div style="@($"view-transition-name: {prefix}_item")">
+                    @Item
+                </div>
+            }
+        </div>
+    </div>
+</CreateId>
+
+@code {
+    private RenderFragment Item => @<div class="card p-5"></div>;
+
+    private string Position { get; set; } = "left";
+
+    private void MoveToLeft()
+    {
+        _ = ViewTransitionService.Run(() =>
+        {
+            Position = "left";
+            StateHasChanged();
+        });
+    }
+
+    private void MoveToRight()
+    {
+        _ = ViewTransitionService.Run(() =>
+        {
+            Position = "right";
+            StateHasChanged();
+        });
+    }
+}

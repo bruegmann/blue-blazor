@@ -1,0 +1,45 @@
+﻿@using BlueBlazor.Services
+@inject ViewTransitionService ViewTransitionService
+
+<div class="row">
+    <div class="col-6">
+        @if (Position == "left")
+        {
+            <div style="view-transition-name: move-me">
+                <!-- view-transition-name has to be set and be unique per rendered element -->
+                <Button OnClick="MoveToRight">Move to right</Button>
+            </div>
+        }
+    </div>
+
+    <div class="col-6 text-end">
+        @if (Position == "right")
+        {
+            <div style="view-transition-name: move-me">
+                <Button OnClick="MoveToLeft">Move to left</Button>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private string Position { get; set; } = "left";
+
+    private void MoveToLeft()
+    {
+        _ = ViewTransitionService.Run(() =>
+        {
+            Position = "left";
+            StateHasChanged();
+        });
+    }
+
+    private void MoveToRight()
+    {
+        _ = ViewTransitionService.Run(() =>
+        {
+            Position = "right";
+            StateHasChanged();
+        });
+    }
+}

@@ -99,6 +99,15 @@ public partial class Combobox : BlueComponentBase
     public string? PopoverId { get; set; }
 
     [Parameter]
+    public bool SearchHidden { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public RenderFragment? IconBefore { get; set; }
+
+    [Parameter]
     public EventCallback<PopoverToggleEventArgs> OnTogglePopover { get; set; }
 
     [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(BlSelectEventArgs))]

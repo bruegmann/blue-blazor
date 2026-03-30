@@ -6,6 +6,9 @@ using System.Text.Json.Serialization;
 
 namespace BlueBlazor.Services;
 
+/// <summary>
+/// Provides methods for displaying, managing, and interacting with dialogs in a web application.
+/// </summary>
 public class DialogService
 {
     private IJSRuntime JSRuntime { get; set; } = default!;
