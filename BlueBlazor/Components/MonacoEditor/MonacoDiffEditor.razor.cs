@@ -67,7 +67,7 @@ public partial class MonacoDiffEditor : BlueComponentBase, IAsyncDisposable
     {
         if (firstRender)
         {
-            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/MonacoDiffEditor/MonacoDiffEditor.razor.js");
+            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/MonacoEditor/MonacoDiffEditor.razor.js");
             _dotNetRef = DotNetObjectReference.Create(this);
             await _module.InvokeVoidAsync("Initialize", _id, _element, _dotNetRef, OriginalValue, CurrentValue, ReadOnly, RenderSideBySide, IgnoreTrimWhitespace, RenderOverviewRuler);
         }
