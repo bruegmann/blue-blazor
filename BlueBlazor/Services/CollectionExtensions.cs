@@ -13,6 +13,7 @@ public static class CollectionExtensions
             services.Configure<Options>(_ => { });
 
         services.AddScoped<DialogService>();
+        services.AddScoped<ViewTransitionService>();
         return services;
     }
 }

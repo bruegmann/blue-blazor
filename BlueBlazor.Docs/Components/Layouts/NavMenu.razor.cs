@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlueBlazor.Docs.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using System.Text.Json;
 
@@ -11,6 +12,8 @@ public partial class NavMenu : ComponentBase
 
     [Inject]
     private NavigationManager NavigationManager { get; set; } = default!;
+
+    private PagesData? _pagesData;
 
     public void Dispose()
     {
@@ -44,8 +47,6 @@ public partial class NavMenu : ComponentBase
     private async Task LoadPagesData()
     {
         var json = await Http.GetStringAsync("data/pages-data.json?v=8");
-        componentPageUrls = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(json);
+        _pagesData = JsonSerializer.Deserialize<PagesData>(json);
     }
-
-    Dictionary<string, Dictionary<string, string>>? componentPageUrls;
 }

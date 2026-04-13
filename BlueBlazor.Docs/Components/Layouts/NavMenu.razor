@@ -7,12 +7,55 @@
         </MenuItem>
     </li>
 
+
+
+    @if (_pagesData != null)
+    {
+        @foreach (var group in _pagesData.ServicePageUrls)
+        {
+            <li class="mt-3">
+                <strong class="ps-2">@group.Key</strong>
+                <ul class="list-unstyled">
+                    @foreach (var item in group.Value)
+                    {
+                        <li>
+                            <MenuItem Label="@item.Key" Href="@(item.Value + "/")" Current="@IsActive(item.Value + "/")">
+                                <IconBefore>
+                                    @(componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.Icon ?? defaultIcon)
+                                </IconBefore>
+
+                                <ChildContent>
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsNew == true)
+                                    {
+                                        <span class="badge bg-primary ms-1 mt-1">New</span>
+                                    }
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsUpdate == true)
+                                    {
+                                        <span class="badge bg-info ms-1 mt-1">Update</span>
+                                    }
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsExperimental == true)
+                                    {
+                                        <span class="badge bg-warning ms-1 mt-1">Experimental</span>
+                                    }
+                                    @if (componentIcons.Where(x => x.Key == item.Key).FirstOrDefault().Value?.IsDeprecated == true)
+                                    {
+                                        <span class="badge bg-danger ms-1 mt-1">Deprecated</span>
+                                    }
+                                </ChildContent>
+                            </MenuItem>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    }
+
     <li class="mt-3">
         <strong class="ps-2">Components</strong>
         <ul class="list-unstyled">
-            @if (componentPageUrls != null)
+            @if (_pagesData != null)
             {
-                @foreach (var group in componentPageUrls)
+                @foreach (var group in _pagesData.ComponentPageUrls)
                 {
                     @foreach (var item in group.Value.Where(i => i.Key == group.Key))
                     {
@@ -95,44 +138,44 @@
 @code {
     Dictionary<string, ComponentIcon> componentIcons = new()
     {
-        {"Action menu", new(@<BiMenuButtonWide />, @<BiMenuButtonWideFill />)},
-        {"Alert section", new(@<BiExclamationDiamond />, @<BiExclamationDiamondFill />)},
+        {"Action Menu", new(@<BiMenuButtonWide />, @<BiMenuButtonWideFill />)},
+        {"Alert Section", new(@<BiExclamationDiamond />, @<BiExclamationDiamondFill />)},
         {"Button", new(@<BiPlayBtn />, @<BiPlayBtnFill />)},
-        {"Button or a", new(@<BiLink45deg />)},
+        {"Button Or A", new(@<BiLink45deg />)},
         {"Chevron", new(@<BiChevronRight />)},
         {"Region", new(@<BiCardHeading />)},
         {"Heading", new(@<BiTypeH1 />)},
         {"Intro", new(@<BiPostcard />, @<BiPostcardFill />)},
         {"Layout", new(@<BiLayoutTextWindowReverse />)},
-        {"Qr code gen", new(@<BiQrCode />)},
-        {"Menu item", new(@<BiApp />)},
+        {"Qr Code Gen", new(@<BiQrCode />)},
+        {"Menu Item", new(@<BiApp />)},
         {"Popover", new(@<BiMenuDown />)},
-        {"Totp input", new(@<BiInputCursorText />, isUpdate: true)},
+        {"Totp Input", new(@<BiInputCursorText />)},
         {"Tab", new(@<BiSegmentedNav />)},
         {"Tabs", new(@<BiSegmentedNav />)},
-        {"Simple layout", new(@<BiWindow />)},
-        {"Inline edit", new(@<BiCursorText />)},
-        {"Tui editor", new(@<BiPencilSquare />)},
-        {"Modal dialog", new(@<BiWindowStack />)},
-        {"Monaco editor", new(@<BiFileCodeFill />, isUpdate: true)},
-        {"Offcanvas dialog", new(@<BiWindowStack />)},
-        {"Dialog opener", new(@<BiArrowUpRightSquare />)},
-        {"Dialog provider", new(@<BiSquare />)},
+        {"Simple Layout", new(@<BiWindow />)},
+        {"Inline Edit", new(@<BiCursorText />)},
+        {"Tui Editor", new(@<BiPencilSquare />)},
+        {"Modal Dialog", new(@<BiWindowStack />)},
+        {"Monaco Editor", new(@<BiFileCodeFill />)},
+        {"Offcanvas Dialog", new(@<BiWindowStack />)},
+        {"Dialog Service", new(@<BiWindow />)},
+        {"Dialog Opener", new(@<BiArrowUpRightSquare />)},
+        {"Dialog Provider", new(@<BiSquare />)},
         {"Actions", new(@<BiMenuApp />, isExperimental: true)},
         {"Collapse", new(@<BiCardHeading />)},
         {"Dropdown", new(@<BiMenuDown />, isDeprecated: true)},
-        {"Text input", new(@<BiInputCursor />)},
+        {"Text Input", new(@<BiInputCursor />)},
         {"Tooltip", new(@<BiChatSquareText />)},
-        {"Create id", new(@<BiBracesAsterisk />)},
-        {"Field groups", new(@<BiListOl />)},
-        {"Field group", new(@<BiCardHeading />)},
+        {"Create Id", new(@<BiBracesAsterisk />)},
         {"Odometer", new(@<Bi9Square />)},
-        {"Combobox", new(@<BiMenuButtonWideFill />, isUpdate: true)},
-        {"Combobox option", new(@<BiMenuButtonWideFill />)},
-        {"Combobox option group", new(@<BiMenuButtonWideFill />)},
-        {"Field set", new(@<BiUiChecksGrid />)},
+        {"Combobox", new(@<BiMenuButtonWideFill />)},
+        {"Combobox Option", new(@<BiMenuButtonWideFill />)},
+        {"Combobox Option Group", new(@<BiMenuButtonWideFill />)},
+        {"Field Set", new(@<BiUiChecksGrid />)},
         {"Legend", new(@<BiType />)},
-        {"Reconnect modal", new(@<BiBroadcast />, isNew: true)}
+        {"Reconnect Modal", new(@<BiBroadcast />)},
+        {"View Transition Service", new(@<BiGraphUpArrow />, isNew: true)}
     };
     RenderFragment defaultIcon = @<BiFileCode />;
 

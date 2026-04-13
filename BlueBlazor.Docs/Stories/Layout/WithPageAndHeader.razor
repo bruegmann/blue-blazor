@@ -16,13 +16,11 @@
     </SideContent>
 
     <PageContent>
-        <Header>
-            <HeaderTitle AppTitle="Home"
-                         Breadcrumb="@(new() {
-                                new() { Href = "components/header-title", Text = "First" },
-                                new() { Text = "Current page" }
-                             })" />
-        </Header>
+        <HeaderTitle AppTitle="Home"
+                     Breadcrumb="@(new() {
+                                                     new() { Href = "components/header-title", Text = "First" },
+                                                     new() { Text = "Current page" }
+                                                  })" />
 
         <div class="container">
             <Heading PageHeader>PageContent</Heading>

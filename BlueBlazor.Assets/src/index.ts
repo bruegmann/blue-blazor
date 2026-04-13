@@ -120,3 +120,23 @@ export function beforeStart(options: any) {
     //   customElements.define("split-panels", SplitPanels);
     beforeStartCalled = true
 }
+
+
+function startViewTransition(dotNetHelper: any, methodName: string, callbackId: string) {
+    const callback = () => dotNetHelper.invokeMethodAsync(methodName, callbackId)
+
+    if (document.startViewTransition) {
+        document.startViewTransition(callback)
+    } else {
+        callback() // Fallback for not supported browsers
+    }
+}
+
+declare global {
+    interface Window {
+        blueBlazor: any
+    }
+}
+
+window.blueBlazor = window.blueBlazor || {}
+window.blueBlazor.startViewTransition = startViewTransition
