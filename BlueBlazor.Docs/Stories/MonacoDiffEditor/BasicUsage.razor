@@ -1,0 +1,6 @@
+﻿<MonacoDiffEditor OriginalValue="@OldText"
+                  @bind-CurrentValue="@CurrentText" />
+@code {
+    string OldText = "This line is removed on the right.\njust some text\nabcd\nefgh\nSome more text";
+    string CurrentText = "just some text\nabcz\nzzzzefgh\nSome more text.\nThis line is removed on the left.";
+}

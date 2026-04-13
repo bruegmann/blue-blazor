@@ -1,0 +1,6 @@
+@namespace BlueBlazor.Components
+@inherits BlueComponentBase
+<div @ref="@_element"
+     class="@(new CssBuilder(Class).Build())"
+     style="@(new StyleBuilder(Style).AddStyle("height", Height).Build())"
+     @attributes="@AdditionalAttributes" />
