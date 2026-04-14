@@ -58,6 +58,12 @@ public partial class MonacoDiffEditor : BlueComponentBase, IAsyncDisposable
     [Parameter]
     public bool IgnoreTrimWhitespace { get; set; } = false;
 
+    /// <summary>
+    /// When enabled, long lines are wrapped within the editor instead of scrolling horizontally.
+    /// </summary>
+    [Parameter]
+    public bool WordWrap { get; set; } = false;
+
     protected override void OnInitialized()
     {
         _currentValue = CurrentValue;
@@ -69,7 +75,7 @@ public partial class MonacoDiffEditor : BlueComponentBase, IAsyncDisposable
         {
             _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/MonacoEditor/MonacoDiffEditor.razor.js");
             _dotNetRef = DotNetObjectReference.Create(this);
-            await _module.InvokeVoidAsync("Initialize", _id, _element, _dotNetRef, OriginalValue, CurrentValue, ReadOnly, RenderSideBySide, IgnoreTrimWhitespace, RenderOverviewRuler);
+            await _module.InvokeVoidAsync("Initialize", _id, _element, _dotNetRef, OriginalValue, CurrentValue, ReadOnly, RenderSideBySide, IgnoreTrimWhitespace, RenderOverviewRuler, WordWrap ? "on" : "off");
         }
     }
     protected override async Task OnParametersSetAsync()
