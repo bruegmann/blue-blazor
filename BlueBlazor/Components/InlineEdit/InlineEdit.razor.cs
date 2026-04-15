@@ -30,6 +30,8 @@ public partial class InlineEdit : BlueComponentBase
     private string? HeaderClassValue => new CssBuilder("blue-label")
         .AddClass("visually-hidden", HeaderHidden).Build();
 
+    private bool ShowEditValue => Provider != null && Provider.ActiveInlineEdit == this ? true : Provider == null ? ShowEdit : false;
+
     /// <summary>
     /// Content for edit mode.
     /// </summary>
@@ -108,6 +110,9 @@ public partial class InlineEdit : BlueComponentBase
     [CascadingParameter(Name = "ControlId")]
     protected string? ControlId { get; set; }
 
+    [CascadingParameter]
+    private InlineEditProvider? Provider { get; set; }
+
     protected override void OnParametersSet()
     {
         if (EditMode == false)
@@ -119,6 +124,7 @@ public partial class InlineEdit : BlueComponentBase
     private void ToggleShowEdit()
     {
         ShowEdit = !ShowEdit;
+        Provider?.ToggleActiveInlineEdit(this);
     }
 
     private async Task EditRequested()
@@ -128,6 +134,8 @@ public partial class InlineEdit : BlueComponentBase
             await EditModeChanged.InvokeAsync(true);
         }
         ShowEdit = true;
+
+        Provider?.ToggleActiveInlineEdit(this);
     }
 
     private void OnClickSubmitButton()
