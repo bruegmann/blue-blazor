@@ -32,7 +32,7 @@
 
 const diffEditorCollection = {}
 
-export async function Initialize(id, element, dotNetHelper, originalValue, modifiedValue, readOnly, renderSideBySide, ignoreTrimWhitespace, renderOverviewRuler) {
+export async function Initialize(id, element, dotNetHelper, originalValue, modifiedValue, readOnly, renderSideBySide, ignoreTrimWhitespace, renderOverviewRuler, wordWrap) {
     await MonacoProm
 
     const originalModel = monaco.editor.createModel(originalValue, "plaintext")
@@ -44,7 +44,8 @@ export async function Initialize(id, element, dotNetHelper, originalValue, modif
         renderSideBySide: renderSideBySide,
         ignoreTrimWhitespace: ignoreTrimWhitespace,
         renderOverviewRuler: renderOverviewRuler,
-        readOnly: readOnly
+        readOnly: readOnly,
+        wordWrap: wordWrap
     })
 
     diffEditor.setModel({

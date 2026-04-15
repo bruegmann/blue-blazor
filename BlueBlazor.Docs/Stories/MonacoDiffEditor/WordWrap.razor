@@ -1,0 +1,7 @@
+﻿<MonacoDiffEditor OriginalValue="@originalText"
+                  @bind-CurrentValue="@currentText" 
+                  WordWrap/>
+@code {
+    string originalText = "This line is short.";
+    string currentText = "This line is intentionally longer so that it wraps onto the next line, demonstrating how the content spans across multiple lines within the editor.";
+}
