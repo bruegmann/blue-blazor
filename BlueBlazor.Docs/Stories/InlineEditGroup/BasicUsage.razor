@@ -1,0 +1,24 @@
+﻿<InlineEditGroup>
+    <CreateId Context="yourNameId">
+        <InlineEdit Id="@yourNameId" Header="Your name" ReadText="@YourName">
+            <input id="@yourNameId" type="text" class="form-control" @bind="@YourName" autofocus />
+        </InlineEdit>
+    </CreateId>
+    <CreateId Context="lastNameId">
+        <InlineEdit Id="@lastNameId" Header="Last name" ReadText="@LastName">
+            <input id="@lastNameId" type="text" class="form-control" @bind="@LastName" autofocus />
+        </InlineEdit>
+    </CreateId>
+</InlineEditGroup>
+
+
+@code {
+    private string YourName { get; set; } = "John";
+    private string LastName { get; set; } = "Doe";
+    private bool EditMode { get; set; }
+    private void HandleEditModeChanged(bool editMode)
+    {
+        EditMode = editMode;
+    }
+    private EventCallback<bool> EditModeChanged => EventCallback.Factory.Create<bool>(this, HandleEditModeChanged);
+}

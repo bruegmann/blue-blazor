@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 namespace BlueBlazor.Components;
 
-public partial class InlineEditProvider
+/// <summary>
+/// Controls which of the containing <see cref="InlineEdit"/> instances is active.
+/// </summary>
+public partial class InlineEditGroup
 {
     internal InlineEdit? ActiveInlineEdit { get; set; } = null!;
 
@@ -14,7 +17,8 @@ public partial class InlineEditProvider
         {
             ActiveInlineEdit = inlineEdit;
             StateHasChanged();
-        }else if(ActiveInlineEdit == inlineEdit)
+        }
+        else if (ActiveInlineEdit == inlineEdit)
         {
             ActiveInlineEdit = null;
             StateHasChanged();
