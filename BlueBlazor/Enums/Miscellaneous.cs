@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace BlueBlazor.Shared;
 
 public enum BreakSize
