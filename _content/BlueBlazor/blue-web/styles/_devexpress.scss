@@ -109,7 +109,17 @@ body.modal-open .dxbl-popup-cell[style="z-index: 1050;"] {
         > ul
         > li
         > .dxbl-tabs-item:not(.dxbl-active):not(.dxbl-disabled):not(:disabled),
-    .dxbl-tabs > .dxbl-tabs-tablist > ul > li > .dxbl-tabs-item:not(.dxbl-active):not(.dxbl-disabled):not(:disabled) {
+    .dxbl-tabs > .dxbl-tabs-tablist > ul > li > .dxbl-tabs-item:not(.dxbl-active):not(.dxbl-disabled):not(:disabled),
+    .dxbl-context-menu-submenu.dxbl-context-menu-dropdown
+        .dxbl-dropdown-body
+        ul
+        li:not(.dxbl-context-menu-separator)
+        > .dxbl-context-menu-item,
+    .dxbl-context-menu.dxbl-context-menu-dropdown
+        .dxbl-dropdown-body
+        ul
+        li:not(.dxbl-context-menu-separator)
+        > .dxbl-context-menu-item {
         cursor: default;
     }
 }

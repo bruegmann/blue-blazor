@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.25.4 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.25.5 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -10928,6 +10928,11 @@ body {
     contain: paint;
 }
 
+// Helps you creating striped items.
+.blue-odd-bg:nth-of-type(odd) {
+    background-color: var(--blue-odd-bg, var(--bs-tertiary-bg));
+}
+
 .blue-loading {
     background-color: $primary;
 }
@@ -11435,6 +11440,16 @@ body {
             .blue-opacity-hover-content-default {
                 opacity: 0;
             }
+        }
+    }
+
+    .blue-bg-hover {
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        &:focus-within {
+            background-color: var(--blue-hover-bg, var(--bs-secondary-bg));
         }
     }
 }
@@ -12445,7 +12460,17 @@ body.modal-open .dxbl-popup-cell[style="z-index: 1050;"] {
         > ul
         > li
         > .dxbl-tabs-item:not(.dxbl-active):not(.dxbl-disabled):not(:disabled),
-    .dxbl-tabs > .dxbl-tabs-tablist > ul > li > .dxbl-tabs-item:not(.dxbl-active):not(.dxbl-disabled):not(:disabled) {
+    .dxbl-tabs > .dxbl-tabs-tablist > ul > li > .dxbl-tabs-item:not(.dxbl-active):not(.dxbl-disabled):not(:disabled),
+    .dxbl-context-menu-submenu.dxbl-context-menu-dropdown
+        .dxbl-dropdown-body
+        ul
+        li:not(.dxbl-context-menu-separator)
+        > .dxbl-context-menu-item,
+    .dxbl-context-menu.dxbl-context-menu-dropdown
+        .dxbl-dropdown-body
+        ul
+        li:not(.dxbl-context-menu-separator)
+        > .dxbl-context-menu-item {
         cursor: default;
     }
 }

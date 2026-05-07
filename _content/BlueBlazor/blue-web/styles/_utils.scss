@@ -23,3 +23,8 @@
 .blue-contain-paint {
     contain: paint;
 }
+
+// Helps you creating striped items.
+.blue-odd-bg:nth-of-type(odd) {
+    background-color: var(--blue-odd-bg, var(--bs-tertiary-bg));
+}
