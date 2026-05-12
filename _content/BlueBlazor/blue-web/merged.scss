@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.25.5 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.25.6 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -12367,6 +12367,8 @@ dialog.blue-modal:has(.offcanvas-start) {
     --dxbl-dropdown-border-radius: var(--bs-border-radius) !important;
     --dxbl-btn-border-radius: var(--bs-border-radius) !important;
     --dxbl-context-menu-border-radius: var(--bs-border-radius) !important;
+    --dxbl-edit-dropdown-border-radius: var(--bs-border-radius) !important;
+    --dxbl-list-box-border-radius: var(--bs-border-radius) !important;
 
     --dxbl-btn-font-size: 1rem;
     --dxbl-checkbox-font-size: 1rem;
@@ -12470,7 +12472,29 @@ body.modal-open .dxbl-popup-cell[style="z-index: 1050;"] {
         .dxbl-dropdown-body
         ul
         li:not(.dxbl-context-menu-separator)
-        > .dxbl-context-menu-item {
+        > .dxbl-context-menu-item,
+    .dxbl-list-box-render-container:not(.dxbl-disabled):not(:disabled):not(.dxbl-readonly)
+        > .dxbl-scroll-viewer
+        > .dxbl-scroll-viewer-content
+        > :not(.dxbl-list-box-empty-data-container)
+        > li:not(.dxbl-list-box-group-item):not(.dxbl-list-box-item-disabled):not(.dxbl-list-box-empty-list-item),
+    .dxbl-list-box-render-container:not(.dxbl-disabled):not(:disabled):not(.dxbl-readonly)
+        > .dxbl-scroll-viewer
+        > .dxbl-scroll-viewer-content
+        > :not(.dxbl-list-box-empty-data-container)
+        > tbody
+        > tr:not(.dxbl-list-box-group-item):not(.dxbl-list-box-item-disabled):not(.dxbl-list-box-empty-list-item),
+    .dxbl-list-box:not(.dxbl-disabled):not(:disabled):not(.dxbl-readonly)
+        > .dxbl-scroll-viewer
+        > .dxbl-scroll-viewer-content
+        > :not(.dxbl-list-box-empty-data-container)
+        > li:not(.dxbl-list-box-group-item):not(.dxbl-list-box-item-disabled):not(.dxbl-list-box-empty-list-item),
+    .dxbl-list-box:not(.dxbl-disabled):not(:disabled):not(.dxbl-readonly)
+        > .dxbl-scroll-viewer
+        > .dxbl-scroll-viewer-content
+        > :not(.dxbl-list-box-empty-data-container)
+        > tbody
+        > tr:not(.dxbl-list-box-group-item):not(.dxbl-list-box-item-disabled):not(.dxbl-list-box-empty-list-item) {
         cursor: default;
     }
 }
