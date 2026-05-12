@@ -18,7 +18,18 @@ namespace BlueBlazor.Components;
 /// </summary>
 public partial class InlineEdit : BlueComponentBase
 {
-    public bool ShowEdit { get; set; }
+    private bool _showEdit;
+    public bool ShowEdit
+    {
+        get => _showEdit; set
+        {
+            _showEdit = value;
+            if (InlineEditGroup != null)
+            {
+                InlineEditGroup.SetActiveInlineEdit(value ? this : null);
+            }
+        }
+    }
 
     private string _generatedId = "InlineEdit-" + Guid.NewGuid().ToString();
     private string IdValue => Id ?? ControlId ?? _generatedId;
@@ -30,7 +41,7 @@ public partial class InlineEdit : BlueComponentBase
     private string? HeaderClassValue => new CssBuilder("blue-label")
         .AddClass("visually-hidden", HeaderHidden).Build();
 
-    private bool ShowEditValue => InlineEditGroup?.ActiveInlineEdit == this || InlineEditGroup is null && ShowEdit;
+    private bool ShowEditValue => InlineEditGroup?.ActiveInlineEdit == this || InlineEditGroup is null && _showEdit;
 
     /// <summary>
     /// Content for edit mode.
@@ -117,13 +128,13 @@ public partial class InlineEdit : BlueComponentBase
     {
         if (EditMode == false)
         {
-            ShowEdit = false;
+            _showEdit = false;
         }
     }
 
     private void ToggleShowEdit()
     {
-        ShowEdit = !ShowEdit;
+        _showEdit = !_showEdit;
         InlineEditGroup?.ToggleActiveInlineEdit(this);
     }
 
@@ -133,7 +144,7 @@ public partial class InlineEdit : BlueComponentBase
         {
             await EditModeChanged.InvokeAsync(true);
         }
-        ShowEdit = true;
+        _showEdit = true;
 
         InlineEditGroup?.ToggleActiveInlineEdit(this);
     }

@@ -11,6 +11,23 @@ public partial class InlineEditGroup
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
+    [CascadingParameter(Name = "EditMode")]
+    protected bool? EditMode { get; set; } = null;
+
+    protected override void OnParametersSet()
+    {
+        if (EditMode == false)
+        {
+            ActiveInlineEdit = null;
+        }
+    }
+
+    internal void SetActiveInlineEdit(InlineEdit? inlineEdit)
+    {
+        ActiveInlineEdit = inlineEdit;
+        StateHasChanged();
+    }
+
     internal void ToggleActiveInlineEdit(InlineEdit inlineEdit)
     {
         if (ActiveInlineEdit != inlineEdit)
