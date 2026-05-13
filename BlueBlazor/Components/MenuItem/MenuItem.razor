@@ -1,7 +1,9 @@
 ﻿@namespace BlueBlazor.Components
 @inherits Button
 
-<Button Class="@ClassValue" Style="@Style" IconAfter="IconAfter" OnClick="OnClick" Href="@Href"
+<Tooltip For="@_overflowId" Disabled="@(!_isOverflowing)" Placement="TooltipPlacement.Right">@_tooltipText</Tooltip>
+
+<Button id="@_overflowId" Class="@ClassValue" Style="@Style" IconAfter="IconAfter" OnClick="OnClick" Href="@Href"
         Target="@Target" Busy="Busy" Label="@Label" LabelHidden="@LabelHidden" ButtonType="ButtonType"
         Variant="Variant.MenuItem" Size="Size" Sm="Sm" Lg="Lg" Disabled="@Disabled" PopoverTarget="@PopoverTarget"
         Success="Success" SuccessChanged="SuccessChanged" ChildContent="ChildContent" Active="Active" Square="Square" @attributes="AdditionalAttributes">
