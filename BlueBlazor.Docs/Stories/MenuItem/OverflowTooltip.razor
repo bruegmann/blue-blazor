@@ -1,0 +1,23 @@
+﻿<div class="vstack" style="@($"max-width: {_width}px")">
+    <MenuItem Label="Short">
+        <Icon><BiBrightnessHigh /></Icon>
+    </MenuItem>
+
+    <MenuItem Label="This is a very long label that should truncate and show a tooltip">
+        <Icon><BiBrightnessHigh /></Icon>
+    </MenuItem>
+
+    <MenuItem Label="Another long menu item label that will also overflow">
+        <Icon><BiBrightnessHigh /></Icon>
+    </MenuItem>
+</div>
+
+<label class="mt-3 d-flex align-items-center gap-2">
+    Container width
+    <input type="range" min="80" max="500" @bind="_width" @bind:event="oninput" />
+    @(_width)px
+</label>
+
+@code {
+    private int _width = 180;
+}
