@@ -108,6 +108,9 @@ public partial class Combobox : BlueComponentBase
     public RenderFragment? IconBefore { get; set; }
 
     [Parameter]
+    public bool Square { get; set; }
+
+    [Parameter]
     public EventCallback<PopoverToggleEventArgs> OnTogglePopover { get; set; }
 
     [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(BlSelectEventArgs))]
