@@ -28,7 +28,7 @@ public partial class OffcanvasDialog : DialogBase
 
     protected override void OnParametersSet()
     {
-        _offcanvasClass = new CssBuilder("offcanvas show")
+        _offcanvasClass = new CssBuilder("offcanvas")
             .AddClass(OffcanvasClass)
             .AddClass($"offcanvas-{Placement.ToString().ToLower()}")
             .Build();
