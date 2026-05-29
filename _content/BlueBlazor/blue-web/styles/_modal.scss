@@ -53,6 +53,8 @@ dialog.blue-modal {
 
     .offcanvas {
         --blue-offcanvas-inset: 1rem;
+        visibility: visible;
+        transform: none;
 
         bottom: var(--blue-offcanvas-inset);
         border: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
