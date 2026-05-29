@@ -35,7 +35,7 @@ public partial class HeaderTitle : BlueComponentBase
     /// Removes default spacing (padding).
     /// </summary>
     [Parameter]
-    public bool NoSpacing { get; set; } = false;
+    public bool NoSpacing { get; set; } = true;
 
     [Parameter]
     public bool Sidebar { get; set; } = false;

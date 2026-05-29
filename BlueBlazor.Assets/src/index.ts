@@ -4,6 +4,7 @@ export * from "@awesome.me/webawesome/dist/components/qr-code/qr-code.js"
 export * from "@awesome.me/webawesome/dist/components/tooltip/tooltip.js"
 export * from "blue-web/dist/js/odometer.js"
 export * from "blue-web/dist/js/select-list.js"
+export * from "blue-web/dist/js/layout.js"
 
 import "../node_modules/bootstrap/js/dist/tab.js"
 import { BlSelectEvent } from "blue-web/dist/js/select-list.js"

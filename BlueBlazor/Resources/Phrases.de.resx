@@ -130,7 +130,7 @@
     <value>Kein Wert</value>
   </data>
   <data name="ToggleSidebar" xml:space="preserve">
-    <value>Sidebar umschalten</value>
+    <value>Seitenleiste umschalten</value>
   </data>
   <data name="ToggleMenu" xml:space="preserve">
     <value>Menü umschalten</value>
@@ -188,5 +188,8 @@
   </data>
   <data name="Confirm" xml:space="preserve">
     <value>Bestätigen</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menü</value>
   </data>
 </root>

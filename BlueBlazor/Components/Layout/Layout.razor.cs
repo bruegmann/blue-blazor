@@ -25,6 +25,12 @@ public partial class Layout : BlueComponentBase
     [Parameter]
     public bool NoPageBorder { get; set; } = false;
 
+    [Parameter]
+    public string? DrawerTitle { get; set; }
+
+    [Parameter]
+    public RenderFragment? DrawerTitleContent { get; set; }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
