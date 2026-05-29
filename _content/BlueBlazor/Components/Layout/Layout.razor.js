@@ -1,37 +1,13 @@
 ﻿export function onLoad() {
-    const expandEl = document.getElementById("layout-expand")
-    if (!expandEl) return
+    const layoutEl = document.getElementById("blueBlazorLayout")
+    if (!layoutEl) return
 
-    const entry = localStorage.getItem("side-layout-shrink")
-    const shrink = entry != null
-    expandEl.checked = !shrink
-
-    expandEl.addEventListener("change", handleChange)
-
-    window.addEventListener("popstate", handleLocationChange)
-
-    const originalPushState = history.pushState
-    history.pushState = function (...args) {
-        originalPushState.apply(history, args)
-        handleLocationChange()
-    }
-
-    const originalReplaceState = history.replaceState
-    history.replaceState = function (...args) {
-        originalReplaceState.apply(history, args)
-        handleLocationChange()
-    }
+    blueWeb.layout.init(layoutEl)
 }
 
-function handleChange() {
-    if (localStorage.getItem("side-layout-shrink")) {
-        localStorage.removeItem("side-layout-shrink")
-    } else {
-        localStorage.setItem("side-layout-shrink", "true")
-    }
-}
+export function onDispose() {
+    const layoutEl = document.getElementById("blueBlazorLayout")
+    if (!layoutEl) return
 
-function handleLocationChange() {
-    const drawerEl = document.getElementById("layout-drawer")
-    if (drawerEl) drawerEl.checked = false
+    blueWeb.layout.dispose(layoutEl)
 }

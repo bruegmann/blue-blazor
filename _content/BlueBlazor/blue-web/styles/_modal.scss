@@ -50,6 +50,36 @@ dialog.blue-modal {
     .offcanvas-backdrop {
         display: none;
     }
+
+    .offcanvas {
+        --blue-offcanvas-inset: 1rem;
+
+        bottom: var(--blue-offcanvas-inset);
+        border: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+        border-radius: var(--bs-border-radius-lg);
+        box-shadow: var(--bs-box-shadow-lg);
+    }
+
+    .offcanvas.offcanvas-start {
+        top: var(--blue-offcanvas-inset);
+        left: var(--blue-offcanvas-inset);
+    }
+
+    .offcanvas.offcanvas-end {
+        top: var(--blue-offcanvas-inset);
+        right: var(--blue-offcanvas-inset);
+    }
+
+    .offcanvas.offcanvas-top {
+        top: var(--blue-offcanvas-inset);
+        right: var(--blue-offcanvas-inset);
+        left: var(--blue-offcanvas-inset);
+    }
+
+    .offcanvas.offcanvas-bottom {
+        right: var(--blue-offcanvas-inset);
+        left: var(--blue-offcanvas-inset);
+    }
 }
 
 dialog.blue-modal[open] {

@@ -1,0 +1,64 @@
+@mixin blue-modal-responsive() {
+    position: static !important;
+    display: flex !important;
+    animation: none !important;
+    color: inherit;
+
+    & > .offcanvas {
+        position: static !important;
+        z-index: auto;
+        inset: auto;
+        border: none;
+        box-shadow: none;
+        width: auto;
+        max-width: none;
+        height: auto;
+        max-height: none;
+        visibility: visible !important;
+        border-radius: 0;
+        background-color: transparent;
+        color: inherit;
+
+        & > .offcanvas-header {
+            display: none;
+        }
+
+        & > .offcanvas-body {
+            padding: 0;
+        }
+    }
+
+    & > .blue-modal-backdrop {
+        display: none;
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .blue-modal.blue-sm-modal {
+        @include blue-modal-responsive();
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .blue-modal.blue-md-modal {
+        @include blue-modal-responsive();
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .blue-modal.blue-lg-modal {
+        @include blue-modal-responsive();
+    }
+}
+
+@include media-breakpoint-up(xl) {
+    .blue-modal.blue-xl-modal {
+        @include blue-modal-responsive();
+    }
+}
+
+@include media-breakpoint-up(xxl) {
+    .blue-modal.blue-xxl-modal {
+        @include blue-modal-responsive();
+    }
+}

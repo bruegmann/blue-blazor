@@ -1,5 +1,5 @@
-import { guid } from "./utils";
-import { getPhrase } from "./shared";
+import { guid } from "./utils.js";
+import { getPhrase } from "./shared.js";
 export async function ask(text) {
   let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   return await dialog("ask", text, options);
