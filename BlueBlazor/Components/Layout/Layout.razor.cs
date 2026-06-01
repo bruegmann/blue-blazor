@@ -20,6 +20,12 @@ public partial class Layout : BlueComponentBase
     public RenderFragment? SideContent { get; set; }
 
     [Parameter]
+    public string? MainClass { get; set; }
+
+    [Parameter]
+    public RenderFragment? MainContent { get; set; }
+
+    [Parameter]
     public RenderFragment? PageContent { get; set; }
 
     [Parameter]
