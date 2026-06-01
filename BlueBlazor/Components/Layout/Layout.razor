@@ -74,9 +74,13 @@
         </dialog>
     </div>
 
-    <main class="blue-layout-main">
-        <div class="@(new CssBuilder("blue-layout-body").AddClass("border-0", NoPageBorder).Build())">
-            @PageContent
-        </div>
+    <main class="@(new CssBuilder("blue-layout-main").AddClass(MainClass).Build())">
+        @if (PageContent != null)
+        {
+            <div class="@(new CssBuilder("blue-layout-body").AddClass("border-0", NoPageBorder).Build())">
+                @PageContent
+            </div>
+        }
+        @MainContent
     </main>
 </div>
