@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -13,9 +12,8 @@ public class DialogService
 {
     private IJSRuntime JSRuntime { get; set; } = default!;
 
-    public DialogService(IOptions<Options> options, IJSRuntime jsRuntime)
+    public DialogService(IJSRuntime jsRuntime)
     {
-        DevExpressSupport = options.Value.DevExpressSupport;
         JSRuntime = jsRuntime;
     }
 
@@ -32,8 +30,6 @@ public class DialogService
         var dialogReference = new DialogReference() { DialogContent = dialogContent };
         return ShowAsync(dialogReference);
     }
-
-    public bool DevExpressSupport { get; set; }
 
     public Task<DialogReference> ShowAsync(DialogReference dialogReference)
         => OnShow!.Invoke(dialogReference);

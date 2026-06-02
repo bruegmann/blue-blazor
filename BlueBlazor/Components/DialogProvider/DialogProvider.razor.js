@@ -6,7 +6,7 @@
 }
 
 export function Show(element) {
-    element.showModal()
+    element.show()
 }
 
 export function Close(element) {

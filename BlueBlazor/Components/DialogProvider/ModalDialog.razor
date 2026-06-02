@@ -15,12 +15,6 @@
         </div>
         <div class="@(new CssBuilder("modal-body").AddClass(BodyClass))">
             @BodyContent
-
-            @if (DevExpressSupport && IsLastDialog)
-            {
-                <!-- Compatibility with DevExpress Popups -->
-                <dxbl-popup-root class="position-fixed z-1 start-0 top-0"></dxbl-popup-root>
-            }
         </div>
 
         @if (FooterContent != null)

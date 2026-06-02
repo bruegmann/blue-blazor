@@ -10,8 +10,6 @@ namespace BlueBlazor.Components;
 /// 
 /// Based on styling Bootstrap's Modal component but uses the native `&lt;dialog&gt;` HTML element.
 /// Modal body and footer will not be rendered until the open event triggered.
-/// 
-/// Uses `&lt;dxbl-popup-root&gt;&lt;/dxbl-popup-root&gt;` for compatibility with DevExpress Popups.
 /// </summary>
 public partial class ModalDialog : DialogBase
 {

@@ -33,7 +33,4 @@ public class DialogBase : ComponentBase
 
     [CascadingParameter(Name = "DialogProvider_IsLastDialog")]
     protected bool IsLastDialog { get; set; }
-
-    [CascadingParameter(Name = "DialogProvider_DevExpressSupport")]
-    protected bool DevExpressSupport { get; set; }
 }
