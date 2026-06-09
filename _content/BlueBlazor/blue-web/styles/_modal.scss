@@ -36,16 +36,22 @@ dialog.blue-modal {
     --ani-translate-from: 0 0;
     --ani-translate-to: 0 0;
 
+    // For compatibility with DevExpress, where z-index start at 1050.
+    --bs-modal-zindex: 1049;
+
     border: none;
     background: none;
     padding: 0;
     margin: 0;
     max-width: none;
     max-height: none;
-    transition:
-        display 0.2s allow-discrete,
-        overlay 0.2s allow-discrete;
-    animation: blue-modal-close 0.2s forwards;
+
+    & > :is(.modal-dialog, .offcanvas) {
+        transition:
+            display 0.2s allow-discrete,
+            overlay 0.2s allow-discrete;
+        animation: blue-modal-close 0.2s forwards;
+    }
 
     .offcanvas-backdrop {
         display: none;
@@ -60,6 +66,7 @@ dialog.blue-modal {
         border: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
         border-radius: var(--bs-border-radius-lg);
         box-shadow: var(--bs-box-shadow-lg);
+        max-width: calc(100% - var(--blue-offcanvas-inset) * 2);
     }
 
     .offcanvas.offcanvas-start {
@@ -86,10 +93,12 @@ dialog.blue-modal {
 
 dialog.blue-modal[open] {
     display: block;
-    animation: blue-modal-open 0.2s forwards;
+    & > :is(.modal-dialog, .offcanvas) {
+        animation: blue-modal-open 0.2s forwards;
+    }
 }
 
-dialog.blue-modal::backdrop {
+.blue-modal-backdrop {
     --bs-backdrop-bg: #000;
     --bs-backdrop-opacity: 0.5;
     background-color: var(--bs-backdrop-bg);
@@ -97,7 +106,7 @@ dialog.blue-modal::backdrop {
     opacity: 0;
 }
 
-dialog.blue-modal[open]::backdrop {
+dialog.blue-modal[open] .blue-modal-backdrop {
     opacity: var(--bs-backdrop-opacity);
 }
 

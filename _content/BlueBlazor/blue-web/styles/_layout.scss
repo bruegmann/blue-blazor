@@ -32,6 +32,7 @@
     height: var(--blue-header-height);
     gap: var(--spacing);
     padding-inline: var(--spacing);
+    width: env(titlebar-area-width);
 }
 
 .blue-layout-side {

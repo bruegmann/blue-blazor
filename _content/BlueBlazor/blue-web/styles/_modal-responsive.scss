@@ -18,6 +18,8 @@
         border-radius: 0;
         background-color: transparent;
         color: inherit;
+        transition: none;
+        animation: none;
 
         & > .offcanvas-header {
             display: none;

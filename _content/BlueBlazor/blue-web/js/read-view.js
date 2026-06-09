@@ -56,6 +56,13 @@ export class ReadView extends HTMLElement {
     var _this$button, _this$container;
     const isDisabled = this.hasAttribute("disabled");
     (_this$button = this.button) === null || _this$button === void 0 || _this$button.setAttribute("aria-disabled", String(isDisabled));
+    if (isDisabled) {
+      var _this$button2;
+      (_this$button2 = this.button) === null || _this$button2 === void 0 || _this$button2.setAttribute("tabindex", "-1");
+    } else {
+      var _this$button3;
+      (_this$button3 = this.button) === null || _this$button3 === void 0 || _this$button3.removeAttribute("tabindex");
+    }
     (_this$container = this.container) === null || _this$container === void 0 || _this$container.setAttribute("aria-disabled", String(isDisabled));
   }
   onEditRequested() {

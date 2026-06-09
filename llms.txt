@@ -33,15 +33,6 @@ To use Blue Blazor components, you need to register the required services. Add t
 builder.Services.AddBlueBlazor();
 ```
 
-If you use DevExpress components you can should enable the `DevExpressSupport` support to avoid problems when using dialogs:
-
-```csharp
-builder.Services.AddBlueBlazor(options =>
-{
-    options.DevExpressSupport = true;
-});
-```
-
 ### Remove `ReconnectModal` component from your project (.NET 10)
 
 Your project probably has a `ReconnectModal` component coming from the Blazor project template.
@@ -184,6 +175,10 @@ That means, you can use all of [Blue Web's JavaScript functions](https://bruegma
 ```
 
 ## Breaking changes
+
+### From v5 to v6
+
+`BlueBlazor.Services.Options.DevExpressSupport` was removed. It isn't necessary anymore.
 
 ### From v4 to v5
 
