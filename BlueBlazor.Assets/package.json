@@ -27,7 +27,7 @@
         "typescript": "^5.4.4"
     },
     "dependencies": {
-        "@awesome.me/webawesome": "^3.7.0",
+        "@awesome.me/webawesome": "^3.9.0",
         "blue-web": "^1.28.2",
         "monaco-editor": "^0.54.0"
     }

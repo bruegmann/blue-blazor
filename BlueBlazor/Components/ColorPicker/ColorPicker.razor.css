@@ -1,0 +1,59 @@
+wa-color-picker {
+    --disabled-opacity: 0.5;
+
+    --color: var(--bs-body-color);
+    --border-width: var(--bs-border-width);
+
+    --wa-border-radius-s: var(--bs-border-radius-sm);
+    --wa-border-radius-m: var(--bs-border-radius);
+    --wa-border-style: solid;
+    --wa-border-width-s: var(--bs-border-width);
+    --wa-border-width-m: var(--bs-border-width);
+    --wa-border-radius-circle: 50%;
+
+    --wa-color-neutral-fill-normal: var(--bs-secondary-bg);
+    --wa-color-surface-border: var(--bs-border-color);
+    --wa-color-surface-default: var(--bs-body-bg);
+    --wa-color-surface-raised: var(--bs-body-bg);
+    --wa-color-neutral-on-quiet: var(--bs-secondary-text-emphasis);
+    --wa-color-neutral-border-loud: var(--bs-secondary-border-subtle);
+    --wa-color-neutral-fill-quiet: var(--bs-secondary-bg);
+    --wa-color-focus: rgba(var(--bs-primary-rgb), 50%);
+
+    --wa-form-control-height: calc(
+        1.5em + 0.75rem + calc(var(--bs-border-width) * 2)
+    );
+    --wa-form-control-background-color: var(--bs-body-bg);
+    --wa-form-control-border-radius: var(--bs-border-radius);
+    --wa-form-control-border-color: var(--bs-border-color);
+    --wa-form-control-border-width: var(--bs-border-width);
+    --wa-form-control-border-style: solid;
+    --wa-form-control-padding-inline: 0.75rem;
+
+    --wa-focus-ring-style: solid;
+    --wa-focus-ring-width: var(--bs-focus-ring-width);
+    --wa-focus-ring: var(--wa-focus-ring-style) var(--bs-focus-ring-width)
+        var(--bs-focus-ring-color);
+    --wa-focus-ring-offset: 0;
+
+    --wa-shadow-m: var(--bs-box-shadow);
+
+    --wa-transition-normal: 150ms;
+    --wa-transition-easing: ease;
+}
+
+wa-color-picker::part(form-control-label),
+wa-color-picker::part(trigger),
+wa-color-picker::part(format-button__base),
+wa-color-picker::part(eyedropper-button__base) {
+    cursor: initial;
+}
+
+wa-color-picker::part(form-control-label) {
+    margin-block-end: 0;
+}
+
+wa-color-picker[disabled],
+wa-color-picker[disabled]::part(trigger) {
+    opacity: var(--disabled-opacity);
+}

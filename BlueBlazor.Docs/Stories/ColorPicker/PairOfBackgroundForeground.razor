@@ -1,0 +1,15 @@
+﻿<FieldSet>
+    <Legend>Coloring</Legend>
+
+    <div class="hstack gap-1">
+        <ColorPicker @bind-Value="Background" Label="Background" LabelHidden />
+        <ColorPicker @bind-Value="Foreground" Label="Foreground" LabelHidden />
+
+        <div class="rounded border px-2 hstack align-self-stretch" style="@($"background: {Background}; color: {Foreground}")" role="presentation">Preview</div>
+    </div>
+</FieldSet>
+
+@code {
+    private string Background { get; set; } = "#ff0000";
+    private string Foreground { get; set; } = "#ff00ff";
+}
