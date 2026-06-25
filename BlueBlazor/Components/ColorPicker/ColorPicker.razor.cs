@@ -4,6 +4,9 @@ using Microsoft.JSInterop;
 
 namespace BlueBlazor.Components;
 
+/// <summary>
+/// Uses Web Component [`wa-color-picker`](https://webawesome.com/docs/components/color-picker) by Web Awesome.
+/// </summary>
 public partial class ColorPicker<T> : BlueComponentBase
 {
     [Inject]

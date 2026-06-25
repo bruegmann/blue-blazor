@@ -153,6 +153,16 @@ public class Helper
             {
                 componentType = Type.GetType($"{componentNamespace}.{component.Name}, {assemblyName}");
             }
+            if (componentType == null)
+            {
+                // Fallback for generic types (e.g. ColorPicker<T> → "ColorPicker`1")
+                var assembly = AppDomain.CurrentDomain.GetAssemblies()
+                    .FirstOrDefault(a => a.GetName().Name == assemblyName);
+                componentType = assembly?.GetTypes()
+                    .FirstOrDefault(t =>
+                        t.Namespace == componentNamespace &&
+                        (t.Name == component.Name || t.Name.StartsWith(component.Name + "`")));
+            }
             if (componentType != null && xmlDocumentationPath != null)
             {
                 string componentComment = GetXmlDocumentationCommentForClass(xmlDocumentationPath, componentType);
