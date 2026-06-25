@@ -1,0 +1,16 @@
+﻿@namespace BlueBlazor.Components
+@typeparam T
+@inherits BlueComponentBase
+
+<wa-color-picker @ref="_element" class="@Class" style="@Style"
+                 swatches="@(Swatches != null ? string.Join("; ", Swatches) : null)"
+                 value="@_color" without-format-toggle="!WithFormatToggle"
+                 disabled="@Disabled"
+                 @oninput="HandleInput"
+                 @attributes="AdditionalAttributes">
+    @if (Label != null)
+    {
+        <span slot="label" class="@(new CssBuilder("blue-label").AddClass("visually-hidden", LabelHidden).Build())">@Label</span>
+    }
+    @ChildContent
+</wa-color-picker>

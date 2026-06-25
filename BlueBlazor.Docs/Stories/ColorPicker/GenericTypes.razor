@@ -1,0 +1,11 @@
+﻿<ColorPicker Label="Color as hex string" @bind-Value="StringColor" />
+<ColorPicker Label="Color as double" @bind-Value="DoubleColor" />
+<ColorPicker Label="Color as integer" @bind-Value="IntColor" />
+
+Hex String Color: @StringColor, Double Color: @DoubleColor, Integer Color: @IntColor
+
+@code {
+    private string StringColor { get; set; } = "#f5a623";
+    private double DoubleColor { get; set; } = 16744448;
+    private int IntColor { get; set; } = 16744703;
+}

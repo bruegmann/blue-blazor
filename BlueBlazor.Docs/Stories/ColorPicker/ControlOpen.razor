@@ -1,0 +1,10 @@
+﻿Is Open: @Open
+
+<Button OnClick="() => Open = true">Open</Button>
+<Button OnClick="() => Open = false">Close</Button>
+
+<ColorPicker T="string" Label="Select a color" @bind-Open="Open" />
+
+@code {
+    private bool Open { get; set; }
+}
