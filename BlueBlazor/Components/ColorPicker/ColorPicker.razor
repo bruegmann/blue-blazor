@@ -2,7 +2,7 @@
 @typeparam T
 @inherits BlueComponentBase
 
-<wa-color-picker class="@Class" style="@Style"
+<wa-color-picker @ref="_element" class="@Class" style="@Style"
                  swatches="@(Swatches != null ? string.Join("; ", Swatches) : null)"
                  value="@_color" without-format-toggle="!WithFormatToggle"
                  disabled="@Disabled"

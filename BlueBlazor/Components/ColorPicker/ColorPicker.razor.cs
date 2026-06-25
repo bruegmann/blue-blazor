@@ -1,12 +1,20 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlueBlazor.Shared;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace BlueBlazor.Components;
 
 public partial class ColorPicker<T> : BlueComponentBase
 {
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; } = default!;
+
     private string _color { get; set; } = "";
 
     private T? _value;
+    private bool _open;
+    private ElementReference? _element;
+    private IJSObjectReference? _module;
 
     [Parameter]
     public string? Label { get; set; }
@@ -30,12 +38,36 @@ public partial class ColorPicker<T> : BlueComponentBase
     public bool Disabled { get; set; }
 
     [Parameter]
+    public bool Open { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OpenChanged { get; set; }
+
+    [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        SyncValue(Value);
+        _color = ColorConverter.GenericToHex(_value);
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
+                "./_content/BlueBlazor/Components/ColorPicker/ColorPicker.razor.js");
+
+            if (_module != null)
+            {
+                await _module.InvokeVoidAsync("init", _element, DotNetObjectReference.Create(this));
+                if (Open)
+                {
+                    await _module.InvokeVoidAsync("runFn", _element, "show");
+                }
+            }
+        }
     }
 
     protected override void OnParametersSet()
@@ -43,38 +75,18 @@ public partial class ColorPicker<T> : BlueComponentBase
         if (!EqualityComparer<T?>.Default.Equals(_value, Value))
         {
             _value = Value;
-            SyncValue(_value);
+            _color = ColorConverter.GenericToHex(_value);
         }
-
-        base.OnParametersSet();
     }
 
-    private void SyncValue(T? val)
+    protected override async Task OnParametersSetAsync()
     {
-        if (val != null)
+        if (_open != Open)
         {
-            RgbColor? rgbColor = null;
-
-            if (typeof(T) == typeof(string))
+            _open = Open;
+            if (_module != null)
             {
-                rgbColor = ColorConverter.GetRGB((string)(object)val);
-            }
-            else if (typeof(T) == typeof(double))
-            {
-                rgbColor = ColorConverter.GetRGB(((double)(object)val).ToString());
-            }
-            else if (typeof(T) == typeof(int))
-            {
-                rgbColor = ColorConverter.GetRGB(((int)(object)val).ToString());
-            }
-            else
-            {
-                throw new InvalidOperationException($"Unsupported type: {typeof(T)}");
-            }
-
-            if (rgbColor != null)
-            {
-                _color = ColorConverter.RgbToHex(rgbColor);
+                await _module.InvokeVoidAsync("runFn", _element, Open ? "show" : "hide");
             }
         }
     }
@@ -114,5 +126,21 @@ public partial class ColorPicker<T> : BlueComponentBase
                 }
             }
         }
+    }
+
+    [JSInvokable]
+    public async Task HandleHide()
+    {
+        _open = false;
+        Open = false;
+        await OpenChanged.InvokeAsync(false);
+    }
+
+    [JSInvokable]
+    public async Task HandleShow()
+    {
+        _open = true;
+        Open = true;
+        await OpenChanged.InvokeAsync(true);
     }
 }

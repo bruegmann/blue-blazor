@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace BlueBlazor.Components;
+namespace BlueBlazor.Shared;
 
 public static class ColorConverter
 {
@@ -43,6 +43,37 @@ public static class ColorConverter
             B = intValue & 255,
             A = 1
         };
+    }
+
+    public static string GenericToHex<T>(T? val)
+    {
+        if (val != null)
+        {
+            RgbColor? rgbColor = null;
+
+            if (typeof(T) == typeof(string))
+            {
+                rgbColor = GetRGB((string)(object)val);
+            }
+            else if (typeof(T) == typeof(double))
+            {
+                rgbColor = GetRGB(((double)(object)val).ToString());
+            }
+            else if (typeof(T) == typeof(int))
+            {
+                rgbColor = GetRGB(((int)(object)val).ToString());
+            }
+            else
+            {
+                throw new InvalidOperationException($"Unsupported type: {typeof(T)}");
+            }
+
+            if (rgbColor != null)
+            {
+                return RgbToHex(rgbColor);
+            }
+        }
+        return "";
     }
 
     public static string RgbToHex(RgbColor rgbColors)
