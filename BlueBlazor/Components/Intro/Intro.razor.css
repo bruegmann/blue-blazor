@@ -1,0 +1,35 @@
+.shake {
+    animation: shakeEffect 0.4s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .shake {
+        animation: none;
+    }
+}
+
+@keyframes shakeEffect {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-10px);
+    }
+
+    40% {
+        transform: translateX(10px);
+    }
+
+    60% {
+        transform: translateX(-5px);
+    }
+
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+.skip-init-animation {
+    animation: none;
+}

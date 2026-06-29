@@ -1,0 +1,10 @@
+﻿<Intro Logo="images/blue.svg"
+       Title="Hello World" @bind-Shake="IsShaking">
+    Here could be a sign in form.
+
+    <Button OnClick="() => IsShaking = true">Shake!</Button>
+</Intro>
+
+@code {
+    private bool IsShaking { get; set; }
+}
