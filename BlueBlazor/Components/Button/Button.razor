@@ -3,7 +3,12 @@
 @inherits BlueComponentBase
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
-<ButtonOrA @attributes="AdditionalAttributes" Disabled="@(Busy || _busy || Disabled)" ButtonType="@ButtonType"
+@if (Tooltip != null || TooltipContent != null)
+{
+    <Tooltip For="@IdValue">@Tooltip@TooltipContent</Tooltip>
+}
+
+<ButtonOrA @attributes="AdditionalAttributes" Id="@IdValue" Disabled="@(Busy || _busy || Disabled)" ButtonType="@ButtonType"
            OnClick="@HandleClick" Href="@Href" Target="@Target" Class="@ClassValue" Style="@Style" PopoverTarget="@PopoverTarget" aria-label="@(LabelHidden ? Label : null)">
     @if (Busy || _busy)
     {

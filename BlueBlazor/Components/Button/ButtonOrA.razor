@@ -3,14 +3,14 @@
 
 @if (isButton)
 {
-    <button @attributes="AdditionalAttributes" @onclick="OnClick" type="@ButtonType?.ToString().ToLower()" class="@Class" style="@Style"
+    <button @attributes="AdditionalAttributes" id="@Id" @onclick="OnClick" type="@ButtonType?.ToString().ToLower()" class="@Class" style="@Style"
         disabled="@Disabled" popovertarget="@PopoverTarget">
         @ChildContent
     </button>
 }
 else
 {
-    <a @attributes="AdditionalAttributes" @onclick="OnClick" href="@Href" class="@Class" style="@Style" disabled="@Disabled"
+    <a @attributes="AdditionalAttributes" id="@Id" @onclick="OnClick" href="@Href" class="@Class" style="@Style" disabled="@Disabled"
        target="@Target" rel="@(Target == "_blank" ? "noreferrer" : "")" popovertarget="@PopoverTarget">
         @ChildContent
     </a>
@@ -41,6 +41,9 @@ else
 
     [Parameter]
     public string? PopoverTarget { get; set; }
+
+    [Parameter]
+    public string? Id { get; set; }
 
     protected override void OnParametersSet()
     {

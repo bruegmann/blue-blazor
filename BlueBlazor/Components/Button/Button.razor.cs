@@ -19,6 +19,9 @@ public partial class Button : BlueComponentBase
         }
     }
 
+    private string _generatedId = $"uid_{Guid.NewGuid():N}";
+    private string? IdValue => Id == null && (Tooltip != null || TooltipContent != null) ? _generatedId : Id;
+
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
@@ -121,6 +124,15 @@ public partial class Button : BlueComponentBase
     /// </summary>
     [Parameter]
     public bool Square { get; set; } = false;
+
+    [Parameter]
+    public string? Id { get; set; }
+
+    [Parameter]
+    public string? Tooltip { get; set; }
+
+    [Parameter]
+    public RenderFragment? TooltipContent { get; set; }
 
     protected override void OnParametersSet()
     {
