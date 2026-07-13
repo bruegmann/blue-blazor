@@ -4,7 +4,7 @@
 @inherits BlueComponentBase
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
-<div class="@ClassValue" style="@StyleValue">
+<div class="@ClassValue" style="@StyleValue" id="@WrapperId">
     @if (!string.IsNullOrEmpty(Header) || HeaderContent is not null)
     {
         <label for="@IdValue" class="@HeaderClassValue" style="margin-left: .75rem">@Header @HeaderContent</label>

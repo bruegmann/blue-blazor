@@ -42,10 +42,7 @@ wa-color-picker {
     --wa-transition-easing: ease;
 }
 
-wa-color-picker::part(form-control-label),
-wa-color-picker::part(trigger),
-wa-color-picker::part(format-button__base),
-wa-color-picker::part(eyedropper-button__base) {
+wa-color-picker::part(form-control-label) {
     cursor: initial;
 }
 

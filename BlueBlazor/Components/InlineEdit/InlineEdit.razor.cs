@@ -109,6 +109,9 @@ public partial class InlineEdit : BlueComponentBase
     [Parameter]
     public bool EditDisabled { get; set; }
 
+    [Parameter]
+    public string? WrapperId { get; set; }
+
     [CascadingParameter(Name = "Disabled")]
     protected bool Disabled { get; set; } = false;
 
