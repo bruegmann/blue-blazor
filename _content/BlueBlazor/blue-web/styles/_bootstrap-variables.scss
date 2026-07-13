@@ -1,5 +1,5 @@
 // Main color theme. E.g. used for background for body and sidebar.
-$theme: hsl(217deg 10% 94%) !default;
+$theme: hsl(217, 17%, 98%) !default;
 $theme-dark: hsl(217deg 10% 8%) !default;
 $primary: hsl(221, 97%, 53%) !default;
 $white: #fff !default;
@@ -42,5 +42,5 @@ $link-hover-decoration: underline !default;
 $focus-ring-color: #{rgba(var(--bs-primary-rgb), 25%)} !default;
 $input-focus-border-color: #{rgba(var(--bs-primary-rgb), 50%)} !default;
 
-$enable-button-pointers: false !default;
+$enable-button-pointers: true !default;
 $focus-ring-width: 0.125rem !default;
