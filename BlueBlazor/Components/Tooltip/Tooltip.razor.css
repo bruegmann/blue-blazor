@@ -1,3 +1,7 @@
+wa-tooltip:not(:defined) {
+    display: none;
+}
+
 wa-tooltip {
     color: var(--bs-body-bg, white);
     --wa-tooltip-arrow-size: 0.375rem;
