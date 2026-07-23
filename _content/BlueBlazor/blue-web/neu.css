@@ -1,0 +1,243 @@
+/* Neumorphism effects */
+:root {
+  --neu-bg: #e5dff4;
+  --neu-bg-inset: #e5dff4;
+  --neu-shadow-high: rgb(238.2511627907, 234.3860465116, 247.9139534884);
+  --neu-shadow-low: rgb(216.6651162791, 207.8186046512, 238.7813953488);
+  --neu-shadow-high-inset: rgb(241.3348837209, 238.1813953488, 249.2186046512);
+  --neu-shadow-low-inset: rgb(216.6651162791, 207.8186046512, 238.7813953488);
+  --neu-distance: 0.37rem;
+  --neu-blur: 0.7rem;
+  --neu-shadow-1:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low);
+  --neu-shadow-inset-1: inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset);
+  --neu-shadow-switch-1:  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low);
+  --neu-shadow-inset-switch-1: inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset);
+  --neu-shadow-2:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low);
+  --neu-shadow-inset-2: inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset);
+  --neu-shadow-switch-2:  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low);
+  --neu-shadow-inset-switch-2: inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset);
+  --neu-shadow-3:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low);
+  --neu-shadow-inset-3: inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset);
+  --neu-shadow-switch-3:  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-low);
+  --neu-shadow-inset-switch-3: inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset);
+  --neu-shadow-4:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low);
+  --neu-shadow-inset-4: inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset);
+  --neu-shadow-switch-4:  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low);
+  --neu-shadow-inset-switch-4: inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset);
+  --neu-shadow-5:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low);
+  --neu-shadow-inset-5: inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset);
+  --neu-shadow-switch-5:  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-low);
+  --neu-shadow-inset-switch-5: inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset);
+}
+
+.neu-shadow-1 {
+  box-shadow:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low) !important;
+}
+.neu-shadow-1.neu-shadow-inset-1 {
+  box-shadow:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-1.neu-shadow-inset-switch-1 {
+  box-shadow:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-1.neu-shadow-inset-2 {
+  box-shadow:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-1.neu-shadow-inset-switch-2 {
+  box-shadow:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-1.neu-shadow-inset-3 {
+  box-shadow:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-1.neu-shadow-inset-switch-3 {
+  box-shadow:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-1.neu-shadow-inset-4 {
+  box-shadow:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-1.neu-shadow-inset-switch-4 {
+  box-shadow:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-1.neu-shadow-inset-5 {
+  box-shadow:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-1.neu-shadow-inset-switch-5 {
+  box-shadow:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-inset-1 {
+  box-shadow: inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-inset-switch-1 {
+  box-shadow: inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-2 {
+  box-shadow:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low) !important;
+}
+.neu-shadow-2.neu-shadow-inset-1 {
+  box-shadow:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-2.neu-shadow-inset-switch-1 {
+  box-shadow:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-2.neu-shadow-inset-2 {
+  box-shadow:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-2.neu-shadow-inset-switch-2 {
+  box-shadow:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-2.neu-shadow-inset-3 {
+  box-shadow:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-2.neu-shadow-inset-switch-3 {
+  box-shadow:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-2.neu-shadow-inset-4 {
+  box-shadow:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-2.neu-shadow-inset-switch-4 {
+  box-shadow:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-2.neu-shadow-inset-5 {
+  box-shadow:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-2.neu-shadow-inset-switch-5 {
+  box-shadow:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-inset-2 {
+  box-shadow: inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-inset-switch-2 {
+  box-shadow: inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-3 {
+  box-shadow:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low) !important;
+}
+.neu-shadow-3.neu-shadow-inset-1 {
+  box-shadow:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-3.neu-shadow-inset-switch-1 {
+  box-shadow:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-3.neu-shadow-inset-2 {
+  box-shadow:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-3.neu-shadow-inset-switch-2 {
+  box-shadow:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-3.neu-shadow-inset-3 {
+  box-shadow:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-3.neu-shadow-inset-switch-3 {
+  box-shadow:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-3.neu-shadow-inset-4 {
+  box-shadow:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-3.neu-shadow-inset-switch-4 {
+  box-shadow:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-3.neu-shadow-inset-5 {
+  box-shadow:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-3.neu-shadow-inset-switch-5 {
+  box-shadow:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-inset-3 {
+  box-shadow: inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-inset-switch-3 {
+  box-shadow: inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-4 {
+  box-shadow:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low) !important;
+}
+.neu-shadow-4.neu-shadow-inset-1 {
+  box-shadow:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-4.neu-shadow-inset-switch-1 {
+  box-shadow:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-4.neu-shadow-inset-2 {
+  box-shadow:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-4.neu-shadow-inset-switch-2 {
+  box-shadow:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-4.neu-shadow-inset-3 {
+  box-shadow:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-4.neu-shadow-inset-switch-3 {
+  box-shadow:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-4.neu-shadow-inset-4 {
+  box-shadow:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-4.neu-shadow-inset-switch-4 {
+  box-shadow:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-4.neu-shadow-inset-5 {
+  box-shadow:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-4.neu-shadow-inset-switch-5 {
+  box-shadow:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-inset-4 {
+  box-shadow: inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-inset-switch-4 {
+  box-shadow: inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-5 {
+  box-shadow:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low) !important;
+}
+.neu-shadow-5.neu-shadow-inset-1 {
+  box-shadow:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-5.neu-shadow-inset-switch-1 {
+  box-shadow:  calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low), inset calc(var(--neu-distance) * 0.25) calc(var(--neu-distance) * 0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.25) calc(var(--neu-distance) * -0.25) calc(var(--neu-blur) * 0.25) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-5.neu-shadow-inset-2 {
+  box-shadow:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-5.neu-shadow-inset-switch-2 {
+  box-shadow:  calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-5.neu-shadow-inset-3 {
+  box-shadow:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-5.neu-shadow-inset-switch-3 {
+  box-shadow:  calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-high),  calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-low), inset calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-5.neu-shadow-inset-4 {
+  box-shadow:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-5.neu-shadow-inset-switch-4 {
+  box-shadow:  calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high),  calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low), inset calc(var(--neu-distance) * 1.5) calc(var(--neu-distance) * 1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -1.5) calc(var(--neu-distance) * -1.5) calc(var(--neu-blur) * 1.5) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-5.neu-shadow-inset-5 {
+  box-shadow:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+.neu-shadow-5.neu-shadow-inset-switch-5 {
+  box-shadow:  calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high),  calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-inset-5 {
+  box-shadow: inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+
+.neu-shadow-inset-switch-5 {
+  box-shadow: inset calc(var(--neu-distance) * 3) calc(var(--neu-distance) * 3) calc(var(--neu-blur) * 3) var(--neu-shadow-high-inset), inset calc(var(--neu-distance) * -3) calc(var(--neu-distance) * -3) calc(var(--neu-blur) * 3) var(--neu-shadow-low-inset) !important;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5ldS5zY3NzIiwibmV1LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQSx3QkFBQTtBQXlGQTtFQXRESSxpQkFBQTtFQUNBLHVCQUFBO0VBRUEsc0VBQUE7RUFDQSxxRUFBQTtFQUNBLDRFQUFBO0VBQ0EsMkVBQUE7RUFFQSx1QkFBQTtFQUNBLGtCQUFBO0VBR0ksK1BBQUE7RUFDQSwyUkFBQTtFQUVBLHNRQUFBO0VBQ0Esa1NBQUE7RUFKQSx5UEFBQTtFQUNBLHFSQUFBO0VBRUEsZ1FBQUE7RUFDQSw0UkFBQTtFQUpBLDZPQUFBO0VBQ0EseVFBQUE7RUFFQSxvUEFBQTtFQUNBLGdSQUFBO0VBSkEseVBBQUE7RUFDQSxxUkFBQTtFQUVBLGdRQUFBO0VBQ0EsNFJBQUE7RUFKQSw2T0FBQTtFQUNBLHlRQUFBO0VBRUEsb1BBQUE7RUFDQSxnUkFBQTtBQ3ZCUjs7QUQ2QlE7RUFDSSxzUUFBQTtBQzFCWjtBRDZCZ0I7RUFDSSw2Z0JBQ0k7QUM1QnhCO0FEZ0NnQjtFQUNJLDZnQkFDSTtBQy9CeEI7QUR1QmdCO0VBQ0ksaWdCQUNJO0FDdEJ4QjtBRDBCZ0I7RUFDSSxpZ0JBQ0k7QUN6QnhCO0FEaUJnQjtFQUNJLHllQUNJO0FDaEJ4QjtBRG9CZ0I7RUFDSSx5ZUFDSTtBQ25CeEI7QURXZ0I7RUFDSSxpZ0JBQ0k7QUNWeEI7QURjZ0I7RUFDSSxpZ0JBQ0k7QUNieEI7QURLZ0I7RUFDSSx5ZUFDSTtBQ0p4QjtBRFFnQjtFQUNJLHllQUNJO0FDUHhCOztBRFlRO0VBQ0ksNFJBQUE7QUNUWjs7QURpQlE7RUFDSSw0UkFBQTtBQ2RaOztBRGJRO0VBQ0ksZ1FBQUE7QUNnQlo7QURiZ0I7RUFDSSw2Z0JBQ0k7QUNjeEI7QURWZ0I7RUFDSSw2Z0JBQ0k7QUNXeEI7QURuQmdCO0VBQ0ksaWdCQUNJO0FDb0J4QjtBRGhCZ0I7RUFDSSxpZ0JBQ0k7QUNpQnhCO0FEekJnQjtFQUNJLHllQUNJO0FDMEJ4QjtBRHRCZ0I7RUFDSSx5ZUFDSTtBQ3VCeEI7QUQvQmdCO0VBQ0ksaWdCQUNJO0FDZ0N4QjtBRDVCZ0I7RUFDSSxpZ0JBQ0k7QUM2QnhCO0FEckNnQjtFQUNJLHllQUNJO0FDc0N4QjtBRGxDZ0I7RUFDSSx5ZUFDSTtBQ21DeEI7O0FEOUJRO0VBQ0ksc1JBQUE7QUNpQ1o7O0FEekJRO0VBQ0ksc1JBQUE7QUM0Qlo7O0FEdkRRO0VBQ0ksb1BBQUE7QUMwRFo7QUR2RGdCO0VBQ0ksNmdCQUNJO0FDd0R4QjtBRHBEZ0I7RUFDSSw2Z0JBQ0k7QUNxRHhCO0FEN0RnQjtFQUNJLGlnQkFDSTtBQzhEeEI7QUQxRGdCO0VBQ0ksaWdCQUNJO0FDMkR4QjtBRG5FZ0I7RUFDSSx5ZUFDSTtBQ29FeEI7QURoRWdCO0VBQ0kseWVBQ0k7QUNpRXhCO0FEekVnQjtFQUNJLGlnQkFDSTtBQzBFeEI7QUR0RWdCO0VBQ0ksaWdCQUNJO0FDdUV4QjtBRC9FZ0I7RUFDSSx5ZUFDSTtBQ2dGeEI7QUQ1RWdCO0VBQ0kseWVBQ0k7QUM2RXhCOztBRHhFUTtFQUNJLDBRQUFBO0FDMkVaOztBRG5FUTtFQUNJLDBRQUFBO0FDc0VaOztBRGpHUTtFQUNJLGdRQUFBO0FDb0daO0FEakdnQjtFQUNJLDZnQkFDSTtBQ2tHeEI7QUQ5RmdCO0VBQ0ksNmdCQUNJO0FDK0Z4QjtBRHZHZ0I7RUFDSSxpZ0JBQ0k7QUN3R3hCO0FEcEdnQjtFQUNJLGlnQkFDSTtBQ3FHeEI7QUQ3R2dCO0VBQ0kseWVBQ0k7QUM4R3hCO0FEMUdnQjtFQUNJLHllQUNJO0FDMkd4QjtBRG5IZ0I7RUFDSSxpZ0JBQ0k7QUNvSHhCO0FEaEhnQjtFQUNJLGlnQkFDSTtBQ2lIeEI7QUR6SGdCO0VBQ0kseWVBQ0k7QUMwSHhCO0FEdEhnQjtFQUNJLHllQUNJO0FDdUh4Qjs7QURsSFE7RUFDSSxzUkFBQTtBQ3FIWjs7QUQ3R1E7RUFDSSxzUkFBQTtBQ2dIWjs7QUQzSVE7RUFDSSxvUEFBQTtBQzhJWjtBRDNJZ0I7RUFDSSw2Z0JBQ0k7QUM0SXhCO0FEeElnQjtFQUNJLDZnQkFDSTtBQ3lJeEI7QURqSmdCO0VBQ0ksaWdCQUNJO0FDa0p4QjtBRDlJZ0I7RUFDSSxpZ0JBQ0k7QUMrSXhCO0FEdkpnQjtFQUNJLHllQUNJO0FDd0p4QjtBRHBKZ0I7RUFDSSx5ZUFDSTtBQ3FKeEI7QUQ3SmdCO0VBQ0ksaWdCQUNJO0FDOEp4QjtBRDFKZ0I7RUFDSSxpZ0JBQ0k7QUMySnhCO0FEbktnQjtFQUNJLHllQUNJO0FDb0t4QjtBRGhLZ0I7RUFDSSx5ZUFDSTtBQ2lLeEI7O0FENUpRO0VBQ0ksMFFBQUE7QUMrSlo7O0FEdkpRO0VBQ0ksMFFBQUE7QUMwSloiLCJmaWxlIjoibmV1LmNzcyJ9 */

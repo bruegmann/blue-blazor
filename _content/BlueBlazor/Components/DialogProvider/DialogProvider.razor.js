@@ -12,6 +12,13 @@ export function Close(element) {
     element.close()
 }
 
+export function CloseById(id) {
+    if (!id) return
+    const element = document.getElementById(id)
+    if (!element) return
+    element.close()
+}
+
 export function Destroy(element) {
     element.remove()
 }

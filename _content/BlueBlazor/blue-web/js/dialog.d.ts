@@ -7,6 +7,7 @@ export interface DialogOptions {
     cancelBtnText?: string;
     inputType?: string;
     defaultValue?: string;
+    id?: string;
 }
 export declare function ask(text: string, options?: DialogOptions | string): Promise<string | boolean>;
 export declare function tell(text: string, options?: DialogOptions | string): Promise<void>;

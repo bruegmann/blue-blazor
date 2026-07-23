@@ -8,7 +8,6 @@
     --blue-menu-item-indicator-bg: #{color-contrast($sidebar-bg, $sidebar-indicator-color)};
     --bs-link-hover-color: #{color-contrast($sidebar-bg, $link-hover-color)};
 
-    interpolate-size: allow-keywords;
     display: grid;
     grid-template-rows: min-content 1fr;
     grid-template-columns: min-content 1fr;
@@ -40,18 +39,22 @@
     overflow: auto;
     background: inherit;
     scrollbar-color: transparent transparent;
-    transition:
-        width 0.2s ease-in-out,
-        display 0.2s ease-in-out allow-discrete;
 
     &:hover,
     &:focus-within {
         scrollbar-color: color-mix(in srgb, currentColor 50%, transparent) transparent;
     }
+
+    &.with-transition {
+        interpolate-size: allow-keywords;
+        transition:
+            width 0.2s ease-in-out,
+            display 0.2s ease-in-out allow-discrete;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .blue-layout-side {
+    .blue-layout-side.with-transition {
         transition: none;
     }
 }

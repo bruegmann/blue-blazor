@@ -27,6 +27,7 @@ export function init(layoutEl) {
     signal: controller.signal
   });
   mrInit(modalEl);
+  layoutSideEl.classList.add("with-transition");
 }
 export function dispose(layoutEl) {
   const instance = instances.get(layoutEl);
