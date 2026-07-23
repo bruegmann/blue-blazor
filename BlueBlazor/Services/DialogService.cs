@@ -25,6 +25,8 @@ public class DialogService
     // Fires when dialog close event has fired
     public event Func<DialogReference, Task>? OnClosed;
 
+    public event Func<string, Task>? OnCloseById;
+
     public Task<DialogReference> ShowAsync(RenderFragment? dialogContent)
     {
         var dialogReference = new DialogReference() { DialogContent = dialogContent };
@@ -40,12 +42,15 @@ public class DialogService
     internal Task ClosedAsync(DialogReference dialogReference)
         => OnClosed?.Invoke(dialogReference) ?? Task.CompletedTask;
 
+    public Task CloseByIdAsync(string id)
+        => OnCloseById?.Invoke(id) ?? Task.CompletedTask;
+
     #region Blue Web JS Dialog Functions
     public async Task<string?> AskAsync(string text,
         string? title = null, string? defaultValue = null, string? icon = null, bool? switchPrimaryBtn = null,
-        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null)
+        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null, string? id = null)
     {
-        string json = GetDialogOptionsJson(title, defaultValue, icon, switchPrimaryBtn, acceptBtnText, cancelBtnText, inputType);
+        string json = GetDialogOptionsJson(title, defaultValue, icon, switchPrimaryBtn, acceptBtnText, cancelBtnText, inputType, id);
         var result = await JSRuntime.InvokeAsync<object>("blueWeb.dialog.ask", text, json);
         if (result is System.Text.Json.JsonElement element && element.ValueKind == System.Text.Json.JsonValueKind.False)
         {
@@ -56,22 +61,22 @@ public class DialogService
 
     public async Task TellAsync(string text,
         string? title = null, string? defaultValue = null, string? icon = null, bool? switchPrimaryBtn = null,
-        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null)
+        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null, string? id = null)
     {
-        string json = GetDialogOptionsJson(title, defaultValue, icon, switchPrimaryBtn, acceptBtnText, cancelBtnText, inputType);
+        string json = GetDialogOptionsJson(title, defaultValue, icon, switchPrimaryBtn, acceptBtnText, cancelBtnText, inputType, id);
         await JSRuntime.InvokeVoidAsync("blueWeb.dialog.tell", text, json);
     }
 
     public async Task<bool> VerifyAsync(string text,
         string? title = null, string? defaultValue = null, string? icon = null, bool? switchPrimaryBtn = null,
-        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null)
+        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null, string? id = null)
     {
-        string json = GetDialogOptionsJson(title, defaultValue, icon, switchPrimaryBtn, acceptBtnText, cancelBtnText, inputType);
+        string json = GetDialogOptionsJson(title, defaultValue, icon, switchPrimaryBtn, acceptBtnText, cancelBtnText, inputType, id);
         return await JSRuntime.InvokeAsync<bool>("blueWeb.dialog.verify", text, json);
     }
 
     private string GetDialogOptionsJson(string? title = null, string? defaultValue = null, string? icon = null, bool? switchPrimaryBtn = null,
-        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null)
+        string? acceptBtnText = null, string? cancelBtnText = null, string? inputType = null, string? id = null)
         => System.Text.Json.JsonSerializer.Serialize(new DialogOptions
         {
             Title = title,
@@ -80,7 +85,8 @@ public class DialogService
             SwitchPrimaryBtn = switchPrimaryBtn,
             AcceptBtnText = acceptBtnText,
             CancelBtnText = cancelBtnText,
-            InputType = inputType
+            InputType = inputType,
+            Id = id
         }, new System.Text.Json.JsonSerializerOptions
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
@@ -98,6 +104,7 @@ public class DialogOptions
     public string? AcceptBtnText { get; set; }
     public string? CancelBtnText { get; set; }
     public string? InputType { get; set; }
+    public string? Id { get; set; }
 }
 
 public class DialogReference

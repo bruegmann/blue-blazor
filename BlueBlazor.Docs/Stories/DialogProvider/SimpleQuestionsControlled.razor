@@ -1,0 +1,13 @@
+﻿@using BlueBlazor.Services
+@inject DialogService DialogService
+
+<Button Label="Open Controlled Dialog" OnClick="OpenControlledTellDialog" />
+
+@code {
+    private async Task OpenControlledTellDialog()
+    {
+        DialogService.TellAsync("Dialog will close after a few seconds.", id: "myControlledDialog");
+        await Task.Delay(3000);
+        await DialogService.CloseByIdAsync("myControlledDialog");
+    }
+}

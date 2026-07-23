@@ -31,12 +31,14 @@ public partial class DialogProvider : ComponentBase, IDisposable
     {
         DialogService.OnShow -= ShowDialog;
         DialogService.OnClose -= CloseDialog;
+        DialogService.OnCloseById -= CloseDialogById;
     }
 
     protected override void OnInitialized()
     {
         DialogService.OnShow += ShowDialog;
         DialogService.OnClose += CloseDialog;
+        DialogService.OnCloseById += CloseDialogById;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -66,6 +68,16 @@ public partial class DialogProvider : ComponentBase, IDisposable
         if (_module is not null)
         {
             await _module.InvokeVoidAsync("Close", dialogReference.Element);
+        }
+
+        StateHasChanged();
+    }
+
+    public async Task CloseDialogById(string id)
+    {
+        if (_module is not null)
+        {
+            await _module.InvokeVoidAsync("CloseById", id);
         }
 
         StateHasChanged();
