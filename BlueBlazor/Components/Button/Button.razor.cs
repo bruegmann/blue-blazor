@@ -9,7 +9,9 @@ namespace BlueBlazor.Components;
 /// </summary>
 public partial class Button : BlueComponentBase
 {
+    private static readonly TimeSpan BusyDelay = TimeSpan.FromMilliseconds(4000);
     private bool _busy = false;
+    private bool _isHandlingClick = false;
     private bool _success
     {
         get => Success;
@@ -155,9 +157,35 @@ public partial class Button : BlueComponentBase
 
     private async Task HandleClick(MouseEventArgs args)
     {
-        _busy = true;
-        await OnClick.InvokeAsync(args);
-        _busy = false;
+        if (_isHandlingClick)
+        {
+            return;
+        }
+
+        _isHandlingClick = true;
+        var clickTask = OnClick.InvokeAsync(args);
+        var delayTask = Task.Delay(BusyDelay);
+
+        try
+        {
+            if (await Task.WhenAny(clickTask, delayTask) == delayTask && !clickTask.IsCompleted)
+            {
+                _busy = true;
+                await InvokeAsync(StateHasChanged);
+            }
+
+            await clickTask;
+        }
+        finally
+        {
+            _isHandlingClick = false;
+
+            if (_busy)
+            {
+                _busy = false;
+                await InvokeAsync(StateHasChanged);
+            }
+        }
     }
 
     private string GetButtonVariantClass(Variant variant, Color? buttonColor)
