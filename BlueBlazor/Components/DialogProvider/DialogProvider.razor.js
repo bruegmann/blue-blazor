@@ -6,6 +6,24 @@
 
 export function Show(element) {
     element.show()
+
+    element.__keydownAbortController?.abort()
+
+    const controller = new AbortController()
+    element.__keydownAbortController = controller
+
+    element.addEventListener("keydown", e => {
+        if (e.key === "Escape" && !e.defaultPrevented) {
+            element.close()
+        }
+    }, { signal: controller.signal })
+
+    element.addEventListener("close", () => {
+        controller.abort()
+        if (element.__keydownAbortController === controller) {
+            element.__keydownAbortController = null
+        }
+    }, { once: true, signal: controller.signal })
 }
 
 export function Close(element) {
