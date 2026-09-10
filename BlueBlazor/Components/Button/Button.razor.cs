@@ -60,6 +60,12 @@ public partial class Button : BlueComponentBase
     [Parameter]
     public bool Busy { get; set; } = false;
 
+    /// <summary>
+    /// Overrides default text for busy state. Won't be visible when `LabelHidden` is true.
+    /// </summary>
+    [Parameter]
+    public string? BusyText { get; set; }
+
     [Parameter]
     public string? Label { get; set; }
 

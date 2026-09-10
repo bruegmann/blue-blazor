@@ -14,7 +14,7 @@
     {
         <span class="spinner-border spinner-border-sm bi" aria-hidden="true"></span>
 
-        <span role="status" class="@(new CssBuilder().AddClass("visually-hidden", LabelHidden).AddClass("ms-1", !LabelHidden))">@L["Loading"]…</span>
+        <span role="status" class="@(new CssBuilder().AddClass("visually-hidden", LabelHidden).AddClass("ms-1", !LabelHidden))">@(BusyText ?? $"{L["Loading"]}…")</span>
     }
     else if (_success)
     {
