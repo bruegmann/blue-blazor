@@ -5,6 +5,7 @@
 }
 @layout EmptyLayout
 @page "/components/layout/stories/basic-usage"
+@inject IJSRuntime JSRuntime
 
 <Layout NoPageBorder="@NoPageBorder">
     <HeaderContent>
@@ -37,4 +38,9 @@
 
 @code {
     private bool NoPageBorder { get; set; } = false;
+
+    private async Task ToggleInspector()
+    {
+        await JSRuntime.InvokeVoidAsync("blueWeb.layout.toggleInspector", "#blueBlazorLayout");
+    }
 }

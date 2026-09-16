@@ -14,6 +14,7 @@ public static class CollectionExtensions
 
         services.AddScoped<DialogService>();
         services.AddScoped<ViewTransitionService>();
+        services.AddScoped<LayoutService>();
         return services;
     }
 }

@@ -23,6 +23,9 @@ public partial class Layout : BlueComponentBase
     public RenderFragment? PageContent { get; set; }
 
     [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
     public bool NoPageBorder { get; set; } = false;
 
     [Parameter]

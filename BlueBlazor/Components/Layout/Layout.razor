@@ -56,7 +56,8 @@
                         }
                         else
                         {
-                            @DrawerTitle@DrawerTitleContent
+                            @DrawerTitle
+                            @DrawerTitleContent
                         }
                     </h1>
                     <form method="dialog" style="display: contents;">
@@ -74,8 +75,15 @@
     </div>
 
     <main class="blue-layout-main">
-        <div class="@(new CssBuilder("blue-layout-body").AddClass("border-0", NoPageBorder).Build())">
-            @PageContent
-        </div>
+        @if (ChildContent != null)
+        {
+            @ChildContent
+        }
+        else
+        {
+            <div class="@(new CssBuilder("blue-layout-body").AddClass("border-0", NoPageBorder).Build())">
+                @PageContent
+            </div>
+        }
     </main>
 </div>
