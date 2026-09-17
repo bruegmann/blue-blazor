@@ -12,4 +12,14 @@ public class LayoutService
     {
         return _jsRuntime.InvokeVoidAsync("blueWeb.layout.toggleInspector", "#blueBlazorLayout");
     }
+
+    public ValueTask OpenInspector()
+    {
+        return _jsRuntime.InvokeVoidAsync("blueWeb.layout.openInspector", "#blueBlazorLayout");
+    }
+
+    public ValueTask CloseInspector()
+    {
+        return _jsRuntime.InvokeVoidAsync("blueWeb.layout.closeInspector", "#blueBlazorLayout");
+    }
 }

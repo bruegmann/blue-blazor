@@ -1,5 +1,4 @@
 ﻿function init() {
-    console.log("init")
     const layoutEl = document.getElementById("blueBlazorLayout")
     if (!layoutEl) return
 
