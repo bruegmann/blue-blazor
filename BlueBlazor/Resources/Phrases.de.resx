@@ -192,4 +192,7 @@
   <data name="Menu" xml:space="preserve">
     <value>Menü</value>
   </data>
+  <data name="Inspector" xml:space="preserve">
+    <value>Inspektor</value>
+  </data>
 </root>
