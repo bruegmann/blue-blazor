@@ -4,17 +4,15 @@ using Microsoft.AspNetCore.Components;
 namespace BlueBlazor.Components;
 
 /// <summary>
-/// Use this inside of Layot's <see cref="Layout.ChildContent" /> to insert a [`wa-split-panel`](https://webawesome.com/docs/components/split-panel).
-/// This enables the Layout Inspector on the end. Set its content with <see cref="LayoutSplitter.End" />.
+/// Use this inside of Layot's <see cref="Layout.ChildContent" /> to insert a [`sp-split-view`](https://opensource.adobe.com/spectrum-web-components/components/split-view/).
+/// This enables the Layout Inspector on the end. Set its content with <see cref="End" />.
 /// </summary>
 public partial class LayoutSplitter : BlueComponentBase
 {
+    public const string INSPECTOR_ID = "blueBlazorLayoutInspector";
+    public const string INSPECTOR_LABEL_ID = "blueBlazorLayoutInspectorLabel";
+
     private string? ClassValue => new CssBuilder("blue-layout-splitter").AddClass(Class).Build();
-
-    private string DrawerLabelId => $"{InspectorId}drawerLabel";
-
-    [Parameter]
-    public string InspectorId { get; set; } = "blueBlazorLayoutInspector";
 
     [Parameter]
     public RenderFragment? Start { get; set; }

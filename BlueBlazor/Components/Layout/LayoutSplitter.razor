@@ -3,35 +3,37 @@
 @inherits BlueComponentBase
 @inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
 
-<wa-split-panel primary="end" position="0" disabled class="@ClassValue" style="@Style" @attributes="AdditionalAttributes">
-    <div slot="start" class="@(new CssBuilder("blue-layout-body").AddClass("border-0", NoPageBorder).Build())">@Start</div>
+<sp-split-view class="@ClassValue" style="@Style" @attributes="AdditionalAttributes">
+    <div>
+        <div class="@(new CssBuilder("blue-layout-body").AddClass("border-0", NoPageBorder).Build())">@Start</div>
+    </div>
 
-    <div slot="divider" class="border" style="height: 16px; border-radius: 1px"></div>
-
-    <dialog slot="end" class="blue-layout-inspector blue-lg-modal blue-modal modal"
-            id="@InspectorId"
-            aria-describedby="@DrawerLabelId">
-        <div class="offcanvas offcanvas-end">
-            <div class="offcanvas-header">
-                <h1 class="h5 offcanvas-title" id="@DrawerLabelId">
-                    @if (DrawerTitle == null && DrawerTitleContent == null)
-                    {
-                        @L["Inspector"]
-                    }
-                    else
-                    {
-                        @DrawerTitle
-                        @DrawerTitleContent
-                    }
-                </h1>
-                <form method="dialog" style="display: contents;">
-                    <button type="submit" class="btn-close" aria-label="@(L["Close"])"></button>
-                </form>
+    <div>
+        <dialog class="blue-layout-inspector blue-lg-modal blue-modal modal"
+                id="@INSPECTOR_ID"
+                aria-labelledby="@INSPECTOR_LABEL_ID">
+            <div class="offcanvas offcanvas-end">
+                <div class="offcanvas-header">
+                    <h1 class="h5 offcanvas-title" id="@INSPECTOR_LABEL_ID">
+                        @if (DrawerTitle == null && DrawerTitleContent == null)
+                        {
+                            @L["Inspector"]
+                        }
+                        else
+                        {
+                            @DrawerTitle
+                            @DrawerTitleContent
+                        }
+                    </h1>
+                    <form method="dialog" style="display: contents;">
+                        <button type="submit" class="btn-close" aria-label="@(L["Close"])"></button>
+                    </form>
+                </div>
+                <div class="offcanvas-body">
+                    @End
+                </div>
             </div>
-            <div class="offcanvas-body">
-                @End
-            </div>
-        </div>
-        <form method="dialog" class="blue-modal-backdrop"><button>@L["Close"]</button></form>
-    </dialog>
-</wa-split-panel>
+            <form method="dialog" class="blue-modal-backdrop"><button>@L["Close"]</button></form>
+        </dialog>
+    </div>
+</sp-split-view>

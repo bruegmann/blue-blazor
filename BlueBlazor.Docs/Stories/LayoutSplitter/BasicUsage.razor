@@ -5,12 +5,15 @@
 }
 @layout EmptyLayout
 @page "/components/layout-splitter/stories/basic-usage"
-@using BlueBlazor.Services
-@inject LayoutService LayoutService
 
 <Layout>
     <HeaderContent>
-        <Button Label="Toggle Inspector" OnClick="() => LayoutService.ToggleInspector()" />
+        <LayoutProvider Context="ctx">
+            <Button Label="Toggle Inspector" Active="ctx.InspectorState"
+                    OnClick="() => ctx.ToggleInspector()"
+                    aria-controls="@LayoutSplitter.INSPECTOR_ID"
+                    aria-expanded="@(ctx.InspectorState ? "true" : "false")" />
+        </LayoutProvider>
     </HeaderContent>
 
     <SideContent>

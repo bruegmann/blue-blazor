@@ -4,12 +4,15 @@ using Microsoft.JSInterop;
 namespace BlueBlazor.Components;
 
 /// <summary>
-/// Implementation of SideLayout by Blue Web.
-/// Since 3.4.1 this component no longer uses the Web Component for simplification and 
-/// to avoid flickering while rendering.
+/// Layout with header, sidebar and main areas. This component is designed to only be used once per page.
 /// </summary>
 public partial class Layout : BlueComponentBase
 {
+    public const string ID = "blueBlazorLayout";
+    public const string SIDE_ID = "blueBlazorLayoutSide";
+    public const string DRAWER_ID = "blueBlazorLayoutDrawer";
+    public const string DRAWER_LABEL_ID = "blueBlazorLayoutDrawerLabel";
+
     [Inject]
     private IJSRuntime JSRuntime { get; set; } = default!;
 

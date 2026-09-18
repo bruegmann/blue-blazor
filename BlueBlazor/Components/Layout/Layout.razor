@@ -5,11 +5,11 @@
 
 <PageScript Src="./_content/BlueBlazor/Components/Layout/Layout.razor.js"></PageScript>
 
-<div id="blueBlazorLayout" class="@(new CssBuilder("blue-layout").AddClass(Class).Build())" style="@Style" @attributes="AdditionalAttributes">
+<div id="@ID" class="@(new CssBuilder("blue-layout").AddClass(Class).Build())" style="@Style" @attributes="AdditionalAttributes">
     <header class="blue-layout-header">
         <button type="button"
                 class="btn blue-menu-item blue-btn-square d-flex d-lg-none"
-                onclick="blueBlazorLayoutDrawer.show()"
+                onclick="@($"{DRAWER_ID}.show()")"
                 aria-label="@(L["ToggleMenu"])">
             <svg xmlns="http://www.w3.org/2000/svg"
                  width="16"
@@ -26,7 +26,7 @@
         <button type="button"
                 class="btn blue-menu-item blue-btn-square d-none d-lg-flex"
                 data-blue-toggle="layout-side"
-                aria-controls="blueBlazorLayoutSide"
+                aria-controls="@SIDE_ID"
                 aria-expanded="true"
                 aria-label="@(L["ToggleSidebar"])">
             <svg xmlns="http://www.w3.org/2000/svg"
@@ -43,13 +43,13 @@
         @HeaderContent
     </header>
 
-    <div id="blueBlazorLayoutSide" class="blue-layout-side">
+    <div id="@SIDE_ID" class="blue-layout-side">
         <dialog class="blue-lg-modal blue-modal modal"
-                id="blueBlazorLayoutDrawer"
-                aria-describedby="blueBlazorLayoutDrawerLabel">
+                id="@DRAWER_ID"
+                aria-labelledby="@DRAWER_LABEL_ID">
             <div id="layoutDrawerOffcanvas" class="offcanvas offcanvas-start">
                 <div class="offcanvas-header">
-                    <h1 class="h5 offcanvas-title" id="blueBlazorLayoutDrawerLabel">
+                    <h1 class="h5 offcanvas-title" id="@DRAWER_LABEL_ID">
                         @if (DrawerTitle == null && DrawerTitleContent == null)
                         {
                             @L["Menu"]
