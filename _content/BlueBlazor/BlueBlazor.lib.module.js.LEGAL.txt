@@ -184,13 +184,13 @@ lit-html/directives/style-map.js:
    * SPDX-License-Identifier: BSD-3-Clause
    */
 
-@awesome.me/webawesome/dist/chunks/chunk.BIZW3BJ7.js:
+@awesome.me/webawesome/dist/chunks/chunk.OXDUIQRC.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/components/qr-code/qr-code.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.TKL7YZKI.js:
+@awesome.me/webawesome/dist/chunks/chunk.DJLBC7Q4.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/chunks/chunk.4ZAKP7NY.js:
@@ -199,10 +199,10 @@ lit-html/directives/style-map.js:
 @awesome.me/webawesome/dist/chunks/chunk.MQODJ75V.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.3NKIHICW.js:
+@awesome.me/webawesome/dist/chunks/chunk.PX3HMKF7.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.PX3HMKF7.js:
+@awesome.me/webawesome/dist/chunks/chunk.3NKIHICW.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/chunks/chunk.ZWQCGLB5.js:
@@ -211,10 +211,10 @@ lit-html/directives/style-map.js:
 @awesome.me/webawesome/dist/chunks/chunk.HS5AYC6E.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.HBKCENRD.js:
+@awesome.me/webawesome/dist/chunks/chunk.KQHZRDPB.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.TWDBLNQF.js:
+@awesome.me/webawesome/dist/chunks/chunk.56IHH3HP.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 lit-html/directives/class-map.js:
@@ -224,10 +224,10 @@ lit-html/directives/class-map.js:
    * SPDX-License-Identifier: BSD-3-Clause
    */
 
-@awesome.me/webawesome/dist/chunks/chunk.K442ELDU.js:
+@awesome.me/webawesome/dist/chunks/chunk.64OG2H45.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.52WA2DJO.js:
+@awesome.me/webawesome/dist/chunks/chunk.3H2FQERJ.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/chunks/chunk.KNJT7KBU.js:
@@ -242,7 +242,7 @@ lit-html/directives/class-map.js:
 @awesome.me/webawesome/dist/chunks/chunk.PZAN6FPN.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.JHKMGJRC.js:
+@awesome.me/webawesome/dist/chunks/chunk.BCXHEFKE.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/components/tooltip/tooltip.js:
@@ -257,10 +257,10 @@ lit-html/directives/class-map.js:
 @awesome.me/webawesome/dist/chunks/chunk.GWSUX3V5.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.5LXXXELE.js:
+@awesome.me/webawesome/dist/chunks/chunk.JPBXG7RE.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.XZOAK3IQ.js:
+@awesome.me/webawesome/dist/chunks/chunk.X5AP4FED.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/chunks/chunk.VC3BPUZJ.js:
@@ -285,16 +285,16 @@ lit-html/directives/if-defined.js:
    * SPDX-License-Identifier: BSD-3-Clause
    */
 
-@awesome.me/webawesome/dist/chunks/chunk.74VBHNIB.js:
+@awesome.me/webawesome/dist/chunks/chunk.2LEVBWNI.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/chunks/chunk.JTOY5KP3.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.DOFHHKB4.js:
+@awesome.me/webawesome/dist/chunks/chunk.NUVDWQN5.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.ODECC6XW.js:
+@awesome.me/webawesome/dist/chunks/chunk.3ZKPD2O5.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/chunks/chunk.R7QX4M6R.js:
@@ -314,10 +314,10 @@ lit-html/directives/live.js:
    * SPDX-License-Identifier: BSD-3-Clause
    */
 
-@awesome.me/webawesome/dist/chunks/chunk.SRXHLO73.js:
+@awesome.me/webawesome/dist/chunks/chunk.EL5UNQU3.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.3CFUTVFX.js:
+@awesome.me/webawesome/dist/chunks/chunk.S35PLDPD.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/chunks/chunk.XNTP7DEQ.js:
@@ -330,19 +330,19 @@ lit-html/static.js:
    * SPDX-License-Identifier: BSD-3-Clause
    */
 
-@awesome.me/webawesome/dist/chunks/chunk.EBC7M6Z4.js:
+@awesome.me/webawesome/dist/chunks/chunk.5PQVPZTW.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/chunks/chunk.W7A2VLCT.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.AX24US5R.js:
+@awesome.me/webawesome/dist/chunks/chunk.DVA7QY5T.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.BBOO36QE.js:
+@awesome.me/webawesome/dist/chunks/chunk.CB2JRBWR.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.IB5IGK3H.js:
+@awesome.me/webawesome/dist/chunks/chunk.KFCTFBMF.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/chunks/chunk.YDQCS2HK.js:
@@ -351,23 +351,79 @@ lit-html/static.js:
 @awesome.me/webawesome/dist/chunks/chunk.WDIIGUNP.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.L5E22IYH.js:
+@awesome.me/webawesome/dist/chunks/chunk.O74G5RVH.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/chunks/chunk.HGBRCPUS.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.HCXBOJYW.js:
+@awesome.me/webawesome/dist/chunks/chunk.KKI7M5DP.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.XTA2JDH4.js:
+@awesome.me/webawesome/dist/chunks/chunk.44TPNLVU.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.NF5JTFKH.js:
+@awesome.me/webawesome/dist/chunks/chunk.ZRLTNBWF.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
-@awesome.me/webawesome/dist/chunks/chunk.ITAFLY5Y.js:
+@awesome.me/webawesome/dist/chunks/chunk.AL6UNYSC.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
 
 @awesome.me/webawesome/dist/components/color-picker/color-picker.js:
   /*! Copyright 2026 Fonticons, Inc. - https://webawesome.com/license */
+
+lit-html/directives/repeat.js:
+  /**
+   * @license
+   * Copyright 2017 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+
+lit-html/async-directive.js:
+  /**
+   * @license
+   * Copyright 2017 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+
+lit-html/directives/private-async-helpers.js:
+  /**
+   * @license
+   * Copyright 2021 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+
+lit-html/directives/until.js:
+  /**
+   * @license
+   * Copyright 2017 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+
+lit-html/directives/when.js:
+  /**
+   * @license
+   * Copyright 2021 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+
+lit-html/directives/join.js:
+  /**
+   * @license
+   * Copyright 2021 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+
+lit-html/directives/unsafe-html.js:
+  /**
+   * @license
+   * Copyright 2017 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+
+lit-html/directives/ref.js:
+  /**
+   * @license
+   * Copyright 2020 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
