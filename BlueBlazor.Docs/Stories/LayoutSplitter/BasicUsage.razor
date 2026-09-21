@@ -1,0 +1,49 @@
+﻿@{
+    /*docs {
+    "iframeUrl": "components/layout-splitter/stories/basic-usage"
+    } */
+}
+@layout EmptyLayout
+@page "/components/layout-splitter/stories/basic-usage"
+
+<Layout>
+    <HeaderContent>
+        <LayoutProvider Context="ctx">
+            <Button Label="Toggle Inspector" Active="ctx.InspectorState"
+                    OnClick="() => ctx.ToggleInspector()"
+                    aria-controls="@LayoutSplitter.INSPECTOR_ID"
+                    aria-expanded="@(ctx.InspectorState ? "true" : "false")" />
+        </LayoutProvider>
+    </HeaderContent>
+
+    <SideContent>
+        SideContent
+    </SideContent>
+
+    <ChildContent>
+        <LayoutSplitter>
+            <Start>
+                <div class="container">
+                    Hello World
+                </div>
+            </Start>
+
+            <End>
+                <div class="vstack h-100">
+                    <div class="d-flex border rounded-2">
+                        <button type="button" class="btn blue-menu-item btn-sm icon-link"><span class="blue-btn-icon-wrapper" aria-hidden="true">➕</span><span class="text-truncate">New Chat</span></button><button type="button" class="btn blue-menu-item btn-sm icon-link"><span class="blue-btn-icon-wrapper" aria-hidden="true">✔️</span><span class="text-truncate">Save</span></button>
+                    </div>
+
+                    <div class="vstack align-items-center justify-content-center flex-grow-1 text-secondary"><span>✨</span><small>The chat is empty</small></div>
+
+                    <div class="bg-body border rounded p-1">
+                        <div class="text-secondary p-2 pb-5">Placeholder text...</div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-primary icon-link blue-btn-square" disabled=""><span class="blue-btn-icon-wrapper" aria-hidden="true">⬆️</span></button>
+                        </div>
+                    </div>
+                </div>
+            </End>
+        </LayoutSplitter>
+    </ChildContent>
+</Layout>
