@@ -9,6 +9,7 @@ namespace BlueBlazor.Components;
 public partial class LayoutProvider : BlueComponentBase, IAsyncDisposable
 {
     private IJSObjectReference? _module;
+    private DotNetObjectReference<LayoutProvider>? _dotNetObjectReference;
     private string _listenerId = $"uid_{Guid.NewGuid():N}";
 
     private bool _inspectorState;
@@ -33,6 +34,8 @@ public partial class LayoutProvider : BlueComponentBase, IAsyncDisposable
             await _module.InvokeVoidAsync("dispose", _listenerId);
             await _module.DisposeAsync();
         }
+
+        _dotNetObjectReference?.Dispose();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -41,7 +44,8 @@ public partial class LayoutProvider : BlueComponentBase, IAsyncDisposable
         {
             _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BlueBlazor/Components/Layout/LayoutProvider.razor.js");
             if (_module == null) return;
-            await _module.InvokeVoidAsync("init", _listenerId, LayoutId, DotNetObjectReference.Create(this));
+            _dotNetObjectReference = DotNetObjectReference.Create(this);
+            await _module.InvokeVoidAsync("init", _listenerId, LayoutId, _dotNetObjectReference);
         }
     }
 

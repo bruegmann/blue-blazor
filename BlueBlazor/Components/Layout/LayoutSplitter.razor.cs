@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 namespace BlueBlazor.Components;
 
 /// <summary>
-/// Use this inside of Layot's <see cref="Layout.ChildContent" /> to insert a [`sp-split-view`](https://opensource.adobe.com/spectrum-web-components/components/split-view/).
+/// Use this inside of Layout's <see cref="Layout.ChildContent" /> to insert a [`sp-split-view`](https://opensource.adobe.com/spectrum-web-components/components/split-view/).
 /// This enables the Layout Inspector on the end. Set its content with <see cref="End" />.
 /// </summary>
 public partial class LayoutSplitter : BlueComponentBase
