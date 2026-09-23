@@ -1,19 +1,15 @@
-﻿<ul class="list-unstyled d-flex flex-column">
-    <li>
-        <MenuItem Label="Home" Href="" Current="@IsActive("", true)">
-            <IconBefore>
-                <BiHouse />
-            </IconBefore>
-        </MenuItem>
-    </li>
+﻿<nav class="nav nav-underline text-center d-grid mb-2" style="grid-template-columns: repeat(3, 1fr);">
+    <a class="nav-link" href="https://bruegmann.github.io/blue">Web</a>
+    <a class="nav-link" href="https://bruegmann.github.io/blue/react">React</a>
+    <a class="nav-link active" aria-current="page" href=".">Blazor</a>
+</nav>
 
-
-
+<ul class="list-unstyled d-flex flex-column">
     @if (_pagesData != null)
     {
         @foreach (var group in _pagesData.ServicePageUrls)
         {
-            <li class="mt-3">
+            <li>
                 <strong class="ps-2">@group.Key</strong>
                 <ul class="list-unstyled">
                     @foreach (var item in group.Value)
