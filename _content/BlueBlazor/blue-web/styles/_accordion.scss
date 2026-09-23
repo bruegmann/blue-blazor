@@ -1,0 +1,26 @@
+// Let's you use Bootstrap's Accordion component with the native HTML Details element. No JavaScript necessary then anymore.
+details[open] summary > .accordion-button {
+    @extend .accordion-button, :not(.collapsed);
+}
+
+details.accordion-item:last-of-type[open] > .accordion-header .accordion-button.collapsed {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.blue-accordion {
+    &,
+    details.accordion-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    details.accordion-item[open],
+    details.accordion-item[open]::details-content {
+        flex-grow: 1;
+    }
+
+    .accordion-body {
+        height: 100%;
+    }
+}

@@ -14,16 +14,21 @@ export async function verify(text) {
 }
 async function dialog(dialogType, text) {
   let options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  let {
-    title = getPhrase(dialogType === "verify" ? "Confirm" : dialogType === "ask" ? "Question" : "Message"),
-    icon = undefined,
-    switchPrimaryBtn = false,
-    acceptBtnText = "OK",
-    cancelBtnText = getPhrase("Cancel"),
-    inputType = "text",
-    defaultValue,
-    id
-  } = typeof options === "string" ? JSON.parse(options) : options;
+  let _ref = typeof options === "string" ? JSON.parse(options) : options,
+    _ref$title = _ref.title,
+    title = _ref$title === void 0 ? getPhrase(dialogType === "verify" ? "Confirm" : dialogType === "ask" ? "Question" : "Message") : _ref$title,
+    _ref$icon = _ref.icon,
+    icon = _ref$icon === void 0 ? undefined : _ref$icon,
+    _ref$switchPrimaryBtn = _ref.switchPrimaryBtn,
+    switchPrimaryBtn = _ref$switchPrimaryBtn === void 0 ? false : _ref$switchPrimaryBtn,
+    _ref$acceptBtnText = _ref.acceptBtnText,
+    acceptBtnText = _ref$acceptBtnText === void 0 ? "OK" : _ref$acceptBtnText,
+    _ref$cancelBtnText = _ref.cancelBtnText,
+    cancelBtnText = _ref$cancelBtnText === void 0 ? getPhrase("Cancel") : _ref$cancelBtnText,
+    _ref$inputType = _ref.inputType,
+    inputType = _ref$inputType === void 0 ? "text" : _ref$inputType,
+    defaultValue = _ref.defaultValue,
+    id = _ref.id;
   const _id = id || guid();
   const addToDom = () => {
     document.body.insertAdjacentHTML("beforeend", /* HTML */"<dialog class=\"blue-modal modal\" id=\"".concat(_id, "\" aria-labelledby=\"").concat(_id, "-label\">\n                <div class=\"modal-dialog\">\n                    <div class=\"modal-content\">\n                        <form>\n                            <div class=\"modal-header\">\n                                ").concat(icon ? /* html */"<div class=\"me-2\">".concat(icon, "</div>") : "", "\n                                <h1 class=\"modal-title fs-5\" id=\"").concat(_id, "-label\">").concat(title, "</h1>\n                            </div>\n                            <div class=\"modal-body\">\n                                ").concat(dialogType === "ask" ? /* HTML */"<label for=\"".concat(_id, "-input\" class=\"blue-label\">").concat(text, "</label>\n                                          <input\n                                              type=\"").concat(inputType, "\"\n                                              ").concat(defaultValue !== undefined ? " value=\"".concat(defaultValue, "\"") : "", "\n                                              id=\"").concat(_id, "-input\"\n                                              class=\"form-control\"\n                                          />") : text, "\n                            </div>\n                            <div class=\"modal-footer\">\n                                ").concat(dialogType === "verify" || dialogType === "ask" ? /* HTML */"<button\n                                          type=\"button\"\n                                          class=\"btn ".concat(switchPrimaryBtn ? "btn-primary" : "blue-btn-plain-primary", "\"\n                                          onclick=\"document.getElementById('").concat(_id, "').close()\"\n                                      >\n                                          ").concat(cancelBtnText, "\n                                      </button>") : "", "\n                                <button\n                                    type=\"submit\"\n                                    class=\"btn ").concat(switchPrimaryBtn ? "blue-btn-plain-primary" : "btn-primary", "\"\n                                >\n                                    ").concat(acceptBtnText, "\n                                </button>\n                            </div>\n                        </form>\n                    </div>\n                </div>\n\n                <form method=\"dialog\" class=\"blue-modal-backdrop\">\n                    <button>").concat(cancelBtnText, "</button>\n                </form>\n            </dialog>"));

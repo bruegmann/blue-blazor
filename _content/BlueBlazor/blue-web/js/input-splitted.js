@@ -153,9 +153,7 @@ function _addInput(i) {
   input.value = _classPrivateFieldGet(_valueArray, this)[i] || "";
   input.disabled = this.disabled;
   input.addEventListener("input", _ref => {
-    let {
-      target
-    } = _ref;
+    let target = _ref.target;
     const inputTarget = target;
     if (inputTarget.value !== "" && _classPrivateFieldGet(_refArray, this)[i + 1]) {
       _classPrivateFieldGet(_refArray, this)[i + 1].focus();
@@ -164,19 +162,15 @@ function _addInput(i) {
     this.value = _classPrivateFieldGet(_valueArray, this).join("");
   });
   input.addEventListener("keydown", _ref2 => {
-    let {
-      key,
-      target
-    } = _ref2;
+    let key = _ref2.key,
+      target = _ref2.target;
     const inputTarget = target;
     if (key === "Backspace" && inputTarget.value === "" && _classPrivateFieldGet(_refArray, this)[i - 1] !== undefined) {
       _classPrivateFieldGet(_refArray, this)[i - 1].focus();
     }
   });
   input.addEventListener("paste", _ref3 => {
-    let {
-      clipboardData
-    } = _ref3;
+    let clipboardData = _ref3.clipboardData;
     const pastedData = clipboardData.getData("Text");
     let k = 0;
     for (let j = i; j < this.length; j++) {

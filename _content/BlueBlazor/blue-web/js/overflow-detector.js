@@ -26,10 +26,8 @@ export class OverflowDetector {
   }
   observe(options) {
     var _this$resizeObserver;
-    const {
-      element,
-      onChange
-    } = options;
+    const element = options.element,
+      onChange = options.onChange;
     if (this.entries.has(element)) {
       this.unobserve(element);
     }

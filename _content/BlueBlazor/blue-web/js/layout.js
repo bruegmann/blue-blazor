@@ -41,10 +41,8 @@ export function init(layoutEl) {
 export function dispose(layoutEl) {
   const instance = instances.get(layoutEl);
   if (!instance) return;
-  const {
-    controller,
-    modalEl
-  } = instance;
+  const controller = instance.controller,
+    modalEl = instance.modalEl;
   controller.abort();
   if (modalEl) mrDispose(modalEl);
   instances.delete(layoutEl);
@@ -52,10 +50,8 @@ export function dispose(layoutEl) {
 function toggleSidebar(layoutEl) {
   const instance = instances.get(layoutEl);
   if (!instance) return;
-  const {
-    layoutSideEl,
-    toggleLayoutSideEl
-  } = instance;
+  const layoutSideEl = instance.layoutSideEl,
+    toggleLayoutSideEl = instance.toggleLayoutSideEl;
   if (!layoutSideEl || !toggleLayoutSideEl) return;
   layoutSideEl.classList.toggle("d-lg-none");
   layoutSideEl.classList.toggle("w-lg-0");
@@ -84,11 +80,9 @@ function disableSplitter(layoutEl, splitterEl) {
   delete layoutEl.dataset.blueSplitterEnabled;
 }
 function initInspector(layoutEl, instance) {
-  const {
-    splitterEl,
-    inspectorEl,
-    controller
-  } = instance;
+  const splitterEl = instance.splitterEl,
+    inspectorEl = instance.inspectorEl,
+    controller = instance.controller;
   if (!splitterEl || !inspectorEl || !controller) return;
   const enabled = localStorage.getItem("blueLayoutInspectorEnabled") != null;
   if (enabled && getComputedStyle(inspectorEl).position !== "fixed") {
@@ -132,10 +126,8 @@ function updateInspectorState(layoutTarget) {
   if (!layoutEl) return;
   const instance = instances.get(layoutEl);
   if (!(instance !== null && instance !== void 0 && instance.splitterEl) || !instance.inspectorEl) return;
-  const {
-    splitterEl,
-    inspectorEl
-  } = instance;
+  const splitterEl = instance.splitterEl,
+    inspectorEl = instance.inspectorEl;
   const isOpen = getComputedStyle(inspectorEl).position === "fixed" ? inspectorEl.open : splitterEl.resizable;
   const previousState = layoutEl.dataset.blueInspectorOpen;
   if (isOpen) layoutEl.dataset.blueInspectorOpen = "";else delete layoutEl.dataset.blueInspectorOpen;
@@ -149,10 +141,8 @@ export function openInspector(layoutTarget) {
   if (!layoutEl) return;
   const instance = instances.get(layoutEl);
   if (!(instance !== null && instance !== void 0 && instance.splitterEl) || !instance.inspectorEl) return;
-  const {
-    splitterEl,
-    inspectorEl
-  } = instance;
+  const splitterEl = instance.splitterEl,
+    inspectorEl = instance.inspectorEl;
   if (getComputedStyle(inspectorEl).position === "fixed") {
     // Is active as dialog
     if (showCommand === "show") {
@@ -172,10 +162,8 @@ export function closeInspector(layoutTarget) {
   if (!layoutEl) return;
   const instance = instances.get(layoutEl);
   if (!(instance !== null && instance !== void 0 && instance.splitterEl) || !instance.inspectorEl) return;
-  const {
-    splitterEl,
-    inspectorEl
-  } = instance;
+  const splitterEl = instance.splitterEl,
+    inspectorEl = instance.inspectorEl;
   if (getComputedStyle(inspectorEl).position === "fixed") {
     // Is active as dialog
     inspectorEl.close();
@@ -192,10 +180,8 @@ export function toggleInspector(layoutTarget) {
   if (!layoutEl) return;
   const instance = instances.get(layoutEl);
   if (!(instance !== null && instance !== void 0 && instance.splitterEl) || !instance.inspectorEl) return;
-  const {
-    splitterEl,
-    inspectorEl
-  } = instance;
+  const splitterEl = instance.splitterEl,
+    inspectorEl = instance.inspectorEl;
   const isOpen = getComputedStyle(inspectorEl).position === "fixed" ? inspectorEl.open : splitterEl.resizable;
   if (isOpen) {
     closeInspector(layoutTarget);
