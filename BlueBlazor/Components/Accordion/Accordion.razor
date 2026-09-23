@@ -1,0 +1,6 @@
+﻿@namespace BlueBlazor.Components
+@inherits BlueComponentBase
+
+<div class="@(new CssBuilder("blue-accordion accordion").AddClass(Class).Build())" style="@Style" @attributes="AdditionalAttributes">
+    <CascadingValue Value="this" IsFixed>@ChildContent</CascadingValue>
+</div>
