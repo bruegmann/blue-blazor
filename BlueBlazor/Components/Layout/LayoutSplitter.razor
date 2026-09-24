@@ -29,8 +29,8 @@
                         <button type="submit" class="btn-close" aria-label="@(L["Close"])"></button>
                     </form>
                 </div>
-                <div class="offcanvas-body">
-                    @End
+                <div class="@(new CssBuilder("offcanvas-body").AddClass(DrawerBodyClass).Build())">
+                    <div class="blue-layout-inspector-body">@End</div>
                 </div>
             </div>
             <form method="dialog" class="blue-modal-backdrop"><button>@L["Close"]</button></form>

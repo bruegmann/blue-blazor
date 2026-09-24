@@ -28,4 +28,7 @@ public partial class LayoutSplitter : BlueComponentBase
 
     [Parameter]
     public bool NoPageBorder { get; set; } = false;
+
+    [Parameter]
+    public string? DrawerBodyClass { get; set; }
 }

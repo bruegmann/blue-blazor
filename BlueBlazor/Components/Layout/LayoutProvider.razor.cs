@@ -51,12 +51,12 @@ public partial class LayoutProvider : BlueComponentBase, IAsyncDisposable
 
     public ValueTask ToggleInspector()
     {
-        return JSRuntime.InvokeVoidAsync("blueWeb.layout.toggleInspector", LayoutId);
+        return JSRuntime.InvokeVoidAsync("blueWeb.layout.toggleInspector", LayoutId, "show");
     }
 
     public ValueTask OpenInspector()
     {
-        return JSRuntime.InvokeVoidAsync("blueWeb.layout.openInspector", LayoutId);
+        return JSRuntime.InvokeVoidAsync("blueWeb.layout.openInspector", LayoutId, "show");
     }
 
     public ValueTask CloseInspector()
