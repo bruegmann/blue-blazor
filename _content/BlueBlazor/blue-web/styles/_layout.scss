@@ -79,28 +79,7 @@
 }
 
 .blue-layout-body {
-    --spacing: 0.5rem;
-    --blue-menu-item-indicator-bg: #{$sidebar-indicator-color};
-    --bs-link-hover-color: #{$link-hover-color};
-
-    width: calc(100% - var(--spacing) * 2);
-    height: calc(100% - var(--spacing));
-    margin-left: auto;
-    margin-right: auto;
-    overflow: auto;
-    scrollbar-color: color-mix(in srgb, currentColor 50%, transparent) transparent;
-    background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity, 1));
-    color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity, 1));
-    box-shadow: var(--bs-box-shadow-sm);
-    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
-    border-radius: var(--bs-border-radius-lg);
-}
-
-@include color-mode(dark, false) {
-    .blue-layout-body {
-        --blue-menu-item-indicator-bg: #{$sidebar-indicator-color-dark};
-        --bs-link-hover-color: #{$link-hover-color-dark};
-    }
+    @include blue-layout-body(rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity, 1)));
 }
 
 .blue-layout-splitter {
@@ -141,18 +120,36 @@
             }
         }
     }
+
+    .blue-layout-body,
+    .blue-layout-inspector-body {
+        width: calc(100% - var(--spacing));
+    }
+
+    & > :first-child .blue-layout-body {
+        margin-right: 0;
+    }
+
+    & > :last-child .blue-layout-inspector-body {
+        margin-left: 0;
+    }
 }
 
 .blue-layout-inspector {
     &:not([open]) {
         & > .offcanvas {
-            --spacing: 0.5rem;
             width: 100%;
-            height: calc(100% - var(--spacing));
-
-            & > .offcanvas-body {
-                padding-inline: var(--spacing);
-            }
         }
+    }
+}
+
+.blue-layout-inspector-body {
+    width: 100%;
+    height: 100%;
+}
+
+@include media-breakpoint-up(lg) {
+    .blue-layout-inspector-body {
+        @include blue-layout-body(rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity, 1)));
     }
 }

@@ -51,7 +51,8 @@ function toggleSidebar(layoutEl) {
   const instance = instances.get(layoutEl);
   if (!instance) return;
   const layoutSideEl = instance.layoutSideEl,
-    toggleLayoutSideEl = instance.toggleLayoutSideEl;
+    toggleLayoutSideEl = instance.toggleLayoutSideEl,
+    splitterEl = instance.splitterEl;
   if (!layoutSideEl || !toggleLayoutSideEl) return;
   layoutSideEl.classList.toggle("d-lg-none");
   layoutSideEl.classList.toggle("w-lg-0");
@@ -62,6 +63,10 @@ function toggleSidebar(layoutEl) {
   } else {
     localStorage.setItem("blueLayoutSideShrink", "");
   }
+  if (!splitterEl) return;
+  setTimeout(() => {
+    adjustSplitter(layoutEl, splitterEl);
+  }, 10);
 }
 function setSplitterPosition(splitterEl, value) {
   if (value < 0) splitterEl.splitterPos = 0;else if (splitterEl.maxPos && value > splitterEl.maxPos) splitterEl.splitterPos = splitterEl.maxPos;else splitterEl.splitterPos = value;
@@ -78,6 +83,12 @@ function disableSplitter(layoutEl, splitterEl) {
   setSplitterPosition(splitterEl, splitterEl.maxPos || splitterEl.viewSize);
   splitterEl.resizable = false;
   delete layoutEl.dataset.blueSplitterEnabled;
+}
+function adjustSplitter(layoutEl, splitterEl) {
+  if (splitterEl.resizable && splitterEl.dataset.blueInspectorSize) {
+    setSplitterPosition(splitterEl, splitterEl.viewSize - parseInt(splitterEl.dataset.blueInspectorSize));
+    updateInspectorState(layoutEl);
+  }
 }
 function initInspector(layoutEl, instance) {
   const splitterEl = instance.splitterEl,
@@ -96,9 +107,8 @@ function initInspector(layoutEl, instance) {
       if (inspectorEl && getComputedStyle(inspectorEl).display === "none" || !splitterEl.resizable) {
         disableSplitter(layoutEl, splitterEl);
         updateInspectorState(layoutEl);
-      } else if (splitterEl.resizable && splitterEl.dataset.blueInspectorSize) {
-        setSplitterPosition(splitterEl, splitterEl.viewSize - parseInt(splitterEl.dataset.blueInspectorSize));
-        updateInspectorState(layoutEl);
+      } else {
+        adjustSplitter(layoutEl, splitterEl);
       }
     }
   }, {

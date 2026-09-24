@@ -1,0 +1,24 @@
+@mixin blue-layout-body($bg) {
+    --spacing: 0.5rem;
+    --blue-menu-item-indicator-bg: #{$sidebar-indicator-color};
+    --bs-link-hover-color: #{$link-hover-color};
+
+    width: calc(100% - var(--spacing) * 2);
+    height: calc(100% - var(--spacing));
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    scrollbar-color: color-mix(in srgb, currentColor 50%, transparent) transparent;
+    background-color: $bg;
+    color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity, 1));
+    box-shadow: var(--bs-box-shadow-sm);
+    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+    border-radius: var(--bs-border-radius-lg);
+
+    @include color-mode(dark, false) {
+        & {
+            --blue-menu-item-indicator-bg: #{$sidebar-indicator-color-dark};
+            --bs-link-hover-color: #{$link-hover-color-dark};
+        }
+    }
+}
