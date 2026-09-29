@@ -1,0 +1,49 @@
+﻿<style>
+    .demo-hi-icon::before {
+        content: "😇";
+    }
+
+    .demo-info-icon::before {
+        content: "ℹ️";
+    }
+</style>
+
+<CreateId Context="popoverId">
+    <TuiEditor @bind-Value="@Input">
+        <ToolbarItems>
+            <TuiEditorToolbarItem IconClass="demo-hi-icon"
+                                  Tooltip="Click to show message"
+                                  OnClick="HandleClick" />
+
+            <TuiEditorToolbarItem Text="Customized!" Class="text-primary w-auto" Style="font-weight: bold" />
+
+            <TuiEditorToolbarItem GroupIndex="1"
+                                  ItemIndex="2"
+                                  IconClass="demo-info-icon"
+                                  Tooltip="Click to open popover"
+                                  PopoverTarget="@popoverId" />
+        </ToolbarItems>
+    </TuiEditor>
+
+    <Popover Id="@popoverId" Class="p-3">
+        Hello from popover!
+    </Popover>
+</CreateId>
+
+<ul>
+    @foreach (var greeting in _greetings)
+    {
+        <li>@greeting</li>
+    }
+</ul>
+
+@code {
+    private string Input { get; set; } = "**Initial value**";
+
+    private List<string> _greetings = [];
+
+    private void HandleClick()
+    {
+        _greetings.Add("Hi!");
+    }
+}
