@@ -10,7 +10,8 @@ export function Initialize(
     language,
     height,
     autoFocus,
-    placeholder = undefined
+    placeholder = undefined,
+    toolbarItemGroups
 ) {
     if (!language) language = document.documentElement.lang
 
@@ -23,12 +24,7 @@ export function Initialize(
         hideModeSwitch: true,
         theme: "dark",
         language,
-        toolbarItems: [
-            ["heading", "bold", "italic", "strike"],
-            ["hr", "quote"],
-            ["ul", "ol", "task", "indent", "outdent"],
-            ["link"]
-        ],
+        toolbarItems: toolbarItemGroups,
         autofocus: autoFocus || element.getAttribute("autofocus") !== null,
         placeholder: placeholder
     })

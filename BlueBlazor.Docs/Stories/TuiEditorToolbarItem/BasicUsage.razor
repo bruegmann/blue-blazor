@@ -8,27 +8,25 @@
     }
 </style>
 
-<CreateId Context="popoverId">
-    <TuiEditor @bind-Value="@Input">
-        <ToolbarItems>
-            <TuiEditorToolbarItem IconClass="demo-hi-icon"
-                                  Tooltip="Click to show message"
-                                  OnClick="HandleClick" />
+<TuiEditor @bind-Value="@Input">
+    <CustomToolbarItems>
+        <TuiEditorToolbarItem IconClass="demo-hi-icon"
+                              Tooltip="Click to show message"
+                              OnClick="HandleClick" />
 
-            <TuiEditorToolbarItem Text="Customized!" Class="text-primary w-auto" Style="font-weight: bold" />
+        <TuiEditorToolbarItem Text="Customized!" Class="text-primary w-auto" Style="font-weight: bold" />
 
-            <TuiEditorToolbarItem GroupIndex="1"
-                                  ItemIndex="2"
-                                  IconClass="demo-info-icon"
-                                  Tooltip="Click to open popover"
-                                  PopoverTarget="@popoverId" />
-        </ToolbarItems>
-    </TuiEditor>
+        <TuiEditorToolbarItem GroupIndex="1"
+                              ItemIndex="2"
+                              IconClass="demo-info-icon"
+                              Tooltip="Click to open popover"
+                              PopoverTarget="@_popoverId" />
+    </CustomToolbarItems>
+</TuiEditor>
 
-    <Popover Id="@popoverId" Class="p-3">
-        Hello from popover!
-    </Popover>
-</CreateId>
+<Popover Id="@_popoverId" Class="p-3">
+    Hello from popover!
+</Popover>
 
 <ul>
     @foreach (var greeting in _greetings)
@@ -38,6 +36,7 @@
 </ul>
 
 @code {
+    private string _popoverId = $"uid_{Guid.NewGuid():N}";
     private string Input { get; set; } = "**Initial value**";
 
     private List<string> _greetings = [];

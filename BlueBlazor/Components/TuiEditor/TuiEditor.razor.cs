@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlueBlazor.Extensions;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System.Xml.Linq;
 
 namespace BlueBlazor.Components;
 
@@ -14,17 +14,25 @@ namespace BlueBlazor.Components;
 /// A slightly customized theme for Toast UI Editor comes as isolated CSS for this component (TuiEditor.razor.css).
 /// Necessary JavaScript will dynamically loaded. So everything should "just work". 
 /// </summary>
-public partial class TuiEditor : ComponentBase, IDisposable
+public partial class TuiEditor : ComponentBase, IAsyncDisposable
 {
     [Inject]
     private IJSRuntime JSRuntime { get; set; } = default!;
 
+    public static readonly List<List<TuiEditorToolbarItemName>> DEFAULT_TOOLBAR_ITEM_GROUPS = [
+        [TuiEditorToolbarItemName.Heading, TuiEditorToolbarItemName.Bold, TuiEditorToolbarItemName.Italic, TuiEditorToolbarItemName.Strike],
+        [TuiEditorToolbarItemName.Hr, TuiEditorToolbarItemName.Quote],
+        [TuiEditorToolbarItemName.Ul, TuiEditorToolbarItemName.Ol, TuiEditorToolbarItemName.Task, TuiEditorToolbarItemName.Indent, TuiEditorToolbarItemName.Outdent],
+        [TuiEditorToolbarItemName.Link]
+    ];
+
     private ElementReference _element;
     private IJSObjectReference? _module;
     private DotNetObjectReference<TuiEditor>? _dotNetObject;
-    private string _id = Guid.NewGuid().ToString();
+    private readonly string _id = Guid.NewGuid().ToString();
+    private bool _isDisposing;
 
-    private List<TuiEditorToolbarItem> _toolbarItems = [];
+    private List<TuiEditorToolbarItem> _customToolbarItems = [];
 
     private string? _value;
     [Parameter]
@@ -54,7 +62,10 @@ public partial class TuiEditor : ComponentBase, IDisposable
     public EventCallback OnApply { get; set; }
 
     [Parameter]
-    public RenderFragment? ToolbarItems { get; set; }
+    public RenderFragment? CustomToolbarItems { get; set; }
+
+    [Parameter]
+    public List<List<TuiEditorToolbarItemName>> ToolbarItemGroups { get; set; } = DEFAULT_TOOLBAR_ITEM_GROUPS;
 
     [Parameter(CaptureUnmatchedValues = true)]
     public IDictionary<string, object>? AdditionalAttributes { get; set; }
@@ -78,13 +89,25 @@ public partial class TuiEditor : ComponentBase, IDisposable
             if (_module is not null)
             {
                 _dotNetObject = DotNetObjectReference.Create(this);
-                await _module.InvokeVoidAsync("Initialize", _id, _element, _dotNetObject, Value, Language, Height, AutoFocus, Placeholder);
+
+                List<List<string>> toolbarItemGroupsStringified = [];
+                foreach (var group in ToolbarItemGroups)
+                {
+                    var g = new List<string>();
+                    foreach (var item in group)
+                    {
+                        g.Add(item.ToAttributeValue() ?? "");
+                    }
+                    toolbarItemGroupsStringified.Add(g);
+                }
+
+                await _module.InvokeVoidAsync("Initialize", _id, _element, _dotNetObject, Value, Language, Height, AutoFocus, Placeholder, toolbarItemGroupsStringified);
 
                 // Insert in reverse because TOAST UI inserts by GroupIndex/ItemIndex (default: 0),
                 // so declared ToolbarItem components keep their intended visual order.
-                for (int i = _toolbarItems.Count - 1; i >= 0; i--)
+                for (int i = _customToolbarItems.Count - 1; i >= 0; i--)
                 {
-                    var item = _toolbarItems[i];
+                    var item = _customToolbarItems[i];
                     await _module.InvokeVoidAsync("InsertToolbarItem", _id, item.NameValue, _dotNetObject,
                         item.GroupIndex, item.ItemIndex, item.Tooltip, item.Text, item.IconClass, item.PopoverTarget, item.Class, item.Style);
                 }
@@ -104,14 +127,27 @@ public partial class TuiEditor : ComponentBase, IDisposable
         }
     }
 
-    internal void AddToolbarItem(TuiEditorToolbarItem item) { _toolbarItems.Add(item); }
+    internal void AddToolbarItem(TuiEditorToolbarItem item)
+    {
+        _customToolbarItems.Add(item);
+    }
 
     internal async Task RemoveToolbarItem(TuiEditorToolbarItem item)
     {
-        _toolbarItems.Remove(item);
-        if (_module is not null)
+        _customToolbarItems.Remove(item);
+        if (_isDisposing || _module is null) return;
+
+        try
         {
-            await _module.InvokeVoidAsync("InsertToolbarItem", _id, item.NameValue);
+            await _module.InvokeVoidAsync("RemoveToolbarItem", _id, item.NameValue);
+        }
+        catch (ObjectDisposedException)
+        {
+            // Komponente/JS-Referenz wird bereits abgebaut.
+        }
+        catch (JSDisconnectedException)
+        {
+            // Bei WASM/Disconnect während Dispose ignorierbar.
         }
     }
 
@@ -131,7 +167,7 @@ public partial class TuiEditor : ComponentBase, IDisposable
     [JSInvokable]
     public async Task InvokeToolbarItemClick(string name)
     {
-        foreach (var item in _toolbarItems)
+        foreach (var item in _customToolbarItems)
         {
             if (item.NameValue == name && item.OnClick.HasDelegate)
             {
@@ -140,13 +176,45 @@ public partial class TuiEditor : ComponentBase, IDisposable
         }
     }
 
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
-        if (_module is not null)
+        _isDisposing = true;
+
+        var module = _module;
+        _module = null;
+
+        if (module is not null)
         {
-            _module.InvokeVoidAsync("Destroy", _id);
-            _dotNetObject?.Dispose();
-            _module.DisposeAsync();
+            try
+            {
+                await module.InvokeVoidAsync("Destroy", _id);
+            }
+            catch (ObjectDisposedException) { }
+            catch (JSDisconnectedException) { }
+
+            await module.DisposeAsync();
         }
+
+        _dotNetObject?.Dispose();
     }
+}
+
+public enum TuiEditorToolbarItemName
+{
+    Heading,
+    Bold,
+    Italic,
+    Strike,
+    Hr,
+    Quote,
+    Ul,
+    Ol,
+    Task,
+    Indent,
+    Outdent,
+    Table,
+    Image,
+    Link,
+    Code,
+    Codeblock
 }

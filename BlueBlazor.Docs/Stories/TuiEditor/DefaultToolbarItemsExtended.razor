@@ -1,0 +1,6 @@
+﻿<TuiEditor @bind-Value="@Input"
+           ToolbarItemGroups="[.. TuiEditor.DEFAULT_TOOLBAR_ITEM_GROUPS, [TuiEditorToolbarItemName.Code]]" />
+
+@code {
+    private string Input { get; set; } = "**Initial value**";
+}
