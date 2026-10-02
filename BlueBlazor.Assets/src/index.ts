@@ -11,6 +11,8 @@ export * from "blue-web/dist/js/layout.js"
 import "../node_modules/bootstrap/js/dist/tab.js"
 import { BlSelectEvent } from "blue-web/dist/js/select-list.js"
 
+import "blue-themify"
+
 interface Blazor {
     registerCustomEventType: (
         name: string,
