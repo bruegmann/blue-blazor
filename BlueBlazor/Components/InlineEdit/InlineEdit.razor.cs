@@ -61,6 +61,9 @@ public partial class InlineEdit : BlueComponentBase
     [Parameter]
     public RenderFragment? SharedContent { get; set; }
 
+    [Parameter]
+    public RenderFragment? AfterContent { get; set; }
+
     /// <summary>
     /// Text that will displayed in read mode.
     /// </summary>
