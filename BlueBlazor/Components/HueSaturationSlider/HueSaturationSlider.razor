@@ -1,0 +1,43 @@
+﻿@namespace BlueBlazor.Components
+@inherits BlueComponentBase
+
+<div class="@(new CssBuilder("slider-wrapper").AddClass(Class).Build())"
+     style="@(new StyleBuilder(Style).AddStyle("background", Color).Build())" @attributes="AdditionalAttributes">
+    <div class="slider-container">
+        <CreateId Context="idPrefix">
+            <div class="slider-group">
+                <label for="@($"{idPrefix}-hue")">Hue</label>
+                <input id="@($"{idPrefix}-hue")"
+                       class="value-input"
+                       type="number"
+                       readonly="@ReadOnly"
+                       min="0"
+                       max="360"
+                       @bind-value="HueValue" />
+                <input class="hue-slider"
+                       type="range"
+                       disabled="@ReadOnly"
+                       min="0"
+                       max="360"
+                       @bind-value="HueValue" />
+            </div>
+
+            <div class="slider-group">
+                <label for="@($"{idPrefix}-saturation")">Saturation</label>
+                <input id="@($"{idPrefix}-saturation")"
+                       class="value-input"
+                       type="number"
+                       readonly="@ReadOnly"
+                       min="0"
+                       max="100"
+                       @bind-value="SaturationValue" />
+                <input type="range"
+                       disabled="@ReadOnly"
+                       min="0"
+                       max="100"
+                       style="@($"background: {SaturationGradient}")"
+                       @bind-value="SaturationValue" />
+            </div>
+        </CreateId>
+    </div>
+</div>

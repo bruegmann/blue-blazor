@@ -1,0 +1,11 @@
+﻿<HueSaturationSlider @bind-Hue="Hue" @bind-Saturation="Saturation" />
+
+<ul>
+    <li>Hue: @Hue</li>
+    <li>Saturation: @Saturation</li>
+</ul>
+
+@code {
+    private int Hue { get; set; }
+    private int Saturation { get; set; }
+}

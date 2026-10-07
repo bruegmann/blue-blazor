@@ -15,7 +15,6 @@ public partial class Themify : BlueComponentBase, IAsyncDisposable
     private ElementReference _styleElement;
     private IJSObjectReference? _module;
     private DotNetObjectReference<Themify>? _dotNetObject;
-    private string? _json;
     private readonly StringBuilder _cssBuilder = new();
     private string? _css;
     private bool _isDisposed;
@@ -37,6 +36,9 @@ public partial class Themify : BlueComponentBase, IAsyncDisposable
 
     [Parameter]
     public EventCallback<ThemeInfo?> ThemeInfoChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<string> CssChanged { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -62,7 +64,6 @@ public partial class Themify : BlueComponentBase, IAsyncDisposable
     public async Task ReceiveThemeInfo(string json)
     {
         if (_isDisposed) return;
-        _json = json;
 
         if (ThemeInfoChanged.HasDelegate)
         {
@@ -74,7 +75,7 @@ public partial class Themify : BlueComponentBase, IAsyncDisposable
     }
 
     [JSInvokable]
-    public void ReceiveCssChunk(string chunk, bool isFirst, bool isLast)
+    public async Task ReceiveCssChunk(string chunk, bool isFirst, bool isLast)
     {
         if (_isDisposed) return;
 
@@ -86,6 +87,11 @@ public partial class Themify : BlueComponentBase, IAsyncDisposable
         if (isLast)
         {
             _css = _cssBuilder.ToString();
+            if (CssChanged.HasDelegate)
+            {
+                await CssChanged.InvokeAsync(_css);
+            }
+
             StateHasChanged();
         }
     }
@@ -119,11 +125,21 @@ public class ThemeInfo
     public string Name { get; set; } = "";
     public Dictionary<string, string> Variables { get; set; } = new();
     public ThemeAppearance Appearance { get; set; }
+    public ThemeRounding Rounding { get; set; }
     public string BlueWebVersion { get; set; } = "";
+    public string? CustomStyle { get; set; }
 }
 
 public enum ThemeAppearance
 {
     Soft,
     Bold
+}
+
+public enum ThemeRounding
+{
+    Default,
+    None,
+    Minimal,
+    Maximal
 }

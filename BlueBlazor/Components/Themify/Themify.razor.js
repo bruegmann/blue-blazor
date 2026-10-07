@@ -1,10 +1,12 @@
 const controllers = new Map()
 
-export function init(element, dotNetHelper, styleElement, themeInfoJson = null) {
-    if (!element) return
+export function init(wrapper, dotNetHelper, styleElement, themeInfoJson = null) {
+    if (!wrapper) return
 
     const abortController = new AbortController()
-    controllers.set(element, abortController)
+    controllers.set(wrapper, abortController)
+
+    const element = document.createElement("themify-appearance-helper-wrapper")
 
     if (themeInfoJson) {
         const themeInfo = JSON.parse(themeInfoJson)
@@ -33,13 +35,15 @@ export function init(element, dotNetHelper, styleElement, themeInfoJson = null) 
             // Component mind already been disposed
         }
     }, { signal: abortController.signal })
+
+    wrapper.appendChild(element)
 }
 
-export function dispose(element) {
-    if (!element) return
-    const abortController = controllers.get(element)
+export function dispose(wrapper) {
+    if (!wrapper) return
+    const abortController = controllers.get(wrapper)
     if (abortController) {
         abortController.abort()
-        controllers.delete(element)
+        controllers.delete(wrapper)
     }
 }
