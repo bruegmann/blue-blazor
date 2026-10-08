@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.ComponentModel;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -28,7 +29,7 @@ public partial class Themify : BlueComponentBase, IAsyncDisposable
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
         };
-        _jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+        _jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.KebabCaseLower));
     }
 
     [Parameter]
@@ -39,6 +40,22 @@ public partial class Themify : BlueComponentBase, IAsyncDisposable
 
     [Parameter]
     public EventCallback<string> CssChanged { get; set; }
+
+    /// <summary>
+    /// Let's you define yourself the source URL of the Blue Web SCSS file.
+    /// By default, the file included in Blue Blazor package will be used.
+    /// </summary>
+    [Parameter]
+    public string? BlueWebScssSrc { get; set; } = "./_content/BlueBlazor/blue-web/merged.scss";
+
+    [Parameter]
+    public bool ApplyOnMount { get; set; }
+
+    [Parameter]
+    public bool HideRename { get; set; } = true;
+
+    [Parameter]
+    public bool HideSquircles { get; set; } = true;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -55,7 +72,7 @@ public partial class Themify : BlueComponentBase, IAsyncDisposable
                     themeInfoJson = JsonSerializer.Serialize(ThemeInfo, _jsonSerializerOptions);
                 }
 
-                await _module.InvokeVoidAsync("init", _element, _dotNetObject, _styleElement, themeInfoJson);
+                await _module.InvokeVoidAsync("init", _element, _dotNetObject, _styleElement, ApplyOnMount, HideRename, HideSquircles, themeInfoJson, BlueWebScssSrc);
             }
         }
     }
@@ -126,6 +143,13 @@ public class ThemeInfo
     public Dictionary<string, string> Variables { get; set; } = new();
     public ThemeAppearance Appearance { get; set; }
     public ThemeRounding Rounding { get; set; }
+
+    /// <summary>
+    /// Based on which app you create the theme for, this can differentiate.
+    /// More about this on the Bootstrap docs: https://getbootstrap.com/docs/5.3/customize/color-modes/#building-with-sass
+    /// </summary>
+    public ThemeColorModeType ColorModeType { get; set; } = ThemeColorModeType.MediaQuery;
+
     public string BlueWebVersion { get; set; } = "";
     public string? CustomStyle { get; set; }
 }
@@ -142,4 +166,12 @@ public enum ThemeRounding
     None,
     Minimal,
     Maximal
+}
+
+public enum ThemeColorModeType
+{
+    Data,
+
+    [Description("media-query")]
+    MediaQuery
 }
