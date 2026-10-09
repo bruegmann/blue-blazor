@@ -1,0 +1,12 @@
+﻿<Themify @bind-ThemeInfo="_themeInfo" />
+
+<hr />
+
+<ul>
+    <li>Name: @_themeInfo.Name</li>
+    <li>Appearance: @_themeInfo.Appearance</li>
+</ul>
+
+@code {
+    ThemeInfo _themeInfo = new ThemeInfo() { Appearance = ThemeAppearance.Bold };
+}

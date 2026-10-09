@@ -1,0 +1,110 @@
+.slider-wrapper {
+    border-radius: 1.5rem;
+    padding: 0.5rem;
+}
+
+.slider-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+}
+
+.slider-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.5rem;
+
+    & > input[type="range"] {
+        grid-column: span 2;
+    }
+}
+
+label {
+    color: #fff;
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 12px;
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+.value-input {
+    text-align: center;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.125rem;
+    font-size: 0.9rem;
+    color: #333;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+
+    &[readonly] {
+        color: #fff;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        background: rgba(255, 255, 255, 0.2);
+        --outline-opacity: 10%;
+    }
+
+    &:focus {
+        outline: 2px solid hsla(var(--primary-hs) var(--l-50) / var(--outline-opacity, 100%));
+    }
+}
+
+/* Hue slider gradient */
+.hue-slider {
+    background: linear-gradient( to right, hsl(0, 100%, 50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%), hsl(180, 100%, 50%), hsl(240, 100%, 50%), hsl(300, 100%, 50%), hsl(360, 100%, 50%) );
+}
+
+input[type="range"]:disabled {
+    opacity: 0.5;
+}
+
+/* Thumb styles (WebKit) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #0003;
+    box-shadow: 0 0 3px #0005;
+    transition: transform 0.1s;
+}
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+    }
+
+    input[type="range"]::-webkit-slider-thumb:active {
+        border-color: hsl(var(--primary-hs) var(--l-50));
+    }
+
+/* Firefox */
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #0003;
+    box-shadow: 0 0 3px #0005;
+    transition: transform 0.1s;
+}
+
+    input[type="range"]::-moz-range-thumb:hover {
+        transform: scale(1.2);
+    }
+
+    input[type="range"]::-moz-range-thumb:hover {
+        border-color: hsl(var(--primary-hs) var(--l-50));
+    }
