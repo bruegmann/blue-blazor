@@ -140,7 +140,7 @@ public partial class Themify : BlueComponentBase, IAsyncDisposable
 public class ThemeInfo
 {
     public string Name { get; set; } = "";
-    public Dictionary<string, string> Variables { get; set; } = new();
+    public Dictionary<string, string> Variables { get; set; } = new() { { "$theme", "hsl(217, 17%, 98%)" }, { "$primary", "hsl(221, 97%, 53%)" } };
     public ThemeAppearance Appearance { get; set; }
     public ThemeRounding Rounding { get; set; }
 
