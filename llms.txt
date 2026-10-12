@@ -258,3 +258,2653 @@ The way to embed Blue Web CSS has changed. You now need to change the following 
 - <link rel="stylesheet" href="_content/BlueBlazor/css/blue-web.min.css" />
 + <link rel="stylesheet" href="_content/BlueBlazor/blue-web/style.min.css" />
 ```
+
+
+## Accordion
+Uses the native HTML Details element and combines it with the styling of Bootstrap's Accordion component. No JavaScript required.
+
+### Basic Usage
+
+```razor
+<Accordion>
+    <AccordionItem HeaderText="Accordion item 1">Show something</AccordionItem>
+    <AccordionItem HeaderText="Accordion item 2">Show something</AccordionItem>
+    <AccordionItem HeaderText="Accordion item 3">Show something</AccordionItem>
+</Accordion>
+```
+### Single Or None
+
+```razor
+<Accordion ExpandSingleOrNone>
+    <AccordionItem HeaderText="Accordion item 1">Show something</AccordionItem>
+    <AccordionItem HeaderText="Accordion item 2">Show something</AccordionItem>
+    <AccordionItem HeaderText="Accordion item 3">Show something</AccordionItem>
+</Accordion>
+```
+
+
+
+## AccordionItem
+
+
+
+## ActionMenu
+The Action Menu on the top right of a page. You can place Actions here which are in context of the current page.
+
+### Basic Usage
+
+```razor
+
+@layout EmptyLayout
+@page "/components/action-menu/stories/basic-usage"
+
+<ActionMenu>
+    <MenuItem Label="Hello" />
+    <MenuItem Label="World" />
+</ActionMenu>
+```
+
+
+
+## Actions
+Combination of toolbar and a dropdown menu. Items in toolbar will only be shown if there is enough space.
+Otherwise they will be visible in the dropdown menu. JavaScript detects if space is changing and rearranges.
+IMPORTANT: As of right now, children you pass will be rendered twice. Once in the toolbar and once in the dropdown.
+
+### Basic Usage
+
+```razor
+<div class="border" style="@($"width: {Width}px")">
+    <Actions>
+        <MenuItem Label="Child 1">
+            <IconBefore>🌍</IconBefore>
+        </MenuItem>
+
+        <MenuItem Label="Child 2">
+            <IconBefore>🌑</IconBefore>
+        </MenuItem>
+
+        <MenuItem Label="Child 3">
+            <IconBefore>☀️</IconBefore>
+        </MenuItem>
+
+        <MenuItem Label="Child 4">
+            <IconBefore>🚀</IconBefore>
+        </MenuItem>
+
+        <MenuItem Label="Child 5">
+            <IconBefore>🌌</IconBefore>
+        </MenuItem>
+    </Actions>
+</div>
+
+
+<label class="mt-3">
+    <span class="form-label">Change width</span>
+    <input type="range" class="form-range" min="100" max="1200" @bind="Width" @bind:event="oninput" /> @Width
+</label>
+
+@code {
+    private string Width { get; set; } = "392";
+}
+```
+### Disposable
+
+```razor
+@if (_show)
+{
+    <div style="@($"width: {Width}px")">
+        <Actions>
+            <MenuItem Label="Child 1">
+                <IconBefore>🌍</IconBefore>
+            </MenuItem>
+
+            <MenuItem Label="Child 2">
+                <IconBefore>🌑</IconBefore>
+            </MenuItem>
+
+            <MenuItem Label="Child 3">
+                <IconBefore>☀️</IconBefore>
+            </MenuItem>
+
+            <MenuItem Label="Child 4">
+                <IconBefore>🚀</IconBefore>
+            </MenuItem>
+
+            <MenuItem Label="Child 5">
+                <IconBefore>🌌</IconBefore>
+            </MenuItem>
+        </Actions>
+    </div>
+}
+
+<Button Label="Toggle" OnClick="() => { _show = !_show; }" />
+
+<label class="mt-3">
+    <span class="form-label">Change width</span>
+    <input type="range" class="form-range" min="100" max="1200" @bind="Width" @bind:event="oninput" /> @Width
+</label>
+
+@code {
+    private bool _show = true;
+    private string Width { get; set; } = "260";
+}
+
+```
+### Inside Layout Header
+
+```razor
+<div style="@($"width: {Width}px")">
+    <div class="d-flex justify-content-between bg-primary-subtle border">
+        <div style="text-wrap: nowrap;"><strong>My big fat logo</strong></div>
+
+        <Actions Class="bg-primary text-white">
+            <Dropdown Label="Dropdown">
+                <MenuItem Label="Child 1">
+                    <IconBefore>🌍</IconBefore>
+                </MenuItem>
+
+                <MenuItem Label="Child 2">
+                    <IconBefore>🌑</IconBefore>
+                </MenuItem>
+
+                <MenuItem Label="Child 3">
+                    <IconBefore>☀️</IconBefore>
+                </MenuItem>
+
+                <MenuItem Label="Child 4">
+                    <IconBefore>🚀</IconBefore>
+                </MenuItem>
+
+                <MenuItem Label="Child 5">
+                    <IconBefore>🌌</IconBefore>
+                </MenuItem>
+            </Dropdown>
+
+            <button type="button" class="blue-menu-item btn">
+                <span class="blue-menu-item-icon" aria-hidden="true">🌍</span>
+                <span class="blue-menu-item-label">Child</span>
+            </button>
+            <button type="button" class="blue-menu-item btn">
+                <span class="blue-menu-item-icon" aria-hidden="true">🌑</span>
+                <span class="blue-menu-item-label">Child 2</span>
+            </button>
+            <button type="button" class="blue-menu-item btn">
+                <span class="blue-menu-item-icon" aria-hidden="true">☀️</span>
+                <span class="blue-menu-item-label">Child 3</span>
+            </button>
+            <button type="button" class="blue-menu-item btn">
+                <span class="blue-menu-item-icon" aria-hidden="true">🚀</span>
+                <span class="blue-menu-item-label">Child 4</span>
+            </button>
+            <button type="button" class="blue-menu-item btn">
+                <span class="blue-menu-item-icon" aria-hidden="true">🌌</span>
+                <span class="blue-menu-item-label">Child 5</span>
+            </button>
+        </Actions>
+    </div>
+
+    <hr />
+
+    <div class="bg-success-subtle border">
+        <Layout Class="h-auto">
+            <HeaderContent>
+                <div style="text-wrap: nowrap;"><strong>My big fat logo</strong></div>
+
+                <Actions Class="bg-primary text-white">
+                    <Dropdown Label="Dropdown">
+                        <MenuItem Label="Child 1">
+                            <IconBefore>🌍</IconBefore>
+                        </MenuItem>
+
+                        <MenuItem Label="Child 2">
+                            <IconBefore>🌑</IconBefore>
+                        </MenuItem>
+
+                        <MenuItem Label="Child 3">
+                            <IconBefore>☀️</IconBefore>
+                        </MenuItem>
+
+                        <MenuItem Label="Child 4">
+                            <IconBefore>🚀</IconBefore>
+                        </MenuItem>
+
+                        <MenuItem Label="Child 5">
+                            <IconBefore>🌌</IconBefore>
+                        </MenuItem>
+                    </Dropdown>
+
+                    <button type="button" class="blue-menu-item btn">
+                        <span class="blue-menu-item-icon" aria-hidden="true">🌍</span>
+                        <span class="blue-menu-item-label">Child</span>
+                    </button>
+                    <button type="button" class="blue-menu-item btn">
+                        <span class="blue-menu-item-icon" aria-hidden="true">🌑</span>
+                        <span class="blue-menu-item-label">Child 2</span>
+                    </button>
+                    <button type="button" class="blue-menu-item btn">
+                        <span class="blue-menu-item-icon" aria-hidden="true">☀️</span>
+                        <span class="blue-menu-item-label">Child 3</span>
+                    </button>
+                    <button type="button" class="blue-menu-item btn">
+                        <span class="blue-menu-item-icon" aria-hidden="true">🚀</span>
+                        <span class="blue-menu-item-label">Child 4</span>
+                    </button>
+                    <button type="button" class="blue-menu-item btn">
+                        <span class="blue-menu-item-icon" aria-hidden="true">🌌</span>
+                        <span class="blue-menu-item-label">Child 5</span>
+                    </button>
+                </Actions>
+            </HeaderContent>
+            <PageContent>
+                Hello World
+            </PageContent>
+        </Layout>
+
+
+    </div>
+</div>
+
+
+<label class="mt-3">
+    <span class="form-label">Change width</span>
+    <input type="range" class="form-range" min="100" max="1200" @bind="Width" @bind:event="oninput" /> @Width
+</label>
+
+@code {
+    private string Width { get; set; } = "392";
+}
+```
+
+
+
+## AlertSection
+This is a alert section that can be used to display alerts like error, warning, info or success messages to the user.
+
+### Basic Usage
+
+```razor
+<AlertSection Alerts="alerts" />
+
+@code {
+    List<AlertSection.Alert> alerts = new() {
+        new () { Message = "It is an error.", AlertType = AlertSection.AlertType.Danger },
+        new () { Message = "It is a warning.", AlertType = AlertSection.AlertType.Warning },
+        new () { Message = "It is an info.", AlertType = AlertSection.AlertType.Info },
+        new () { Message = "It is a success.", AlertType = AlertSection.AlertType.Success }
+    };
+}
+```
+
+
+
+## Button
+This is a button with some useful default attributes.
+
+### Basic example
+A basic example of a button with using the `OnClick` event.
+```razor
+
+<Button Label="Click me" OnClick="onClick" />
+
+<p>You have clicked the button @clickCount times.</p>
+
+@code {
+    int clickCount = 0;
+
+    void onClick()
+    {
+        clickCount++;
+    }
+}
+
+```
+### Busy
+You can set the `busy` state manually. Busy state is set automatically when the button is clicked and the OnClick event handler is running.
+```razor
+
+@using BlueBlazor.Shared
+
+<Button Label="See that spinning icon?" Busy />
+<Button Label="See that spinning icon?" Busy Color="Color.Primary" Size="Size.Lg" />
+```
+### Busy Custom Text
+
+```razor
+<Button Label="Text for normal state" Busy BusyText="Fetching data..." />
+```
+### Success
+
+```razor
+<Button Label="Click me" OnClick="FakeProcess" @bind-Success="@_success" />
+<Button Label="Click me" LabelHidden Square OnClick="FakeProcess" @bind-Success="@_success">
+    <IconBefore>
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-floppy2-fill" viewBox="0 0 16 16">
+            <path d="M12 2h-2v3h2z" />
+            <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v13A1.5 1.5 0 0 0 1.5 16h13a1.5 1.5 0 0 0 1.5-1.5V2.914a1.5 1.5 0 0 0-.44-1.06L14.147.439A1.5 1.5 0 0 0 13.086 0zM4 6a1 1 0 0 1-1-1V1h10v4a1 1 0 0 1-1 1zM3 9h10a1 1 0 0 1 1 1v5H2v-5a1 1 0 0 1 1-1" />
+        </svg>
+    </IconBefore>
+</Button>
+
+@code {
+    private bool _success = false;
+
+    private async Task FakeProcess()
+    {
+        await Task.Delay(2000);
+        _success = true;
+    }
+}
+
+```
+### Variants
+You can customize buttons using `Variant`, `Color` and `Size`. To have full control, set `Variant` to `Variant.None` and use the `Class` property.
+```razor
+
+@using BlueBlazor.Shared
+
+<div class="vstack gap-2">
+    <div class="hstack gap-2">
+        <Button Label="Default is plain and secondary" />
+        <Button Label="Make button look like menu item"
+                Variant="Variant.MenuItem" />
+        <Button Label="Make button look like a link" Variant="Variant.Link" />
+    </div>
+    <div class="hstack gap-2">
+        <Button Label="Primary" Color="Color.Primary" />
+        <Button Label="Secondary" />
+        <Button Label="Success" Color="Color.Success" />
+        <Button Label="Danger" Color="Color.Danger" />
+        <Button Label="Warning" Color="Color.Warning" />
+        <Button Label="Info" Color="Color.Info" />
+        <Button Label="Light" Color="Color.Light" />
+        <Button Label="Dark" Color="Color.Dark" />
+    </div>
+    <div class="hstack gap-2">
+        <Button Label="Primary" Color="Color.Primary" Variant="Variant.Plain" />
+        <Button Label="Secondary" Variant="Variant.Plain" />
+        <Button Label="Success" Color="Color.Success" Variant="Variant.Plain" />
+        <Button Label="Danger" Color="Color.Danger" Variant="Variant.Plain" />
+        <Button Label="Warning" Color="Color.Warning" Variant="Variant.Plain" />
+        <Button Label="Info" Color="Color.Info" Variant="Variant.Plain" />
+        <Button Label="Light" Color="Color.Light" Variant="Variant.Plain" />
+        <Button Label="Dark" Color="Color.Dark" Variant="Variant.Plain" />
+    </div>
+    <div class="hstack gap-2">
+        <Button Label="Primary" Color="Color.Primary" Variant="Variant.Filled" />
+        <Button Label="Secondary" Variant="Variant.Filled" />
+        <Button Label="Success" Color="Color.Success" Variant="Variant.Filled" />
+        <Button Label="Danger" Color="Color.Danger" Variant="Variant.Filled" />
+        <Button Label="Warning" Color="Color.Warning" Variant="Variant.Filled" />
+        <Button Label="Info" Color="Color.Info" Variant="Variant.Filled" />
+        <Button Label="Light" Color="Color.Light" Variant="Variant.Filled" />
+        <Button Label="Dark" Color="Color.Dark" Variant="Variant.Filled" />
+    </div>
+    <div class="hstack gap-2">
+        <Button Label="Primary" Color="Color.Primary" Variant="Variant.Outline" />
+        <Button Label="Secondary" Variant="Variant.Outline" />
+        <Button Label="Success" Color="Color.Success" Variant="Variant.Outline" />
+        <Button Label="Danger" Color="Color.Danger" Variant="Variant.Outline" />
+        <Button Label="Warning" Color="Color.Warning" Variant="Variant.Outline" />
+        <Button Label="Info" Color="Color.Info" Variant="Variant.Outline" />
+        <Button Label="Light" Color="Color.Light" Variant="Variant.Outline" />
+        <Button Label="Dark" Color="Color.Dark" Variant="Variant.Outline" />
+    </div>
+    <div class="hstack gap-2">
+        <Button Label="Primary" Color="Color.Primary" Variant="Variant.Link" />
+        <Button Label="Secondary" Variant="Variant.Link" />
+        <Button Label="Success" Color="Color.Success" Variant="Variant.Link" />
+        <Button Label="Danger" Color="Color.Danger" Variant="Variant.Link" />
+        <Button Label="Warning" Color="Color.Warning" Variant="Variant.Link" />
+        <Button Label="Info" Color="Color.Info" Variant="Variant.Link" />
+        <Button Label="Light" Color="Color.Light" Variant="Variant.Link" />
+        <Button Label="Dark" Color="Color.Dark" Variant="Variant.Link" />
+    </div>
+</div>
+```
+### With Icon
+Using the render fragments `IconBefore` or `IconAfter` will automatically set the [Bootstrap helper `icon-link`.](https://getbootstrap.com/docs/5.3/helpers/icon-link/#example)
+```razor
+
+
+<Button Label="No icon" />
+
+<Button Label="Let's have an icon">
+    <IconBefore>
+        <BiBox2Heart />
+    </IconBefore>
+</Button>
+
+<Button Label="Animate on hover" Class="icon-link-hover">
+    <IconAfter>
+        <BiArrowRight />
+    </IconAfter>
+</Button>
+
+<Button Label="Custom hover transform" Class="icon-link-hover" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);">
+    <IconBefore>
+        <BiClipboard />
+    </IconBefore>
+</Button>
+
+<Button Label="Emoji as icon" Class="icon-link-hover">
+    <IconAfter>
+        <span>➡️</span>
+    </IconAfter>
+</Button>
+```
+### With Tooltip
+
+```razor
+<Button Label="Hover me" Tooltip="Hello, this is a tooltip as string." />
+
+<Button Label="Hover me">
+    <TooltipContent>
+        <strong>Or using <code>TooltipContent</code> fragment with custom content.</strong>
+    </TooltipContent>
+</Button>
+```
+
+
+
+## ButtonOrA
+A helper component that can be either a button or an anchor tag, depending on if there is a [Href](components/button-or-a#props-href) or not.
+
+
+
+
+## Chevron
+### Basic Usage
+
+```razor
+<Button OnClick="() => {isOpen = !isOpen;}">
+    <Chevron Open="@isOpen" /> Click to toggle the chevron
+</Button>
+
+@code {
+    bool isOpen = false;
+}
+```
+
+
+
+## Collapse
+### Basic Usage
+
+```razor
+<Collapse Label="Click to open">
+    Child content
+</Collapse>
+```
+### Behave As Collapse Group
+
+```razor
+<div class="blue-collapse-group">
+    <MenuItem Label="Parent">
+        <IconBefore>
+            <BiDropletFill />
+        </IconBefore>
+    </MenuItem>
+
+    <Collapse>
+        <MenuItem Label="Child 1" />
+        <MenuItem Label="Child 2" />
+    </Collapse>
+</div>
+```
+### Controlled State
+
+```razor
+<Collapse @bind-Open="Open" Label="Controlled collapse">
+    Hello world!
+</Collapse>
+
+<Button OnClick="() => { Open = !Open; }">
+    @if (Open)
+    {
+        <span>Close</span>
+    }
+    else
+    {
+        <span>Open</span>
+    }
+</Button>
+
+@code {
+    private bool Open { get; set; } = false;
+}
+
+```
+
+
+
+## ColorPicker### Basic Usage
+
+```razor
+<ColorPicker Label="Select a color" Value="@("#ff0000")" />
+```
+### Bindable
+
+```razor
+<ColorPicker Label="Select a color" @bind-Value="Color" />
+
+Color: @Color
+
+@code {
+    private string Color { get; set; } = "#ff0000";
+}
+
+```
+### Control Open
+
+```razor
+Is Open: @Open
+
+<Button OnClick="() => Open = true">Open</Button>
+<Button OnClick="() => Open = false">Close</Button>
+
+<ColorPicker T="string" Label="Select a color" @bind-Open="Open" />
+
+@code {
+    private bool Open { get; set; }
+}
+
+```
+### Disabled
+
+```razor
+<ColorPicker Label="Select a color" Value="@("#ff0000")" Disabled />
+<ColorPicker Label="Select a color" Value="@("#ff0000")" Disabled Style="--disabled-opacity: 1" />
+```
+### Generic Types
+
+```razor
+<ColorPicker Label="Color as hex string" @bind-Value="StringColor" />
+<ColorPicker Label="Color as double" @bind-Value="DoubleColor" />
+<ColorPicker Label="Color as integer" @bind-Value="IntColor" />
+
+Hex String Color: @StringColor, Double Color: @DoubleColor, Integer Color: @IntColor
+
+@code {
+    private string StringColor { get; set; } = "#f5a623";
+    private double DoubleColor { get; set; } = 16744448;
+    private int IntColor { get; set; } = 16744703;
+}
+
+```
+### Pair Of Background Foreground
+
+```razor
+<FieldSet>
+    <Legend>Coloring</Legend>
+
+    <div class="hstack gap-1">
+        <ColorPicker @bind-Value="Background" Label="Background" LabelHidden />
+        <ColorPicker @bind-Value="Foreground" Label="Foreground" LabelHidden />
+
+        <div class="rounded-1 border px-2 hstack align-self-stretch" style="@($"background: {Background}; color: {Foreground}")" role="presentation">Preview</div>
+    </div>
+</FieldSet>
+
+@code {
+    private string Background { get; set; } = "#ff0000";
+    private string Foreground { get; set; } = "#ff00ff";
+}
+
+```
+### Swatches
+
+```razor
+<ColorPicker Label="Select a color" Value="@("#ff0000")" Swatches="@(["#d0021b", "#f5a623", "#f8e71c", "#8b572a", "#7ed321", "#417505"])" />
+```
+### With Format Toggle
+
+```razor
+<ColorPicker Label="Select a color" Value="@("#ff0000")" WithFormatToggle />
+```
+
+
+
+## Combobox
+### Basic Usage
+
+```razor
+<Combobox>
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Date" />
+    <ComboboxOption Value="Elderberry" />
+    <ComboboxOption Value="Fig" />
+    <ComboboxOption Value="Grape" />
+    <ComboboxOption Value="Honeydew" />
+</Combobox>
+```
+### Bindable
+
+```razor
+<Combobox @bind-Value="SelectedValue">
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Date" />
+    <ComboboxOption Value="Elderberry" />
+    <ComboboxOption Value="Fig" />
+    <ComboboxOption Value="Grape" />
+    <ComboboxOption Value="Honeydew" />
+</Combobox>
+
+<div class="mt-2">Selected: @SelectedValue</div>
+
+<Button Label="Change to 'Grape' from outside" Variant="Variant.Outline" Sm
+        OnClick="@(() => { SelectedValue = "Grape"; })" />
+
+@code {
+    private string? SelectedValue { get; set; } = "Banana";
+}
+```
+### Custom Button Content
+
+```razor
+<Combobox Multiple>
+    <CustomButtonContent>
+        You have selected @context.SelectedItems.Count items!
+    </CustomButtonContent>
+    <ChildContent>
+        <ComboboxOption Value="Apple" />
+        <ComboboxOption Value="Banana" />
+        <ComboboxOption Value="Cherry" />
+        <ComboboxOption Value="Date" />
+        <ComboboxOption Value="Elderberry" />
+        <ComboboxOption Value="Fig" />
+        <ComboboxOption Value="Grape" />
+        <ComboboxOption Value="Honeydew" />
+    </ChildContent>
+</Combobox>
+```
+### Empty State
+
+```razor
+<Combobox></Combobox>
+```
+### Grouped With Input
+
+```razor
+<div class="input-group">
+    <TextInput Label="Your value" LabelHidden @bind-Value="SelectedValue" />
+
+    <Combobox @bind-Value="SelectedValue" Class="rounded-end" PopoverEnd LabelHidden>
+        <ComboboxOption Value="Apple" />
+        <ComboboxOption Value="Banana" />
+        <ComboboxOption Value="Cherry" />
+        <ComboboxOption Value="Date" />
+    </Combobox>
+</div>
+
+@code {
+    private string? SelectedValue { get; set; } = "Banana";
+}
+```
+### Multiple
+
+```razor
+<Combobox Multiple>
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Date" />
+    <ComboboxOption Value="Elderberry" />
+    <ComboboxOption Value="Fig" />
+    <ComboboxOption Value="Grape" />
+    <ComboboxOption Value="Honeydew" />
+</Combobox>
+```
+### Multiple Bindable
+
+```razor
+<Combobox Multiple @bind-SelectedItems="SelectedItems">
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Date" />
+    <ComboboxOption Value="Elderberry" />
+    <ComboboxOption Value="Fig" />
+    <ComboboxOption Value="Grape" />
+    <ComboboxOption Value="Honeydew" />
+</Combobox>
+
+<div class="mt-2">Selected: 
+    <ul>
+        @foreach (var selected in SelectedItems)
+        {
+            <li>@selected.Value</li>
+        }
+    </ul>
+</div>
+
+<Button Variant="Variant.Outline" Sm OnClick="@(() => { SelectedItems.Add(new() { Value = "Grape" }); })">Add 'Grape' from outside</Button>
+
+@code {
+    private List<ComboboxSelectedItem> SelectedItems { get; set; } = [new() { Value = "Banana" }];
+}
+```
+### Scrollable
+
+```razor
+<Combobox @bind-Value="SelectedValue">
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Apricot" />
+    <ComboboxOption Value="Avocado" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Blackberry" />
+    <ComboboxOption Value="Blueberry" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Coconut" />
+    <ComboboxOption Value="Cranberry" />
+    <ComboboxOption Value="Date" />
+    <ComboboxOption Value="Dragonfruit" />
+    <ComboboxOption Value="Elderberry" />
+    <ComboboxOption Value="Fig" />
+    <ComboboxOption Value="Grape" />
+    <ComboboxOption Value="Grapefruit" />
+    <ComboboxOption Value="Guava" />
+    <ComboboxOption Value="Honeydew" />
+    <ComboboxOption Value="Jackfruit" />
+    <ComboboxOption Value="Kiwi" />
+    <ComboboxOption Value="Lemon" />
+    <ComboboxOption Value="Lime" />
+    <ComboboxOption Value="Lychee" />
+    <ComboboxOption Value="Mango" />
+    <ComboboxOption Value="Nectarine" />
+    <ComboboxOption Value="Orange" />
+    <ComboboxOption Value="Papaya" />
+    <ComboboxOption Value="Passionfruit" />
+    <ComboboxOption Value="Peach" />
+    <ComboboxOption Value="Pear" />
+    <ComboboxOption Value="Pineapple" />
+    <ComboboxOption Value="Plum" />
+    <ComboboxOption Value="Pomegranate" />
+    <ComboboxOption Value="Quince" />
+    <ComboboxOption Value="Raspberry" />
+    <ComboboxOption Value="Strawberry" />
+    <ComboboxOption Value="Tangerine" />
+    <ComboboxOption Value="Watermelon" />
+</Combobox>
+
+<Button Label="Change to 'Raspberry' from outside" Variant="Variant.Outline" Sm
+        OnClick="@(() => { SelectedValue = "Raspberry"; })" />
+
+@code {
+    private string? SelectedValue { get; set; }
+}
+```
+### Search Hidden
+
+```razor
+<Combobox SearchHidden>
+    <IconBefore>
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+        </svg>
+    </IconBefore>
+    <CustomButtonContent>Add</CustomButtonContent>
+    <ChildContent>
+        <ComboboxOption Value="Apple" />
+        <ComboboxOption Value="Banana" />
+        <ComboboxOption Value="Cherry" />
+        <ComboboxOption Value="Date" />
+        <ComboboxOption Value="Elderberry" />
+        <ComboboxOption Value="Fig" />
+        <ComboboxOption Value="Grape" />
+        <ComboboxOption Value="Honeydew" />
+    </ChildContent>
+</Combobox>
+
+
+```
+### Square
+
+```razor
+<Combobox Square LabelHidden>
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Date" />
+    <ComboboxOption Value="Elderberry" />
+    <ComboboxOption Value="Fig" />
+    <ComboboxOption Value="Grape" />
+    <ComboboxOption Value="Honeydew" />
+</Combobox>
+```
+### Value And Description
+
+```razor
+<Combobox @bind-Value="SelectedValue" @bind-Description="SelectedDescription">
+    <ComboboxOption Value="apple" Description="Apfel" />
+    <ComboboxOption Value="banana" Description="Banane" />
+    <ComboboxOption Value="cherry" Description="Kirsche" />
+    <ComboboxOption Value="kiwi" Description="Kiwi" />
+    <ComboboxOption Value="this-has-no-description" />
+</Combobox>
+
+<div class="mt-2">
+    Selected value: <strong>@SelectedValue</strong>, selected description: <strong>@SelectedDescription</strong>
+</div>
+
+<Button Label="Change to 'kiwi' with description 'Kiwi' from outside" Variant="Variant.Outline" Sm
+        OnClick="@(() => { SelectedValue = "kiwi"; SelectedDescription = "Kiwi"; })" />
+
+@code {
+    private string SelectedValue { get; set; } = "apple";
+    private string SelectedDescription { get; set; } = "Apple";
+}
+```
+### Variants And Colors
+
+```razor
+<Combobox Variant="Variant.Filled" Color="Color.Dark" Class="mb-1">
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Date" />
+</Combobox>
+<br />
+
+<Combobox Variant="Variant.Filled" Color="Color.Primary" Class="mb-1">
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Date" />
+</Combobox>
+<br />
+
+<Combobox Variant="Variant.MenuItem" Class="mb-1">
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Date" />
+</Combobox>
+<br />
+
+<Combobox Variant="Variant.Plain" Color="Color.Success">
+    <ComboboxOption Value="Apple" />
+    <ComboboxOption Value="Banana" />
+    <ComboboxOption Value="Cherry" />
+    <ComboboxOption Value="Date" />
+</Combobox>
+```
+### With Label
+
+```razor
+<CreateId Context="id">
+    <label for="@id">Fruit</label>
+    <Combobox id="@id">
+        <ComboboxOption Value="Apple"/>
+        <ComboboxOption Value="Banana"/>
+        <ComboboxOption Value="Cherry"/>
+        <ComboboxOption Value="Date"/>
+        <ComboboxOption Value="Elderberry"/>
+        <ComboboxOption Value="Fig"/>
+        <ComboboxOption Value="Grape"/>
+        <ComboboxOption Value="Honeydew"/>
+    </Combobox>
+</CreateId>
+```
+
+
+
+## ComboboxOption
+Always use together with [Combobox](components/combobox).
+
+### Custom Content And Styling
+
+```razor
+<Combobox>
+    <ComboboxOption Value="Apple" Class="fw-bold">
+        🍎 Apple
+    </ComboboxOption>
+    <ComboboxOption Value="Banana" Class="fw-bold">
+        🍌 Banana
+    </ComboboxOption>
+    <ComboboxOption Value="Cherry" Class="fw-bold">
+        🍒 Cherry
+    </ComboboxOption>
+    <ComboboxOption Value="Kiwi" Class="fw-bold">
+        🥝 Kiwi
+    </ComboboxOption>
+</Combobox>
+```
+
+
+
+## ComboboxOptionGroup
+### Basic Usage
+
+```razor
+<Combobox>
+    <ComboboxOptionGroup Label="Group 1">
+        <ComboboxOption Value="Apple" />
+        <ComboboxOption Value="Banana" />
+        <ComboboxOption Value="Cherry" />
+        <ComboboxOption Value="Date" />
+    </ComboboxOptionGroup>
+
+    <ComboboxOptionGroup Label="Group 2">
+        <ComboboxOption Value="Elderberry" />
+        <ComboboxOption Value="Fig" />
+        <ComboboxOption Value="Grape" />
+        <ComboboxOption Value="Honeydew" />
+    </ComboboxOptionGroup>
+</Combobox>
+
+```
+### With Scrollspy
+
+```razor
+<Combobox Scrollspy SelectListMaxHeight="100px">
+    <ComboboxOptionGroup Label="Group 1">
+        <ComboboxOption Value="Apple" />
+        <ComboboxOption Value="Banana" />
+        <ComboboxOption Value="Cherry" />
+        <ComboboxOption Value="Date" />
+    </ComboboxOptionGroup>
+
+    <ComboboxOptionGroup Label="Group 2">
+        <ComboboxOption Value="Elderberry" />
+        <ComboboxOption Value="Fig" />
+        <ComboboxOption Value="Grape" />
+        <ComboboxOption Value="Honeydew" />
+    </ComboboxOptionGroup>
+</Combobox>
+
+```
+
+
+
+## CreateId
+Helper component that creates an unique ID.
+
+### Basic Usage
+
+```razor
+<CreateId>
+    <label for="@context" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="@context" placeholder="name@example.com">
+</CreateId>
+```
+### Child Content Separated
+
+```razor
+<CreateId>
+    <ChildContent Context="id">
+        <label for="@id" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="@id" placeholder="name@example.com">
+    </ChildContent>
+</CreateId>
+```
+### Named Context
+
+```razor
+<CreateId Context="id">
+    <label for="@id" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="@id" placeholder="name@example.com">
+</CreateId>
+```
+
+
+
+## DialogOpener
+A helper component that will run `await DialogService.ShowAsync(DialogContent)` when user clicks on your provided `ToggleContent`.
+`DialogService` has to be registered inside your `Program.cs`.
+
+As `DialogContent` you should use `ModalDialog` or `OffcanvasDialog` component, which are part of Blue Blazor.
+
+### Modal Basic Usage
+
+```razor
+<DialogOpener>
+    <ToggleContent><Button Label="Show Modal" /></ToggleContent>
+    <DialogContent>
+        <ModalDialog TitleText="Modal Title">
+            <BodyContent>
+                <p>Modal body content</p>
+            </BodyContent>
+        </ModalDialog>
+    </DialogContent>
+</DialogOpener>
+```
+### Modal Verify Or Tell Or Ask
+For simpler user requests, you can you use the JavaScript functions `blueWeb.dialog.verify`, `blueWeb.dialog.tell` or `blueWeb.dialog.ask` per code.
+```razor
+
+
+@inject IJSRuntime JSRuntime
+
+<!-- Include this inside your App.razor or where else you embed JS files -->
+<script src="_content/BlueBlazor/blue-web/js/dialog.bundle.js"></script>
+
+<Button Label="Verify" OnClick="VerifyExample" />
+<Button Label="Tell" OnClick="TellExample" />
+<Button Label="Ask" OnClick="AskExample" />
+
+@code {
+    private async Task VerifyExample()
+    {
+        bool yesOrNo = await JSRuntime.InvokeAsync<bool>("blueWeb.dialog.verify", "Do you want to proceed?");
+        await JSRuntime.InvokeVoidAsync("blueWeb.dialog.tell", $"You clicked {(yesOrNo ? "Yes" : "No")}");
+    }
+
+    private async Task TellExample()
+    {
+        await JSRuntime.InvokeVoidAsync("blueWeb.dialog.tell", "A message for you");
+    }
+    private async Task AskExample()
+    {
+        string answer = await JSRuntime.InvokeAsync<string>("blueWeb.dialog.ask", "What is the question?");
+        await JSRuntime.InvokeVoidAsync("blueWeb.dialog.tell", $"You asked: {answer}");
+    }
+}
+
+```
+
+
+
+## DialogProvider
+Contains and manages dialogs coming from the [DialogService](components/dialog-provider#props-dialog-service).
+[DialogService](components/dialog-provider#props-dialog-service) has to be registered inside your `Program.cs` like this:
+
+```csharp
+builder.Services.AddBlueBlazor();
+```
+
+You have to put `<DialogProvider />` somewhere in your app if you want to use the `DialogService`. Like in your `App.razor` or `MainLayout.razor`.
+`DialogProvider` has to be interactive. So maybe you have to set `<DialogProvider @rendermode="InteractiveServer" />` or `<DialogProvider @rendermode="InteractiveAuto" />`.
+
+### Basic Usage
+
+```razor
+@using BlueBlazor.Services
+@inject DialogService DialogService
+
+<Button OnClick="OpenModalDialog">Open Modal Dialog</Button>
+<Button OnClick="OpenOffcanvasDialog">Open Offcanvas Dialog</Button>
+<Button OnClick="OpenModalDialogDirectCall">Open Modal Dialog by direct call</Button>
+
+<DialogProvider />
+
+<p>Closed Count: @closedTimer</p>
+
+@code {
+    int closedTimer = 0;
+
+    protected override void OnInitialized()
+    {
+        DialogService.OnClosed += HandleClosed;
+    }
+
+    protected void Dispose()
+    {
+        DialogService.OnClosed -= HandleClosed;
+    }
+
+    private async Task OpenModalDialog()
+    {
+        var dialogReference = await DialogService.ShowAsync(@<ModalDialog TitleText="This will close after 3 seconds" />);
+        await Task.Delay(3000);
+        await DialogService.CloseAsync(dialogReference);
+    }
+
+    private async Task OpenOffcanvasDialog()
+    {
+        var dialogReference = new DialogReference();
+        dialogReference.DialogContent = @<OffcanvasDialog TitleText="Hello Offcanvas" />;
+        await DialogService.ShowAsync(dialogReference);
+    }
+
+    private async Task OpenModalDialogDirectCall()
+    {
+        await DialogService.ShowAsync(@<ModalDialog TitleText="This one has been called directly">
+            <BodyContent>
+                <form method="dialog">
+                    <Button ButtonType="Shared.ButtonType.Submit" Label="Close modal" />
+                </form>
+            </BodyContent>
+        </ModalDialog>);
+    }
+
+    private async Task HandleClosed(DialogReference dialogReference)
+    {
+        closedTimer++;
+        StateHasChanged();
+    }
+}
+
+```
+### Simple Questions
+`DialogService` has shortcuts to use `blueWeb.dialog.ask`, `blueWeb.dialog.tell` and `blueWeb.dialog.verify`.
+```razor
+
+@using BlueBlazor.Services
+@inject DialogService DialogService
+
+<Button Label="Ask user" OnClick="AskUser" />
+<Button Label="Verify" OnClick="Verify" />
+
+@code {
+    private async Task AskUser()
+    {
+        string? result = await DialogService.AskAsync("What is your name?", defaultValue: "Jeff");
+        if (result is not null)
+        {
+            await DialogService.TellAsync("You answered: " + result);
+        }
+    }
+
+
+    private async Task Verify()
+    {
+        bool result = await DialogService.VerifyAsync("Do you agree?", "Say yes or no");
+        await DialogService.TellAsync("You answered: " + result);
+    }
+}
+
+```
+### Simple Questions Controlled
+
+```razor
+@using BlueBlazor.Services
+@inject DialogService DialogService
+
+<Button Label="Open Controlled Dialog" OnClick="OpenControlledTellDialog" />
+
+@code {
+    private async Task OpenControlledTellDialog()
+    {
+        DialogService.TellAsync("Dialog will close after a few seconds.", id: "myControlledDialog");
+        await Task.Delay(3000);
+        await DialogService.CloseByIdAsync("myControlledDialog");
+    }
+}
+
+```
+
+
+
+## ModalDialog
+This provides the template for a Modal.
+Should be used together with the `DialogService` and [`DialogProvider`](components/dialog-provider) and optionally with [`DialogOpener`](components/dialog-opener).
+
+Based on styling Bootstrap's Modal component but uses the native `<dialog>` HTML element.
+Modal body and footer will not be rendered until the open event triggered.
+
+### Modal Scrollable
+
+```razor
+<DialogOpener>
+    <ToggleContent><Button Label="Show Scrollable Modal" /></ToggleContent>
+    <DialogContent>
+        <ModalDialog Scrollable Size="Shared.ModalSize.Xl" TitleText="With big content">
+            <BodyContent>
+                <p class="fs-1 mx-5 px-5">
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+
+                    Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+
+                    Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+
+                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.
+                </p>
+            </BodyContent>
+        </ModalDialog>
+    </DialogContent>
+</DialogOpener>
+```
+
+
+
+## OffcanvasDialog
+This provides the template for a Offcanvas.
+Should be used together with the `DialogService` and [`DialogProvider`](components/dialog-provider) and optionally with [`DialogOpener`](components/dialog-opener).
+
+Based on styling Bootstrap's Offcanvas component but uses the native `<dialog>` HTML element.
+Offcanvas body will not be rendered until the open event triggered.
+
+### Offcanvas Basic Usage
+
+```razor
+<DialogOpener>
+    <ToggleContent><Button Label="Show offcanvas" /></ToggleContent>
+    <DialogContent>
+        <OffcanvasDialog TitleText="Offcanvas Title">
+            <BodyContent>
+                <p>Offcanvas body content</p>
+            </BodyContent>
+        </OffcanvasDialog>
+    </DialogContent>
+</DialogOpener>
+```
+### Offcanvas Placement Usage
+
+```razor
+@using BlueBlazor.Shared
+
+<DialogOpener>
+    <ToggleContent><Button Label="➡️ Show offcanvas from start" /></ToggleContent>
+    <DialogContent>
+        <OffcanvasDialog TitleText="Offcanvas Title" Placement="OffcanvasPlacement.Start">
+            <BodyContent>
+                <p>Offcanvas body content</p>
+            </BodyContent>
+        </OffcanvasDialog>
+    </DialogContent>
+</DialogOpener>
+
+<DialogOpener>
+    <ToggleContent><Button Label="⬅️ Show offcanvas from end" /></ToggleContent>
+    <DialogContent>
+        <OffcanvasDialog TitleText="Offcanvas Title" Placement="OffcanvasPlacement.End">
+            <BodyContent>
+                <p>Offcanvas body content</p>
+            </BodyContent>
+        </OffcanvasDialog>
+    </DialogContent>
+</DialogOpener>
+
+<DialogOpener>
+    <ToggleContent><Button Label="⬇️ Show offcanvas from top" /></ToggleContent>
+    <DialogContent>
+        <OffcanvasDialog TitleText="Offcanvas Title" Placement="OffcanvasPlacement.Top">
+            <BodyContent>
+                <p>Offcanvas body content</p>
+            </BodyContent>
+        </OffcanvasDialog>
+    </DialogContent>
+</DialogOpener>
+
+<DialogOpener>
+    <ToggleContent><Button Label="⬆️ Show offcanvas from bottom" /></ToggleContent>
+    <DialogContent>
+        <OffcanvasDialog TitleText="Offcanvas Title" Placement="OffcanvasPlacement.Bottom">
+            <BodyContent>
+                <p>Offcanvas body content</p>
+            </BodyContent>
+        </OffcanvasDialog>
+    </DialogContent>
+</DialogOpener>
+```
+
+
+
+## Dropdown
+@deprecated Use Popover component instead in combination with Button or MenuItem or another element.
+
+A combination of [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API), [Anchor Positioning](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning) and styles of Menu Item.
+In some browsers, Anchor Positioning doesn't work yet. If you want to support them, you need to implement a polyfill or fallback styles.
+
+### Basic Usage
+
+```razor
+<Dropdown Label="Click to open">
+    <MenuItem Label="First element">
+    <IconBefore>☀️</IconBefore>
+    </MenuItem>
+    <MenuItem Label="Second element">
+    <IconBefore>🚀</IconBefore>
+    </MenuItem>
+</Dropdown>
+```
+### Fallback
+
+```razor
+<Dropdown Label="Click to open" Fallback>
+    <MenuItem Label="First element">
+    <IconBefore>☀️</IconBefore>
+    </MenuItem>
+    <MenuItem Label="Second element">
+    <IconBefore>🚀</IconBefore>
+    </MenuItem>
+</Dropdown>
+```
+### Position End
+
+```razor
+<Dropdown Label="Click to open" End>
+    <MenuItem Label="First element">
+    <IconBefore>☀️</IconBefore>
+    </MenuItem>
+    <MenuItem Label="Second element">
+    <IconBefore>🚀</IconBefore>
+    </MenuItem>
+</Dropdown>
+```
+
+
+
+## FieldSet
+Wrapper for native [fieldset element](https://developer.mozilla.org/docs/Web/HTML/Reference/Elements/fieldset).
+
+### Basic Usage
+
+```razor
+<FieldSet>
+    <Legend>Choose your favorite monster</Legend>
+
+    <input type="radio" id="kraken" name="monster" value="K" />
+    <label for="kraken">Kraken</label>
+    <br />
+
+    <input type="radio" id="sasquatch" name="monster" value="S" />
+    <label for="sasquatch">Sasquatch</label>
+    <br />
+
+    <input type="radio" id="mothman" name="monster" value="M" />
+    <label for="mothman">Mothman</label>
+</FieldSet>
+```
+
+
+
+## Legend
+Wrapper for native [legend element](https://developer.mozilla.org/docs/Web/HTML/Reference/Elements/legend) with some default styling.
+Should be used together with [FieldSet](components/field-set).
+
+### Custom Styling
+
+```razor
+<FieldSet>
+    <Legend Class="text-primary fs-2">Choose your favorite monster</Legend>
+
+    <input type="radio" id="kraken" name="monster" value="K" />
+    <label for="kraken">Kraken</label>
+    <br />
+
+    <input type="radio" id="sasquatch" name="monster" value="S" />
+    <label for="sasquatch">Sasquatch</label>
+    <br />
+
+    <input type="radio" id="mothman" name="monster" value="M" />
+    <label for="mothman">Mothman</label>
+</FieldSet>
+```
+
+
+
+## HeaderTitle
+Let's you set a logo and/or a breadcrumb.
+
+### Basic Usage
+
+```razor
+<HeaderTitle Logo="data:image/svg+xml;base64,PHN2ZyBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJiaSBiaS1iYWNrcGFjazIiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNC4wNCA3LjQzYTQgNCAwIDAxNy45MiAwIC41LjUgMCAxMS0uOTkuMTQgMyAzIDAgMDAtNS45NCAwIC41LjUgMCAxMS0uOTktLjE0Ii8+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNCA5LjVhLjUuNSAwIDAxLjUtLjVoN2EuNS41IDAgMDEuNS41djRhLjUuNSAwIDAxLS41LjVoLTdhLjUuNSAwIDAxLS41LS41em0xIC41djNoNnYtM2gtMXYuNWEuNS41IDAgMDEtMSAwVjEweiIvPjxwYXRoIGQ9Ik02IDIuMzQxVjJhMiAyIDAgMTE0IDB2LjM0MWMyLjMzLjgyNCA0IDMuMDQ3IDQgNS42NTl2MS4xOTFsMS4xNy41ODVhMS41IDEuNSAwIDAxLjgzIDEuMzQyVjEzLjVhMS41IDEuNSAwIDAxLTEuNSAxLjVoLTFjLS40NTYuNjA3LTEuMTgyIDEtMiAxaC03YTIuNSAyLjUgMCAwMS0yLTFoLTFBMS41IDEuNSAwIDAxMCAxMy41di0yLjM4MmExLjUgMS41IDAgMDEuODMtMS4zNDJMMiA5LjE5MVY4YTYgNiAwIDAxNC01LjY1OU03IDJ2LjA4M2E2IDYgMCAwMTIgMFYyYTEgMSAwIDAwLTIgME0zIDEzLjVBMS41IDEuNSAwIDAwNC41IDE1aDdhMS41IDEuNSAwIDAwMS41LTEuNVY4QTUgNSAwIDAwMyA4em0tMS0zLjE5bC0uNzI0LjM2MmEuNS41IDAgMDAtLjI3Ni40NDdWMTMuNWEuNS41IDAgMDAuNS41SDJ6bTEyIDBWMTRoLjVhLjUuNSAwIDAwLjUtLjV2LTIuMzgyYS41LjUgMCAwMC0uMjc2LS40NDdMMTQgMTAuMzA5eiIvPjwvc3ZnPg=="
+             AppTitle="Home" />
+```
+### Breadcrumb
+
+```razor
+<HeaderTitle Logo="data:image/svg+xml;base64,PHN2ZyBmaWxsPSJjdXJyZW50Q29sb3IiIGNsYXNzPSJiaSBiaS1iYWNrcGFjazIiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNC4wNCA3LjQzYTQgNCAwIDAxNy45MiAwIC41LjUgMCAxMS0uOTkuMTQgMyAzIDAgMDAtNS45NCAwIC41LjUgMCAxMS0uOTktLjE0Ii8+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNCA5LjVhLjUuNSAwIDAxLjUtLjVoN2EuNS41IDAgMDEuNS41djRhLjUuNSAwIDAxLS41LjVoLTdhLjUuNSAwIDAxLS41LS41em0xIC41djNoNnYtM2gtMXYuNWEuNS41IDAgMDEtMSAwVjEweiIvPjxwYXRoIGQ9Ik02IDIuMzQxVjJhMiAyIDAgMTE0IDB2LjM0MWMyLjMzLjgyNCA0IDMuMDQ3IDQgNS42NTl2MS4xOTFsMS4xNy41ODVhMS41IDEuNSAwIDAxLjgzIDEuMzQyVjEzLjVhMS41IDEuNSAwIDAxLTEuNSAxLjVoLTFjLS40NTYuNjA3LTEuMTgyIDEtMiAxaC03YTIuNSAyLjUgMCAwMS0yLTFoLTFBMS41IDEuNSAwIDAxMCAxMy41di0yLjM4MmExLjUgMS41IDAgMDEuODMtMS4zNDJMMiA5LjE5MVY4YTYgNiAwIDAxNC01LjY1OU03IDJ2LjA4M2E2IDYgMCAwMTIgMFYyYTEgMSAwIDAwLTIgME0zIDEzLjVBMS41IDEuNSAwIDAwNC41IDE1aDdhMS41IDEuNSAwIDAwMS41LTEuNVY4QTUgNSAwIDAwMyA4em0tMS0zLjE5bC0uNzI0LjM2MmEuNS41IDAgMDAtLjI3Ni40NDdWMTMuNWEuNS41IDAgMDAuNS41SDJ6bTEyIDBWMTRoLjVhLjUuNSAwIDAwLjUtLjV2LTIuMzgyYS41LjUgMCAwMC0uMjc2LS40NDdMMTQgMTAuMzA5eiIvPjwvc3ZnPg=="
+             AppTitle="Home"
+             Breadcrumb="@([
+                             new("First", "components/header-title"),
+                             new("Current page")
+                          ])" />
+```
+
+
+
+## InlineEdit
+A wrapper component that allows inline editing of content.
+It starts in read mode and when the user clicks on the content, it switches to edit mode.
+
+Inline edit is designed to be used deeper inside a context, which handles state for edit mode.
+That's why the state for the edit mode and the event callback have to be passed as cascading parameters.
+Take a look at the example in the docs to see how to use it.
+
+The component itself passes two cascading parameters down to its children:
+* `"ControlId"` with value `@Id`.
+* `"AutoFocus"` with value `true`.
+
+### Basic Usage
+
+```razor
+<CascadingValue Name="EditMode" Value="EditMode">
+    <CascadingValue Name="EditModeChanged" Value="EditModeChanged">
+        <CreateId Context="id">
+            <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
+                <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
+            </InlineEdit>
+        </CreateId>
+    </CascadingValue>
+</CascadingValue>
+
+
+@code {
+    private string YourName { get; set; } = "John";
+    private bool EditMode { get; set; }
+    private void HandleEditModeChanged(bool editMode)
+    {
+        EditMode = editMode;
+    }
+    private EventCallback<bool> EditModeChanged => EventCallback.Factory.Create<bool>(this, HandleEditModeChanged);
+}
+
+```
+### Confirm On Lose Focus
+
+```razor
+<CascadingValue Name="EditMode" Value="EditMode">
+    <CascadingValue Name="EditModeChanged" Value="EditModeChanged">
+        <InlineEdit Header="Your name" ReadText="@YourName" ConfirmOnLoseFocus>
+            <input type="text" class="form-control" @bind="@YourName" autofocus />
+        </InlineEdit>
+    </CascadingValue>
+</CascadingValue>
+
+
+@code {
+    private string YourName { get; set; } = "John";
+    private bool EditMode { get; set; }
+    private void HandleEditModeChanged(bool editMode)
+    {
+        EditMode = editMode;
+    }
+    private EventCallback<bool> EditModeChanged => EventCallback.Factory.Create<bool>(this, HandleEditModeChanged);
+}
+
+```
+### Control Show Edit State
+
+```razor
+<InlineEdit @ref="_inlineEditRef" Header="Start editing">
+    <Button Label="Cancel editing" OnClick="CancelEditing" />
+</InlineEdit>
+
+@code {
+    private InlineEdit? _inlineEditRef;
+
+    private void CancelEditing()
+    {
+        _inlineEditRef?.ShowEdit = false;
+    }
+}
+```
+### Custom Read Content
+
+```razor
+<InlineEdit Header="Wiki article slug" ReadIsEmpty="@string.IsNullOrEmpty(WikiSlug)">
+    <ReadContent>
+        <a href="https://en.wikipedia.org/wiki/@WikiSlug" target="_blank" rel="noreferrer">@WikiSlug</a>
+    </ReadContent>
+    <ChildContent>
+        <input type="text" class="form-control" @bind="@WikiSlug" autofocus />
+    </ChildContent>
+</InlineEdit>
+
+@code {
+    private string WikiSlug { get; set; } = "Elizabeth_of_Leiningen";
+}
+
+```
+### Disabled
+
+```razor
+<InlineEdit Header="Your name" ReadText="@YourName" EditDisabled />
+
+@code {
+    private string YourName { get; set; } = "John";
+}
+
+```
+### Disabled Using Cascading Value
+
+```razor
+<CascadingValue Name="Disabled" Value="true">
+    <InlineEdit Header="Your name" ReadText="@YourName">
+        <input type="text" class="form-control" @bind="@YourName" autofocus />
+    </InlineEdit>
+</CascadingValue>
+
+@code {
+    private string YourName { get; set; } = "John";
+}
+
+```
+### Empty Header
+
+```razor
+@using Microsoft.AspNetCore.Components.Forms
+
+<InlineEdit>
+    <HeaderContent></HeaderContent>
+    <ReadContent>
+        <label>
+            <input type="checkbox" checked="@IsChecked" class="form-check-input" readonly /> Your checkbox
+        </label>
+    </ReadContent>
+    <ChildContent>
+        <label style="padding-left: .75rem">
+            <InputCheckbox @bind-Value="IsChecked" class="form-check-input" /> Your checkbox
+        </label>
+    </ChildContent>
+</InlineEdit>
+
+@code {
+    private bool IsChecked { get; set; } = false;
+}
+```
+### Header Hidden
+
+```razor
+<InlineEdit Header="Your name" HeaderHidden ReadText="@YourName" />
+
+@code {
+    private string YourName { get; set; } = "John";
+}
+
+```
+### No Header
+
+```razor
+@using Microsoft.AspNetCore.Components.Forms
+
+<InlineEdit>
+    <ReadContent>
+        <label>
+            <input type="checkbox" checked="@IsChecked" class="form-check-input" readonly /> Your checkbox
+        </label>
+    </ReadContent>
+    <ChildContent>
+        <label style="padding-left: .75rem">
+            <InputCheckbox @bind-Value="IsChecked" class="form-check-input" /> Your checkbox
+        </label>
+    </ChildContent>
+</InlineEdit>
+
+@code {
+    private bool IsChecked { get; set; } = false;
+}
+```
+### Shared Content
+
+```razor
+@using Microsoft.AspNetCore.Components.Forms
+
+<InlineEdit SpacingForEdit>
+    <SharedContent>
+        <label>
+            <InputCheckbox @bind-Value="IsChecked" class="form-check-input" />
+            Accept?
+        </label>
+    </SharedContent>
+</InlineEdit>
+
+@code {
+    private bool IsChecked { get; set; } = false;
+}
+
+```
+### Spacing For Edit
+
+```razor
+<InlineEdit SpacingForEdit>
+    <ReadContent>
+        <label class="form-check">
+            <input type="checkbox" class="form-check-input" checked="@IsChecked" readonly /> Check this
+        </label>
+    </ReadContent>
+    <ChildContent>
+        <label class="form-check">
+            <input type="checkbox" class="form-check-input" @bind="@IsChecked" /> Check this
+        </label>
+    </ChildContent>
+</InlineEdit>
+
+@if (IsChecked)
+{
+    <span>Is checked</span>
+}
+else
+{
+    <span>Is not checked</span>
+}
+
+@code {
+    private bool IsChecked { get; set; } = false;
+}
+
+```
+
+
+
+## InlineEditGroup
+Controls which of the containing [InlineEdit](components/inline-edit) instances is active.
+
+### Basic Usage
+
+```razor
+<InlineEditGroup>
+    <CreateId Context="yourNameId">
+        <InlineEdit Id="@yourNameId" Header="Your name" ReadText="@YourName">
+            <input id="@yourNameId" type="text" class="form-control" @bind="@YourName" autofocus />
+        </InlineEdit>
+    </CreateId>
+    <CreateId Context="lastNameId">
+        <InlineEdit Id="@lastNameId" Header="Last name" ReadText="@LastName">
+            <input id="@lastNameId" type="text" class="form-control" @bind="@LastName" autofocus />
+        </InlineEdit>
+    </CreateId>
+</InlineEditGroup>
+
+
+@code {
+    private string YourName { get; set; } = "John";
+    private string LastName { get; set; } = "Doe";
+    private bool EditMode { get; set; }
+    private void HandleEditModeChanged(bool editMode)
+    {
+        EditMode = editMode;
+    }
+    private EventCallback<bool> EditModeChanged => EventCallback.Factory.Create<bool>(this, HandleEditModeChanged);
+}
+```
+
+
+
+## Intro
+### Basic Usage
+
+```razor
+<Intro Logo="images/blue.svg"
+       Title="Hello World">
+    Here could be a sign in form.
+</Intro>
+```
+### Custom Logo Content
+
+```razor
+<Intro Title="Hello World">
+    <LogoContent>
+        <img src="images/blue.svg" alt="@context.LogoAlt" class="blue-intro-image" />
+    </LogoContent>
+    <ChildContent>
+        Here could be a sign in form.
+    </ChildContent>
+</Intro>
+```
+### Login Form
+
+```razor
+<Intro Title="Login">
+    <TextInput Label="Password" Floating Type="password" name="password" Placeholder="Passwort" />
+
+    <div class="text-center mt-3">
+        <Button Label="Login" ButtonType="BlueBlazor.Shared.ButtonType.Submit" FilledPrimary Size="BlueBlazor.Shared.Size.Lg" Class="icon-link-hover">
+            <IconAfter>
+                <BiArrowRight />
+            </IconAfter>
+        </Button>
+    </div>
+</Intro>
+```
+### Shake
+
+```razor
+<Intro Logo="images/blue.svg"
+       Title="Hello World" @bind-Shake="IsShaking">
+    Here could be a sign in form.
+
+    <Button OnClick="() => IsShaking = true">Shake!</Button>
+</Intro>
+
+@code {
+    private bool IsShaking { get; set; }
+}
+
+```
+
+
+
+## Layout
+Layout with header, sidebar and main areas. This component is designed to only be used once per page.
+
+### Basic Usage
+
+```razor
+
+@layout EmptyLayout
+@page "/components/layout/stories/basic-usage"
+@inject IJSRuntime JSRuntime
+
+<Layout NoPageBorder="@NoPageBorder">
+    <HeaderContent>
+        HeaderContent
+    </HeaderContent>
+
+    <SideContent>
+        SideContent
+    </SideContent>
+
+    <PageContent>
+        <div class="container">
+            <Heading PageHeader>PageContent</Heading>
+
+            <p>For better contrast, the page content has a border. If it doesn't fit with your design, you can disable by setting <code>NoPageBorder</code></p>.
+
+            <Button OnClick="@(() => NoPageBorder = !NoPageBorder)">
+                @if (NoPageBorder)
+                {
+                    <span>Enable Page Border</span>
+                }
+                else
+                {
+                    <span>Disable Page Border</span>
+                }
+            </Button>
+        </div>
+    </PageContent>
+</Layout>
+
+@code {
+    private bool NoPageBorder { get; set; } = false;
+
+    private async Task ToggleInspector()
+    {
+        await JSRuntime.InvokeVoidAsync("blueWeb.layout.toggleInspector", "#blueBlazorLayout");
+    }
+}
+```
+### With Page And Header
+
+```razor
+
+@layout EmptyLayout
+@page "/components/layout/stories/with-page-and-header"
+
+<Layout>
+    <HeaderContent>
+        <HeaderTitle AppTitle="My app" />
+    </HeaderContent>
+
+    <SideContent>
+        SideContent
+    </SideContent>
+
+    <PageContent>
+        <HeaderTitle AppTitle="Home"
+                     Breadcrumb="@(new() {
+                                                     new() { Href = "components/header-title", Text = "First" },
+                                                     new() { Text = "Current page" }
+                                                  })" />
+
+        <div class="container">
+            <Heading PageHeader>PageContent</Heading>
+
+            <p>For better contrast, the page content has a border. If it doesn't fit with your design, you can disable by setting <code>NoPageBorder</code></p>.
+
+        </div>
+    </PageContent>
+</Layout>
+```
+
+
+
+## LayoutProvider
+Allows you to control and receive states by the global [Layout](components/layout) instance.
+
+
+
+
+## LayoutSplitter
+Use this inside of Layout's [ChildContent](components/layout#props-child-content) to insert a [`sp-split-view`](https://opensource.adobe.com/spectrum-web-components/components/split-view/).
+This enables the Layout Inspector on the end. Set its content with [End](components/layout-splitter#props-end).
+
+### Basic Usage
+
+```razor
+
+@layout EmptyLayout
+@page "/components/layout-splitter/stories/basic-usage"
+
+<Layout>
+    <HeaderContent>
+        <LayoutProvider Context="ctx">
+            <Button Label="Toggle Inspector" Active="ctx.InspectorState"
+                    OnClick="() => ctx.ToggleInspector()"
+                    aria-controls="@LayoutSplitter.INSPECTOR_ID"
+                    aria-expanded="@(ctx.InspectorState ? "true" : "false")" />
+        </LayoutProvider>
+    </HeaderContent>
+
+    <SideContent>
+        SideContent
+    </SideContent>
+
+    <ChildContent>
+        <LayoutSplitter>
+            <Start>
+                <div class="container">
+                    Hello World
+                </div>
+            </Start>
+
+            <End>
+                <div class="vstack h-100">
+                    <div class="d-flex border-bottom">
+                        <button type="button" class="btn blue-menu-item btn-sm icon-link"><span class="blue-btn-icon-wrapper" aria-hidden="true">➕</span><span class="text-truncate">New Chat</span></button><button type="button" class="btn blue-menu-item btn-sm icon-link"><span class="blue-btn-icon-wrapper" aria-hidden="true">✔️</span><span class="text-truncate">Save</span></button>
+                    </div>
+
+                    <div class="vstack align-items-center justify-content-center flex-grow-1 text-secondary"><span>✨</span><small>The chat is empty</small></div>
+
+                    <div class="p-2">
+                        <div class="bg-body border rounded p-1">
+                            <div class="text-secondary p-2 pb-5">Placeholder text...</div>
+                            <div class="text-end">
+                                <button type="button" class="btn btn-primary icon-link blue-btn-square" disabled=""><span class="blue-btn-icon-wrapper" aria-hidden="true">⬆️</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </End>
+        </LayoutSplitter>
+    </ChildContent>
+</Layout>
+```
+
+
+
+## MenuItem
+### Basic Usage
+
+```razor
+<MenuItem Label="Parent">
+    <IconBefore>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+            <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"></path>
+        </svg>
+    </IconBefore>
+</MenuItem>
+```
+### Current
+
+```razor
+<div class="vstack">
+    <MenuItem Label="Item 1" Current="@(_currentItem == "item-1")" OnClick="@(() => { _currentItem = "item-1"; })">
+        <Icon><BiBrightnessHigh /></Icon>
+        <IconForCurrent><BiBrightnessHighFill /></IconForCurrent>
+    </MenuItem>
+
+    <MenuItem Label="Item 2" Current="@(_currentItem == "item-2")" OnClick="@(() => { _currentItem = "item-2"; })">
+        <Icon><BiBrightnessHigh /></Icon>
+    </MenuItem>
+</div>
+
+@code {
+    private string _currentItem = "item-1";
+}
+```
+### Overflow Tooltip
+
+```razor
+<div class="vstack" style="@($"max-width: {_width}px")">
+    <MenuItem Label="Short">
+        <Icon><BiBrightnessHigh /></Icon>
+    </MenuItem>
+
+    <MenuItem Label="This is a very long label that should truncate and show a tooltip">
+        <Icon><BiBrightnessHigh /></Icon>
+    </MenuItem>
+
+    <MenuItem Label="Another long menu item label that will also overflow">
+        <Icon><BiBrightnessHigh /></Icon>
+    </MenuItem>
+</div>
+
+<label class="mt-3 d-flex align-items-center gap-2">
+    Container width
+    <input type="range" min="80" max="500" @bind="_width" @bind:event="oninput" />
+    @(_width)px
+</label>
+
+@code {
+    private int _width = 180;
+}
+
+```
+
+
+
+## MonacoDiffEditor
+A Blazor component wrapper for the Monaco Diff Editor (the diff editor that powers VS Code).
+Provides two-way binding.
+
+### Basic Usage
+
+```razor
+<MonacoDiffEditor OriginalValue="@OldText"
+                  @bind-CurrentValue="@CurrentText" />
+@code {
+    string OldText = "This line is removed on the right.\njust some text\nabcd\nefgh\nSome more text";
+    string CurrentText = "just some text\nabcz\nzzzzefgh\nSome more text.\nThis line is removed on the left.";
+}
+```
+### Inline Diff
+
+```razor
+<MonacoDiffEditor OriginalValue="@OldText"
+                  RenderSideBySide="false"
+                  @bind-CurrentValue="@CurrentText" />
+@code {
+    string OldText = "This line is removed on the right.\njust some text\nabcd\nefgh\nSome more text";
+    string CurrentText = "just some text\nabcz\nzzzzefgh\nSome more text.\nThis line is removed on the left.";
+}
+```
+### Overview Ruler Enabled
+
+```razor
+<MonacoDiffEditor OriginalValue="@OldText"
+                  RenderOverviewRuler
+                  ReadOnly
+                  @bind-CurrentValue="@CurrentText" />
+
+@code {
+    string OldText = "This line is removed on the right.\njust some text\nabcd\nefgh\nSome more text";
+    string CurrentText = "just some text\nabcz\nzzzzefgh\nSome more text.\nThis line is removed on the left.";
+}
+```
+### Word Wrap
+
+```razor
+<MonacoDiffEditor OriginalValue="@originalText"
+                  @bind-CurrentValue="@currentText" 
+                  WordWrap/>
+@code {
+    string originalText = "This line is short.";
+    string currentText = "This line is intentionally longer so that it wraps onto the next line, demonstrating how the content spans across multiple lines within the editor.";
+}
+
+```
+
+
+
+## MonacoEditor
+A Blazor component wrapper for the Monaco Editor (the code editor that powers VS Code).
+Provides two-way binding, language selection, and integration with JavaScript for advanced editing features.
+
+### Basic Usage
+
+```razor
+<MonacoEditor Language="sql" Value="SELECT HELLO FROM WORLD" />
+```
+### Line Numbers
+
+```razor
+<MonacoEditor Language="sql" Value="SELECT HELLO FROM WORLD" LineNumbers="MonacoEditorLineNumbers.On" />
+```
+### Minimap Enabled
+
+```razor
+<MonacoEditor Language="sql" Value="SELECT HELLO FROM WORLD" MinimapEnabled />
+```
+### Toggle Read Only
+
+```razor
+@using Microsoft.AspNetCore.Components.Forms
+
+<label>
+    <InputCheckbox @bind-Value="ReadOnly" class="form-check-input" /> Read only
+</label>
+
+<MonacoEditor Language="xml" @bind-Value="MyCode" ReadOnly="ReadOnly" />
+
+@code {
+    private bool ReadOnly { get; set; } = true;
+    private string MyCode { get; set; } = "<IDataDocuments>Test</IDataDocuments>";
+}
+
+```
+
+
+
+## Odometer
+Displays a numeric value with a smooth rolling animation — similar to a mechanical odometer or number counter.
+It’s designed for use in badges, notifications, dashboards, or any place where numbers change dynamically.
+Uses [`bl-odometer`](https://bruegmann.github.io/blue-web/v1/js/Odometer) by Blue Web.
+
+### Basic Usage
+
+```razor
+<Odometer Value="_count" />
+
+<Button Label="Increment" OnClick="() => _count++" />
+
+@code {
+    private int _count = 0;
+}
+```
+### Custom Max Number
+
+```razor
+<Odometer Value="_count" Max="99" />
+
+<Button Label="Increment" OnClick="() => _count++" />
+
+@code {
+    private int _count = 95;
+}
+```
+### Style Based On Change
+
+```razor
+<span class="scope badge rounded-pill bg-body-tertiary text-body border">
+    <Odometer Value="_count" />
+</span>
+
+<Button Label="Increment" OnClick="() => _count++" />
+<Button Label="Decrement" OnClick="() => _count--" />
+
+@code {
+    private int _count = 0;
+}
+```
+### Styled As Badge
+
+```razor
+<Button>
+    <span aria-hidden="true">🔔</span> Notifications
+    <span class="badge bg-primary-subtle text-primary-emphasis">
+        <Odometer Value="_count" />
+    </span>
+</Button>
+
+<Button Label="Increment" OnClick="() => _count++" />
+
+@code {
+    private int _count = 0;
+}
+```
+
+
+
+## Outside
+
+
+
+## PageScript
+Let's you load JavaScript (JS) in a Blazor Web App with static server-side rendering (static SSR)
+and enhanced navigation.
+Based on code from: [https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/static-server-rendering?view=aspnetcore-8.0](https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/static-server-rendering?view=aspnetcore-8.0).
+You can find more information about the usage there.
+Internally, Blue Blazor uses this for the `Layout` component to load fallback JavaScript.
+
+
+
+
+## Popover
+### Basic Usage
+
+```razor
+<CreateId>
+    <MenuItem Label="Open popover" PopoverTarget="@context">
+        <IconAfter>
+            <BiChevronDown />
+        </IconAfter>
+    </MenuItem>
+
+    <Popover Id="@context">
+        <MenuItem Label="Sub item 1" />
+        <MenuItem Label="Sub longer item 2" />
+    </Popover>
+</CreateId>
+```
+### On Toggle
+
+```razor
+<div class="hstack gap-3">
+    <CreateId>
+        <MenuItem Label="Open popover" PopoverTarget="@context">
+        <IconAfter>
+            <BiChevronDown />
+        </IconAfter>
+        </MenuItem>
+
+        <Popover Id="@context" OnToggle="HandleToggle">
+            <MenuItem Label="Sub item 1" />
+            <MenuItem Label="Sub longer item 2" />
+        </Popover>
+    </CreateId>
+
+    New state: @(_newState?.ToString())
+</div>
+
+@code {
+    private PopoverState? _newState;
+
+    private void HandleToggle(PopoverToggleEventArgs args)
+    {
+        _newState = args.NewState;
+    }
+}
+```
+
+
+
+## QrCodeGen
+Generates a QR code. Uses Web Component [`wa-qr-code`](https://webawesome.com/docs/components/qr-code) by Web Awesome.
+
+### Basic Usage
+
+```razor
+<QrCodeGen Value="Hello World!" Class="w-25 h-25" />
+```
+
+
+
+## ReconnectModal
+Since .NET 10 the UI for reconnecting to the server is customizable. This component is an adjusted version of the default reconnect modal, which comes with the default project templates.
+[](https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/signalr?view=aspnetcore-10.0#reflect-the-server-side-connection-state-in-the-ui)
+
+
+
+## Heading
+Helper component to render a heading element (`<h1>`-`<h6>`).
+Add some top and bottom margin by setting [Spacing](components/heading#props-spacing) property.
+
+### Basic Usage
+
+```razor
+<Heading>I am a headline!</Heading>
+```
+### Page Header
+
+```razor
+<Heading PageHeader Level="4">I am a page header on level 4!</Heading>
+```
+
+
+
+## Region
+Marks a new section. Use it together with [Heading](components/heading).
+Region will automatically increase the heading level, so you don't have to set it yourself.
+
+### Basic Usage
+
+```razor
+<Region>
+    <Heading>Heading Level 1</Heading>
+
+    <Region>
+        <Heading>Heading Level 2</Heading>
+
+        <Region>
+            <Heading>Heading Level 3</Heading>
+        </Region>
+    </Region>
+</Region>
+```
+### Control Heading Level Visually
+
+```razor
+<Region>
+    <Heading H6>Heading Level 1</Heading>
+
+    <Region>
+        <Heading H1>Heading Level 2</Heading>
+
+        <Region>
+            <Heading>Heading Level 3</Heading>
+        </Region>
+    </Region>
+</Region>
+```
+### Starting Level
+
+```razor
+<Region Level="3">
+    <Heading>Heading Level 3</Heading>
+
+    <Region>
+        <Heading>Heading Level 4</Heading>
+
+        <Region>
+            <Heading>Heading Level 5</Heading>
+        </Region>
+    </Region>
+</Region>
+```
+
+
+
+## SidebarMenu
+
+
+
+## SimpleLayout
+A simple layout with header and main content area.
+
+### Basic Usage
+
+```razor
+
+@layout EmptyLayout
+@page "/components/simple-layout/stories/basic-usage"
+
+<SimpleLayout>
+    <HeaderContent>
+        <HeaderTitle AppTitle="My website" />
+    </HeaderContent>
+
+    <PageContent>
+        <div class="container">
+            <Heading PageHeader>PageContent</Heading>
+
+            <p>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.
+            </p>
+        </div>
+    </PageContent>
+</SimpleLayout>
+```
+
+
+
+## Tab
+Always use together with [Tabs](components/tabs).
+
+
+
+
+## Tabs
+Implementation of Bootstrap Tabs. Use together with [Tab](components/tab).
+
+### Basic Usage
+
+```razor
+<Tabs @bind-ActiveTabIndex="@ActiveTabIndex">
+    <Tab Label="Tab 1" Active>
+        Hello from Tab 1
+    </Tab>
+
+    <Tab Label="Tab 2" ContentClass="pt-3">
+        Hello from Tab 2. This one has some padding top.
+    </Tab>
+
+    <Tab Label="Tab 3">
+        Hello from Tab 3
+    </Tab>
+
+    @if (_showFourthTab)
+    {
+        <Tab Label="Tab 4">
+            Hello from Tab 4
+        </Tab>
+    }
+</Tabs>
+
+<p>ActiveTabIndex: @ActiveTabIndex</p>
+
+<div><Button Label="Change tab from outside" OnClick="() => { ActiveTabIndex = 2; }" /></div>
+
+<div>
+    <Button Label="Toggle fourth tab" OnClick="() => { _showFourthTab = !_showFourthTab; StateHasChanged(); }" />
+</div>
+
+@code {
+    private bool _showFourthTab = true;
+    private int ActiveTabIndex { get; set; } = 0;
+}
+```
+### Underline
+
+```razor
+<Tabs Underline>
+    <Tab Label="Tab 1" Active>
+        Hello from Tab 1
+    </Tab>
+
+    <Tab Label="Tab 2">
+        Hello from Tab 2. This one has some padding top.
+    </Tab>
+
+    <Tab Label="Tab 3">
+        Hello from Tab 3
+    </Tab>
+</Tabs>
+```
+
+
+
+## TextInput
+Represents a text input component with customizable properties such as label, placeholder, value, and styling.
+
+### Basic Usage
+
+```razor
+<TextInput Label="My label" />
+```
+### Floating Label
+
+```razor
+<TextInput Label="My label" Floating />
+```
+### Immediate
+
+```razor
+<TextInput Label="Without Immediate" @bind-Value="@value" SmallLabel />
+<p><code>value</code>: @value</p>
+
+<TextInput Label="With Immediate" @bind-Value="@valueImmediate" Immediate SmallLabel />
+<p><code>valueImmediate</code>: @valueImmediate</p>
+
+@code {
+    string value = "";
+    string valueImmediate = "";
+}
+
+```
+### Label Hidden
+
+```razor
+<div class="input-group">
+    <TextInput Label="Input label" LabelHidden />
+    <Button>Click me</Button>
+</div>
+```
+### Read Only
+
+```razor
+<TextInput Label="My label" Value="My value" ReadOnly />
+```
+### Small Label
+
+```razor
+<TextInput Label="My label" Value="My value" SmallLabel />
+```
+### Textarea
+
+```razor
+<TextInput Label="Text input for longer text" Textarea />
+<br />
+<TextInput Label="With floating label" Floating Textarea InputStyle="height: 100px" />
+```
+### Additional attributes
+All additional attributes will be passed to the input element.
+```razor
+
+
+<TextInput Label="Disabled" Value="My value" disabled />
+<br />
+<TextInput Label="Hover the control" Value="My value" title="This is coming from the title attribute" />
+```
+
+
+
+## Tooltip
+Uses Web Component [`wa-tooltip`](https://webawesome.com/docs/components/tooltip) by Web Awesome.
+
+### Basic Usage
+
+```razor
+<Tooltip For="my-button" @bind-Open="IsOpen">This is a tooltip</Tooltip>
+<Button Id="my-button">Hover Me</Button>
+
+@if (IsOpen)
+{
+    <div>Is open</div>
+}
+else
+{
+    <div>Is not open</div>
+}
+
+@code {
+    private bool IsOpen { get; set; } = false;
+}
+```
+
+
+
+## TotpInput
+This uses `InputSplitted` from [Blue Web](https://bruegmann.github.io/blue-web/v1/js/Input%20Splitted).
+
+### Basic Usage
+
+```razor
+<TotpInput Label="TOTP" />
+
+```
+### Disabled
+
+```razor
+@using Microsoft.AspNetCore.Components.Forms
+
+<CreateId Context="id">
+    <InputCheckbox @bind-Value="IsDisabled" class="form-check-input" id="@id" />
+    <label class="form-check-label" for="@id">Disabled</label>
+</CreateId>
+
+<TotpInput Disabled="IsDisabled" />
+
+
+@code {
+    private bool IsDisabled { get; set; } = true;
+}
+
+```
+### Form Label
+
+```razor
+<TotpInput Label="TOTP" FormLabel />
+
+```
+### Label Hidden
+
+```razor
+<TotpInput Label="TOTP" LabelHidden />
+
+```
+
+
+
+## TuiEditor
+Wrapper for [Toast UI Editor](https://github.com/nhn/tui.editor/tree/master) for Blazor.
+Allows to edit markdown in a WYSIWYG editor.
+
+The editor JavaScript class is preconfigured for our own needs.
+Toast UI offers way more options than we cover up with this wrapper, but more can be added at anytime.
+
+A slightly customized theme for Toast UI Editor comes as isolated CSS for this component (TuiEditor.razor.css).
+Necessary JavaScript will dynamically loaded. So everything should "just work".
+
+### Basic Usage
+
+```razor
+<TuiEditor @bind-Value="@Input" />
+
+<Heading Level="3">Markdown</Heading>
+@Input
+
+@code {
+    private string Input { get; set; } = "**Initial value**";
+}
+
+```
+### Default Toolbar Items Customized
+
+```razor
+<TuiEditor @bind-Value="@Input"
+           ToolbarItemGroups="[[TuiEditorToolbarItemName.Heading, TuiEditorToolbarItemName.Code], [.. TuiEditor.DEFAULT_TOOLBAR_ITEM_GROUPS[1]]]" />
+
+@code {
+    private string Input { get; set; } = "**Initial value**";
+}
+
+```
+### Default Toolbar Items Extended
+
+```razor
+<TuiEditor @bind-Value="@Input"
+           ToolbarItemGroups="[.. TuiEditor.DEFAULT_TOOLBAR_ITEM_GROUPS, [TuiEditorToolbarItemName.Code]]" />
+
+@code {
+    private string Input { get; set; } = "**Initial value**";
+}
+
+```
+### Default Toolbar Items Overwritten
+
+```razor
+<TuiEditor @bind-Value="@Input" ToolbarItemGroups="[[TuiEditorToolbarItemName.Code, TuiEditorToolbarItemName.Codeblock]]" />
+
+@code {
+    private string Input { get; set; } = "**Initial value**";
+}
+
+```
+### Placeholder
+
+```razor
+<TuiEditor Placeholder="Enter your content here" />
+```
+### With Inline Edit
+In this case we use third-party library [Markdig](https://www.nuget.org/packages/Markdig/) to render markdown content for the read view.
+```razor
+
+
+<CascadingValue Name="EditMode" Value="EditMode">
+    <CascadingValue Name="EditModeChanged" Value="EditModeChanged">
+        <InlineEdit Header="Your content" PreventConfirmOnSubmit>
+            <ReadContent>
+                @((MarkupString)Html)
+            </ReadContent>
+            <ChildContent>
+                <TuiEditor @bind-Value="@Input" />
+            </ChildContent>
+        </InlineEdit>
+    </CascadingValue>
+</CascadingValue>
+
+@code {
+    private string _input = "**Initial value**";
+    private string Input
+    {
+        get => _input;
+        set
+        {
+            _input = value;
+            RenderHtml();
+        }
+    }
+    private string Html { get; set; } = "";
+
+    private bool EditMode { get; set; }
+    private void HandleEditModeChanged(bool editMode)
+    {
+        EditMode = editMode;
+    }
+    private EventCallback<bool> EditModeChanged => EventCallback.Factory.Create<bool>(this, HandleEditModeChanged);
+
+    protected override void OnInitialized()
+    {
+        RenderHtml();
+    }
+
+    private void RenderHtml()
+    {
+        Html = Markdig.Markdown.ToHtml(Input);
+    }
+}
+
+```
+### Write And Post
+
+```razor
+<div class="d-flex flex-column gap-3">
+    <TuiEditor @bind-Value="@Input" OnApply="HandleApply" Placeholder="Enter a text" />
+    <Button Label="Submit" FilledPrimary OnClick="HandleApply" />
+
+    @foreach (string post in _posts)
+    {
+        <div class="card">
+            <div class="card-body">
+                @post
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<string> _posts = [];
+    private string Input { get; set; } = "";
+
+    private void HandleApply()
+    {
+        _posts.Add(Input);
+        Input = string.Empty;
+    }
+}
+
+```
+
+
+
+## TuiEditorToolbarItem
+### Basic Usage
+
+```razor
+<style>
+    .demo-hi-icon::before {
+        content: "😇";
+    }
+
+    .demo-info-icon::before {
+        content: "ℹ️";
+    }
+</style>
+
+<TuiEditor @bind-Value="@Input">
+    <CustomToolbarItems>
+        <TuiEditorToolbarItem IconClass="demo-hi-icon"
+                              Tooltip="Click to show message"
+                              OnClick="HandleClick" />
+
+        <TuiEditorToolbarItem Text="Customized!" Class="text-primary w-auto" Style="font-weight: bold" />
+
+        <TuiEditorToolbarItem GroupIndex="1"
+                              ItemIndex="2"
+                              IconClass="demo-info-icon"
+                              Tooltip="Click to open popover"
+                              PopoverTarget="@_popoverId" />
+    </CustomToolbarItems>
+</TuiEditor>
+
+<Popover Id="@_popoverId" Class="p-3">
+    Hello from popover!
+</Popover>
+
+<ul>
+    @foreach (var greeting in _greetings)
+    {
+        <li>@greeting</li>
+    }
+</ul>
+
+@code {
+    private string _popoverId = $"uid_{Guid.NewGuid():N}";
+    private string Input { get; set; } = "**Initial value**";
+
+    private List<string> _greetings = [];
+
+    private void HandleClick()
+    {
+        _greetings.Add("Hi!");
+    }
+}
+
+```
+
