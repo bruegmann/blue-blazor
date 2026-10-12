@@ -228,7 +228,8 @@ public class Helper
     {
         string markdown = await File.ReadAllTextAsync(readmePath);
 
-        var components = Directory.GetFiles(componentsPath, "*.razor").Select(Path.GetFileNameWithoutExtension);
+        var components = Directory.GetFiles(componentsPath, "*.razor", SearchOption.AllDirectories)
+            .Select(Path.GetFileNameWithoutExtension);
 
         foreach (var component in components)
         {
