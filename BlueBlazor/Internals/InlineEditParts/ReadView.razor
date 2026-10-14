@@ -1,2 +1,4 @@
-﻿<bl-read-view @ref="_readViewElement" disabled="@Disabled"
+﻿@inherits BlueComponentBase
+
+<bl-read-view @ref="_readViewElement" disabled="@Disabled" class="@(new CssBuilder(Class).AddClass("with-border", Border).Build())" style="@Style"
     @attributes="AdditionalAttributes">@ChildContent</bl-read-view>

@@ -3,7 +3,7 @@ using Microsoft.JSInterop;
 
 namespace BlueBlazor.Internals.InlineEditParts;
 
-public partial class ReadView : ComponentBase
+public partial class ReadView : BlueComponentBase
 {
     [Inject]
     private IJSRuntime JSRuntime { get; set; } = default!;
@@ -19,8 +19,8 @@ public partial class ReadView : ComponentBase
     [Parameter]
     public bool? Disabled { get; set; }
 
-    [Parameter(CaptureUnmatchedValues = true)]
-    public IDictionary<string, object>? AdditionalAttributes { get; set; }
+    [Parameter]
+    public bool Border { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

@@ -5,8 +5,9 @@
 }
 
 .inline-edit {
+    --inline-edit-spacing: .25rem;
     position: relative;
-    margin-left: -.75rem;
+    margin-left: calc(--inline-edit-spacing * -1);
 }
 
 .inline-edit:has(.inline-edit-submit) {

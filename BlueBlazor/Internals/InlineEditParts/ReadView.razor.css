@@ -1,0 +1,4 @@
+.with-border::part(presentation) {
+    box-shadow: inset 0 0 0 var(--bs-border-width, 1px) var(--bs-border-color);
+    --blue-read-view-bg: var(--bs-tertiary-bg);
+}
