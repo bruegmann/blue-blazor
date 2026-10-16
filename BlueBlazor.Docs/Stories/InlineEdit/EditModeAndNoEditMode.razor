@@ -1,0 +1,46 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        <CascadingValue Name="EditMode" Value="true" IsFixed>
+            <CreateId Context="id">
+                <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
+                    <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
+                </InlineEdit>
+            </CreateId>
+        </CascadingValue>
+    </div>
+    
+    <div class="col-md-3">
+        <CascadingValue Name="EditMode" Value="false" IsFixed>
+            <CreateId Context="id">
+                <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
+                    <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
+                </InlineEdit>
+            </CreateId>
+        </CascadingValue>
+    </div>
+
+    <div class="col-md-3">
+        <Button Label="Toggle edit mode" OnClick="() => EditMode = !EditMode" />
+
+        <CascadingValue Name="EditMode" Value="EditMode">
+            <CreateId Context="id">
+                <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
+                    <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
+                </InlineEdit>
+            </CreateId>
+
+            
+            <CreateId Context="id">
+                <InlineEdit Id="@id" Header="Last name" ReadText="@YourLastName">
+                    <input id="@id" type="text" class="form-control" @bind="@YourLastName" autofocus />
+                </InlineEdit>
+            </CreateId>
+        </CascadingValue>
+    </div>
+</div>
+
+@code {
+    private string YourName { get; set; } = "John";
+    private string YourLastName { get; set; } = "";
+    private bool EditMode { get; set; }
+}

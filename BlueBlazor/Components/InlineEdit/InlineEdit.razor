@@ -7,14 +7,14 @@
 <div class="@ClassValue" style="@StyleValue" id="@WrapperId">
     @if (!string.IsNullOrEmpty(Header) || HeaderContent is not null)
     {
-        <label for="@IdValue" class="@HeaderClassValue" style="margin-left: var(--inline-edit-spacing)">@Header @HeaderContent</label>
+        <label for="@IdValue" class="@HeaderClassValue" style="margin-left: var(--blue-read-view-padding)">@Header @HeaderContent</label>
     }
 
     @if (ShowEditValue)
     {
         <EditView OnConfirm="ToggleShowEdit" OnDismiss="ToggleShowEdit" ConfirmOnLoseFocus="@ConfirmOnLoseFocus"
                   PreventConfirmOnSubmit="@PreventConfirmOnSubmit" class="position-relative"
-                  style="@(SpacingForEdit ? "padding-left: var(--inline-edit-spacing)" : null)">
+                  style="@(SpacingForEdit ? "padding-left: var(--blue-read-view-padding)" : null)">
             <CascadingValue Name="ControlId" Value="@IdValue">
                 <CascadingValue Name="AutoFocus" Value="true">
                     @ChildContent @SharedContent
@@ -39,13 +39,11 @@
     {
         <ReadView OnEditRequested="EditRequested" id="@IdValue" Disabled="EditDisabled || Disabled"
                   Border="EditMode == true && !EditDisabled && !Disabled">
-            <div class="form-control-plaintext py-0" style="padding-left: var(--inline-edit-spacing); padding-right: var(--inline-edit-spacing)">
-                @ReadText @ReadContent @SharedContent
-                @if ((string.IsNullOrEmpty(ReadText) && ReadContent == null && SharedContent == null) || ReadIsEmpty)
-                {
-                    <span class="text-secondary" role="status">@L["NoValue"]</span>
-                }
-            </div>
+            @ReadText @ReadContent @SharedContent
+            @if ((string.IsNullOrEmpty(ReadText) && ReadContent == null && SharedContent == null) || ReadIsEmpty)
+            {
+                <span class="@(EditMode == true ? "opacity-0" : "text-secondary")" role="status">@L["NoValue"]</span>
+            }
         </ReadView>
     }
     @AfterContent

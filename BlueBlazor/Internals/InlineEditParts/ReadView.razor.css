@@ -1,4 +1,7 @@
-.with-border::part(presentation) {
+bl-read-view {
+    --transition: var(--blue-read-view-transition), box-shadow 0.4s;
+}
+
+bl-read-view.with-border::part(presentation) {
     box-shadow: inset 0 0 0 var(--bs-border-width, 1px) var(--bs-border-color);
-    --blue-read-view-bg: var(--bs-tertiary-bg);
 }

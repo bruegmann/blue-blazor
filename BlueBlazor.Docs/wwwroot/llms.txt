@@ -1682,7 +1682,7 @@ The component itself passes two cascading parameters down to its children:
 
 @code {
     private string YourName { get; set; } = "John";
-    private bool EditMode { get; set; } = true;
+    private bool EditMode { get; set; };
     private void HandleEditModeChanged(bool editMode)
     {
         EditMode = editMode;
@@ -1764,6 +1764,30 @@ The component itself passes two cascading parameters down to its children:
     <InlineEdit Header="Your name" ReadText="@YourName">
         <input type="text" class="form-control" @bind="@YourName" autofocus />
     </InlineEdit>
+</CascadingValue>
+
+@code {
+    private string YourName { get; set; } = "John";
+}
+
+```
+### Edit Mode And No Edit Mode
+
+```razor
+<CascadingValue Name="EditMode" Value="true" IsFixed>
+    <CreateId Context="id">
+        <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
+            <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
+        </InlineEdit>
+    </CreateId>
+</CascadingValue>
+
+<CascadingValue Name="EditMode" Value="false" IsFixed>
+    <CreateId Context="id">
+        <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
+            <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
+        </InlineEdit>
+    </CreateId>
 </CascadingValue>
 
 @code {
