@@ -32,7 +32,7 @@ public partial class Popover : BlueComponentBase
     public bool End { get; set; }
 
     [Parameter]
-    public string RoundingClass { get; set; } = "rounded-4";
+    public string RoundingClass { get; set; } = "rounded-3";
 
     [Parameter]
     public EventCallback<PopoverToggleEventArgs> OnToggle { get; set; }
