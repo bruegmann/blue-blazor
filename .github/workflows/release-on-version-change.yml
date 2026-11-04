@@ -163,10 +163,10 @@ jobs:
                   NUGET_API_KEY: ${{steps.login.outputs.NUGET_API_KEY}}
               run: |
                   if [ -z "$NUGET_API_KEY" ]; then
-                    echo "NUGET_API_KEY secret ist nicht gesetzt. Überspringe Veröffentlichung.";
+                    echo "NUGET_API_KEY secret is not set. Skip publishing.";
                     exit 0;
                   fi
-                  echo "Veröffentliche Pakete nach NuGet..."
+                  echo "Publish to NuGet..."
                   for file in artifacts/*.nupkg; do
                     echo "Push $file";
                     dotnet nuget push "$file" \
