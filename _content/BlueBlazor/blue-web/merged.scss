@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.32.1 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.34.0 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -33,9 +33,13 @@ $h4-font-size: $font-size-base * 1.125 !default;
 $h5-font-size: $font-size-base * 1.1 !default;
 $h6-font-size: $font-size-base !default;
 
+$border-radius-sm: 0.4rem !default;
 $border-radius: 0.7rem !default;
 $border-radius-lg: 1rem !default;
-$border-radius-sm: 0.5rem !default;
+$border-radius-xl: 1.5rem !default;
+$border-radius-xxl: 2rem !default;
+$border-radius-pill: 50rem !default;
+$border-radius-2xl: $border-radius-xxl !default; // Deprecated in v5.3.0
 
 $custom-checkbox-indicator-border-radius: $border-radius-sm !default;
 
@@ -3768,6 +3772,13 @@ $corner-shape: #{round} !default;
     --blue-menu-item-height: #{$normal-size};
 
     --blue-corner-shape: #{$corner-shape};
+}
+
+:root,
+:host {
+    --blue-read-view-padding-x: 0.5rem;
+    --blue-read-view-padding-y: 0.25rem;
+    --blue-read-view-transition: background 0.2s;
 }
 
 @include color-mode(dark, true) {
