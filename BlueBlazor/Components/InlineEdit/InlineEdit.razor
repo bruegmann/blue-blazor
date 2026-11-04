@@ -7,14 +7,14 @@
 <div class="@ClassValue" style="@StyleValue" id="@WrapperId">
     @if (!string.IsNullOrEmpty(Header) || HeaderContent is not null)
     {
-        <label for="@IdValue" class="@HeaderClassValue" style="margin-left: var(--blue-read-view-padding)">@Header @HeaderContent</label>
+        <label for="@IdValue" class="@HeaderClassValue" style="margin-left: var(--blue-read-view-padding-x)">@Header @HeaderContent</label>
     }
 
     @if (ShowEditValue)
     {
         <EditView OnConfirm="ToggleShowEdit" OnDismiss="ToggleShowEdit" ConfirmOnLoseFocus="@ConfirmOnLoseFocus"
                   PreventConfirmOnSubmit="@PreventConfirmOnSubmit" class="position-relative"
-                  style="@(SpacingForEdit ? "padding-left: var(--blue-read-view-padding)" : null)">
+                  style="@(SpacingForEdit ? "padding-left: var(--blue-read-view-padding-x)" : null)">
             <CascadingValue Name="ControlId" Value="@IdValue">
                 <CascadingValue Name="AutoFocus" Value="true">
                     @ChildContent @SharedContent
@@ -23,7 +23,7 @@
 
             <div class="inline-edit-submit d-flex position-absolute mt-1 flex-shrink-0"
                  style="z-index: 4; inset-block-start: 100%; inset-inline-end: 0;" role="group">
-                <Button Label="@(L["Save"])" LabelHidden FilledPrimary ButtonType="ButtonType.Submit" OnClick="OnClickSubmitButton"
+                <Button Label="@(L["Save"])" LabelHidden FilledPrimary Square ButtonType="ButtonType.Submit" OnClick="OnClickSubmitButton"
                         Class="me-1 shadow">
                     <IconBefore>
                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
