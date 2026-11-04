@@ -12,6 +12,8 @@ jobs:
     detect-version-and-release:
         name: Detect version change and release
         runs-on: ubuntu-latest
+        permissions:
+            id-token: write # enable GitHub OIDC token issuance for this job
 
         steps:
             - name: Checkout
@@ -149,18 +151,18 @@ jobs:
               if: steps.compare.outputs.changed == 'true'
               run: dotnet pack BlueBlazor/BlueBlazor.csproj -c Release -o ./artifacts --no-build
 
-            # - name: Upload package artifact (optional, removed)
-            #   if: steps.compare.outputs.changed == 'true'
-            #   uses: actions/upload-artifact@v4
-            #   with:
-            #       name: nupkg
-            #       path: artifacts/*.nupkg
-            #       if-no-files-found: warn
+            # Get a short-lived NuGet API key
+            - name: NuGet login (OIDC → temp API key)
+              if: steps.compare.outputs.changed == 'true'
+              uses: NuGet/login@v1
+              id: login
+              with:
+                  user: ${{ secrets.NUGET_USER }}
 
             - name: Publish to NuGet
               if: steps.compare.outputs.changed == 'true'
               env:
-                  NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+                  NUGET_API_KEY: ${{steps.login.outputs.NUGET_API_KEY}}
               run: |
                   if [ -z "$NUGET_API_KEY" ]; then
                     echo "NUGET_API_KEY secret ist nicht gesetzt. Überspringe Veröffentlichung.";
