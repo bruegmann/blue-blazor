@@ -276,18 +276,36 @@ Uses the native HTML Details element and combines it with the styling of Bootstr
 
 ```razor
 <Accordion ExpandSingleOrNone>
-    <AccordionItem HeaderText="Accordion item 1" OpenChanged="@(() => { _openItem = "Accordion item 1"; })">Show something</AccordionItem>
-    <AccordionItem HeaderText="Accordion item 2" OpenChanged="@(() => { _openItem = "Accordion item 2"; })">Show something</AccordionItem>
-    <AccordionItem HeaderText="Accordion item 3" OpenChanged="@(() => { _openItem = "Accordion item 3"; })">Show something</AccordionItem>
+    @foreach (var item in _items)
+    {
+        <AccordionItem HeaderText="@item.HeaderTitle"
+                       Open="item == _openItem"
+                       OpenChanged="(open) => { if (open) _openItem = item; }">
+            @item.Content
+        </AccordionItem>
+    }
 </Accordion>
 
 @if (_openItem != null)
 {
-    <text>@_openItem is now open</text>
+    <text>@_openItem.HeaderTitle is now open</text>
 }
 
 @code {
-    private string? _openItem;
+    private List<MyItem> _items = [new("Accordion item 1"), new("Accordion item 2"), new("Accordion item 3")];
+
+    private MyItem? _openItem;
+
+    public class MyItem
+    {
+        public string HeaderTitle;
+        public string Content = "Show something";
+
+        public MyItem(string headerTitle)
+        {
+            HeaderTitle = headerTitle;
+        }
+    }
 }
 
 ```
