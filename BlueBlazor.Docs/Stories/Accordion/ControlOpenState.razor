@@ -1,0 +1,32 @@
+﻿<Accordion ExpandSingleOrNone>
+    @foreach (var item in _items)
+    {
+        <AccordionItem HeaderText="@item.HeaderTitle"
+                       Open="item == _openItem"
+                       OpenChanged="(open) => { if (open) _openItem = item; }">
+            @item.Content
+        </AccordionItem>
+    }
+</Accordion>
+
+@if (_openItem != null)
+{
+    <text>@_openItem.HeaderTitle is now open</text>
+}
+
+@code {
+    private List<MyItem> _items = [new("Accordion item 1"), new("Accordion item 2"), new("Accordion item 3")];
+
+    private MyItem? _openItem;
+
+    public class MyItem
+    {
+        public string HeaderTitle;
+        public string Content = "Show something";
+
+        public MyItem(string headerTitle)
+        {
+            HeaderTitle = headerTitle;
+        }
+    }
+}

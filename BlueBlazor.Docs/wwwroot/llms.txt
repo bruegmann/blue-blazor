@@ -272,6 +272,25 @@ Uses the native HTML Details element and combines it with the styling of Bootstr
     <AccordionItem HeaderText="Accordion item 3">Show something</AccordionItem>
 </Accordion>
 ```
+### Control Open State
+
+```razor
+<Accordion ExpandSingleOrNone>
+    <AccordionItem HeaderText="Accordion item 1" OpenChanged="@(() => { _openItem = "Accordion item 1"; })">Show something</AccordionItem>
+    <AccordionItem HeaderText="Accordion item 2" OpenChanged="@(() => { _openItem = "Accordion item 2"; })">Show something</AccordionItem>
+    <AccordionItem HeaderText="Accordion item 3" OpenChanged="@(() => { _openItem = "Accordion item 3"; })">Show something</AccordionItem>
+</Accordion>
+
+@if (_openItem != null)
+{
+    <text>@_openItem is now open</text>
+}
+
+@code {
+    private string? _openItem;
+}
+
+```
 ### Single Or None
 
 ```razor
@@ -1682,7 +1701,7 @@ The component itself passes two cascading parameters down to its children:
 
 @code {
     private string YourName { get; set; } = "John";
-    private bool EditMode { get; set; };
+    private bool EditMode { get; set; }
     private void HandleEditModeChanged(bool editMode)
     {
         EditMode = editMode;
@@ -1774,24 +1793,51 @@ The component itself passes two cascading parameters down to its children:
 ### Edit Mode And No Edit Mode
 
 ```razor
-<CascadingValue Name="EditMode" Value="true" IsFixed>
-    <CreateId Context="id">
-        <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
-            <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
-        </InlineEdit>
-    </CreateId>
-</CascadingValue>
+<div class="row">
+    <div class="col-md-3">
+        <CascadingValue Name="EditMode" Value="true" IsFixed>
+            <CreateId Context="id">
+                <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
+                    <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
+                </InlineEdit>
+            </CreateId>
+        </CascadingValue>
+    </div>
+    
+    <div class="col-md-3">
+        <CascadingValue Name="EditMode" Value="false" IsFixed>
+            <CreateId Context="id">
+                <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
+                    <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
+                </InlineEdit>
+            </CreateId>
+        </CascadingValue>
+    </div>
 
-<CascadingValue Name="EditMode" Value="false" IsFixed>
-    <CreateId Context="id">
-        <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
-            <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
-        </InlineEdit>
-    </CreateId>
-</CascadingValue>
+    <div class="col-md-3">
+        <Button Label="Toggle edit mode" OnClick="() => EditMode = !EditMode" />
+
+        <CascadingValue Name="EditMode" Value="EditMode">
+            <CreateId Context="id">
+                <InlineEdit Id="@id" Header="Your name" ReadText="@YourName">
+                    <input id="@id" type="text" class="form-control" @bind="@YourName" autofocus />
+                </InlineEdit>
+            </CreateId>
+
+            
+            <CreateId Context="id">
+                <InlineEdit Id="@id" Header="Last name" ReadText="@YourLastName">
+                    <input id="@id" type="text" class="form-control" @bind="@YourLastName" autofocus />
+                </InlineEdit>
+            </CreateId>
+        </CascadingValue>
+    </div>
+</div>
 
 @code {
     private string YourName { get; set; } = "John";
+    private string YourLastName { get; set; } = "";
+    private bool EditMode { get; set; }
 }
 
 ```

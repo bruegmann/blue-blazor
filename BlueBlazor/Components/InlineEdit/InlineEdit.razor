@@ -7,7 +7,7 @@
 <div class="@ClassValue" style="@StyleValue" id="@WrapperId">
     @if (!string.IsNullOrEmpty(Header) || HeaderContent is not null)
     {
-        <label for="@IdValue" class="@HeaderClassValue" style="margin-left: var(--blue-read-view-padding-x)">@Header @HeaderContent</label>
+        <label for="@IdValue" class="@HeaderClassValue">@Header @HeaderContent</label>
     }
 
     @if (ShowEditValue)

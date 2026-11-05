@@ -6,7 +6,6 @@
 
 .inline-edit {
     position: relative;
-    margin-left: calc(var(--blue-read-view-padding-x) * -1);
 }
 
 .inline-edit:has(.inline-edit-submit) {
@@ -15,23 +14,4 @@
 
     .inline-edit:has(.inline-edit-submit):has(:focus) {
         z-index: 2;
-    }
-
-    .inline-edit ::deep .form-control {
-        padding: var(--blue-read-view-padding-y) var(--blue-read-view-padding-x);
-    }
-
-    .inline-edit ::deep .btn {
-        --bs-btn-padding-x: var(--blue-read-view-padding-x);
-        --bs-btn-padding-y: var(--blue-read-view-padding-y);
-    }
-
-    .inline-edit ::deep [class^="dxbl-"]:not(.dxbl-btn-tool):not(.dxbl-toolbar-item):not(:is(.dxbl-toolbar-btn-ellipsis > .dxbl-btn)) {
-        --dxbl-btn-padding-x: var(--blue-read-view-padding-x) !important;
-        --dxbl-btn-padding-y: var(--blue-read-view-padding-y) !important;
-    }
-
-    .inline-edit ::deep [class^="dxbl-"] {
-        --dxbl-text-edit-padding-x: var(--blue-read-view-padding-x) !important;
-        --dxbl-text-edit-padding-y: var(--blue-read-view-padding-y) !important;
     }

@@ -1,7 +1,7 @@
 ﻿@namespace BlueBlazor.Components
 @inherits BlueComponentBase
 
-<details class="@(new CssBuilder("accordion-item blue-collapse").AddClass(Class).Build())" style="@Style" name="@NameValue" open="@Open" @attributes="AdditionalAttributes">
+<details @ref="_detailsRef" class="@(new CssBuilder("accordion-item blue-collapse").AddClass(Class).Build())" style="@Style" name="@NameValue" open="@Open" @attributes="AdditionalAttributes">
     <summary class="@(new CssBuilder("accordion-header").AddClass(HeaderClass).Build())">
         <div class="@(new CssBuilder("accordion-button collapsed").AddClass(HeaderButtonClass).Build())">@HeaderText@HeaderContent</div>
     </summary>
