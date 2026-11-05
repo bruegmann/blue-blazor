@@ -116,8 +116,8 @@ $corner-shape: #{round} !default;
 
 :root,
 :host {
-    --blue-read-view-padding-x: 0.5rem;
-    --blue-read-view-padding-y: 0.25rem;
+    --blue-read-view-padding-x: #{$input-btn-padding-x};
+    --blue-read-view-padding-y: #{$input-btn-padding-y};
     --blue-read-view-transition: background 0.2s;
 }
 

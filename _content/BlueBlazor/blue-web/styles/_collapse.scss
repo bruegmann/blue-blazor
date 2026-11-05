@@ -15,7 +15,7 @@
     }
 
     &[open] > summary .blue-collapse-chevron {
-        --blue-collapse-chevron-rotate: 90deg;
+        --blue-collapse-chevron-rotate: -180deg;
         transform: rotate(var(--blue-collapse-chevron-rotate));
     }
 

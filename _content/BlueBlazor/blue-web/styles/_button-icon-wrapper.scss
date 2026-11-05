@@ -10,6 +10,8 @@
     & > svg {
         width: $icon-link-icon-size;
         height: $icon-link-icon-size;
+        min-width: 16px;
+        min-height: 16px;
         fill: currentcolor;
     }
 }

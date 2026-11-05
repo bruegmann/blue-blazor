@@ -1,10 +1,10 @@
 /*!
- * Blue Web v1.34.0 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.35.1 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
 // Main color theme. E.g. used for background for body and sidebar.
-$theme: hsl(217, 17%, 98%) !default;
+$theme: hsl(217, 17%, 96%) !default;
 $theme-dark: hsl(217deg 10% 8%) !default;
 $primary: hsl(221, 97%, 53%) !default;
 $white: #fff !default;
@@ -25,6 +25,7 @@ $light: #ecedf0 !default;
 //
 
 $font-size-base: 1rem !default;
+$font-size-lg: $font-size-base * 1.125 !default;
 
 $h1-font-size: $font-size-base * 2 !default;
 $h2-font-size: $font-size-base * 1.5 !default;
@@ -34,10 +35,10 @@ $h5-font-size: $font-size-base * 1.1 !default;
 $h6-font-size: $font-size-base !default;
 
 $border-radius-sm: 0.4rem !default;
-$border-radius: 0.7rem !default;
-$border-radius-lg: 1rem !default;
-$border-radius-xl: 1.5rem !default;
-$border-radius-xxl: 2rem !default;
+$border-radius: 0.625rem !default;
+$border-radius-lg: 0.75rem !default;
+$border-radius-xl: 1rem !default;
+$border-radius-xxl: 1.5rem !default;
 $border-radius-pill: 50rem !default;
 $border-radius-2xl: $border-radius-xxl !default; // Deprecated in v5.3.0
 
@@ -50,6 +51,15 @@ $link-hover-decoration: underline !default;
 // In a future Bootstrap release, this might not be necessary anymore.
 $focus-ring-color: #{rgba(var(--bs-primary-rgb), 25%)} !default;
 $input-focus-border-color: #{rgba(var(--bs-primary-rgb), 50%)} !default;
+
+$input-btn-padding-y: 0.25rem !default;
+$input-btn-padding-x: 0.625rem !default;
+
+$input-btn-padding-y-sm: 0.15rem !default;
+$input-btn-padding-x-sm: 0.4rem !default;
+
+$input-btn-padding-y-lg: 0.5rem !default;
+$input-btn-padding-x-lg: 0.75rem !default;
 
 $enable-button-pointers: true !default;
 $focus-ring-width: 0.125rem !default;
@@ -3776,8 +3786,8 @@ $corner-shape: #{round} !default;
 
 :root,
 :host {
-    --blue-read-view-padding-x: 0.5rem;
-    --blue-read-view-padding-y: 0.25rem;
+    --blue-read-view-padding-x: #{$input-btn-padding-x};
+    --blue-read-view-padding-y: #{$input-btn-padding-y};
     --blue-read-view-transition: background 0.2s;
 }
 
@@ -3824,9 +3834,9 @@ $corner-shape: #{round} !default;
 @mixin blue-menu-item-indicator() {
     content: "";
     position: absolute;
-    top: 0.625rem;
-    bottom: 0.625rem;
-    left: 0.125rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    left: 0;
     right: initial;
     width: 3px;
     height: auto;
@@ -4133,7 +4143,7 @@ $corner-shape: #{round} !default;
     color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity, 1));
     box-shadow: var(--bs-box-shadow-sm);
     border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
-    border-radius: var(--bs-border-radius-lg);
+    border-radius: var(--bs-border-radius-2xl);
 
     @include color-mode(dark, false) {
         & {
@@ -10877,10 +10887,10 @@ $utilities: map-merge(
 
 // Styling for a form control label.
 .blue-label {
-    color: var(--bs-primary-text-emphasis);
-    font-weight: 500;
-    font-size: 1rem;
+    font-size: 0.875rem;
+    font-weight: 400;
     margin-bottom: 0;
+    padding-inline: #{$input-btn-padding-x};
 }
 
 // Vertically alignment, especially for Bootstrap Icons.
@@ -10888,6 +10898,8 @@ $utilities: map-merge(
 .bi {
     display: inline-block;
     vertical-align: -0.125em;
+    min-width: 16px;
+    min-height: 16px;
 }
 
 * {
@@ -11135,7 +11147,7 @@ body {
     }
 
     &::before {
-        --visual-padding: 0.125rem;
+        --visual-padding: 1px;
 
         content: "";
         position: absolute;
@@ -11510,6 +11522,8 @@ body {
     & > svg {
         width: $icon-link-icon-size;
         height: $icon-link-icon-size;
+        min-width: 16px;
+        min-height: 16px;
         fill: currentcolor;
     }
 }
@@ -12233,7 +12247,7 @@ dialog.blue-modal:has(.offcanvas-start) {
     }
 
     &[open] > summary .blue-collapse-chevron {
-        --blue-collapse-chevron-rotate: 90deg;
+        --blue-collapse-chevron-rotate: -180deg;
         transform: rotate(var(--blue-collapse-chevron-rotate));
     }
 
@@ -12510,8 +12524,8 @@ details.accordion-item:last-of-type[open] > .accordion-header .accordion-button.
 
 /* Make DevExpress components look more like Bootstrap/Blue */
 [class^="dxbl-"]:not(.dxbl-btn-tool):not(.dxbl-toolbar-item):not(:is(.dxbl-toolbar-btn-ellipsis > .dxbl-btn)) {
-    --dxbl-btn-padding-x: 0.75rem !important;
-    --dxbl-btn-padding-y: 0.375rem !important;
+    --dxbl-btn-padding-x: #{$input-btn-padding-x} !important;
+    --dxbl-btn-padding-y: #{$input-btn-padding-y} !important;
 }
 
 .dxbl-toolbar-btn-ellipsis > .dxbl-btn {
@@ -12521,8 +12535,8 @@ details.accordion-item:last-of-type[open] > .accordion-header .accordion-button.
 
 [class^="dxbl-"] {
     --dxbl-text-edit-border-radius: var(--bs-border-radius) !important;
-    --dxbl-text-edit-padding-x: 0.75rem !important;
-    --dxbl-text-edit-padding-y: 0.375rem !important;
+    --dxbl-text-edit-padding-x: #{$input-btn-padding-x} !important;
+    --dxbl-text-edit-padding-y: #{$input-btn-padding-y} !important;
     --dxbl-text-edit-line-height: 1.5 !important;
     --dxbl-text-edit-focus-shadow-spread: #{$focus-ring-width} !important;
     --dxbl-listbox-border-radius: var(--bs-border-radius) !important;
@@ -12722,6 +12736,10 @@ body.modal-open .dxbl-popup-cell[style="z-index: 1050;"] {
 .dxbl-checkbox:not(.dxbl-disabled):not(:disabled):not(.dxbl-readonly) input,
 .dxbl-checkbox:not(.dxbl-disabled):not(:disabled):not(.dxbl-readonly) label {
     cursor: initial;
+}
+
+.dxbl-grid-header-content {
+    @extend .blue-label;
 }
 
 :root {
