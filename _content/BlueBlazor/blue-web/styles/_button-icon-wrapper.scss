@@ -26,5 +26,18 @@
 }
 
 .blue-btn-square {
-    padding: calc(var(--bs-btn-padding-y) + #{$icon-link-underline-offset});
+    min-height: 2rem;
+    aspect-ratio: 1;
+    padding: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    &.btn-sm {
+        min-height: 1.765rem;
+    }
+
+    &.btn-lg {
+        min-height: 2.375rem;
+    }
 }

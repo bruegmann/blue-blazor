@@ -6,7 +6,6 @@
     --spacing: 0.5rem;
 
     --blue-menu-item-indicator-bg: #{color-contrast($sidebar-bg, $sidebar-indicator-color)};
-    --bs-link-hover-color: #{color-contrast($sidebar-bg, $link-hover-color)};
 
     display: grid;
     grid-template-rows: min-content 1fr;
@@ -17,10 +16,14 @@
     background-color: var(--blue-sidebar-bg);
 }
 
+.blue-layout-side {
+    --bs-link-hover-color: #{color-contrast($theme, $link-hover-color)};
+}
+
 @include color-mode(dark, false) {
-    .blue-layout {
+    .blue-layout-side {
         --blue-menu-item-indicator-bg: #{$sidebar-indicator-color-dark};
-        --bs-link-hover-color: #{color-contrast($sidebar-bg, $link-hover-color-dark)};
+        --bs-link-hover-color: #{color-contrast($theme-dark, $link-hover-color-dark)};
     }
 }
 

@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.35.1 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.36.1 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -24,7 +24,7 @@ $light: #ecedf0 !default;
 // Components
 //
 
-$font-size-base: 1rem !default;
+$font-size-base: 0.875rem !default;
 $font-size-lg: $font-size-base * 1.125 !default;
 
 $h1-font-size: $font-size-base * 2 !default;
@@ -34,11 +34,11 @@ $h4-font-size: $font-size-base * 1.125 !default;
 $h5-font-size: $font-size-base * 1.1 !default;
 $h6-font-size: $font-size-base !default;
 
-$border-radius-sm: 0.4rem !default;
+$border-radius-sm: 0.5rem !default;
 $border-radius: 0.625rem !default;
-$border-radius-lg: 0.75rem !default;
-$border-radius-xl: 1rem !default;
-$border-radius-xxl: 1.5rem !default;
+$border-radius-lg: $border-radius * 1.2 !default;
+$border-radius-xl: $border-radius * 1.4 !default;
+$border-radius-xxl: $border-radius * 1.8 !default;
 $border-radius-pill: 50rem !default;
 $border-radius-2xl: $border-radius-xxl !default; // Deprecated in v5.3.0
 
@@ -53,12 +53,12 @@ $focus-ring-color: #{rgba(var(--bs-primary-rgb), 25%)} !default;
 $input-focus-border-color: #{rgba(var(--bs-primary-rgb), 50%)} !default;
 
 $input-btn-padding-y: 0.25rem !default;
-$input-btn-padding-x: 0.625rem !default;
+$input-btn-padding-x: 0.5rem !default;
 
-$input-btn-padding-y-sm: 0.15rem !default;
-$input-btn-padding-x-sm: 0.4rem !default;
+$input-btn-padding-y-sm: 0.225rem !default;
+$input-btn-padding-x-sm: 0.5rem !default;
 
-$input-btn-padding-y-lg: 0.5rem !default;
+$input-btn-padding-y-lg: 0.375rem !default;
 $input-btn-padding-x-lg: 0.75rem !default;
 
 $enable-button-pointers: true !default;
@@ -66,6 +66,9 @@ $focus-ring-width: 0.125rem !default;
 
 $accordion-padding-x: 1rem !default;
 $accordion-padding-y: 0.75rem !default;
+
+$nav-link-padding-y: $input-btn-padding-y;
+$nav-link-padding-x: $input-btn-padding-x;
 
 
 // Bootstrap functions
@@ -3710,7 +3713,7 @@ $bla-btn-font-size: 1em !default;
 $bla-header-nav-padding: 0.75rem !default;
 
 // Width of the sidebar.
-$bla-sidebar-width: 16.563rem !default;
+$bla-sidebar-width: 234px !default;
 
 // Background of sidebar.
 $sidebar-bg: $theme !default;
@@ -3775,7 +3778,7 @@ $corner-shape: #{round} !default;
     --blue-sidebar-bg: #{$sidebar-bg};
     --blue-header-bg: #{$header-bg};
 
-    --blue-header-height: 3.429rem;
+    --blue-header-height: 48px;
     --blue-header-color: #{$header-color};
     --blue-action-link-bg-color: var(--blue-theme);
     --blue-menu-item-indicator-bg: #{$sidebar-indicator-color};
@@ -10887,8 +10890,8 @@ $utilities: map-merge(
 
 // Styling for a form control label.
 .blue-label {
-    font-size: 0.875rem;
-    font-weight: 400;
+    font-size: #{$font-size-sm};
+    font-weight: 500;
     margin-bottom: 0;
     padding-inline: #{$input-btn-padding-x};
 }
@@ -11538,7 +11541,20 @@ body {
 }
 
 .blue-btn-square {
-    padding: calc(var(--bs-btn-padding-y) + #{$icon-link-underline-offset});
+    min-height: 2rem;
+    aspect-ratio: 1;
+    padding: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    &.btn-sm {
+        min-height: 1.765rem;
+    }
+
+    &.btn-lg {
+        min-height: 2.375rem;
+    }
 }
 
 // Inspired by Bootstrap's button system but extended with more variants
@@ -11764,30 +11780,11 @@ body {
         --#{$prefix}nav-link-color: var(--#{$prefix}list-group-action-color);
     }
 
-    .nav-link:hover,
-    .nav-link:focus {
-        &::after {
-            @include blue-menu-item-indicator();
-            @include blue-menu-item-indicator-horizontal();
-            opacity: 0.25;
-        }
-
-        position: relative;
-        border-bottom-color: transparent;
-    }
-
     .nav-link.active,
     .show > .nav-link,
     .blue-tab:checked {
-        &::after {
-            @include blue-menu-item-indicator();
-            @include blue-menu-item-indicator-horizontal();
-            opacity: 1;
-        }
-
-        position: relative;
-        font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-base);
-        border-bottom-color: transparent;
+        font-weight: var(--blue-tabs-underline-active-font-weight, $font-weight-semibold);
+        // border-bottom-color: var(--blue-menu-item-indicator-bg);
         color: currentColor;
     }
 }
@@ -12082,7 +12079,6 @@ dialog.blue-modal:has(.offcanvas-start) {
     --spacing: 0.5rem;
 
     --blue-menu-item-indicator-bg: #{color-contrast($sidebar-bg, $sidebar-indicator-color)};
-    --bs-link-hover-color: #{color-contrast($sidebar-bg, $link-hover-color)};
 
     display: grid;
     grid-template-rows: min-content 1fr;
@@ -12093,10 +12089,14 @@ dialog.blue-modal:has(.offcanvas-start) {
     background-color: var(--blue-sidebar-bg);
 }
 
+.blue-layout-side {
+    --bs-link-hover-color: #{color-contrast($theme, $link-hover-color)};
+}
+
 @include color-mode(dark, false) {
-    .blue-layout {
+    .blue-layout-side {
         --blue-menu-item-indicator-bg: #{$sidebar-indicator-color-dark};
-        --bs-link-hover-color: #{color-contrast($sidebar-bg, $link-hover-color-dark)};
+        --bs-link-hover-color: #{color-contrast($theme-dark, $link-hover-color-dark)};
     }
 }
 
@@ -12483,7 +12483,7 @@ dialog.blue-modal:has(.offcanvas-start) {
     @media screen and (min-width: 768px) {
         .blue-intro-container,
         .sign-in-container {
-            padding: var(--blue-sign-in-container-md-padding, 0 calc(50% - 18rem));
+            padding: var(--blue-sign-in-container-md-padding, 0 calc(50% - 16rem));
             width: var(--blue-sign-in-container-md-width, auto);
         }
     }
@@ -12528,11 +12528,6 @@ details.accordion-item:last-of-type[open] > .accordion-header .accordion-button.
     --dxbl-btn-padding-y: #{$input-btn-padding-y} !important;
 }
 
-.dxbl-toolbar-btn-ellipsis > .dxbl-btn {
-    --dxbl-btn-padding-x: 0.475rem !important;
-    --dxbl-btn-padding-y: 0.375rem !important;
-}
-
 [class^="dxbl-"] {
     --dxbl-text-edit-border-radius: var(--bs-border-radius) !important;
     --dxbl-text-edit-padding-x: #{$input-btn-padding-x} !important;
@@ -12547,139 +12542,10 @@ details.accordion-item:last-of-type[open] > .accordion-header .accordion-button.
     --dxbl-context-menu-border-radius: var(--bs-border-radius) !important;
     --dxbl-edit-dropdown-border-radius: var(--bs-border-radius) !important;
     --dxbl-list-box-border-radius: var(--bs-border-radius) !important;
-
-    --dxbl-btn-font-size: 1rem;
-    --dxbl-checkbox-font-size: 1rem;
-    --dxbl-calendar-font-size: 1rem;
-    --dxbl-listbox-font-size: 1rem;
-    --dxbl-list-box-font-size: 1rem;
-    --dxbl-list-box-item-drag-hint-font-size: 1rem;
-    --dxbl-color-palette-font-size: 1rem;
-    --dxbl-text-edit-font-size: 1rem;
-    --dxbl-edit-dropdown-font-size: 1rem;
-    --dxbl-pager-font-size: 1rem;
-    --dxbl-grid-font-size: 1rem;
-    --dxbl-grid-draggable-header-font-size: 1rem;
-    --dxbl-grid-row-drag-hint-font-size: 1rem;
-    --dxbl-flyout-font-size: 1rem;
-    --dxbl-popup-font-size: 1rem;
-    --dxbl-dropdown-font-size: 1rem;
-    --dxbl-window-font-size: 1rem;
-    --dxbl-group-font-size: 1rem;
-    --dxbl-fl-font-size: 1rem;
-    --dxbl-fl-group-font-size: 1rem;
-    --dxbl-fl-tab-group-font-size: 1rem;
-    --dxbl-fl-tab-group-content-font-size: 1rem;
-    --dxbl-toolbar-font-size: 1rem;
-    --dxbl-tabs-font-size: 1rem;
-    --dxbl-tabs-content-font-size: 1rem;
-    --dxbl-accordion-group-font-size: 1rem;
-    --dxbl-accordion-group-item-font-size: 1rem;
-    --dxbl-accordion-group-header-font-size: 1rem;
-    --dxbl-treeview-font-size: 1rem;
-    --dxbl-navigation-badge-font-size: 1rem;
-    --dxbl-radio-group-font-size: 1rem;
-    --dxbl-context-menu-font-size: 1rem;
-    --dxbl-menu-item-font-size: 1rem;
-    --dxbl-scheduler-font-size: 1rem;
-    --dxbl-toast-text-font-size: 1rem;
-    --dxbl-toast-header-font-size: 1rem;
-    --dxbl-drawer-panel-font-size: 1rem;
-    --dxbl-progress-bar-label-font-size: 1rem;
-    --dxbl-pivot-font-size: 1rem;
-    --dxbl-pivot-field-font-size: 1rem;
-    --dxbl-pivot-header-font-size: 1rem;
-    --dxbl-pivot-total-font-size: 1rem;
-    --dxbl-pivot-table-font-size: 1rem;
-    --dxbl-pivot-table-header-field-font-size: 1rem;
-    --dxbl-pivot-table-row-field-font-size: 1rem;
-    --dxbl-pivot-table-total-font-size: 1rem;
-    --dx-chatui-message-font-size: 1rem;
-    --dx-chatui-suggestion-item-title-font-size: 1rem;
-    --dx-chatui-attachment-list-item-font-size: 1rem;
-    --dx-chatui-suggestion-item-text-font-size: 1rem;
-    --dxbl-message-box-body-text-font-size: 1rem;
-    --dxbl-message-box-header-font-size: 1rem;
-    --dxbl-splitter-font-size: 1rem;
-    --dxbl-filter-builder-font-size: 1rem;
-}
-
-.dxbl-grid {
-    --dxbl-grid-font-size: 1rem;
-    border: none;
-}
-
-.dxbl-pager-page-edit {
-    min-width: 2.5em;
-}
-
-.dxbl-toolbar {
-    --dxbl-toolbar-font-size: var(--bs-body-font-size) !important;
-    font-size: var(--dxbl-toolbar-font-size);
 }
 
 body.modal-open .dxbl-popup-cell[style="z-index: 1050;"] {
     z-index: 1056 !important;
-}
-
-@if ($enable-button-pointers: false) {
-    .dxbl-context-menu.dxbl-context-menu-dropdown
-        > .dxbl-dropdown-body
-        ul
-        li:not(.dxbl-context-menu-separator)
-        > .dxbl-context-menu-item,
-    .dxbl-context-menu-submenu.dxbl-context-menu-dropdown
-        > .dxbl-dropdown-body
-        ul
-        li:not(.dxbl-context-menu-separator)
-        > .dxbl-context-menu-item,
-    .dxbl-tabs
-        > .dxbl-tabs-tablist
-        > .dxbl-scroll-viewer
-        > .dxbl-scroll-viewer-content
-        > ul
-        > li
-        > .dxbl-tabs-item:not(.dxbl-active):not(.dxbl-disabled):not(:disabled),
-    .dxbl-tabs > .dxbl-tabs-tablist > ul > li > .dxbl-tabs-item:not(.dxbl-active):not(.dxbl-disabled):not(:disabled),
-    .dxbl-context-menu-submenu.dxbl-context-menu-dropdown
-        .dxbl-dropdown-body
-        ul
-        li:not(.dxbl-context-menu-separator)
-        > .dxbl-context-menu-item,
-    .dxbl-context-menu.dxbl-context-menu-dropdown
-        .dxbl-dropdown-body
-        ul
-        li:not(.dxbl-context-menu-separator)
-        > .dxbl-context-menu-item,
-    .dxbl-list-box-render-container:not(.dxbl-disabled):not(:disabled):not(.dxbl-readonly)
-        > .dxbl-scroll-viewer
-        > .dxbl-scroll-viewer-content
-        > :not(.dxbl-list-box-empty-data-container)
-        > li:not(.dxbl-list-box-group-item):not(.dxbl-list-box-item-disabled):not(.dxbl-list-box-empty-list-item),
-    .dxbl-list-box-render-container:not(.dxbl-disabled):not(:disabled):not(.dxbl-readonly)
-        > .dxbl-scroll-viewer
-        > .dxbl-scroll-viewer-content
-        > :not(.dxbl-list-box-empty-data-container)
-        > tbody
-        > tr:not(.dxbl-list-box-group-item):not(.dxbl-list-box-item-disabled):not(.dxbl-list-box-empty-list-item),
-    .dxbl-list-box:not(.dxbl-disabled):not(:disabled):not(.dxbl-readonly)
-        > .dxbl-scroll-viewer
-        > .dxbl-scroll-viewer-content
-        > :not(.dxbl-list-box-empty-data-container)
-        > li:not(.dxbl-list-box-group-item):not(.dxbl-list-box-item-disabled):not(.dxbl-list-box-empty-list-item),
-    .dxbl-list-box:not(.dxbl-disabled):not(:disabled):not(.dxbl-readonly)
-        > .dxbl-scroll-viewer
-        > .dxbl-scroll-viewer-content
-        > :not(.dxbl-list-box-empty-data-container)
-        > tbody
-        > tr:not(.dxbl-list-box-group-item):not(.dxbl-list-box-item-disabled):not(.dxbl-list-box-empty-list-item),
-    .dxbl-treeview
-        .dxbl-treeview-item
-        > .dxbl-treeview-item-content
-        > .dxbl-treeview-item-container:not(.dxbl-disabled),
-    .dxbl-grid-action {
-        cursor: default;
-    }
 }
 
 .dxbl-tabs.dxbl-tabs-top
@@ -12692,10 +12558,6 @@ body.modal-open .dxbl-popup-cell[style="z-index: 1050;"] {
 .dxbl-tabs.dxbl-tabs-top > .dxbl-tabs-tablist > ul > li > .dxbl-tabs-item:not(.dxbl-tabs-tmpl) {
     border-top-left-radius: var(--bs-border-radius);
     border-top-right-radius: var(--bs-border-radius);
-}
-
-.dxbl-edit-btn-dropdown {
-    padding-inline: 0.25rem !important;
 }
 
 @keyframes dxbl-btn-before-in {
@@ -12740,13 +12602,13 @@ body.modal-open .dxbl-popup-cell[style="z-index: 1050;"] {
 
 .dxbl-grid-header-content {
     @extend .blue-label;
+    padding-block: #{$input-btn-padding-y};
 }
 
 :root {
     --bs-font-sans-serif: Inter, #{$font-family-sans-serif};
     --blue-font-feature-settings: "liga" 1, "calt" 1, "cv05" 1, "cv07" 1, "tnum" 1, "zero" 1;
     font-feature-settings: var(--blue-font-feature-settings);
-    font-size: 14px;
 }
 @supports (font-variation-settings: normal) {
     :root {

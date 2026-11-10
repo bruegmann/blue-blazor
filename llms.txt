@@ -729,6 +729,18 @@ Using the render fragments `IconBefore` or `IconAfter` will automatically set th
         <span>➡️</span>
     </IconAfter>
 </Button>
+
+<Button Sm Label="Let's have an icon but small">
+    <IconBefore>
+        <BiBox2Heart />
+    </IconBefore>
+</Button>
+
+<Button Sm Label="Let's have an icon but small" LabelHidden Square>
+    <IconBefore>
+        <BiBox2Heart />
+    </IconBefore>
+</Button>
 ```
 ### With Tooltip
 
@@ -1626,44 +1638,41 @@ Wrapper for native [fieldset element](https://developer.mozilla.org/docs/Web/HTM
 ### Basic Usage
 
 ```razor
-<FieldSet>
-    <Legend>Choose your favorite monster</Legend>
+<FieldSet Legend="Choose your favorite monster">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="kraken" name="monster" value="K" />
+        <label class="form-check-label" for="kraken">Kraken</label>
+    </div>
 
-    <input type="radio" id="kraken" name="monster" value="K" />
-    <label for="kraken">Kraken</label>
-    <br />
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="sasquatch" name="monster" value="S" />
+        <label class="form-check-label" for="sasquatch">Sasquatch</label>
+    </div>
 
-    <input type="radio" id="sasquatch" name="monster" value="S" />
-    <label for="sasquatch">Sasquatch</label>
-    <br />
-
-    <input type="radio" id="mothman" name="monster" value="M" />
-    <label for="mothman">Mothman</label>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="mothman" name="monster" value="M" />
+        <label class="form-check-label" for="mothman">Mothman</label>
+    </div>
 </FieldSet>
 ```
-
-
-
-## Legend
-Wrapper for native [legend element](https://developer.mozilla.org/docs/Web/HTML/Reference/Elements/legend) with some default styling.
-Should be used together with [FieldSet](components/field-set).
-
-### Custom Styling
+### Customize
 
 ```razor
-<FieldSet>
-    <Legend Class="text-primary fs-2">Choose your favorite monster</Legend>
+<FieldSet Legend="Choose your favorite monster" VerticalStack Gap="3">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="kraken2" name="monster" value="K" />
+        <label class="form-check-label" for="kraken2">Kraken</label>
+    </div>
 
-    <input type="radio" id="kraken" name="monster" value="K" />
-    <label for="kraken">Kraken</label>
-    <br />
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="sasquatch2" name="monster" value="S" />
+        <label class="form-check-label" for="sasquatch2">Sasquatch</label>
+    </div>
 
-    <input type="radio" id="sasquatch" name="monster" value="S" />
-    <label for="sasquatch">Sasquatch</label>
-    <br />
-
-    <input type="radio" id="mothman" name="monster" value="M" />
-    <label for="mothman">Mothman</label>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="mothman2" name="monster" value="M" />
+        <label class="form-check-label" for="mothman2">Mothman</label>
+    </div>
 </FieldSet>
 ```
 
