@@ -1,4 +1,7 @@
 ﻿@namespace BlueBlazor.Components
 @inherits BlueComponentBase
 
-<fielset class="@Class" style="@Style" @attributes="AdditionalAttributes">@ChildContent</fielset>
+<fielset class="@Class" style="@Style" @attributes="AdditionalAttributes">
+    <legend class="blue-label">@Legend@LegendContent</legend>
+    <div class="@BodyClassValue">@ChildContent</div>
+</fielset>

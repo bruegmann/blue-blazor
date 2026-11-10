@@ -1,7 +1,7 @@
 ﻿@{
-        /*docs {
-        "description": "Using the render fragments `IconBefore` or `IconAfter` will automatically set the [Bootstrap helper `icon-link`.](https://getbootstrap.com/docs/5.3/helpers/icon-link/#example)"
-    } */
+    /*docs {
+    "description": "Using the render fragments `IconBefore` or `IconAfter` will automatically set the [Bootstrap helper `icon-link`.](https://getbootstrap.com/docs/5.3/helpers/icon-link/#example)"
+} */
 }
 
 <Button Label="No icon" />
@@ -28,4 +28,16 @@
     <IconAfter>
         <span>➡️</span>
     </IconAfter>
+</Button>
+
+<Button Sm Label="Let's have an icon but small">
+    <IconBefore>
+        <BiBox2Heart />
+    </IconBefore>
+</Button>
+
+<Button Sm Label="Let's have an icon but small" LabelHidden Square>
+    <IconBefore>
+        <BiBox2Heart />
+    </IconBefore>
 </Button>
