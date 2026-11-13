@@ -176,6 +176,10 @@ That means, you can use all of [Blue Web's JavaScript functions](https://bruegma
 
 ## Breaking changes
 
+### From v6 to v7
+
+Component `Legend` was removed. Use the new property `Legend` (string) or `LegendContent` (RenderFragment) of `FieldSet` instead.
+
 ### From v5 to v6
 
 `BlueBlazor.Services.Options.DevExpressSupport` was removed. It isn't necessary anymore.
