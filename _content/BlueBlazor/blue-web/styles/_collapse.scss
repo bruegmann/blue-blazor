@@ -15,26 +15,22 @@
     }
 
     &[open] > summary .blue-collapse-chevron {
-        --blue-collapse-chevron-rotate: -180deg;
-        transform: rotate(var(--blue-collapse-chevron-rotate));
+        transform: scaleY(-1);
     }
 
     &::details-content {
         block-size: 0;
         opacity: 0;
-        translate: 0 -4rem;
         transition:
             block-size 0.2s,
             content-visibility 0.2s,
-            opacity 0.2s,
-            translate 0.2s;
+            opacity 0.2s;
         transition-behavior: allow-discrete;
     }
 
     &[open]::details-content {
         block-size: auto;
         opacity: 1;
-        translate: 0;
     }
 }
 
@@ -46,9 +42,9 @@
 }
 
 .blue-collapse-indent {
-    // 0.5em is half of icon width
-    --margin-inline-start: calc(#{$input-btn-padding-x} + 0.5em + #{$input-btn-border-width});
-    margin-inline-start: var(--margin-inline-start);
+    // .5em is half of icon width
+    margin-inline-start: calc(#{$input-btn-padding-x} + 0.5em + #{$input-btn-border-width});
+    padding-inline-start: calc(0.25rem + #{$input-btn-border-width});
 }
 
 // Let's you group a collapse together with another UI element like a button that should come before the collapse summary.
@@ -63,10 +59,10 @@
 
         & > summary {
             grid-column: 2;
+        }
 
-            & + * {
-                width: calc(100% + var(--margin-inline-start) - 3px);
-            }
+        &::details-content {
+            grid-column: 1 / 3;
         }
     }
 }
