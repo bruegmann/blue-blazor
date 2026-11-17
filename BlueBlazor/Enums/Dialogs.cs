@@ -6,7 +6,8 @@ public enum ModalSize
 {
     Sm,
     Lg,
-    Xl
+    Xl,
+    Xxl
 }
 
 public enum OffcanvasPlacement
