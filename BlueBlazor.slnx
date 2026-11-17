@@ -1,0 +1,18 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/assets/">
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="BlueBlazor.Assets/BlueBlazor.Assets.esproj">
+    <Platform Project="AnyCPU" />
+  </Project>
+  <Project Path="BlueBlazor.Docs/BlueBlazor.Docs.csproj">
+    <BuildDependency Project="DocGen/DocGen.csproj" />
+  </Project>
+  <Project Path="BlueBlazor/BlueBlazor.csproj" />
+  <Project Path="DocGen/DocGen.csproj" />
+</Solution>
