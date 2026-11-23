@@ -1,4 +1,4 @@
-import { StatusType } from "./shared.js";
+import type { StatusType } from "./shared.js";
 export declare function startLoading(): void;
 export declare function finishLoading(): void;
 export declare function showSuccess(): void;

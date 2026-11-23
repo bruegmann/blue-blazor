@@ -1,5 +1,5 @@
 /*!
- * Blue Web v1.36.2 (https://bruegmann.github.io/blue-web)
+ * Blue Web v1.37.0 (https://bruegmann.github.io/blue-web)
  * Licensed under GNU General Public License v3.0 (https://github.com/bruegmann/blue-web/blob/master/LICENSE).
 */
 
@@ -1909,6 +1909,7 @@ $modal-sm:                          300px !default;
 $modal-md:                          500px !default;
 $modal-lg:                          800px !default;
 $modal-xl:                          1140px !default;
+$modal-xxl:                         1320px !default;
 
 $modal-fade-transform:              translate(0, -50px) !default;
 $modal-show-transform:              none !default;
@@ -3301,11 +3302,11 @@ $rfs-mq-property-height: if($rfs-mode == max-media-query, max-height, min-height
     --#{$prefix}table-bg: #{$background};
     --#{$prefix}table-border-color: #{$table-border-color};
     --#{$prefix}table-striped-bg: #{$striped-bg};
-    --#{$prefix}table-striped-color: #{color-contrast($striped-bg)};
+    --#{$prefix}table-striped-color: #{color-contrast($striped-bg)}; // stylelint-disable-line scss/dollar-variable-no-missing-interpolation
     --#{$prefix}table-active-bg: #{$active-bg};
-    --#{$prefix}table-active-color: #{color-contrast($active-bg)};
+    --#{$prefix}table-active-color: #{color-contrast($active-bg)}; // stylelint-disable-line scss/dollar-variable-no-missing-interpolation
     --#{$prefix}table-hover-bg: #{$hover-bg};
-    --#{$prefix}table-hover-color: #{color-contrast($hover-bg)};
+    --#{$prefix}table-hover-color: #{color-contrast($hover-bg)}; // stylelint-disable-line scss/dollar-variable-no-missing-interpolation
 
     color: var(--#{$prefix}table-color);
     border-color: var(--#{$prefix}table-border-color);
@@ -4234,8 +4235,8 @@ $corner-shape: #{round} !default;
 
 @mixin bsBanner($file) {
   /*!
-   * Bootstrap #{$file} v5.3.8 (https://getbootstrap.com/)
-   * Copyright 2011-2025 The Bootstrap Authors
+   * Bootstrap #{$file} v5.3.9 (https://getbootstrap.com/)
+   * Copyright 2011-2026 The Bootstrap Authors
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    */
 }
@@ -5935,7 +5936,7 @@ legend {
 
 ::-webkit-datetime-edit-fields-wrapper,
 ::-webkit-datetime-edit-text,
-::-webkit-datetime-edit-minute,
+::-webkit-datetime-edit-minute-field,
 ::-webkit-datetime-edit-hour-field,
 ::-webkit-datetime-edit-day-field,
 ::-webkit-datetime-edit-month-field,
@@ -9707,14 +9708,22 @@ textarea {
 
 @include media-breakpoint-up(lg) {
   .modal-lg,
-  .modal-xl {
+  .modal-xl,
+  .modal-xxl {
     --#{$prefix}modal-width: #{$modal-lg};
   }
 }
 
 @include media-breakpoint-up(xl) {
-  .modal-xl {
+  .modal-xl,
+  .modal-xxl {
     --#{$prefix}modal-width: #{$modal-xl};
+  }
+}
+
+@include media-breakpoint-up(xxl) {
+  .modal-xxl {
+    --#{$prefix}modal-width: #{$modal-xxl};
   }
 }
 
@@ -10559,6 +10568,12 @@ textarea {
 .placeholder-glow {
   .placeholder {
     animation: placeholder-glow 2s ease-in-out infinite;
+
+    @if $enable-reduced-motion {
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
   }
 }
 
@@ -10572,6 +10587,12 @@ textarea {
   mask-image: linear-gradient(130deg, $black 55%, rgba(0, 0, 0, (1 - $placeholder-opacity-min)) 75%, $black 95%);
   mask-size: 200% 100%;
   animation: placeholder-wave 2s linear infinite;
+
+  @if $enable-reduced-motion {
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
 }
 
 @keyframes placeholder-wave {
@@ -12514,6 +12535,63 @@ details.accordion-item:last-of-type[open] > .accordion-header .accordion-button.
 
     .accordion-body {
         height: 100%;
+    }
+}
+
+// Base styles with focus on functionality
+bl-quick-look {
+    display: contents;
+}
+
+bl-quick-look-backdrop {
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    background: rgb(22 21 24 / 38%);
+    backdrop-filter: blur(7px);
+    opacity: 1;
+    transition: opacity 180ms ease;
+}
+
+bl-quick-look-backdrop[hidden],
+bl-quick-look-content[hidden] {
+    display: none !important;
+}
+
+bl-quick-look-backdrop:is([data-starting-style], [data-ending-style]) {
+    opacity: 0;
+}
+
+bl-quick-look-content {
+    position: fixed;
+    z-index: 21;
+    inset: 50% auto auto 50%;
+    display: grid;
+    width: min(1320px, calc(100vw - 2rem));
+    height: min(720px, calc(100dvh - 2rem));
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    padding: 0;
+    overflow: hidden;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition:
+        opacity 180ms ease,
+        scale 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+bl-quick-look-content:is([data-starting-style], [data-ending-style]) {
+    scale: 0.97;
+    opacity: 0;
+}
+
+// Themed styles
+
+.blue-quick-look {
+    bl-quick-look-content {
+        border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+        border-radius: var(--bs-border-radius-lg);
+        background-color: var(--bs-body-bg);
+        box-shadow: var(--bs-box-shadow-lg);
     }
 }
 
