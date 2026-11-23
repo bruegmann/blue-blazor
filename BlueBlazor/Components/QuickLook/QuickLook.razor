@@ -1,0 +1,29 @@
+﻿@namespace BlueBlazor.Components
+@inherits BlueComponentBase
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<BlueBlazor.Resources.Phrases> L
+
+<bl-quick-look @ref="_element" class="@(new CssBuilder("blue-quick-look").AddClass(Class).Build())" style="@Style" @attributes="AdditionalAttributes">
+    <bl-quick-look-trigger>
+        @TriggerContent
+    </bl-quick-look-trigger>
+    <bl-quick-look-backdrop hidden></bl-quick-look-backdrop>
+    <bl-quick-look-content hidden>
+        <header class="hstack p-3">
+            <div>
+                <bl-quick-look-title as-child>
+                    <h2 class="h5">@Title@TitleContent</h2>
+                </bl-quick-look-title>
+                @if (Description != null || DescriptionContent != null)
+                {
+                    <bl-quick-look-description>@Description@DescriptionContent</bl-quick-look-description>
+                }
+            </div>
+
+            <bl-quick-look-close>
+                <button type="button" class="btn-close ms-auto" aria-label="@L["Close"]"></button>
+            </bl-quick-look-close>
+        </header>
+        @ChildContent
+    </bl-quick-look-content>
+</bl-quick-look>

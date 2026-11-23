@@ -1,0 +1,19 @@
+﻿<QuickLook OpenChanged="(b) => Open = b"
+           Title="Example Quick Look"
+           Description="Here will quickly get a closer look">
+    <TriggerContent>
+        <Button Label="Hover or focus to trigger the Quick Look" />
+    </TriggerContent>
+
+    <ChildContent>
+        <div class="bg-body-tertiary d-flex align-items-center justify-content-center" style="min-height: 260px">
+            Isn't this nice?
+        </div>
+    </ChildContent>
+</QuickLook>
+
+<strong>Open: @Open</strong>
+
+@code {
+    private bool Open { get; set; }
+}

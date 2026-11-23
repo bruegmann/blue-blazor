@@ -98,7 +98,7 @@ Your project probably already has at least one page component. Change its conten
 
 ### Next steps
 
-You now have a very basic app with Blue Blazor. To learn more, check out [the examples](https://github.com/bruegmann/blue-blazor/tree/master/examples) and the [component docs](https://bruegmann.github.io/blue-blazor/).
+You now have a very basic app with Blue Blazor. To learn more, check out the [component docs](https://bruegmann.github.io/blue-blazor/).
 
 ## Theming
 
@@ -175,6 +175,10 @@ That means, you can use all of [Blue Web's JavaScript functions](https://bruegma
 ```
 
 ## Breaking changes
+
+### From v7 to v8
+
+Dropped support for .NET 8 and .NET 9. Added .NET 11 as target framework.
 
 ### From v6 to v7
 
@@ -2498,6 +2502,33 @@ Generates a QR code. Uses Web Component [`wa-qr-code`](https://webawesome.com/do
 
 ```razor
 <QrCodeGen Value="Hello World!" Class="w-25 h-25" />
+```
+
+
+
+## QuickLook
+### Basic Usage
+
+```razor
+<QuickLook OpenChanged="(b) => Open = b"
+           Title="Example Quick Look"
+           Description="Here will quickly get a closer look">
+    <TriggerContent>
+        <Button Label="Hover or focus to trigger the Quick Look" />
+    </TriggerContent>
+
+    <ChildContent>
+        <div class="bg-body-tertiary d-flex align-items-center justify-content-center" style="min-height: 260px">
+            Isn't this nice?
+        </div>
+    </ChildContent>
+</QuickLook>
+
+<strong>Open: @Open</strong>
+
+@code {
+    private bool Open { get; set; }
+}
 ```
 
 

@@ -98,7 +98,7 @@ Your project probably already has at least one page component. Change its conten
 
 ### Next steps
 
-You now have a very basic app with Blue Blazor. To learn more, check out [the examples](https://github.com/bruegmann/blue-blazor/tree/master/examples) and the [component docs](https://bruegmann.github.io/blue-blazor/).
+You now have a very basic app with Blue Blazor. To learn more, check out the [component docs](https://bruegmann.github.io/blue-blazor/).
 
 ## Theming
 
@@ -175,6 +175,10 @@ That means, you can use all of [Blue Web's JavaScript functions](https://bruegma
 ```
 
 ## Breaking changes
+
+### From v7 to v8
+
+Dropped support for .NET 8 and .NET 9. Added .NET 11 as target framework.
 
 ### From v6 to v7
 
