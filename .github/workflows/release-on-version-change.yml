@@ -139,7 +139,7 @@ jobs:
 
             - name: Restore
               if: steps.compare.outputs.changed == 'true'
-              run: dotnet restore BlueBlazor.sln
+              run: dotnet restore BlueBlazor.slnx
 
             - name: Build (Release)
               if: steps.compare.outputs.changed == 'true'
